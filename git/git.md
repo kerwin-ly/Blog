@@ -121,6 +121,22 @@ git checkout -b chy origin/chy
 git fetch origin
 git checkout -b chy origin/chy
 ```
+#####6. 远程分支合并
+eg:合并child分支到parent分支
+```
+git fetch origin
+git checkout -b child origin/child
+```
+```
+本地检查代码，处理冲突
+```
+```
+git checkout parent
+git merge --no-ff child
+```
+```
+git push origin parent
+```
 #### 5.bug分支
 ##### 1.功能未开发完，不能提交代码
 首先，不要git add,commit。直接隐藏当前的修改
