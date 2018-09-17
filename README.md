@@ -13,7 +13,7 @@
 
 [sass笔记](https://github.com/kerwin1/Blog/blob/master/sass/sass.md)
 
-[vue笔记&&踩坑](https://github.com/kerwin1/Blog/tree/master/vue)
+[vue踩坑](https://github.com/kerwin1/Blog/blob/master/vue/%E8%B8%A9%E5%9D%91.md)
 
 [electron](https://github.com/kerwin1/Blog/tree/master/electron)
 ## 后台
@@ -23,4 +23,5 @@
 ## 其他
 
 [git笔记](https://github.com/kerwin1/Blog/blob/master/git/git.md)
+
 [git版本号管理](https://github.com/kerwin1/Blog/blob/master/git/%E7%89%88%E6%9C%AC%E5%8F%B7%E6%84%8F%E4%B9%89.md)
