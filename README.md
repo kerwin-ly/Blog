@@ -14,11 +14,13 @@
 [sass笔记](https://github.com/kerwin1/Blog/blob/master/sass/sass.md)
 
 [vue笔记&&踩坑](https://github.com/kerwin1/Blog/tree/master/vue)
+
+[electron](https://github.com/kerwin1/Blog/tree/master/electron)
 ## 后台
 
-python3
+[python3笔记](https://github.com/kerwin1/Blog/blob/master/python/%E7%AC%94%E8%AE%B0.md)
 
 ## 其他
 
-[git](https://github.com/kerwin1/Blog/blob/master/git/git.md)
-
+[git笔记](https://github.com/kerwin1/Blog/blob/master/git/git.md)
+[git版本号管理](https://github.com/kerwin1/Blog/blob/master/git/%E7%89%88%E6%9C%AC%E5%8F%B7%E6%84%8F%E4%B9%89.md)
