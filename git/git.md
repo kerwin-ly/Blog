@@ -121,6 +121,7 @@ git checkout -b chy origin/chy
 git fetch origin
 git checkout -b chy origin/chy
 ```
+
 #####6. 远程分支合并
 eg:合并child分支到parent分支
 ```
@@ -137,6 +138,8 @@ git merge --no-ff child
 ```
 git push origin parent
 ```
+
+
 #### 5.bug分支
 ##### 1.功能未开发完，不能提交代码
 首先，不要git add,commit。直接隐藏当前的修改
@@ -183,6 +186,7 @@ git push
 [http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137602359178794d966923e5c4134bc8bf98dfb03aea3000](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137602359178794d966923e5c4134bc8bf98dfb03aea3000)
 
 #### 6.标签管理
+##### 6.1基本操作
 ```
 git tag v1.0  默认标签是打在最新提交的commit上的
 git tag v0.9 6224937  在指定commit下打标签
@@ -192,6 +196,20 @@ git push origin --delete <tag tagName>  删除远程tag
 ```
 参考链接：
 [https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951758572072ce1dc172b4178b910d31bc7521ee4000](http://https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951758572072ce1dc172b4178b910d31bc7521ee4000)
+
+##### 2.修改远程tag（非特殊情况，不要修改）
+将名为 old 的 tag 改为 new，可以通过执行以下命令来修改远程 tag 名称:
+```
+git tag new old
+
+git tag -d old
+
+git push origin :refs/tags/old
+
+git push --tags
+``
+
+
 #### 7. 历史操作
 ##### 1.删除某次历史提交
 
