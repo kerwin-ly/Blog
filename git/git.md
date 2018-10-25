@@ -103,7 +103,7 @@ git push origin newName
 ```
 ##### 5.远程分支的合并
 ###### eg:将远程的chy分支合并到ly分支
-######1.获取并检出此合并请求的分支
+###### 1.获取并检出此合并请求的分支
 ```
 git fetch origin
 git checkout -b chy origin/chy
@@ -122,7 +122,17 @@ git fetch origin
 git checkout -b chy origin/chy
 ```
 
-#####6. 远程分支合并
+###### 4.合并本地分支
+
+```
+合并分支时添加注释信息（只适用于non-fast-forward方式， 该方式会生成新的commit。 fast-forward不会生成新的commit ）
+
+--no-ff -m" 本次合并添加的注释信息"
+
+--no-ff ：非快速合并 non-fast-forward
+```
+
+###### 6. 远程分支合并
 eg:合并child分支到parent分支
 ```
 git fetch origin
