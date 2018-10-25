@@ -122,7 +122,7 @@ git fetch origin
 git checkout -b chy origin/chy
 ```
 
-###### 4.合并本地分支
+###### 5.合并本地分支
 
 ```
 合并分支时添加注释信息（只适用于non-fast-forward方式， 该方式会生成新的commit。 fast-forward不会生成新的commit ）
