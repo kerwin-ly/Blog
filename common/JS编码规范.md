@@ -101,9 +101,9 @@ getProductDictionary (val1, val2, val3) {}
 
 ```
 增加: addSomething
-编辑: modifySomething
+编辑: updateSomething
 删除: deleteSomething
-查看: seeSomething
+查看: getSomething
 检查: checkSomething
 获取列表数据: getSomethingList
 提交数据: submitSomething
@@ -368,5 +368,22 @@ if (value == '') {
 }
 ```
 
+##### 10. 先声明数值，再使用，避免直接使用数值
+```
+<!--正确方式-->
+function getMinHeight(clientHeight) {
+	let headerHeight = 30;
+
+	return clientHeight - headerHeight;
+}
+
+```
+<!--错误方式-->
+function getMinHeight(clientHeight) {
+	return clientHeight - 30; // 无法知道30具体是什么值
+}
+```
+
+##### 11. 不要的代码直接干掉，不要注释。如果逻辑复杂，自己提交commit写清楚，需要时，去代码仓库看。
 
 
