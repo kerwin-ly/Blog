@@ -70,13 +70,13 @@ git merge branchName  合并某分支到当前分支
 
 #### 4.远程分支
 
-##### 1.基本操作：
+##### 4.1 基本操作：
 ```
 git remote -v  查看远程库的信息
 git pull origin master  拉取代码到本地
 git push origin master  提交修改到远程库
 ```
-##### 2.创建远程分支：
+##### 4.2 创建远程分支：
 ```
 git branch -a (查看有几个分支)
 git checkout -b 'aa'    创建并切换分支
@@ -88,11 +88,11 @@ git pull origin name(拉去分支最新信息)
 git push origin name(提交分支信息)
 git checkout master(切回主分支)
 ```
-##### 3.删除远程分支
+##### 4.3 删除远程分支
 ```
 git push origin --delete <branchName>
 ```
-##### 4.重新命名远程分支
+##### 4.4 重新命名远程分支
 
 ```
 git push origin --delete originBranch
@@ -101,28 +101,28 @@ git branch -m oldName newName
 
 git push origin newName
 ```
-##### 5.远程分支的合并
-###### eg:将远程的chy分支合并到ly分支
-###### 1.获取并检出此合并请求的分支
+#### 5.远程分支的合并
+##### eg:将远程的chy分支合并到ly分支
+##### 5.1 获取并检出此合并请求的分支
 ```
 git fetch origin
 git checkout -b chy origin/chy
 ```
-###### 2.本地审查变更
-###### 3.合并分支并修复出现的任何冲突
+##### 5.2 本地审查变更
+##### 5.3 合并分支并修复出现的任何冲突
 
 ```
 git fetch origin
 git checkout -b chy origin/chy
 ```
-###### 4.推送合并的结果到 GitLab
+##### 5.4 推送合并的结果到 GitLab
 
 ```
 git fetch origin
 git checkout -b chy origin/chy
 ```
 
-###### 5.合并本地分支
+##### 5.5 合并本地分支
 
 ```
 合并分支时添加注释信息（只适用于non-fast-forward方式， 该方式会生成新的commit。 fast-forward不会生成新的commit ）
@@ -132,7 +132,7 @@ git checkout -b chy origin/chy
 --no-ff ：非快速合并 non-fast-forward
 ```
 
-###### 6. 远程分支合并
+##### 5.6 远程分支合并
 eg:合并child分支到parent分支
 ```
 git fetch origin
@@ -150,8 +150,8 @@ git push origin parent
 ```
 
 
-#### 5.bug分支
-##### 1.功能未开发完，不能提交代码
+#### 6.bug分支
+##### 6.1 功能未开发完，不能提交代码
 首先，不要git add,commit。直接隐藏当前的修改
 ```
 git stash
@@ -167,7 +167,7 @@ git stash list
 ```
 git stash pop
 ```
-##### 2.功能开发完成，需要提交自己代码
+##### 6.2 功能开发完成，需要提交自己代码
 1.先将自己的代码提交到远程
 
 ```
@@ -195,8 +195,8 @@ git push
 参考链接：
 [http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137602359178794d966923e5c4134bc8bf98dfb03aea3000](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137602359178794d966923e5c4134bc8bf98dfb03aea3000)
 
-#### 6.标签管理
-##### 6.1基本操作
+#### 7.标签管理
+##### 7.1 基本操作
 ```
 git tag v1.0  默认标签是打在最新提交的commit上的
 git tag v0.9 6224937  在指定commit下打标签
@@ -207,7 +207,7 @@ git push origin --delete <tag tagName>  删除远程tag
 参考链接：
 [https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951758572072ce1dc172b4178b910d31bc7521ee4000](http://https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001376951758572072ce1dc172b4178b910d31bc7521ee4000)
 
-##### 2.修改远程tag（非特殊情况，不要修改）
+##### 7.2 修改远程tag（非特殊情况，不要修改）
 将名为 old 的 tag 改为 new，可以通过执行以下命令来修改远程 tag 名称:
 ```
 git tag new old
@@ -220,8 +220,8 @@ git push --tags
 ```
 
 
-#### 7. 历史操作
-##### 1.删除某次历史提交
+#### 8. 历史操作
+##### 8.1 删除某次历史提交
 
 （”commit id”替换为想要删除的提交的”commit id”，需要注意最后的^号，意思是commit id的前一次提交）：
 
@@ -236,7 +236,7 @@ git rebase -i "commit id"^
 git push origin master -f
 ```
 
-##### 2.修改历史某次提交
+##### 8.2 修改历史某次提交
 
 
 ```
