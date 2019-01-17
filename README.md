@@ -15,10 +15,13 @@
 
 [vue踩坑](https://github.com/kerwin1/Blog/blob/master/vue/%E8%B8%A9%E5%9D%91.md)
 
-[electron](https://github.com/kerwin1/Blog/tree/master/electron)
+[electron笔记](https://github.com/kerwin1/Blog/tree/master/electron)
+
 ## 后台
 
-[python3笔记](https://github.com/kerwin1/Blog/blob/master/python/%E7%AC%94%E8%AE%B0.md)
+[node笔记](https://github.com/kerwin-ly/Blog/blob/master/node/note.md)
+
+[mongodb笔记](https://github.com/kerwin-ly/Blog/blob/master/mongodb/note.md)
 
 ## 其他
 
