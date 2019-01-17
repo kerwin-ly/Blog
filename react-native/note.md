@@ -406,6 +406,34 @@ focusNextInput = (item, index) => {
 }
 ```
 
+#### 30. 在某些自主研发的手机上报错`Unknown failure ([CDS]close[0])
+Unable to install /path/to/project/android/app/build/outputs/apk/app-debug.apk
+com.android.ddmlib.InstallException: Failed to install all`
+
+指定手机deviceId执行
+```
+adb devices
+
+react-native run-android --deviceId your-device-id
+
+```
+
+#### 31. 全面屏适配
+在`adnroid/app/src/main/AndroidManifest.xml`中编辑
+```
+# 注意sdk版本需要在24或24以上
+<application
+  android:name=".MainApplication"
+  android:allowBackup="true"
+  android:label="@string/app_name"
+  android:icon="@mipmap/ic_launcher"
+  android:theme="@style/AppTheme"
+  android:resizeableActivity="true"> // add this line
+  <meta-data android:name="android.max_aspect" android:value="2.1" /> // add this line
+  ...
+</application>
+```
+
 
 
 
