@@ -21,7 +21,7 @@
 
 [node笔记](https://github.com/kerwin-ly/Blog/blob/master/node/note.md)
 
-[mongodb笔记](https://github.com/kerwin-ly/Blog/blob/master/mongodb/note.md)
+[mysql基本命令](https://github.com/kerwin-ly/Blog/blob/master/mysql/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4.md)
 
 ## 其他
 
