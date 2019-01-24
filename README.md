@@ -19,13 +19,15 @@
 
 [electron笔记](https://github.com/kerwin1/Blog/tree/master/electron)
 
-## 后台
+## Node
 
 [node规避回调地狱](https://github.com/kerwin-ly/Blog/blob/master/node/fixCallbackHell.md)
 
+## Mysql
+
 [mysql基本命令](https://github.com/kerwin-ly/Blog/blob/master/mysql/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4.md)
 
-## 其他
+## Git
 
 [git笔记](https://github.com/kerwin1/Blog/blob/master/git/git.md)
 
