@@ -16,7 +16,6 @@ mounted: function () {
 }
 ```
 
-
 #### 4.v-for 遍历数组时的参数顺序 变更
 当包含 index 时，之前遍历数组时的参数顺序是 (index, value)。现在是 **(value, index)** ，来和 JavaScript 的原生数组方法（例如 forEach 和 map）保持一致。
 
