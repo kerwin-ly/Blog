@@ -17,15 +17,21 @@
 
 [vue踩坑](https://github.com/kerwin1/Blog/blob/master/vue/%E8%B8%A9%E5%9D%91.md)
 
+[vue1.x升级到2.x](https://github.com/kerwin-ly/Blog/blob/master/vue/vue1%E5%8D%87%E7%BA%A7%E5%88%B0vue2.md)
+
+[vue-mvvm实现原理（外文）](https://github.com/DMQ/mvvm)
+
 [electron笔记](https://github.com/kerwin1/Blog/tree/master/electron)
 
-## 后台
+## Node
 
-[node使用async方法解决回调地狱](https://github.com/kerwin-ly/Blog/blob/master/node/note.md)
+[node规避回调地狱](https://github.com/kerwin-ly/Blog/blob/master/node/fixCallbackHell.md)
+
+## Mysql
 
 [mysql基本命令](https://github.com/kerwin-ly/Blog/blob/master/mysql/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4.md)
 
-## 其他
+## Git
 
 [git笔记](https://github.com/kerwin1/Blog/blob/master/git/git.md)
 
