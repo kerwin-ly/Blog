@@ -19,6 +19,8 @@
 
 [vue1.x升级到2.x](https://github.com/kerwin-ly/Blog/blob/master/vue/vue1%E5%8D%87%E7%BA%A7%E5%88%B0vue2.md)
 
+[vue-mvvm实现原理（外文）](https://segmentfault.com/a/1190000006599500#articleHeader3)
+
 [electron笔记](https://github.com/kerwin1/Blog/tree/master/electron)
 
 ## Node
