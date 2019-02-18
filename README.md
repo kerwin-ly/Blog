@@ -1,6 +1,9 @@
 # 踩坑&&笔记
 
 ## 前端
+
+[JavaScript核心](https://github.com/kerwin-ly/Blog/tree/master/js)
+
 [HTML && CSS编码规范](https://github.com/kerwin1/Blog/blob/master/common/HTML%20%26%26%20CSS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
 
 [JS编码规范](https://github.com/kerwin1/Blog/blob/master/common/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
