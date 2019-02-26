@@ -2,6 +2,7 @@
 
 >参考链接
 [2018年最新经典web前端面试题](https://juejin.im/post/5baa0797f265da0aaa0517e6)
+[前端面试总结](https://github.com/InterviewMap/CS-Interview-Knowledge-Map)
 
 ### CSS && DOM
 
@@ -80,6 +81,11 @@ var Person2 = function () {
 var person = new Person2();
 person.getname(); // linxin
 ```
+
+#### 4.作用域和作用域链
+>JavaScript 采用`词法作用域`，函数的作用域在函数定义的时候就决定了，函数的作用域基于函数创建的位置。而与词法作用域相对的是`动态作用域`，函数的作用域是在函数调用的时候才决定的。
+
+>当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做`作用域链`。
 
 ### 前端框架 && 工具
 
