@@ -2,7 +2,11 @@
 
 >参考链接
 [2018年最新经典web前端面试题](https://juejin.im/post/5baa0797f265da0aaa0517e6)
+<<<<<<< HEAD
 [前端面试总结](https://github.com/InterviewMap/CS-Interview-Knowledge-Map)
+=======
+[面试汇总](https://github.com/InterviewMap/CS-Interview-Knowledge-Map)
+>>>>>>> 7acc6b7ed4a133571faf00c8daead26016942a52
 
 ### CSS && DOM
 
@@ -107,7 +111,7 @@ https://segmentfault.com/a/1190000016404843
 ```
 
 三次握手
-![三次握手分析图](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/tcp.png)
+![三次握手分析图](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/tcp.jpg)
 ```
 目的：它可以保证两端（发送端和接收端）通信主机之间的通信可达。它能够处理在传输过程中丢包、传输顺序乱掉等异常情况；此外它还能有效利用宽带，缓解网络拥堵。
 
@@ -121,14 +125,9 @@ https://segmentfault.com/a/1190000016404843
 渲染步骤
 ```
 1. 解析HTML，构建 DOM 树
-
 2. 解析 CSS ，生成 CSS 规则树
-
 3. 合并 DOM 树和 CSS 规则，生成 render 树
-
 4. 布局 render 树（ Layout / reflow ），负责各元素尺寸、位置的计算
-
 5. 绘制 render 树（ paint ），绘制页面像素信息
-
 6. 浏览器会将各层的信息发送给 GPU，GPU 会将各层合成（ composite ），显示在屏幕上
 ```
