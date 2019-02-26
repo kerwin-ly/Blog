@@ -18,7 +18,8 @@ relative: 相对定位，根据自身进行定位，设置了定位后，该位�
 fixed: 根据浏览器进行定位
 
 #### 3.css3动画属性
-
+>如果让用js去实现一个动画，不考虑兼容性的话尽量使用`requestAnimationFrame`
+requestAnimationFrame接受一个动画执行函数作为参数，这个函数的作用是仅执行一帧动画的渲染，并根据条件判断是否结束，如果动画没有结束，则继续调用requestAnimationFrame并将自身作为参数传入
 ```
 .header {
   animation: mymove 2s infinite;
@@ -32,6 +33,18 @@ fixed: 根据浏览器进行定位
     background-color: green;
   }
 }
+```
+```js
+let box = document.getElementById('box');
+let num = 10;
+function step() {
+  num += 10;
+  box.style.left = num + 'px';
+  if (num <= 1000) {
+    window.requestAnimationFrame(step);
+  }
+}
+window.requestAnimationFrame(step);
 ```
 
 #### 4.CSS3中新增伪类举例
@@ -138,6 +151,9 @@ console.log('script end');
 如果忘了什么原因就去看[js引擎的执行过程二](https://heyingye.github.io/2018/03/26/js%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%88%E4%BA%8C%EF%BC%89/)
 
 ### 前端框架 && 工具
+
+#### 1.vue的mvvm的实现原理
+[剖析Vue实现原理 - 如何实现双向绑定mvvm](https://github.com/DMQ/mvvm)
 
 ### 计算机网络基础
 
