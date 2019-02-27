@@ -19,7 +19,7 @@ fixed: 根据浏览器进行定位
 
 #### 3.css3动画属性
 >如果让用js去实现一个动画，不考虑兼容性的话尽量使用`requestAnimationFrame`
-requestAnimationFrame接受一个动画执行函数作为参数，这个函数的作用是仅执行一帧动画的渲染，并根据条件判断是否结束，如果动画没有结束，则继续调用requestAnimationFrame并将自身作为参数传入
+`requestAnimationFrame`接受一个动画执行函数作为参数，这个函数的作用是仅执行一帧动画的渲染，并根据条件判断是否结束，如果动画没有结束，则继续调用`requestAnimationFrame`并将自身作为参数传入
 ```
 .header {
   animation: mymove 2s infinite;
@@ -80,6 +80,9 @@ window.requestAnimationFrame(step);
 [类和类的继承](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E7%B1%BB%E5%92%8C%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.md)
 
 #### 3.apply和call有什么区别
+>参考连接
+[javascript深入之call和apply](https://github.com/mqyqingfeng/Blog/issues/11)
+
 `apply`和`call`区别不大，都可以改变`this`指针的指向。只是后面参数。`apply`可以接数组，`call`则要一个一个挨着写。
 ```js
 var Person1  = function (name) {
@@ -94,13 +97,54 @@ var Person2 = function () {
 var person = new Person2();
 person.getname(); // linxin
 ```
+call的实现原理
+```js
+// 相当于将方法函数作为其对象的一个属性，执行完成后，再将其属性删除
+Function.prototype.call2 = function(context) {
+  // 首先要获取调用call的函数，用this可以获取
+  context.fn = this;
+  context.fn();
+  delete context.fn;
+  ...
+}
 
-#### 4.作用域和作用域链
+// 测试一下
+var foo = {
+  value: 1
+};
+
+function bar() {
+  console.log(this.value);
+}
+
+// 相当于bar的this指针指向了foo（foo.fn = this;）
+bar.call2(foo); // 1
+```
+
+#### 4.什么是bind
+>(JavaScript深入之bind的模拟实现)[https://github.com/mqyqingfeng/Blog/issues/12]
+bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。(来自于 MDN )
+```js
+var foo = {
+  value: 1
+};
+
+function bar() {
+  console.log(this.value);
+}
+
+// 返回了一个函数
+var bindFoo = bar.bind(foo); 
+
+bindFoo(); // 1
+```
+
+#### 5.作用域和作用域链
 >JavaScript 采用`词法作用域`，函数的作用域在函数定义的时候就决定了，函数的作用域基于函数创建的位置。而与词法作用域相对的是`动态作用域`，函数的作用域是在函数调用的时候才决定的。
 
 >当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做`作用域链`。
 
-#### 5.js的执行过程
+#### 6.js的执行过程
 >参考连接：
 [js引擎的执行过程一](https://heyingye.github.io/2018/03/19/js%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/)
 [js引擎的执行过程二](https://heyingye.github.io/2018/03/26/js%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%88%E4%BA%8C%EF%BC%89/)
