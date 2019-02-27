@@ -15,7 +15,7 @@ typeof(Object) // object
 ```js
 // 以下是11种：
 var number = 1;          // [object Number]
-var string = '123';      // [object String]
+var string = '12';      // [object String]
 var boolean = true;      // [object Boolean]
 var und = undefined;     // [object Undefined]
 var nul = null;          // [object Null]
