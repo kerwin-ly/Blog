@@ -378,12 +378,13 @@ function getMinHeight(clientHeight) {
 }
 
 ```
+```
 <!--错误方式-->
 function getMinHeight(clientHeight) {
 	return clientHeight - 30; // 无法知道30具体是什么值
 }
 ```
 
-##### 11. 不要的代码直接干掉，不要注释。如果逻辑复杂，自己提交commit写清楚，需要时，去代码仓库看。
+##### 11. 不要过多的直接注释代码，不要的直接删掉。
 
 
