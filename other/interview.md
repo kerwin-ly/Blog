@@ -157,6 +157,44 @@ bindFoo(); // 1
 `eval`（有安全，性能问题）
 每进入一个不同的运行环境都会创建一个相应的`执行上下文（Execution Context）`，那么在一段JS程序中一般都会创建多个执行上下文，js引擎会以栈的方式对这些执行上下文进行处理，形成`函数调用栈（call stack）`，栈底永远是全局执行上下文（Global Execution Context），栈顶则永远是当前执行上下文。
 
+#### 7.将'get-element-by-id'转换为'getElementById'（字符串和数组的基本操作）
+```js
+var str = 'get-element-by-id';
+var arr = str.split('-');
+var upperArray = [];
+
+arr.map((item, index) => {
+  var upperStr = '';
+  if (index > 0) {
+    upperStr = item.charAt(0).toUpperCase() + item.substring(1);
+  } else {
+    upperStr = item;
+  }
+  upperArray.push(upperStr);
+})
+
+var resultStr = upperArray.join("");
+```
+
+#### 8.冒泡排序(从小到大排序)
+```js
+var arr = [3, 4, 2, 4, 1, 2, 7, 8, 2, 6];
+
+function sort(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] > arr[j]) {
+        var temp = arr[j];
+        arr[j] = arr[i];
+        arr[i] = temp;
+      }
+    }
+  }
+  return arr;
+}
+console.log(sort(arr));
+```
+
 ##### 1.语法分析
 分析该js脚本代码块的语法是否正确，如果出现不正确，则向外抛出一个语法错误（SyntaxError），停止该js代码块的执行，然后继续查找并加载下一个代码块；如果语法正确，则进入预编译阶段
 
