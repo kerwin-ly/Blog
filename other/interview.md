@@ -157,6 +157,44 @@ bindFoo(); // 1
 `eval`（有安全，性能问题）
 每进入一个不同的运行环境都会创建一个相应的`执行上下文（Execution Context）`，那么在一段JS程序中一般都会创建多个执行上下文，js引擎会以栈的方式对这些执行上下文进行处理，形成`函数调用栈（call stack）`，栈底永远是全局执行上下文（Global Execution Context），栈顶则永远是当前执行上下文。
 
+##### 1.语法分析
+分析该js脚本代码块的语法是否正确，如果出现不正确，则向外抛出一个语法错误（SyntaxError），停止该js代码块的执行，然后继续查找并加载下一个代码块；如果语法正确，则进入预编译阶段
+
+##### 2.预编译阶段
+通过语法分析阶段后，进入预编译阶段，遇到js的运行环境则开始创建执行上下文。
+
+创建执行上下文做了什么？
+```
+1.创建变量对象（Variable Object）（创建arguments对象（函数运行环境下），函数声明提前解析，变量声明提升）
+2.建立作用域链（Scope Chain）
+3.确定this指向
+```
+
+什么是变量对象和活动对象？
+>`变量对象(VO)`是执行上下文相关的数据作用域，存储了在上下文中定义的变量和函数声明。在执行阶段之前，`变量对象(VO)`中的属性是不能被访问的。在执行阶段之后，`变量对象(VO)`变成活`活动对象（AO）`，里面的属性都能被访问了，然后开始进行执行阶段的操作。它们其实是同一个对象，只是处于执行上下文中的不同生命周期。
+
+##### 3.执行阶段
+>js是单线程的，但是参与js执行的线程主要有4个。`JS引擎线程` `事件触发线程` `定时器触发线程` `HTTP异步请求线程`.
+经典例子：
+```js
+console.log('script start');
+
+setTimeout(function() {
+  console.log('setTimeout');
+}, 0);
+
+Promise.resolve().then(function() {
+  console.log('promise1');
+}).then(function() {
+  console.log('promise2');
+});
+
+console.log('script end');
+```
+打印的值依次为：`script start`,`script end`,`promise1`,`promise2`,`setTimeout`
+
+如果忘了什么原因就去看[js引擎的执行过程二](https://heyingye.github.io/2018/03/26/js%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%88%E4%BA%8C%EF%BC%89/)
+
 #### 7.将'get-element-by-id'转换为'getElementById'（字符串和数组的基本操作）
 ```js
 var str = 'get-element-by-id';
@@ -195,43 +233,13 @@ function sort(arr) {
 console.log(sort(arr));
 ```
 
-##### 1.语法分析
-分析该js脚本代码块的语法是否正确，如果出现不正确，则向外抛出一个语法错误（SyntaxError），停止该js代码块的执行，然后继续查找并加载下一个代码块；如果语法正确，则进入预编译阶段
+#### 9.commonJS和es6模块化的区别
+1.commonJS支持动态导入，如`require(${path}/xx.js)`;后者不支持
 
-##### 2.预编译阶段
-通过语法分析阶段后，进入预编译阶段，遇到js的运行环境则开始创建执行上下文。
+2.commonJS是同步导入，因为服务端文件都在本地，导入不会造成太明显的线程阻塞。而import是异步导入，大多用于浏览器端，需要对文件进行下载，所以同步导入影响很大。
 
-创建执行上下文做了什么？
-```
-1.创建变量对象（Variable Object）（创建arguments对象（函数运行环境下），函数声明提前解析，变量声明提升）
-2.建立作用域链（Scope Chain）
-3.确定this指向
-```
+3.commonJSd导入的值是对值的拷贝，如果发生改变，不会影响原始值。而import导出的值是绑定的，它们指向了同一个内存地址，导出值改变会影响原始值。
 
-什么是变量对象和活动对象？
->`变量对象(VO)`是执行上下文相关的数据作用域，存储了在上下文中定义的变量和函数声明。在执行阶段之前，`变量对象(VO)`中的属性是不能被访问的。在执行阶段之后，`变量对象(VO)`变成活`活动对象（AO）`，里面的属性都能被访问了，然后开始进行执行阶段的操作。它们其实是同一个对象，只是处于执行上下文中的不同生命周期。
-
-##### 3.执行阶段
->js是单线程的，但是参与js执行的线程主要有4个。`JS引擎线程` `事件触发线程` `定时器触发线程` `HTTP异步请求线程`.
-经典例子：
-```js
-console.log('script start');
-
-setTimeout(function() {
-  console.log('setTimeout');
-}, 0);
-
-Promise.resolve().then(function() {
-  console.log('promise1');
-}).then(function() {
-  console.log('promise2');
-});
-
-console.log('script end');
-```
-打印的值依次为：`script start`,`script end`,`promise1`,`promise2`,`setTimeout`
-
-如果忘了什么原因就去看[js引擎的执行过程二](https://heyingye.github.io/2018/03/26/js%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%88%E4%BA%8C%EF%BC%89/)
 
 ### 前端框架 && 工具
 
