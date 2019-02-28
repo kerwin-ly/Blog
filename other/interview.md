@@ -152,7 +152,7 @@ bindFoo(); // 1
 [javascript深入之变量对象](https://github.com/mqyqingfeng/Blog/issues/5)
 
 >js的运行环境主要有三种
-`全局函数`（js代码加载完毕后，进入代码预编译即进入全局环境）
+`全局环境`（js代码加载完毕后，进入代码预编译即进入全局环境）
 `函数环境`（函数调用执行时，进入该函数环境，不同的函数则函数环境不同）
 `eval`（有安全，性能问题）
 每进入一个不同的运行环境都会创建一个相应的`执行上下文（Execution Context）`，那么在一段JS程序中一般都会创建多个执行上下文，js引擎会以栈的方式对这些执行上下文进行处理，形成`函数调用栈（call stack）`，栈底永远是全局执行上下文（Global Execution Context），栈顶则永远是当前执行上下文。
@@ -240,6 +240,79 @@ console.log(sort(arr));
 
 3.commonJSd导入的值是对值的拷贝，如果发生改变，不会影响原始值。而import导出的值是绑定的，它们指向了同一个内存地址，导出值改变会影响原始值。
 
+#### 10.综合面试题
+>[该题分析解答](https://www.cnblogs.com/xxcanghai/p/5189353.html)
+```js
+function Foo() {
+  getName = function() {
+    alert(1);
+  }
+  return this;
+}
+Foo.getName = function() {
+  alert(2);
+}
+Foo.prototype.getName = function() {
+  alert(3);
+}
+var getName = function() {
+  alert(4);
+}
+function getName() {
+  alert(5);
+}
+
+Foo.getName(); // 2
+getName(); // 4
+Foo().getName(); // 1  
+getName(); // 1
+new Foo.getName(); // 2
+new Foo().getName(); // 3
+new new Foo().getName(); // 3
+```
+
+#### 11.节流函数和防抖函数自我实现
+>为解决页面多次调用方法，造成页面卡顿内存泄漏等问题（如：计时器，滑动页面卡顿），提出了节流函数和防抖函数。
+
+节流函数：在一定的时间内，函数只能被触发一次
+```js
+function throttle(func, wait) {
+  var startTime = 0;
+
+  return function() {
+    var nowTime = Date.now();
+
+    if (nowTime - startTime > wait) {
+      func.call(this);
+      startTime = nowTime;
+    }
+  }
+}
+
+function getNum() {
+  console.log(Date.now())
+}
+
+document.onmousemove = throttle(getNum, 3000);
+```
+
+防抖函数：在规定时间内，如果函数被再次触发，则以最新的时间为准，推迟多少时间后触发。总之在规定时间内，如果被触发了多次，就只按最后一次调用为准。
+```js
+function debounce(func, wait) {
+  var timeout;
+  return function() {
+    clearTimeout(timeout);
+    timeout = setTimeout(func, wait);
+  }
+}
+
+function getNum() {
+  console.log(Date.now())
+}
+
+document.onmousemove = debounce(getNum, 3000);
+```
+
 
 ### 前端框架 && 工具
 
@@ -257,6 +330,7 @@ https://segmentfault.com/a/1190000016404843
 ```
 1.域名解析（因为tcp连接只能识别ip地址）
 2.tcp连接（三次握手）
+(2) 如果遇到的是https协议，则会进行TLS握手，对信息进行加密。
 3.浏览器发送请求报文（请求报文：请求行，请求头，空行（结束标示），请求数据）
 4.服务端响应报文（响应报文：状态行，消息头，响应正文）
 5.浏览器解析渲染页面
@@ -281,6 +355,16 @@ https://segmentfault.com/a/1190000016404843
 2. 解析 CSS ，生成 CSS 规则树
 3. 合并 DOM 树和 CSS 规则，生成 render 树
 4. 布局 render 树（ Layout / reflow ），负责各元素尺寸、位置的计算
-5. 绘制 render 树（ paint ），绘制页面像素信息
+5. 绘制 render 树（ repaint ），绘制页面像素信息
 6. 浏览器会将各层的信息发送给 GPU，GPU 会将各层合成（ composite ），显示在屏幕上
 ```
+
+#### 2.get和post的区别？
+1.get请求能够缓存，post不能
+2.get请求参数是放在路径后面的，post放在request-body中，相对来说更加安全，传输量更大
+3.url有长度限制，这会影响get请求（这是浏览器规定的，不是RFC规定的）
+
+#### 3.如何优化提升前端性能？
+1.减少http的请求数量
+
+2.减少重排和重绘的次数
