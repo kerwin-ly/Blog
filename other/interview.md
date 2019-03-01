@@ -2,7 +2,6 @@
 
 >参考链接
 [2018年最新经典web前端面试题](https://juejin.im/post/5baa0797f265da0aaa0517e6)
-
 [前端面试总结](https://github.com/InterviewMap/CS-Interview-Knowledge-Map)
 
 ### CSS && DOM
@@ -14,8 +13,11 @@
 
 #### 2.定位问题
 static: 默认的定位
+
 absolute: 绝对定位，根据上一个不是static定位的元素进行定位，脱离文档流。
+
 relative: 相对定位，根据自身进行定位，设置了定位后，该位置仍然占位，不脱离文档流。
+
 fixed: 根据浏览器进行定位
 
 #### 3.css3动画属性
