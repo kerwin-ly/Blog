@@ -324,6 +324,31 @@ function getNum() {
 document.onmousemove = debounce(getNum, 3000);
 ```
 
+#### 12.for in和for of的区别
+`for of`主要是遍历数据/数组对象/字符串等拥有**迭代器**的集合
+
+`for in`主要是遍历对象，它会遍历所有的可枚举属性，包括原型
+
+#### 13. Generator函数
+>Generator 函数是一个普通函数（状态机），但是有两个特征。一是，function关键字与函数名之间有一个星号；二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）。
+
+>Generator方法执行后，并不会返回函数的运行结果。而是一个指向内部状态的指针对象，通过`next`方法，使得指针指向下一个状态。每次调用next方法，内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个yield表达式（或return语句）为止。
+
+>yield表达式是暂停执行的标记，而next方法可以恢复执行
+
+```js
+function* hello() {
+  console.log(1);
+  yield 'hello';
+  console.log(2);
+  yield 'word';
+}
+
+var h = hello();
+h.next();
+h.next();
+```
+
 
 ### 前端框架 && 工具
 
