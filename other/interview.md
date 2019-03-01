@@ -143,9 +143,9 @@ bindFoo(); // 1
 ```
 
 #### 5.作用域和作用域链
->JavaScript 采用`词法作用域`，函数的作用域在函数定义的时候就决定了，函数的作用域基于函数创建的位置。而与词法作用域相对的是`动态作用域`，函数的作用域是在函数调用的时候才决定的。
+>JavaScript 采用`词法作用域`，函数的作用域在函数定义的时候就决定了，函数的作用域基于函数创建的位置。而与词法作用域相对的是`动态作用域`，函数的作用域是在函数调用的时候才决定的。（ps:作用域主要有全局作用域，函数作用域，块级作用域）
 
->当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做`作用域链`。
+>当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做`作用域链`。(ps:执行上下文，变量对象等概念在`6.js的执行过程`中)
 
 #### 6.js的执行过程
 >参考连接：
@@ -179,6 +179,7 @@ bindFoo(); // 1
 >js是单线程的，但是参与js执行的线程主要有4个。`JS引擎线程` `事件触发线程` `定时器触发线程` `HTTP异步请求线程`.
 经典例子：
 ```js
+// 这里主要涉及到了宏任务（同步任务，异步任务），微任务，事件循环（Event Loop）
 console.log('script start');
 
 setTimeout(function() {
@@ -199,21 +200,29 @@ console.log('script end');
 
 #### 7.将'get-element-by-id'转换为'getElementById'（字符串和数组的基本操作）
 ```js
-var str = 'get-element-by-id';
-var arr = str.split('-');
-var upperArray = [];
+function convertLowerToCamel(str, token) {
+  var camelList = [];
+  var lowerList = str.split(token); // ['get', 'element', 'by', 'id']
+  var camelStr = '';
 
-arr.map((item, index) => {
-  var upperStr = '';
-  if (index > 0) {
-    upperStr = item.charAt(0).toUpperCase() + item.substring(1);
-  } else {
-    upperStr = item;
-  }
-  upperArray.push(upperStr);
-})
+  arr.map((item, index) => {
+    var tempStr = '';
+    var upperWord = '';
 
-var resultStr = upperArray.join("");
+    if (index > 0) {
+      upperWord = item.charAt(0).toUpperCase();
+      tempStr = upperWord + item.substring(1);
+    } else {
+      tempStr = item;
+    }
+    camelList.push(tempStr);
+  })
+
+  camelStr = camelList.join("");
+  return camelStr;
+}
+
+convertToCamelStr('get-element-by-id', '-');
 ```
 
 #### 8.冒泡排序(从小到大排序)
@@ -232,7 +241,7 @@ function sort(arr) {
   }
   return arr;
 }
-console.log(sort(arr));
+sort(arr);
 ```
 
 #### 9.commonJS和es6模块化的区别
@@ -344,9 +353,9 @@ https://segmentfault.com/a/1190000016404843
 ```
 目的：它可以保证两端（发送端和接收端）通信主机之间的通信可达。它能够处理在传输过程中丢包、传输顺序乱掉等异常情况；此外它还能有效利用宽带，缓解网络拥堵。
 
-第一次握手：建立连接。客户端发送连接请求报文段，将SYN位置为1，Sequence Number为x；然后，客户端进入SYN_SEND状态，等待服务器的确认；
+第一次握手：建立连接。客户端发送连接请求报文段，SYN设为1（Syn--表示同步序号），Seq(Sequence Number请求序号)为X；然后，客户端进入SYN_SEND状态，等待服务器的确认；
 
-第二次握手：服务器收到SYN报文段。服务器收到客户端的SYN报文段，需要对这个SYN报文段进行确认，设置Acknowledgment Number为x+1(Sequence Number+1)；同时，自己自己还要发送SYN请求信息，将SYN位置为1，Sequence Number为y；服务器端将上述所有信息放到一个报文段（即SYN+ACK报文段）中，一并发送给客户端，此时服务器进入SYN_RECV状态；
+第二次握手：服务器收到客户端的SYN报文段，需要对这个SYN报文段进行确认并返回；设置确认号码Acknowledgment Number为X+1(Sequence Number+1)；Sequence Number为Y；此时服务器进入SYN_RECV状态；
 
 第三次握手：客户端收到服务器的SYN+ACK报文段。然后将Acknowledgment Number设置为y+1，向服务器发送ACK报文段，这个报文段发送完毕以后，客户端和服务器端都进入ESTABLISHED状态，完成TCP三次握手。
 ```
@@ -363,7 +372,9 @@ https://segmentfault.com/a/1190000016404843
 
 #### 2.get和post的区别？
 1.get请求能够缓存，post不能
+
 2.get请求参数是放在路径后面的，post放在request-body中，相对来说更加安全，传输量更大
+
 3.url有长度限制，这会影响get请求（这是浏览器规定的，不是RFC规定的）
 
 #### 3.如何优化提升前端性能？
