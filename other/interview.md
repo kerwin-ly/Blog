@@ -355,6 +355,41 @@ h.next();
 #### 1.vue的mvvm的实现原理
 [剖析Vue实现原理 - 如何实现双向绑定mvvm](https://github.com/DMQ/mvvm)
 
+#### 2.jQuery如何自定义插件
+```js
+// $.fn = jQuery.prototype实际上是对原型的继承
+$.fn.myplugin = function() {
+  ...
+}
+
+// 防止$变量污染，将jquery传参到闭包中执行
+(function( $ ) {
+  $.fn.myPlugin = function() {
+    // this指向jQuery对象
+    ...
+  };
+})( jQuery );
+```
+
+一个简单的插件，获取最大高度
+```js
+(function( $ ){
+
+  $.fn.maxHeight = function() {
+  
+    var max = 0;
+
+    this.each(function() {
+      max = Math.max( max, $(this).height() );
+    });
+
+    return max;
+  };
+})( jQuery );
+
+var tallest = $('div').maxHeight(); // 返回最高 div 的高度
+```
+
 ### 计算机网络基础
 
 #### 1.从输入了一个url后，浏览器做了什么？
