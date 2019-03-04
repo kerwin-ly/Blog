@@ -4,7 +4,7 @@
 [2018年最新经典web前端面试题](https://juejin.im/post/5baa0797f265da0aaa0517e6)
 [前端面试总结](https://github.com/InterviewMap/CS-Interview-Knowledge-Map)
 
-### CSS && DOM
+### HTML && CSS
 
 #### 1.css的盒模型
 标准模型：一个块的总宽度=width+margin(左右)+padding(左右)+border(左右)
@@ -72,6 +72,40 @@ window.requestAnimationFrame(step);
   list.addEventListener('click', function(e) {
     console.log(e.target); // 对应点击的li标签
   })
+```
+
+#### 7.html5新增了哪些新特性？移除了哪些？
+新增
+```
+现在html5已经不是SGML的子集，主要是对图像，位置，存储等的添加。
+绘画canvas
+媒介播放的video和audio标签
+存储方式sessionStorage,localStorage
+更好的语义化标签header,article,footer,nav,section
+新的技术webWorker,websocket,Geolocation
+```
+
+移除
+```
+纯表现的元素：basefont，big，center，font, s，strike，tt，u;
+对可用性产生负面影响的元素：frame，frameset，noframes；
+```
+
+#### 8.CSS选择符有哪些？哪些属性可以继承？
+```
+  1.id选择器（ # myid）
+  2.类选择器（.myclassname）
+  3.标签选择器（div, h1, p）
+  4.相邻选择器（h1 + p）
+  5.子选择器（ul > li）
+  6.后代选择器（li a）
+  7.通配符选择器（ * ）
+  8.属性选择器（a[rel = "external"]）
+  9.伪类选择器（a:hover, li:nth-child）
+
+  可继承的样式： font-size font-family color;
+
+  不可继承的样式：border padding margin width height ;
 ```
 
 ### JavaScript基础
@@ -349,6 +383,9 @@ h.next();
 h.next();
 ```
 
+#### 14.什么是this
+[加深对this的理解](http://huang-jerryc.com/2017/07/15/understand-this-of-javascript/)
+
 
 ### 前端框架 && 工具
 
@@ -356,6 +393,7 @@ h.next();
 [剖析Vue实现原理 - 如何实现双向绑定mvvm](https://github.com/DMQ/mvvm)
 
 #### 2.jQuery如何自定义插件
+jquery插件实现基本原理，对原型进行继承
 ```js
 // $.fn = jQuery.prototype实际上是对原型的继承
 $.fn.myplugin = function() {
@@ -388,6 +426,59 @@ $.fn.myplugin = function() {
 })( jQuery );
 
 var tallest = $('div').maxHeight(); // 返回最高 div 的高度
+```
+
+保证jquery的链式调用，返回this(jQuery实例)
+```js
+(function( $ ){
+
+  $.fn.lockDimensions = function( type ) {  
+
+    return this.each(function() {
+
+      var $this = $(this);
+
+      if ( !type || type == 'width' ) {
+        $this.width( $this.width() );
+      }
+
+      if ( !type || type == 'height' ) {
+        $this.height( $this.height() );
+      }
+
+    });
+
+  };
+})( jQuery );
+
+$('div').lockDimensions('width').css('color', 'red');
+```
+
+`$.extend`让默认参数和参数对象合并
+```js
+(function( $ ){
+
+  $.fn.tooltip = function( options ) {  
+
+    // Create some defaults, extending them with any options that were provided
+    var settings = $.extend( {
+      'location'         : 'top',
+      'background-color' : 'blue'
+    }, options);
+
+    return this.each(function() {        
+
+      // Tooltip plugin code here
+
+    });
+
+  };
+})( jQuery );
+
+$('div').tooltip({
+  'location' : 'left'
+});  
+
 ```
 
 ### 计算机网络基础
@@ -438,6 +529,16 @@ https://segmentfault.com/a/1190000016404843
 3.url有长度限制，这会影响get请求（这是浏览器规定的，不是RFC规定的）
 
 #### 3.如何优化提升前端性能？
-1.减少http的请求数量
+1.减少http请求次数：CSS Sprites, JS、CSS源码压缩、图片大小控制合适；网页Gzip，CDN托管，data缓存 ，图片服务器。
 
-2.减少重排和重绘的次数
+2.前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
+
+3.用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能。
+
+4.当需要设置的样式很多时设置className而不是直接操作style。
+
+5.少用全局变量、缓存DOM节点查找的结果。减少IO读取操作。
+
+6.避免使用CSS Expression（css表达式)又称Dynamic properties(动态属性)。
+
+7.图片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。
