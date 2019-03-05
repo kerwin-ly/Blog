@@ -259,7 +259,8 @@ function convertLowerToCamel(str, token) {
 convertToCamelStr('get-element-by-id', '-');
 ```
 
-#### 8.冒泡排序(从小到大排序)
+#### 8.排序(从小到大排序)
+冒泡排序
 ```js
 var arr = [3, 4, 2, 4, 1, 2, 7, 8, 2, 6];
 
@@ -276,6 +277,31 @@ function sort(arr) {
   return arr;
 }
 sort(arr);
+```
+
+快速排序
+```js
+function quickSort(arr) {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  var left = [];
+  var right = [];
+  var index = Math.floor(arr.length / 2);
+  var target = arr.splice(index, 1)[0];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (target > arr[i]) {
+      left.push(arr[i]);
+    } else {
+      right.push(arr[i]);
+    }
+  }
+  return quickSort(left).concat([target], quickSort(right));
+}
+
+quickSort([1, 4, 2, 3, 7, 9, 10, 2, 1]);
 ```
 
 #### 9.commonJS和es6模块化的区别
@@ -387,6 +413,40 @@ h.next();
 [加深对this的理解](http://huang-jerryc.com/2017/07/15/understand-this-of-javascript/)
 
 
+#### 15.promise的实现原理
+>参考连接：[Promise实现原理（附源码）](https://juejin.im/post/5b83cb5ae51d4538cc3ec354)
+
+>构造函数Promise必须接受一个函数作为参数，我们称该函数为handle，handle又包含resolve和reject两个参数，它们是两个函数。
+
+```js
+new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('FULFILLED')
+  }, 1000)
+})
+```
+
+Promise的状态
+```
+Pending(进行中)
+Fullfilled(已成功)
+Rejected(已失败)
+
+Promise对象存在以下三种状态，状态只能由 Pending 变为 Fulfilled 或由 Pending 变为 Rejected ，且状态改变之后不会在发生变化，会一直保持这个状态。
+
+resolve : 将Promise对象的状态从 Pending(进行中) 变为 Fulfilled(已成功)
+reject : 将Promise对象的状态从 Pending(进行中) 变为 Rejected(已失败)
+resolve 和 reject 都可以传入任意类型的值作为实参，表示 Promise 对象成功（Fulfilled）和失败（Rejected）的值
+```
+
+Promise 的 then 方法
+```
+当 promise 状态变为成功时必须被调用，其第一个参数为 promise 成功状态传入的值（resolve 执行时传入的值）
+在 promise 状态改变前其不可被调用
+其调用次数不可超过一次
+then 方法必须返回一个新的 promise 对象，因此 promise 支持链式调用
+```
+
 ### 前端框架 && 工具
 
 #### 1.vue的mvvm的实现原理
@@ -479,6 +539,20 @@ $('div').tooltip({
   'location' : 'left'
 });  
 
+```
+
+#### 3.vue和react的区别
+相同点
+```
+1.都是组件化开发和虚拟dom
+2.都支持使用props进行父子通信
+3.都支持数据驱动，不操作真实dom，更新数据后页面自动更新
+```
+不同点
+```
+1.react使用的是单向数据流，而vue使用的是双向数据绑定
+2.react使用的是jsx方法(all in js的理念)，而vue使用的是模版渲染，通过webpack进行打包
+3.react通过setState改变数据会使整个页面重新渲染，需要通过shouldComponent控制局部更新。而vue会跟踪每一个组件的依赖关系，不需要重新渲染整个组件树。。
 ```
 
 ### 计算机网络基础
