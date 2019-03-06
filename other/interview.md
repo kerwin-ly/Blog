@@ -108,6 +108,81 @@ window.requestAnimationFrame(step);
   不可继承的样式：border padding margin width height ;
 ```
 
+#### 9.右边宽度固定，左边自适应
+注意使用`flex: 1`,父元素一定要`display:  flex`
+```
+<style>
+body {
+  display: flex;
+}
+
+.left{
+  background-color: rebeccapurple;
+  height: 200px;
+  flex: 1;
+}
+
+.right{
+  background-color: red;
+  height: 200px;
+  width: 100px;
+}
+</style>
+
+<body>
+  <div class="left"></div>
+  <div class="right"></div>
+</body>
+```
+
+#### 10.怎么用div来模拟实现一个textarea？
+关键：我们要知道一个h5的属性，那就是contenteditable，将属性设置成true就会使得div是可以编辑的。这个属性兼容IE6之后的版本，很强大
+
+```
+<div id="textarea" contenteditable="true"></div>
+```
+
+#### 11.移动端实现1px边框
+1.用height：1px的div，然后根据媒体查询设置transform: scaleY(0.5);
+```
+div{
+  height:1px;
+  background:#000;
+  -webkit-transform: scaleY(0.5);
+  -webkit-transform-origin:0 0;
+  overflow: hidden;
+}
+```
+
+2.用::after和::befor,设置border-bottom：1px solid #000,然后在缩放-webkit-transform: scaleY(0.5);可以实现两根边线的需求
+```
+div::after{
+  content:'';width:100%;
+  border-bottom:1px solid #000;
+  transform: scaleY(0.5);
+  }
+```
+
+3.::after设置border：1px solid #000; width:200%; height:200%,然后再缩放scaleY(0.5); 优点可以实现圆角，京东就是这么实现的，缺点是按钮添加active比较麻烦。
+```
+.div::after {
+  content: '';
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid #bfbfbf;
+  border-radius: 4px;
+  -webkit-transform: scale(0.5,0.5);
+  transform: scale(0.5,0.5);
+  -webkit-transform-origin: top left;
+}
+```
+
+#### 12.如何处理图片懒加载
+(图片懒加载踩坑)[https://juejin.im/post/5add55dd6fb9a07aad171f76]
+
 ### JavaScript基础
 
 #### 1.javascript有哪些基本数据类型
@@ -518,7 +593,7 @@ $('div').lockDimensions('width').css('color', 'red');
 ```js
 (function( $ ){
 
-  $.fn.tooltip = function( options ) {  
+  $.fn.tooltip = function( options ) {
 
     // Create some defaults, extending them with any options that were provided
     var settings = $.extend( {
@@ -526,7 +601,7 @@ $('div').lockDimensions('width').css('color', 'red');
       'background-color' : 'blue'
     }, options);
 
-    return this.each(function() {        
+    return this.each(function() {
 
       // Tooltip plugin code here
 
@@ -554,6 +629,20 @@ $('div').tooltip({
 2.react使用的是jsx方法(all in js的理念)，而vue使用的是模版渲染，通过webpack进行打包
 3.react通过setState改变数据会使整个页面重新渲染，需要通过shouldComponent控制局部更新。而vue会跟踪每一个组件的依赖关系，不需要重新渲染整个组件树。。
 ```
+
+### 构建工具
+
+#### 1.webpack与grunt、gulp的不同？
+gulp和grunt是比较轻量级的，基于任何和流(task, stream)的。类似jQuery，找到一个（或一类）文件，对其做一系列链式操作，更新流上的数据， 整条链式操作构成了一个任务，多个任务就构成了整个web的构建流程。
+
+webpack是基于入口的。webpack会自动地递归解析入口所需要加载的所有资源文件，然后用不同的Loader来处理不同的文件，用Plugin来扩展webpack功能。他和其他的工具最大的不同在于他支持code-splitting、模块化(AMD，ESM，CommonJs)、全局分析。
+
+总结：
+```
+gulp和grunt需要开发者将整个前端构建过程拆分成多个`Task`，并合理控制所有`Task`的调用关系
+webpack需要开发者找到入口，并需要清楚对于不同的资源应该使用什么Loader做何种解析和加工
+```
+
 
 ### 计算机网络基础
 
@@ -605,7 +694,7 @@ https://segmentfault.com/a/1190000016404843
 #### 3.如何优化提升前端性能？
 1.减少http请求次数：CSS Sprites, JS、CSS源码压缩、图片大小控制合适；网页Gzip，CDN托管，data缓存 ，图片服务器。
 
-2.前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
+2.前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数。
 
 3.用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能。
 
@@ -616,3 +705,5 @@ https://segmentfault.com/a/1190000016404843
 6.避免使用CSS Expression（css表达式)又称Dynamic properties(动态属性)。
 
 7.图片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。
+
+8.路由懒加载（webpack3新方式），大的库（lodash）按需加载
