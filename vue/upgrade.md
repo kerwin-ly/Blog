@@ -1,4 +1,4 @@
-##vue1.0升级到vue2.0
+## vue1.0升级到vue2.0
 #### 1.beforeCompile 移除
 使用 created 钩子函数替代。在dom加载之前就进行处理。
 
