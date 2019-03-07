@@ -1,5 +1,5 @@
 
-##webpack1.0升级3.0(vue-cli)
+## webpack1.0升级3.0(vue-cli)
 #### 1.新建一个最新的vue-cli项目，将build,config,.babelrc文件粘贴进自己的项目中。（注意自己原始文件的保存）
 
 #### 2.报错：所有css无法编译，Moule not found.在每个css里面if(content == 'string')这里报错。

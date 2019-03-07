@@ -1,4 +1,4 @@
-##Cordova
+## Cordova
 #### 1.项目环境配置、项目构建
 http://blog.gxxsite.com/vuejs-cordova-framework-webapp-advance-note/
 #### 2.命令执行
@@ -141,7 +141,6 @@ Android中，默认配置或如下配置时，会保存在 /data/data/<packageId
   14.                   );
 ```
 #### 14.cordova常用的插件和命令
-常用命令来自：http://www.hangge.com/blog/cache/detail_1158.html    ··
-来源： http://www.bijishequ.com/detail/253681?p=
+常用命令来自：http://www.hangge.com/blog/cache/detail_1158.html
 
  
