@@ -9,7 +9,7 @@
 ### Vue
 [vue-mvvm实现原理（外文）](https://github.com/DMQ/mvvm)
 
-[vue1.x升级到2.x](https://github.com/kerwin-ly/Blog/blob/master/vue/vue1%E5%8D%87%E7%BA%A7%E5%88%B0vue2.md)
+[vue1.x升级到2.x](https://github.com/kerwin-ly/Blog/blob/master/vue/upgrade.md)
 
 [webpack1.0升级3.0](https://github.com/kerwin1/Blog/blob/master/common/webpack1.0%E5%8D%87%E7%BA%A73.0.md)
 
