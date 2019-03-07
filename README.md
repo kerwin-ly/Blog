@@ -23,13 +23,13 @@
 [react-native-vector-icons的使用](https://github.com/kerwin-ly/Blog/blob/master/react-native/react-native-vector-icons%20usage.md)
 
 ### Electron
-[electron笔记](https://github.com/kerwin1/Blog/tree/master/electron)
+[electron笔记](https://github.com/kerwin-ly/Blog/blob/master/electron/note.md)
 
 ### Sass
 [sass笔记](https://github.com/kerwin1/Blog/blob/master/sass/note.md)
 
 ### Cordova
-[cordova踩坑](https://github.com/kerwin1/Blog/blob/master/cordova/cordova.md)
+[cordova踩坑](https://github.com/kerwin1/Blog/blob/master/cordova/note.md)
 
 ### 其他
 [HTML && CSS编码规范](https://github.com/kerwin1/Blog/blob/master/common/HTML%20%26%26%20CSS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
