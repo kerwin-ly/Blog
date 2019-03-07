@@ -5,25 +5,25 @@ https://segmentfault.com/a/1190000002933776
 调用InteractionManager的runAfterInteraction方法。在动画执行完成后再改吧state的值
 #### 3.scrollView由于底部Tabnavigator占位，无法滑动到底部
 在底部添加一个空白view占位
-```
+```js
 <ScrollView>
-<View>
-<FlatList
-    data={this.state.manage}
-    renderItem={this._renderIcon}
-    numColumns = {3}
-    keyExtractor ={(item,index) =>item.id}
-    ListHeaderComponent={<Text style={[style.ListHeader]}>管理</Text>}
-/>
- <View style={{height:Platform.OS == 'ios' ? 0: 30}}></View> 
-</View>
+  <View>
+    <FlatList
+        data={this.state.manage}
+        renderItem={this._renderIcon}
+        numColumns = {3}
+        keyExtractor ={(item,index) =>item.id}
+        ListHeaderComponent={<Text style={[style.ListHeader]}>管理</Text>}
+    />
+    <View style={{height:Platform.OS == 'ios' ? 0: 30}}></View> 
+  </View>
 </ScrollView>
 ```
 #### 4.父子之间的传值，props的回调方法
 ##### 方法一：
 子组件
 
-```
+```js
 import React,{ Component } from 'react';
 import {
   View,Text,Button
@@ -43,9 +43,9 @@ export default class MInventory extends Component{
   }
 }
 ```
-父组件
 
-```
+父组件
+```js
 import React,{Component} from 'react';
 import {
   View,
@@ -85,7 +85,7 @@ export default class Inventory extends Component{
 ```
 #### 5.取消FlatList keys missing的警告
 
-```
+```js
 <FlatList
   keyExtractor={this._uniquekey}
   
@@ -99,7 +99,7 @@ export default class Inventory extends Component{
 #### 6.setState同步更新
 ##### 方法一：回调方法
 
-```
+```js
 this.setState({
       load: !this.state.load,
       count: this.state.count + 1
@@ -110,7 +110,7 @@ this.setState({
 ```
 ##### 方法二：传入状态计算函数
 
-```
+```js
 incrementCount(){
    this.setState((prevState, props) => ({
       count: prevState.count + 1
@@ -120,26 +120,28 @@ incrementCount(){
     }));
   }
 ```
+
 #### 7.签名apk
 http://reactnative.cn/docs/0.47/signed-apk-android.html#content
-#### 8.改变state中对象里面的值
 
-```
+#### 8.改变state中对象里面的值
+```js
 this.state = {
-    camera:{
-            show:false,
-            torch:'on'
-        }
+  camera:{
+      show: false,
+      torch: 'on'
     }
+  }
 }
 
 this.setState({
-    camera:{
-        ...this.state.camera,
-        torch:'off'
-    }
+  camera:{
+    ...this.state.camera,
+    torch:'off'
+  }
 })
 ```
+
 #### 7.使用百度地图时，只有网格，无地图
 由于百度地图必须要签名的sha1作为其安全码的一部分，所以，在注册key值时候，应选Android SDK,并且将签名的SHA1值和包名写进去，才能使用。
 
@@ -152,8 +154,6 @@ keytool -printcert -file CERT.RSA
 使用延迟处理，参考链接http://www.jianshu.com/p/2f575cc35780
 
 #### 9.mac下,连上手机后。报错。Could not install the app on the device, read the error above for details. 
-
-
 ```
 chmod 755 android/gradlew
 react-native run-android
@@ -182,15 +182,15 @@ sdk.dir = /Users/liyi/Library/Android/sdk
 Where USERNAME is your OSX username
 
 #### 12.安装指定版本
-
 ```
 $ react-native init demo --version 0.36.1
 ```
-#### 13.如果遇到什么依赖重复，报错。尝试清除缓存
 
+#### 13.如果遇到什么依赖重复，报错。尝试清除缓存
 ```
 yarn start --reset-cache
 ```
+
 #### 14. 如果遇到自己改了图片，图片仍没响应。或者报错
 ```
 res/drawable-mdpi-v4/src_imgs_banner.png:0: error: Resource entry src_imgs_banner is already defined.
@@ -206,38 +206,36 @@ https://blog.csdn.net/wanshaobo888/article/details/78385152
 https://www.jianshu.com/p/cafe0c6cba16
 
 A页面跳转B页面
-```
+```js
 goPageB: () => {
-    this.props.navigation.navigate('B',{
-        callback: (data)=>{
-            this.setState({
-              boom:data,
-            })
-        }
-      }
+  this.props.navigation.navigate('B', {
+    callback: (data) => {
+      this.setState({
+        boom:data
+      })
+    }
+  }
 }
 ```
 B页面回退到A页面：
 
-```
+```js
 const {navigate,goBack,state} = this.props.navigation;
 state.params.callback(this.state.boom);
 this.props.navigation.goBack();  
 ```
 
 #### 17.重置路由栈
-
-```
+```js
 //跳转并清空路由记录
  import { NavigationActions } from 'react-navigation'
-const  resetAction = NavigationActions.reset({
-                index: 0,
-                actions: [
-                    NavigationActions.navigate({routeName:'xxx'})//要跳转到的页面名字
-                ]
-            });
+const resetAction = NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName:'xxx' })//要跳转到的页面名字
+  ]
+});
 this.props.navigation.dispatch(resetAction);
-
 ```
 
 #### 18.SDK Build Tools revision (23.0.1) is too low for project :react-native-keychain报错
@@ -274,9 +272,8 @@ adb reverse tcp:8081 tcp:8081
 
 #### 22. 当state的数据层级，出现Array嵌套时候。（两层或多层）FlatList使用嵌套，state已经改变。页面却没有重绘。
 
-```
+```js
 // 当state内存放的数据为数组时候，实质上是一个引用，就算是state内push了一个数据，这时候是不会触发更新的
-
 // item对应第二层的某对象
 
 selectUser = () => {
@@ -286,10 +283,9 @@ selectUser = () => {
 }
 
 参考链接：https://segmentfault.com/a/1190000002789651
-
 ```
 
-```
+```js
 // 官方文档：给FlatList指定extraData={this.state}属性，是为了保证state.selected变化时，能够正确触发FlatList的更新。如果不指定此属性，则FlatList不会触发更新，因为它是一个PureComponent，其props在===比较中没有变化则不会触发更新
 <FlatList
   data={item.data}
@@ -301,12 +297,10 @@ selectUser = () => {
 ```
 
 #### 23. react-native-push-notification消息推送
-
 git链接：https://github.com/zo0r/react-native-push-notification
 
 #### 24. 在navigationOptions中调用内部方法
-
-```
+```js
 // 使用setParams进行参数传递，去执行内部方法
 static navigationOptions = ({navigation, screenProps}) => ({
   headerTitle: '登录',
@@ -327,12 +321,10 @@ componentDidMount() {
   //在static中使用this方法
   this.props.navigation.setParams({ navigatePress:this._onBackAndroid })
 }
-
-
 ```
 
 #### 25. style中传递参数，自定义theme
-```
+```js
 <Text style={StyleSheet.flatten([styles.label(theme), labelStyle])}>
 233
 </Text>
@@ -345,12 +337,11 @@ const styles = {
     borderColor: theme.colors.grey3
   })
 }
-
 ```
 
 #### 26. FlatList onEndReached触发两次解决办法
 1.添加onMomentumScrollBegin属性给FlatList（onMomentumScrollBegin属性可以在ScrollView中查到,表示滚动动画开始的一个回调函数）
-```
+```js
 <FlatList
   data={this.props.data}
   onEndReached={...}
@@ -358,10 +349,10 @@ const styles = {
   ...
   onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
 />
+```
 
-```
 2.给onEndReached添加一个锁，只在开始滚动动画时解开。
-```
+```js
 onEndReached = () => {
   if (!this.onEndReachedCalledDuringMomentum) {
     this.props.fetchData();
@@ -381,7 +372,7 @@ issue: https://github.com/ant-design/ant-design-mobile/issues/1174
 
 #### 29. FlatList中renderItem设置refs(eg: input换行获取焦点)
 
-```
+```js
 <FlatList
   ref="list"
   ...
