@@ -3,7 +3,7 @@
 vue-cli2版本中默认使用了ExtractTextPlugin插件，来合并各个vue文件的css。
 
 build/utils.js:
-```
+```js
 
 if (options.extract) {
       return ExtractTextPlugin.extract({
@@ -15,9 +15,9 @@ if (options.extract) {
       return ['vue-style-loader'].concat(loaders)
     }
 ```
-webpack.base.conf.js
 
-```
+webpack.base.conf.js
+```js
 plugins: [
     new ExtractTextPlugin({filename: "main.css", allChunks: true}), //抽离成一个单独的css
     new webpack.ProvidePlugin({
@@ -49,8 +49,7 @@ plugins: [
 
 方法二：相对路径
 build/utils.js
-
-```
+```js
 if (options.extract) {
       return ExtractTextPlugin.extract({
         use: loaders,
@@ -63,9 +62,7 @@ if (options.extract) {
 ```
 
 config/index.js
-
-
-```
+```js
 build: {
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
@@ -111,7 +108,7 @@ webapck.prod.conf.js
 
 原始：
 
-```
+```js
 new webpack.DefinePlugin({  
   'process.env': env,  
   $ : 'jquery',  
@@ -120,7 +117,7 @@ new webpack.DefinePlugin({
 ```
 改为：
 
-```
+```js
 new webpack.ProvidePlugin({  
     $: "jquery",  
     jQuery: "jquery"  
@@ -206,4 +203,9 @@ https://juejin.im/post/5a115df9f265da432240caaf
 ```
 
 #### 11.gzip的原理（构建打包时压缩or服务端压缩）
-https://segmentfault.com/a/1190000012800222
+[gzip前端压缩vs服务端压缩](https://segmentfault.com/a/1190000012800222)
+
+#### 12.vue单页面，动态的控制多路由，前进刷新，后退不刷新
+通过路由的钩子函数`beforeEach`和`meta`进行控制其路由参数的`keepAlive`。
+
+参考连接：[另辟蹊径：vue单页面，多路由，前进刷新，后退不刷新](https://segmentfault.com/a/1190000012083511)

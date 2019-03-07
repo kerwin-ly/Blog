@@ -707,3 +707,64 @@ https://segmentfault.com/a/1190000016404843
 7.图片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。
 
 8.路由懒加载（webpack3新方式），大的库（lodash）按需加载
+
+#### 4.关于浏览器跨域问题
+>参考连接：[我知道的跨域与安全](https://juejin.im/post/5a6320d56fb9a01cb64ee191)
+
+##### 为什么需要跨域
+跨域只存在于浏览器端，不存在于安卓/ios/Node.js/python/ java等其它环境。跨域请求能发出去，服务端能收到请求并正常返回结果，只是结果被浏览器拦截了。之所以会跨域，是因为受到了`同源策略`的限制，同源策略要求源相同才能正常进行通信，即`协议`、`域名`、`端口号`都完全一致。
+
+##### CORS跨域
+只要浏览器检测到响应头带上了CORS，并且允许的源包括了本网站，那么就不会拦截请求响应
+```
+Access-Control-Allow-Methods: GET, PUT, POST, OPTIONS, DELETE, PATCH
+Access-Control-Allow-Origin: *
+```
+
+##### JSONP跨域
+JSONP是利用了script标签能够跨域
+```js
+function updateList (data) {
+  console.log(data);
+}
+
+$body.append(‘<script src=“http://otherdomain.com/request?callback=updateList"></script>');
+```
+
+代码先定义一个全局函数，然后把这个函数名通过callback参数添加到script标签的src，script的src就是需要跨域的请求，然后这个请求返回可执行的JS文本：
+```js
+// script响应返回的js内容为
+updateList([{
+    name: 'hello'
+}]);
+```
+由于它是一个js，并且已经定义了upldateList函数，所以能正常执行，并且跨域的数据通过传参得到。这就是JSONP的原理。
+
+##### postMessage跨域
+>client to client,iframe访问父页面可通过window.parent得到父窗口的window对象，通过open打开的可以用window.opener，进而得到父窗口的任何东西；父窗口如果和iframe同源的，那么可通过iframe.contentWindow得到iframe的window对象，如果和iframe不同源，则存在跨域的问题，这个时候可通过postMessage进行通讯。
+
+```js
+// main frame
+let iframeWin = document.querySelector("#my-iframe").contentWindow;
+iframeWin.postMessage({age: 18}, "http://parent.com");
+iframeWin.onmessage = function(event) {
+    console.log("recv from iframe ", event.data);
+};
+
+// iframe
+window.onmessage = function(event) {
+  // test event.origin
+  if (event.origin !== expectOrigin) {
+    return;
+  }
+  console.log("recv from main frame ", event.data);
+};
+
+window.parent.postMessage("hello, this is from iframe ", "http://child.com");
+```
+
+#### 5.Ajax的原理
+>参考连接：[深入理解Ajax原理](https://blog.csdn.net/lfsf802/article/details/7233640)
+
+Ajax 基本上就是把 JavaScript 技术和XMLHttpRequest对象放在 Web 表单和服务器之间。当用户向服务器请求时，数据发送给一些 JavaScript 代码而不是直接发送给服务器。JavaScript代码在幕后发送异步请求,然后服务器将数据返回 JavaScript 代码，后者决定如何处理这些数据,它可以迅速更新表单数据。这就是Ajax的原理所在。
+
