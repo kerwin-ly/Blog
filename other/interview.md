@@ -3,6 +3,7 @@
 >参考链接
 [2018年最新经典web前端面试题](https://juejin.im/post/5baa0797f265da0aaa0517e6)
 [前端面试总结](https://github.com/InterviewMap/CS-Interview-Knowledge-Map)
+[大厂面试回忆录](https://segmentfault.com/a/1190000009662029)
 
 ### HTML && CSS
 
