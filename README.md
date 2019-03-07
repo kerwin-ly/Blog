@@ -18,7 +18,7 @@
 
 
 ### React-Native
-[react-native踩坑](https://github.com/kerwin1/Blog/blob/master/react-native/%E8%B8%A9%E5%9D%91.md)
+[react-native踩坑](https://github.com/kerwin-ly/Blog/blob/master/react-native/note.md)
 
 [react-native-vector-icons的使用](https://github.com/kerwin-ly/Blog/blob/master/react-native/react-native-vector-icons%20usage.md)
 
