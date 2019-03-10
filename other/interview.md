@@ -682,7 +682,7 @@ $('div').tooltip({
 ### 构建工具
 
 #### 1.webpack与grunt、gulp的不同？
-gulp和grunt是比较轻量级的，基于任何和流(task, stream)的。类似jQuery，找到一个（或一类）文件，对其做一系列链式操作，更新流上的数据， 整条链式操作构成了一个任务，多个任务就构成了整个web的构建流程。
+gulp和grunt是比较轻量级的，基于任务和流(task, stream)的。类似jQuery，找到一个（或一类）文件，对其做一系列链式操作，更新流上的数据， 整条链式操作构成了一个任务，多个任务就构成了整个web的构建流程。
 
 webpack是基于入口的。webpack会自动地递归解析入口所需要加载的所有资源文件，然后用不同的Loader来处理不同的文件，用Plugin来扩展webpack功能。他和其他的工具最大的不同在于他支持code-splitting、模块化(AMD，ESM，CommonJs)、全局分析。
 
@@ -700,7 +700,7 @@ source-map-loader：加载额外的 Source Map 文件，以方便断点调试
 image-loader：加载并且压缩图片文件
 babel-loader：把 ES6 转换成 ES5
 css-loader：加载 CSS，支持模块化、压缩、文件导入等特性
-style-loader：把 CSS 代码注入到 JavaScript 中，通过 DOM 操作去加载 CSS。
+style-loader：把css-loader打包好的css代码以<style>标签的形式插入到html文件中。
 eslint-loader：通过 ESLint 检查 JavaScript 代码
 ```
 
