@@ -52,24 +52,52 @@ ob = 'kerwin'
 确定属性：定义的接口和变量必须对等，不能多也不能少
 ```js
 interface Person {
-  name: string,
-  age: number
+  name: string;
+  age: number;
 }
 
 let tom: Person = {
-  name: 'Tom',
-  age: 25
+  name: 'Tom';
+  age: 25;
 }
 ```
 
 可选属性
 ```js
 interface Person {
-  name: string,
-  age?: number
+  name: string;
+  age?: number;
 }
 
 let tom: Person = {
-  name: 'Tom'
+  name: 'Tom';
 }
+```
+
+任意属性,一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集
+```js
+interface Person {
+  name: string;
+  age?: number;
+  [propName: string]: any;
+}
+
+let tom: Person = {
+  name: 'Tom',
+  age: 25,
+  gender: 'man'
+}
+```
+
+只读属性`readonly`，无法再修改该属性，否则会报错
+```js
+interface Person {
+  readonly id: 1;
+  name: string;
+}
+```
+
+#### 6.数组类型
+```js
+let list: any[] = ['kerwin', 123];
 ```

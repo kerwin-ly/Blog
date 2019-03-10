@@ -110,30 +110,71 @@ window.requestAnimationFrame(step);
 ```
 
 #### 9.右边宽度固定，左边自适应
-注意使用`flex: 1`,父元素一定要`display:  flex`
+```
+<body>
+  <div class="parent">
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
+</body>
+```
+
+第一种方法：使用flex,注意使用`flex: 1`,父元素一定要`display:  flex`
 ```
 <style>
-body {
+.parent {
   display: flex;
 }
 
-.left{
-  background-color: rebeccapurple;
-  height: 200px;
-  flex: 1;
+.left {
+  background-color: red;
+  height: 300px;
+  width: 300px;
 }
 
-.right{
-  background-color: red;
-  height: 200px;
-  width: 100px;
+.right {
+  flex: 1;
+  background-color: green;
 }
 </style>
+```
 
-<body>
-  <div class="left"></div>
-  <div class="right"></div>
-</body>
+第二种方法：使用calc
+```
+<style>
+.left {
+  background-color: red;
+  width: 300px;
+  height: 300px;
+}
+
+.right {
+  background-color: green;
+  width: calc(100% - 300px);
+  height: 300px;
+}
+</style>
+```
+
+第三种方法：使用定位
+```
+<style>
+.parent {
+  position: relative;
+}
+
+.left {
+  position: absolute;
+  background-color: red;
+  width: 300px;
+  height: 300px;
+}
+
+.right {
+  height: 300px;
+  margin-left: 300px;
+}
+</style>
 ```
 
 #### 10.怎么用div来模拟实现一个textarea？
@@ -146,22 +187,23 @@ body {
 #### 11.移动端实现1px边框
 1.用height：1px的div，然后根据媒体查询设置transform: scaleY(0.5);
 ```
-div{
-  height:1px;
-  background:#000;
+div {
+  height: 1px;
+  background: #000;
   -webkit-transform: scaleY(0.5);
-  -webkit-transform-origin:0 0;
+  -webkit-transform-origin: 0 0;
   overflow: hidden;
 }
 ```
 
 2.用::after和::befor,设置border-bottom：1px solid #000,然后在缩放-webkit-transform: scaleY(0.5);可以实现两根边线的需求
 ```
-div::after{
-  content:'';width:100%;
-  border-bottom:1px solid #000;
+div::after {
+  content: '';
+  width: 100%;
+  border-bottom: 1px solid #000;
   transform: scaleY(0.5);
-  }
+}
 ```
 
 3.::after设置border：1px solid #000; width:200%; height:200%,然后再缩放scaleY(0.5); 优点可以实现圆角，京东就是这么实现的，缺点是按钮添加active比较麻烦。
@@ -182,7 +224,9 @@ div::after{
 ```
 
 #### 12.如何处理图片懒加载
-(图片懒加载踩坑)[https://juejin.im/post/5add55dd6fb9a07aad171f76]
+>参考连接：[图片懒加载踩坑](https://juejin.im/post/5add55dd6fb9a07aad171f76)
+
+核心：页面进行滑动(注意滑动使用节流函数)，判定元素距离顶部的值(top)小于视窗高度(clientHeight)，则进行图片加载。
 
 ### JavaScript基础
 
@@ -253,7 +297,7 @@ bindFoo(); // 1
 ```
 
 #### 5.作用域和作用域链
->JavaScript 采用`词法作用域`，函数的作用域在函数定义的时候就决定了，函数的作用域基于函数创建的位置。而与词法作用域相对的是`动态作用域`，函数的作用域是在函数调用的时候才决定的。（ps:作用域主要有全局作用域，函数作用域，块级作用域）
+>JavaScript 采用`词法作用域`，**函数的作用域在函数定义的时候就决定了**，函数的作用域基于函数创建的位置。而与词法作用域相对的是`动态作用域`，函数的作用域是在函数调用的时候才决定的。（ps:作用域主要有全局作用域，函数作用域，块级作用域）
 
 >当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做`作用域链`。(ps:执行上下文，变量对象等概念在`6.js的执行过程`中)
 
@@ -475,9 +519,9 @@ document.onmousemove = debounce(getNum, 3000);
 ```js
 function* hello() {
   console.log(1);
-  yield 'hello';
+  yield console.log('hello');
   console.log(2);
-  yield 'word';
+  yield console.log('word');
 }
 
 var h = hello();
