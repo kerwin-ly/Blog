@@ -710,7 +710,7 @@ define-plugin：定义环境变量
 commons-chunk-plugin：提取公共代码
 uglifyjs-webpack-plugin：通过UglifyES压缩ES6代码
 optimize-css-assets-webpack-plugin：优化css插件
-html-webpack-plugin：将打包好的文件注入到html中
+html-webpack-plugin：该插件将为你生成一个 HTML5 文件， 其中包括使用 script 标签的 body 中的所有 webpack 包。
 ```
 
 #### 4.Loader和Plugin的不同？
@@ -858,6 +858,23 @@ window.parent.postMessage("hello, this is from iframe ", "http://child.com");
 
 Ajax 基本上就是把 JavaScript 技术和XMLHttpRequest对象放在 Web 表单和服务器之间。当用户向服务器请求时，数据发送给一些 JavaScript 代码而不是直接发送给服务器。JavaScript代码在幕后发送异步请求,然后服务器将数据返回 JavaScript 代码，后者决定如何处理这些数据,它可以迅速更新表单数据。这就是Ajax的原理所在。
 
-#### 6.CSRF（跨站请求伪造）
->参考连接：[前端安全系列之二：如何防止CSRF攻击](https://juejin.im/post/5bc009996fb9a05d0a055192)
+#### 6.CSRF（跨站请求伪造）XSS（跨站脚本攻击）
+>参考连接：[前端安全系列：如何防止CSRF攻击](https://juejin.im/post/5bc009996fb9a05d0a055192)
+[前端安全系列：如何防止XSS攻击](https://tech.meituan.com/2018/09/27/fe-security.html)
+
+CSRF(Cross-site request forgery)攻击防护措施
+```
+CSRF自动防御策略：同源检测（Origin 和 Referer 验证）。
+CSRF主动防御措施：Token验证 或者 双重Cookie验证 以及配合Samesite Cookie。
+保证页面的幂等性，后端接口不要在GET页面中做用户操作。
+```
+
+XSS(Cross-Site Scripting)攻击预防措施
+```
+禁止加载外域代码，防止复杂的攻击逻辑。
+禁止外域提交，网站被攻击后，用户的数据不会泄露到外域。
+禁止内联脚本执行（规则较严格，目前发现 GitHub 使用）。
+禁止未授权的脚本执行（新特性，Google Map 移动版在使用）。
+合理使用上报可以及时发现 XSS，利于尽快修复问题。
+```
 
