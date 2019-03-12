@@ -572,6 +572,25 @@ then 方法必须返回一个新的 promise 对象，因此 promise 支持链式
 #### 1.vue的mvvm的实现原理
 [剖析Vue实现原理 - 如何实现双向绑定mvvm](https://github.com/DMQ/mvvm)
 
+#### 2.vue-cli生成了哪些文件
+```
+build/
+  build.js --- 生产环境构建
+  check-version.js --- 版本检查(node, npm)
+  dev-client.js --- 开发服务器的热重载（用于实现页面的自动刷新）
+  dev-server.js --- 构建本地服务器（npm run dev就是执行的它）
+  utils.js --- 构建相关的工具
+  vue-loader.conf.js --- vue模板的编译
+  webpack.base.conf.js --- webpack基础配置
+  webpack.dev.conf.js --- webpack开发环境配置
+  webpack.prod.conf.js --- webpack生产环境配置
+config/
+  dev.env.js --- 项目开发环境配置
+  index.js --- 项目主要配置
+  prod.env.js --- 项目生产环境配置
+...
+```
+
 #### 2.jQuery如何自定义插件
 jquery插件实现基本原理，对原型进行继承
 ```js
@@ -854,7 +873,7 @@ window.parent.postMessage("hello, this is from iframe ", "http://child.com");
 ```
 
 #### 5.Ajax的原理
->参考连接：[深入理解Ajax原理](https://blog.csdn.net/lfsf802/article/details/7233640)
+>参考连接：[深入理解Ajax原理](https://juejin.im/post/5b1cebece51d4506ae71addf)
 
 Ajax 基本上就是把 JavaScript 技术和XMLHttpRequest对象放在 Web 表单和服务器之间。当用户向服务器请求时，数据发送给一些 JavaScript 代码而不是直接发送给服务器。JavaScript代码在幕后发送异步请求,然后服务器将数据返回 JavaScript 代码，后者决定如何处理这些数据,它可以迅速更新表单数据。这就是Ajax的原理所在。
 
