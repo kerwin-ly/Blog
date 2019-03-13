@@ -570,7 +570,11 @@ then 方法必须返回一个新的 promise 对象，因此 promise 支持链式
 ### 前端框架 && 工具
 
 #### 1.vue的mvvm的实现原理
-[剖析Vue实现原理 - 如何实现双向绑定mvvm](https://github.com/DMQ/mvvm)
+>参考连接：[剖析Vue实现原理 - 如何实现双向绑定mvvm](https://github.com/DMQ/mvvm)
+
+```
+核心：数据劫持 + 
+```
 
 #### 2.vue-cli生成了哪些文件
 ```
@@ -697,6 +701,17 @@ $('div').tooltip({
 #### 4.react虚拟dom
 >参考连接：[虚拟dom的实现](https://juejin.im/entry/5aedcfa351882506a36c664c)
 [React 虚拟 Dom 和 diff 算法](https://juejin.im/post/5a3200fe51882554bd5111a0)
+
+#### 5.vue和react的生命周期
+vue
+```
+beforeCreate created beforeMount mounted beforeUpdate updated beforeDestroy destroyed
+```
+
+react
+```
+componentWillMount render componentDidMount (shouldComponentUpdate componentWillUpdate render componentDidUpdate) componentWillUnmount
+```
 
 ### 构建工具
 
@@ -897,3 +912,16 @@ XSS(Cross-Site Scripting)攻击预防措施
 合理使用上报可以及时发现 XSS，利于尽快修复问题。
 ```
 
+#### 7.关于浏览器的缓存
+>参考连接:[前端必须要懂的浏览器缓存机制](https://juejin.im/entry/59c8d4675188256bb018ff89)
+```
+浏览器端缓存分为200 from cache和304 not modified
+HTTP协议中Cache-Control 和 Expires可以用来设置新鲜度的限值，前者是HTTP1.1中新增的响应头，后者是HTTP1.0中的响应头。
+max-age（单位为s）而Expires指定的是具体的过期日期而不是秒数
+Cache-Control和Expires同时使用的话，Cache-Control会覆盖Expires
+客户端不用关心ETag值如何产生，只要服务在资源状态发生变更的情况下将ETag值发送给它就行
+Apache默认通过FileEtag中FileEtag INode Mtime Size的配置自动生成ETag(当然也可以通过用户自定义的方式)。
+ETag常与If-None-Match或者If-Match一起，由客户端通过HTTP头信息(包括ETag值)发送给服务端处理。
+Last-Modified常与If-Modified-Since一起由客户端将Last-Modified值包括在HTTP头信息中发给服务端进行处理。
+有些文档资源周期性的被重写，但实际内容没有改变。此时文件元数据中会显示文件最近的修改日期与If-Modified-Since不相同，导致不必要的响应。
+```
