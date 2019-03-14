@@ -4,7 +4,13 @@
 
 ### 原生JavaScript
 
-[JavaScript核心编程](https://github.com/kerwin-ly/Blog/tree/master/javascript)
+[函数声明和函数表达式的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%92%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB.md)
+
+[基本类型和引用类型的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB.md)
+
+[如何判定JS的类型](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9AJS%E7%9A%84%E7%B1%BB%E5%9E%8B.md)
+
+[类和类的继承](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E7%B1%BB%E5%92%8C%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.md)
 
 ### Vue
 [vue-mvvm实现原理（外文）](https://github.com/DMQ/mvvm)

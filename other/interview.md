@@ -925,3 +925,6 @@ ETag常与If-None-Match或者If-Match一起，由客户端通过HTTP头信息(�
 Last-Modified常与If-Modified-Since一起由客户端将Last-Modified值包括在HTTP头信息中发给服务端进行处理。
 有些文档资源周期性的被重写，但实际内容没有改变。此时文件元数据中会显示文件最近的修改日期与If-Modified-Since不相同，导致不必要的响应。
 ```
+
+#### 8.垃圾回收机制
+参考连接：[内存管理](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Memory_Management)
