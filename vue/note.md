@@ -209,3 +209,7 @@ https://juejin.im/post/5a115df9f265da432240caaf
 通过路由的钩子函数`beforeEach`和`meta`进行控制其路由参数的`keepAlive`。
 
 参考连接：[另辟蹊径：vue单页面，多路由，前进刷新，后退不刷新](https://segmentfault.com/a/1190000012083511)
+
+#### 13.使用axios发送请求，多一次Request Method: OPTIONS请求，然后才是get/post请求
+参考连接：[阮一峰详解cors](http://www.ruanyifeng.com/blog/2016/04/cors.html)
+[如何解决axios两次请求问题](https://blog.csdn.net/qq_27626333/article/details/77005911)

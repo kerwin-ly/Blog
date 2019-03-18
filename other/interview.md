@@ -567,6 +567,9 @@ Promise 的 then 方法
 then 方法必须返回一个新的 promise 对象，因此 promise 支持链式调用
 ```
 
+#### 16.JS正则表达式
+>参考连接:[JS正则表达式完整教程](https://juejin.im/post/5965943ff265da6c30653879)
+
 ### 前端框架 && 工具
 
 #### 1.vue的mvvm的实现原理
