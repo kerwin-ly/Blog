@@ -424,7 +424,35 @@ function quickSort(arr) {
 quickSort([1, 4, 2, 3, 7, 9, 10, 2, 1]);
 ```
 
-#### 9.commonJS和es6模块化的区别
+#### 9.commonJS && CMD && AMD && ES6模块化的区别
+>参考链接：[commonJS && CMD && AMD && ES6模块化详解](https://juejin.im/post/5aaa37c8f265da23945f365c)
+
+AMD规范（require.js）使用的是异步加载，不会影响后面js的执行。他会把所有需要的模块放在一起，等待加载完成之后，然后执行对应的回调函数进行操作。
+```js
+/** AMD写法 **/
+define(["a", "b", "c", "d", "e", "f"], function(a, b, c, d, e, f) { 
+  // 等于在最前面声明并初始化了要用到的所有模块
+  a.doSomething();
+  if (false) {
+    // 即便没用到某个模块 b，但 b 还是提前执行了
+    b.doSomething()
+  }
+});
+```
+
+CMD规范（sea.js）和AMD类似，不过他推崇的是一个按需加载。也就是说，需要用到该模块的时候，再进行一个引用。
+```js
+/** CMD写法 **/
+define(function(require, exports, module) {
+  var a = require('./a'); //在需要时申明
+  a.doSomething();
+  if (false) {
+    var b = require('./b');
+    b.doSomething();
+  }
+});
+```
+
 1.commonJS支持动态导入，如`require(${path}/xx.js)`;后者不支持
 
 2.commonJS是同步导入，因为服务端文件都在本地，导入不会造成太明显的线程阻塞。而import是异步导入，大多用于浏览器端，需要对文件进行下载，所以同步导入影响很大。
