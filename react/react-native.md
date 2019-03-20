@@ -1,4 +1,5 @@
 ## react-native踩坑
+
 #### 1.默认情况下，iOS会阻止所有非https的请求。如果你请求的接口是http协议，那么首先需要添加一个App Transport Security的例外，详细可参考
 https://segmentfault.com/a/1190000002933776
 #### 2.在触发动画时候，调用了setState，导致卡屏
