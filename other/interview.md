@@ -742,6 +742,20 @@ vue
 beforeCreate created beforeMount mounted beforeUpdate updated beforeDestroy destroyed
 ```
 
+* vue父子组件渲染过程，父组件 => 子组件 => 父组件
+```
+parent-beforeCreated parent-created parent-beforeMount child-beforeCreated child-created child-beforeMount child-mounted parent-mounted
+```
+* 在各自组件中的data修改中，各自执行update，互不影响
+* 当使用props修改父子关联的属性时，父组件 => 子组件 => 父组件
+```
+parent-beforeUpdate child-beforeUpdate child-updated parent-updated 
+```
+* 当组件进行销毁过程，父组件 => 子组件 => 父组件
+```
+parent-beforeDestory child-beforeDestory child-destoryed parent-destoryed
+```
+
 react
 ```
 componentWillMount render componentDidMount (shouldComponentUpdate componentWillUpdate render componentDidUpdate) componentWillUnmount
