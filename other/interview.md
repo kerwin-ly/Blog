@@ -226,7 +226,7 @@ div::after {
 #### 12.如何处理图片懒加载
 >参考连接：[图片懒加载踩坑](https://juejin.im/post/5add55dd6fb9a07aad171f76)
 
-核心：页面进行滑动(注意滑动使用节流函数)，判定元素距离顶部的值(top)小于视窗高度(clientHeight)，则进行图片加载。
+核心：页面进行滑动(注意滑动使用节流函数)，判定`offsetTop <=  clientHeight + scrollTop`，则进行图片加载。
 
 ### JavaScript基础
 
