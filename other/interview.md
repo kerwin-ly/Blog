@@ -4,6 +4,7 @@
 [2018年最新经典web前端面试题](https://juejin.im/post/5baa0797f265da0aaa0517e6)
 [前端面试总结](https://github.com/InterviewMap/CS-Interview-Knowledge-Map)
 [大厂面试回忆录](https://segmentfault.com/a/1190000009662029)
+[每天一道大厂面试题](https://github.com/Advanced-Frontend/Daily-Interview-Question)
 
 ### HTML && CSS
 
@@ -600,6 +601,42 @@ then 方法必须返回一个新的 promise 对象，因此 promise 支持链式
 
 #### 16.JS正则表达式
 >参考连接:[JS正则表达式完整教程](https://juejin.im/post/5965943ff265da6c30653879)
+
+#### 17.异步面试题
+```js
+async function async1() {
+    console.log('async1 start');
+    await async2();
+    console.log('async1 end');
+}
+async function async2() {
+    console.log('async2');
+}
+console.log('script start');
+setTimeout(function() {
+    console.log('setTimeout');
+}, 0)
+async1();
+new Promise(function(resolve) {
+    console.log('promise1');
+    resolve();
+}).then(function() {
+    console.log('promise2');
+});
+console.log('script end');
+
+/*
+script start
+async1 start
+async2
+promise1
+script end
+async1 end
+promise2
+setTimeout
+*/
+```
+[解答连接](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/7)
 
 ### 前端框架 && 工具
 
