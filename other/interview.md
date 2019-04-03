@@ -230,6 +230,13 @@ div::after {
 
 核心：页面进行滑动(注意滑动使用节流函数)，判定`offsetTop <=  clientHeight + scrollTop`，则进行图片加载。
 
+#### 13.visibility: hidden和display: none的区别
+```
+1，display：none会让元素从渲染树中消失，渲染的时候不占据任何空间；visibility：hidden不会让元素从渲染树中消失，渲染的时候仍然占据空间，只是内容不可见。
+2，display：none是非继承属性，子孙节点消失是由于元素从渲染树中消失造成，通过修改子孙节点的属性无法显示；visibility：hidden是继承属性，子孙节点消失是由于继承了hidden，通过设置visibility：visible，可以让子孙节点显示。
+3，读屏器不会读取display：none的元素内容，而会读取visibility：hidden的元素内容。
+```
+
 ### JavaScript基础
 
 #### 1.javascript有哪些基本数据类型
