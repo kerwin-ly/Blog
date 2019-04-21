@@ -213,3 +213,10 @@ https://juejin.im/post/5a115df9f265da432240caaf
 #### 13.使用axios发送请求，多一次Request Method: OPTIONS请求，然后才是get/post请求
 参考连接：[阮一峰详解cors](http://www.ruanyifeng.com/blog/2016/04/cors.html)
 [如何解决axios两次请求问题](https://blog.csdn.net/qq_27626333/article/details/77005911)
+
+#### 14.在vocode中使用eslint对vue文件进行代码检查（报红色波浪线）
+>[使用 VSCode + ESLint 实践前端编码规范](https://segmentfault.com/a/1190000009077086)
+
+注意全局安装完`eslint`后，要安装`eslint-plugin-html`对文件进行检查。如果是`vue-cli`脚手架搭建，需要在`devDependencies`里面再安装一个`eslint-plugin-html`依赖。
+
+
