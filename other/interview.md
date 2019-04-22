@@ -352,7 +352,9 @@ setTimeout(function() {
   console.log('setTimeout');
 }, 0);
 
-Promise.resolve().then(function() {
+Promise.resolve(
+  console.log('这里是同步');
+).then(function() {
   console.log('promise1');
 }).then(function() {
   console.log('promise2');
@@ -804,6 +806,42 @@ parent-beforeDestory child-beforeDestory child-destoryed parent-destoryed
 react
 ```
 componentWillMount render componentDidMount (shouldComponentUpdate componentWillUpdate render componentDidUpdate) componentWillUnmount
+```
+
+#### 6.react中的setState什么时候同步触发？什么时候异步触发？
+>[react中setState原理](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/17)
+
+```js
+class Example extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      val: 0
+    };
+  }
+  
+  componentDidMount() {
+    this.setState({val: this.state.val + 1});
+    console.log(this.state.val);    // 第 1 次 log
+
+    this.setState({val: this.state.val + 1});
+    console.log(this.state.val);    // 第 2 次 log
+
+    setTimeout(() => {
+      this.setState({val: this.state.val + 1});
+      console.log(this.state.val);  // 第 3 次 log
+
+      this.setState({val: this.state.val + 1});
+      console.log(this.state.val);  // 第 4 次 log
+    }, 0);
+  }
+
+  render() {
+    return null;
+  }
+};
+
+// 0 0 2 3
 ```
 
 ### 构建工具
