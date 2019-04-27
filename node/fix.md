@@ -16,7 +16,7 @@ node --inspect app.js
 Debugger listening on ws://127.0.0.1:9229/e6e6dfbe-52c8-41c8-8e28-451c241cef11
 For help see https://nodejs.org/en/docs/inspector
 ```
-3.点击google浏览器右上方的node图标进行调试
+3.输入网址`chrome://inspect`点击下面的`inspect`进入调试页面
 
 * 第二种：使用vscode调试
 1.使用vscode点击图标，![vscode-debug](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/vscode-debug.png)

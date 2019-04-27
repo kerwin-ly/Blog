@@ -648,6 +648,59 @@ setTimeout
 ```
 [解答连接](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/7)
 
+#### 18.高阶函数和柯里化的使用
+高阶函数：函数可以作为参数传递，也可以作为返回值输出
+```js
+// 这里我们创建了一个单例模式
+let single = function (fn) {
+  let ret;
+  return function () {
+      console.log(ret);   // render一次undefined,render二次true,render三次true
+      // 所以之后每次都执行ret，就不会再次绑定了
+      return ret || (ret = fn.apply(this, arguments));
+  }
+};
+
+let bindEvent = single(function () {
+  // 虽然下面的renders函数执行3次，bindEvent也执行了3次
+  // 但是根据单例模式的特点，函数在被第一次调用后，之后就不再调用了
+  document.getElementById('box').onclick = function () {
+      alert('click');
+  }
+  return true;
+});
+
+let renders = function () {
+  console.log('渲染');
+  bindEvent();
+}
+
+renders();
+renders();
+renders();
+```
+
+函数柯里化:也叫部分求值，柯里化函数会接收一些参数，然后不会立即求值，而是继续返回一个新函数，将传入的参数通过闭包的形式保存，等到被真正求值的时候，再一次性把所有传入的参数进行求值
+```js
+// 普通函数
+function add(x,y){
+    return x + y;
+}
+
+add(3,4);   // 7
+
+// 实现了柯里化的函数
+// 接收参数，返回新函数，把参数传给新函数使用，最后求值
+let add = function(x){
+    return function(y){
+        return x + y;
+    }
+};
+
+add(3)(4);  // 7
+```
+
+
 ### 前端框架 && 工具
 
 #### 1.vue的mvvm的实现原理
