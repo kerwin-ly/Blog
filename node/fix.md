@@ -49,3 +49,6 @@ For help see https://nodejs.org/en/docs/inspector
   ]
 }
 ```
+
+#### 3.node中session和redis的应用(基于koa2)
+[Cookie和Session的区别，Koa2+Mysql+Redis实现登录逻辑](https://segmentfault.com/a/1190000018398276)
