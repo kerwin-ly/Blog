@@ -19,10 +19,12 @@
 
 [webpack1.0升级3.0](https://github.com/kerwin1/Blog/blob/master/common/webpack1.0%E5%8D%87%E7%BA%A73.0.md)
 
-[vue踩坑](https://github.com/kerwin1/Blog/blob/master/vue/%E8%B8%A9%E5%9D%91.md)
+[vue踩坑](https://github.com/kerwin-ly/Blog/blob/master/vue/note.md)
+
+[首屏加载优化](https://github.com/kerwin-ly/Blog/blob/master/vue/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96.md)
 
 ### React
-[react踩坑](https://github.com/kerwin-ly/Blog/blob/master/react/react-fix.md)
+[react踩坑](https://github.com/kerwin-ly/Blog/blob/master/react/react.md)
 
 [react-native踩坑](https://github.com/kerwin-ly/Blog/blob/master/react/react-native-fix.md)
 
@@ -35,7 +37,7 @@
 [sass笔记](https://github.com/kerwin1/Blog/blob/master/sass/note.md)
 
 ### Cordova
-[cordova踩坑](https://github.com/kerwin1/Blog/blob/master/cordova/note.md)
+[cordova踩坑](https://github.com/kerwin-ly/Blog/blob/master/cordova/note.md)
 
 ## 后端
 
