@@ -40,6 +40,7 @@
 ## 后端
 
 ### Node
+[node开发常见问题总结](https://github.com/kerwin-ly/Blog/blob/master/node/fix.md)
 
 [node规避回调地狱](https://github.com/kerwin-ly/Blog/blob/master/node/fixCallbackHell.md)
 
