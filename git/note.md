@@ -19,9 +19,15 @@ cnpm install [name]
 
 #### 2.创建用户名个邮箱
 
-```
+```bash
+# 设置用户名和邮箱
 git config --global user.name "Your Name"
 git config --global user.email "email@example.com"
+
+# 查看当前用户名和邮箱
+git config user.name
+git config user.email
+
 ```
 
 
