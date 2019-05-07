@@ -37,20 +37,20 @@ input type = 'search'
 ```
 参考地址：
 http://blog.csdn.net/listmana/article/details/53942361
-######    1.注意：移动端是可以监听到keydown事件的。建议打印e.keyCode和event来进行提前判定
+###### 1.注意：移动端是可以监听到keydown事件的。建议打印e.keyCode和event来进行提前判定
 ###### 2.键盘中,'下一步'按键，keyCode == '9'，为tab按键。 
-######    3.控制软键盘插件：ionic-plugin-keyboard
+###### 3.控制软键盘插件：ionic-plugin-keyboard
 ```
 git链接：https://github.com/driftyco/ionic-plugin-keyboard
 ```
 ###### 4.android手机键盘显示，界面问题:
-   http://2dxgujun.com/post/2014/10/23/Soft-Keyboard-Jacking-Control.html
+http://2dxgujun.com/post/2014/10/23/Soft-Keyboard-Jacking-Control.html
 
 #### 6.event.target和event.currentTarget的区别
 target：触发事件的元素。
 currentTarget：事件绑定的元素。
 http://www.cnblogs.com/lanse-yan/archive/2013/12/11/3469634.html 
-####7.web端扫描枪应用
+#### 7.web端扫描枪应用
 https://my.oschina.net/cpWeb/blog/775493
 首先聚焦，相当于手动输入了值后，按了endter键。
 #### 8.h5中input type ='number'，如果输入非法数字（如：\ff23）,将自动把Input中value值清空
@@ -125,20 +125,18 @@ Android中，默认配置或如下配置时，会保存在 /data/data/<packageId
 解决办法:在打开apk安装包的时候，退出APP
   
 ```
-1. //下载完成，打开app
-  2.                   cordova.plugins.fileOpener2.open(
-  3.                       openUrl, 
-  4.                       'application/vnd.android.package-archive',
-  5.                       {
-  6.                         error:function(e){
-  7.                           console.log('Error status: ' + e.status + ' - Error message: ' + e.message);
-  8.                         },
-  9.                         success:function(){
-  10.                           console.log('open successfully');
-  11.                           navigator.app.exitApp();
-  12.                         }
-  13.                       }
-  14.                   );
+cordova.plugins.fileOpener2.open(
+openUrl, 
+'application/vnd.android.package-archive',
+{
+  error:function(e){
+  console.log('Error status: ' + e.status + ' - Error message: ' + e.message);
+},
+success:function(){
+  console.log('open successfully');
+  navigator.app.exitApp();
+}
+});
 ```
 #### 14.cordova常用的插件和命令
 常用命令来自：http://www.hangge.com/blog/cache/detail_1158.html
