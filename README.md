@@ -26,7 +26,7 @@
 ### React
 [react踩坑](https://github.com/kerwin-ly/Blog/blob/master/react/react.md)
 
-[react-native踩坑](https://github.com/kerwin-ly/Blog/blob/master/react/react-native-fix.md)
+[react-native踩坑](https://github.com/kerwin-ly/Blog/blob/master/react/react-native.md)
 
 [react-native-vector-icons的使用](https://github.com/kerwin-ly/Blog/blob/master/react-native/react-native-vector-icons%20usage.md)
 
@@ -60,5 +60,3 @@
 [HTML && CSS编码规范](https://github.com/kerwin1/Blog/blob/master/common/HTML%20%26%26%20CSS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
 
 [JS编码规范](https://github.com/kerwin1/Blog/blob/master/common/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
-
-[前端面试总结](https://github.com/kerwin-ly/Blog/blob/master/other/interview.md)
