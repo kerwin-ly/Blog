@@ -12,6 +12,10 @@
 
 [类和类的继承](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E7%B1%BB%E5%92%8C%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.md)
 
+### TypeScript
+
+[TypeScript笔记](https://github.com/kerwin-ly/Blog/blob/master/typescript/node.md)
+
 ### Vue
 [vue-mvvm实现原理（外文）](https://github.com/DMQ/mvvm)
 
