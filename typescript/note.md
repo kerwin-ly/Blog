@@ -63,5 +63,11 @@ function error(message: string): never {
 }
 
 // object
+function create(o: object | null): void {
+  console.log(o);
+}
+create({
+  name: 'kerwin'
+})
 
 ```
