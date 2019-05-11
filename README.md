@@ -29,7 +29,7 @@
 
 [react-native踩坑](https://github.com/kerwin-ly/Blog/blob/master/react/react-native.md)
 
-[react-native-vector-icons的使用](https://github.com/kerwin-ly/Blog/blob/master/react/react-native/react-native-vector-icons%20usage.md)
+[react-native-vector-icons的使用](https://github.com/kerwin-ly/Blog/blob/master/react/react-native-vector-icons%20usage.md)
 
 ### Electron
 [electron笔记](https://github.com/kerwin-ly/Blog/blob/master/electron/note.md)
@@ -60,4 +60,4 @@
 
 [JS编码规范](https://github.com/kerwin1/Blog/blob/master/common/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
 
-[Git提交规范]()
+[Git提交规范](https://github.com/kerwin-ly/Blog/blob/master/common/Git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83.md)
