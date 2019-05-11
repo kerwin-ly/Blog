@@ -219,4 +219,34 @@ https://juejin.im/post/5a115df9f265da432240caaf
 
 注意全局安装完`eslint`后，要安装`eslint-plugin-html`对文件进行检查。如果是`vue-cli`脚手架搭建，需要在`devDependencies`里面再安装一个`eslint-plugin-html`依赖。
 
+#### 15.vue-router路由嵌套路径问题
+
+1.嵌套的子路由保存父路由路径。
+```js
+// 在子路由的path中，最前面不要加/。路由地址将拼接上父路由的地址，结果：localhost:8080/#/parent/child
+{
+  path: '/parent',
+  component: () => import('@/pages/views/parent'),
+  children: [{
+    path: 'child',
+    name: 'child',
+    component: () => import('@/pages/views/child')
+  }]
+}
+```
+
+2.重置路由的路径
+```js
+// 在子路由的path中，前面加上/。路由地址将从根地址进行改写，结果：localhost:8080/#/child
+{
+  path: '/parent',
+  component: () => import('@/pages/views/parent'),
+  children: [{
+    path: '/child',
+    name: 'child',
+    component: () => import('@/pages/views/child')
+  }]
+}
+```
+
 
