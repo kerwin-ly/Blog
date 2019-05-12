@@ -69,5 +69,24 @@ function create(o: object | null): void {
 create({
   name: 'kerwin'
 })
+```
 
+#### 1.3类型断言
+第一种：as写法（jsx中语法只支持这种）
+```js
+let value: any = 'maybe string';
+let num: number = (value as string).length
+```
+
+第二种：尖括号
+```js
+let value: any = 'maybe string';
+let num: number = (<string>value).length
+```
+
+#### 1.4联合类型：该值是多个类型中的任意一种
+```js
+let value: string | number;
+value = '123';
+value = 123;
 ```
