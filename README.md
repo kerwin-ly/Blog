@@ -8,7 +8,7 @@
 
 [如何判定JS的类型](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9AJS%E7%9A%84%E7%B1%BB%E5%9E%8B.md)
 
-[类和类的继承](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E7%B1%BB%E5%92%8C%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.md)
+[类的定义](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E7%B1%BB%E5%92%8C%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.md)
 
 ### TypeScript
 [TypeScript笔记](https://github.com/kerwin-ly/Blog/blob/master/typescript/node.md)
