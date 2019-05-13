@@ -1,4 +1,5 @@
 # TypeScript学习笔记
+>参考连接：[深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why)
 
 ## 安装配置
 全局安装typescript
@@ -10,6 +11,9 @@ npm install -g typescript
 ```bash
 # 生成hello.js
 tsc hello.ts
+
+# 监听ts文件变化
+tsc -w hello.ts
 ```
 
 ## 笔记
@@ -214,6 +218,25 @@ interface sunFunc {
 let mySum: sunFunc = function(x: number, y: number): number {
   return x + y;
 }
+```
+
+#### 3.4 函数扩展参数
+```js
+function sum(a: number, ...result: number[]): number {
+  let sum = a; // a = 0
+
+  for (let i = 0; i < result.length; i++) {
+    sum += result[i];
+  }
+  return sum;
+}
+
+sum(0, 1, 2, 3, 4, 5); // 将0赋值给a,剩下的实参参数传给result
+```
+
+#### 3.5 函数重载
+```js
+
 ```
 
 ### 4.声明文件
