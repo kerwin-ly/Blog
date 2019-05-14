@@ -34,8 +34,9 @@
 ### Electron
 [electron笔记](https://github.com/kerwin-ly/Blog/blob/master/electron/note.md)
 
-### Sass
-[sass笔记](https://github.com/kerwin1/Blog/blob/master/sass/note.md)
+### Style
+[sass笔记](https://github.com/kerwin1/Blog/blob/master/style/sass.md)
+[less笔记](https://github.com/kerwin1/Blog/blob/master/style/less.md)
 
 ### Cordova
 [cordova踩坑](https://github.com/kerwin-ly/Blog/blob/master/cordova/note.md)
