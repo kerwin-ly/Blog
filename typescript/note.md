@@ -50,6 +50,8 @@ x.push(Symbol(1)); // 报错
 let x: f
 
 // 枚举
+enum Flag { Error, Success } // 如果没有赋值，那么他的值就是下标（从0开始）
+enum Flag { Error = 1, Success } // 从1开始计算
 enum Color { Primary = 'blue', Danger = 'red', Warning = 'yellow'.length }; // 注意：如果紧接在计算所得项后面的是未手动赋值的项，那么它就会因为无法获得初始值而报错
 let colorName: Color = Color.Primary;
 enum Color {Red = "red".length, Green, Blue}; // 报错
@@ -108,7 +110,7 @@ value = 123;
 interface Person {
   name: string;
   age: number;
-  gendar?: boolean
+  gendar?: boolean;
 }
 
 // sex可选属性,多加一个接口中不存在的属性，报错
@@ -175,6 +177,59 @@ let tom: GetPerson = function(name: string, age: number): object {
     age
   }
 }
+```
+
+#### 2.5 索引类型
+限制数组
+```js
+interface UserArr {
+  [index: number]: string // 小标必须是number类型，值必须是string类型
+}
+let userArr: UserArr = ['kerwin', 'bob'];
+```
+
+限制对象
+```js
+interface UserObj {
+  [index: string]: string
+}
+let userObj: UserObj = {
+  name: 'kerwin',
+  sex: 'man'
+};
+```
+
+#### 2.6 接口继承接口
+```js
+interface Animal {
+  name: string,
+  age: number,
+  (lang: string)?: object
+}
+
+interface Cat extends Animal {
+  look: string
+}
+
+let cat: Cat = {
+  name: 'cat',
+  age: 4,
+  look: 'cat'
+}
+```
+
+#### 2.7 接口继承类
+```js
+class Point {
+  x: number;
+  y: number;
+}
+
+interface Point3d extends Point {
+  z: number;
+}
+
+let point3d: Point3d = {x: 1, y: 2, z: 3};
 ```
 
 ### 3.函数
@@ -314,10 +369,10 @@ handleEvent(document.getElementById('hello'), 'scroll');
 >ES6中类的概念请参考:[类的定义](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E7%B1%BB%E5%92%8C%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.md)
 
 #### 8.1 访问修饰符public privete protected
-public 修饰的属性或方法是公有的，可以在任何地方被访问到，默认所有的属性和方法都是 public 的
+public 修饰的属性或方法是公有的，可以在任何地方被访问到，默认所有的属性和方法都是 public 的。默认使用
 ```js
 class Animal {
-  public name: string;
+  name: string; // 等同于 public name: string 
   public constructor(name: string) {
     this.name = name;
   }
@@ -346,9 +401,13 @@ class Cat entends Animal {
 protected 修饰的属性或方法是受保护的，它和 private 类似，区别是它在子类中也是允许被访问的
 ```js
 class Animal {
-  protected name;
-  protected constructor(name) {
-    this.name = name;
+  static kind: string; // 静态属性声明
+  protected name: string;
+  protected constructor(n: string) {
+    this.name = n;
+  }
+  static getKind() { // 静态方法声明
+    console.log(Animal.kind); // 静态属性调用
   }
 }
 
@@ -358,6 +417,8 @@ class Cat entends Animal {
     console.log(this.name); // jack
   }
 }
+
+Animal.getKind(); // 静态方法调用
 ```
 
 #### 8.2 抽象类abstract
@@ -382,75 +443,34 @@ class Cat extends Animal {
 }
 
 let cat = new Cat('Kerwin');
+cat.getName();
 ```
 
 #### 8.3 类实现接口implements
 一般来讲，一个类只能继承自另一个类，有时候不同类之间可以有一些共有的特性，这时候就可以把特性提取成接口`interface`，用`implements`关键字来实现。
 ```js
-interface Sound {
-  say();
-}
-
-interface Look {
-  likeSomething();
-}
-
-class Animal {}
-
-class Cat extends Animal implements Sound, Look {
-  say() {
-    console.log('miao...');
-  }
-  likeSomething() {
-    console.log('like what');
-  }
-}
-```
-
-#### 8.4 接口继承接口
-```js
 interface Animal {
-  name: string,
-  age: number,
-  (lang: string)?: object
+  name: string;
+  say(): void;
 }
 
-interface Cat extends Animal {
-  look: string
+// 相当于约束Cat类，必须含有某些属性和方法
+// class Cat extends Animal implements AnimalLimit {}
+class Cat implements Animal {
+  public name: string;
+  constructor(n: string) {
+    this.name = n;
+  }
+  public say(): void {
+    console.log(this.name);
+  }
 }
-
-let cat: Cat = {
-  name: 'cat',
-  age: 4,
-  look: 'cat'
-}
-```
-
-#### 8.5 接口继承类
-```js
-class Point {
-  x: number;
-  y: number;
-}
-
-interface Point3d extends Point {
-  z: number;
-}
-
-let point3d: Point3d = {x: 1, y: 2, z: 3};
 ```
 
 ### 9. 泛型
-泛型（Generics）是指在定义函数、接口或类的时候，不预先指定具体的类型，而在使用的时候再指定类型的一种特性。它保证了咱们在复用组件时，传入不同的类型后函数返回对应的不同类型。
+泛型（Generics）是指在定义函数、接口或类的时候，不预先指定具体的类型，**而在调用的时候再指定类型的一种特性**。它保证了咱们在复用组件时，传入不同的类型后函数返回对应的不同类型。
 
-如果不使用泛型，咱们可以用any。但是会有一个问题，如果传入类型是`string`，本来希望返回也是`string`。这种需求无法满足。
-```js
-function identity(arg: any) {
-  return arg;
-}
-```
-
-泛型，确保传入类型和输出类型一样
+泛型方法
 ```js
 // T相当于一个变量，保证了咱们传入和输出值是同一个类型
 function identity<T>(arg: T): T {
@@ -458,6 +478,57 @@ function identity<T>(arg: T): T {
 }
 
 let output = identity<string>('myString');
+```
+
+泛型类
+```js
+class Animal<T> {
+  public name: T
+  constructor(name: T) {
+    this.name = name;
+  }
+  say(): void {
+    console.log(this.name);
+  }
+}
+let cat = new Animal<string>('cat');
+cat.say();
+```
+
+泛型接口
+```js
+interface Config {
+  <T>(value: T): T
+}
+var getData: Config = function<T>(value: T): T {
+  return value;
+}
+getData<string>('kerwin');
+```
+
+泛型映射
+```js
+// interface DBI<T> {}
+// class MysqlDb<T> implements DBI<T> {} // 如果要实现一个泛型接口，类也必须是泛型类
+
+class MysqlDb<T> {
+  add(info: T):boolean {
+    console.log(info);
+    return true;
+  }
+}
+
+class User {
+  username: string | undefined;
+  password: string | number;
+}
+
+let u = new User();
+u.username = 'kerwin';
+u.password = '123321';
+
+let db = new MysqlDb<User>(); // 把类当作参数，传入到泛型类中
+db.add(u);
 ```
 
 #### 9.1 多个类型参数
