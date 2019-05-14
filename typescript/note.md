@@ -477,7 +477,7 @@ interface Lengthwise {
 }
 
 function loggingIdentity<T entends Lengthwise>(arg: T): T {
-  cosnole.log(arg.length);
+  console.log(arg.length);
   return arg;
 }
 ```
