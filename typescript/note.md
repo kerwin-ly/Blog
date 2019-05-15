@@ -1,5 +1,7 @@
 # TypeScript学习笔记
->参考连接：[深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why)
+>参考连接：
+[深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why)
+[官方文档](https://www.tslang.cn/docs/home.html)
 
 ## 安装配置
 全局安装typescript
