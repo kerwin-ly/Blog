@@ -17,6 +17,13 @@ cd my-app
 ng server --open
 ```
 
+## 常用命令
+### 1. 新建组件
+```bash
+# 在components文件夹下面新建news组件
+ng g component components/news
+```
+
 ## 学习笔记
 ### 1. 架构
 #### 1.1 @NgModule 元数据
