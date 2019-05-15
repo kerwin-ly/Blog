@@ -11,7 +11,10 @@
 [类的定义](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E7%B1%BB%E5%92%8C%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.md)
 
 ### TypeScript
-[TypeScript笔记](https://github.com/kerwin-ly/Blog/blob/master/typescript/node.md)
+[TypeScript笔记](https://github.com/kerwin-ly/Blog/blob/master/typescript/note.md)
+
+### Angular7
+[angular7学习笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/note.md)
 
 ### Vue
 [vue-mvvm实现原理（外文）](https://github.com/DMQ/mvvm)
@@ -36,6 +39,7 @@
 
 ### Style
 [sass笔记](https://github.com/kerwin1/Blog/blob/master/style/sass.md)
+
 [less笔记](https://github.com/kerwin1/Blog/blob/master/style/less.md)
 
 ### Cordova
