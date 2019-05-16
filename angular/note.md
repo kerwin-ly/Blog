@@ -24,6 +24,11 @@ ng server --open
 ng g component components/news
 ```
 
+### 2.创建服务
+```bash
+ng g service services/store
+```
+
 ## 学习笔记
 ### 1. 架构
 #### 1.1 @NgModule 元数据
@@ -236,10 +241,101 @@ ngOnChanges(changes: SimpleChanges) {
 
 * ngAfterContentInit() 和每次 ngDoCheck() 之后调用
 
-* ngAfterViewInit() 当 Angular 初始化完组件视图及其子视图之后调用。第一次 ngAfterContentChecked() 之后调用，只调用一次。
+* ngAfterViewInit() 当 Angular 初始化完组件视图及其子视图之后调用。第一次 ngAfterContentChecked() 之后调用，只调用一次。**这个时候可以拿到具体dom元素和绑定的值了**
 
 * ngAfterViewChecked() 每当 Angular 做完组件视图和子视图的变更检测之后调用。**频繁调用，简化逻辑，注意开销**
 
-* ngAfterViewInit() 和每次 ngAfterContentChecked() 之后调用。
-
 * ngOnDestroy() 每当 Angular 每次销毁指令/组件之前调用。 **这里处理一些内存泄漏问题，如：清除计时器，取消订阅对象等**
+
+### 4. 服务service
+1.创建服务(在当前目录的services文件夹下面创建news服务)
+```bash
+ng g service services/news
+```
+
+2.引入服务
+`app.module.ts`
+```js
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { NewsComponent } from './components/news/news.component';
+import { ChildComponent } from './components/child/child.component';
+
+import { StoreService } from './services/store.service'; // 引入服务
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    NewsComponent,
+    ChildComponent
+  ],
+  imports: [
+    FormsModule,
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [StoreService], // 这里将服务进行注入
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+3.使用服务
+`newsService`
+```js
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class NewsService {
+
+  constructor() { }
+  getName(): string {
+    return 'this is kerwin';
+  }
+}
+
+```
+`news.component.ts`
+```js
+import { NewsService } from './services/store.service';
+
+export class NewsComponent {
+  constructor(public store: NewsService) {
+
+  }
+  getServiceName(): void {
+    console.log(this.store.getName()) // 调用服务的方法
+  }
+} 
+```
+
+#### 5. 通过ViewChild获取dom节点/调用子组件方法
+`app.component.html`设置变量box
+```html
+<app-child #box></app-child>
+```
+
+`app.component.ts`
+```js
+import { ViewChild } from '@angular/core';
+
+export class NewsComponent implements OnInit {
+  public newsTitle: string;
+
+  @ViewChild('box') tempBox: ElementRef; // 将html页面中的#mybox变量赋值给tempBox
+  constructor() {}
+
+  ngOnInit() {}
+
+  ngAfterViewInit(): void {
+    console.log(this.tempBox);
+    this.tempBox.childFn(); // 这里可以直接调用子组件的方法
+  }
+}
+```
