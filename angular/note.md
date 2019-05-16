@@ -80,13 +80,19 @@ constructor(private service: HeroService) {}
 
 ### 2. 模板语法
 #### 2.1 *ngFor获取index
-注意如何获取当前的index
+注意如何获取当前的index,trackBy的应用
+
+>ngFor 指令有时候会性能较差，特别是在大型列表中。 对一个条目的一丁点改动、移除或添加，都会导致级联的 DOM 操作。添加了`trackBy`后会根据数据变动找到指定的dom进行元素替换。
+
 ```html
 <ul id="heros">
-  <li *ngFor="let item of heros; let i = index">
+  <li *ngFor="let item of heros; let i = index; trackBy: trackByHeroes">
     {{ item.name }} {{ i }}
   </li>
 </ul>
+```
+```js
+trackByHeroes(index: number, hero: Hero): number { return hero.id; }
 ```
 
 #### 2.2 属性绑定两种方式
@@ -97,7 +103,9 @@ constructor(private service: HeroService) {}
 ```
 
 #### 2.3 form表单中数据双向绑定
-在`app.module.ts`中添加`import`
+注意：**使用 ngModel 时需要 FormsModule**
+
+在`app.module.ts`中添加`import`，
 ```js
 import { NgModule } frm '@angular/core';
 import { FormsModule } from '@angular/forms'; // 必须有这句
@@ -130,3 +138,108 @@ export class AppComponent {
 }
 ```
 
+#### 2.4 父子组件传值
+父组件
+```html
+<app-child [newsTitle]="newsTitle" (requestChangeTitle)="updateTitle(info)"></app-child>
+```
+```js
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-news',
+  templateUrl: './news.component.html',
+  styleUrls: ['./news.component.less']
+})
+export class NewsComponent implements OnInit {
+  public newsTitle: string;
+  constructor() {
+    this.newsTitle = '这是父组件的消息头';
+  }
+
+  ngOnInit() {}
+
+  updateTitle(info: string) {
+    this.newsTitle = info;
+  }
+}
+```
+
+子组件
+```html
+<div class="child">
+  我是子组件
+  {{ newsTitle }}
+  <button (click)="doUpdate()">修改父组件值</button>
+</div>
+```
+```js
+import { Component, OnInit, Input, Output } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.less']
+})
+export class ChildComponent implements OnInit {
+  @Input() newsTitle: string; // 注意这里的@Input装饰器是关键
+  @Output() requestChangeTitle = new EventEmitter<string>();
+
+  constructor() {}
+
+  ngOnInit() {}
+
+  doUpdate() {
+    this.requestChangeTitle.emit('消息被子组件修改了');
+  }
+}
+```
+
+#### 2.5 没有property时候，动态修改attribute
+![attribute分析](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ng-attribute.png)
+```html
+<table>
+  <tr><td [attr.colspan]="1 + 1">One-Two</td></tr>
+  <tr><td>Five</td><td>Six</td></tr>
+</table>
+```
+
+#### 2.6 管道符
+对数据进行一定的转换修饰
+
+```html
+<div>
+  <p>{{ data | json }}</p>
+</div>
+```
+
+### 3. 生命周期
+* ngOnChanges() 当 Angular（重新）设置数据绑定输入属性时响应。 该方法接受当前和上一属性值的 SimpleChanges 对象。在 ngOnInit() 之前以及所绑定的一个或多个输入属性的值发生变化时都会调用。**用来监听数据变化**
+```js
+ngOnChanges(changes: SimpleChanges) {
+  for (let propName in changes) {
+    let chng = changes[propName];
+    let cur  = JSON.stringify(chng.currentValue);
+    let prev = JSON.stringify(chng.previousValue);
+    this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+  }
+}
+```
+
+* ngOnInit() 在 Angular 第一次显示数据绑定和设置指令/组件的输入属性之后，初始化指令/组件。在第一轮 ngOnChanges() 完成之后调用，只调用一次。**这是获取初始数据的好地方**
+
+* ngDoCheck() 检测，并在发生 Angular 无法或不愿意自己检测的变化时作出反应。在每个变更检测周期中，紧跟在 ngOnChanges() 和 ngOnInit() 后面调用。**开销巨大！**
+
+* ngAfterContentInit() 当 Angular 把外部内容投影进组件/指令的视图之后调用。第一次 ngDoCheck() 之后调用，只调用一次。
+
+* ngAfterContentChecked() 每当 Angular 完成被投影组件内容的变更检测之后调用。
+
+* ngAfterContentInit() 和每次 ngDoCheck() 之后调用
+
+* ngAfterViewInit() 当 Angular 初始化完组件视图及其子视图之后调用。第一次 ngAfterContentChecked() 之后调用，只调用一次。
+
+* ngAfterViewChecked() 每当 Angular 做完组件视图和子视图的变更检测之后调用。**频繁调用，简化逻辑，注意开销**
+
+* ngAfterViewInit() 和每次 ngAfterContentChecked() 之后调用。
+
+* ngOnDestroy() 每当 Angular 每次销毁指令/组件之前调用。 **这里处理一些内存泄漏问题，如：清除计时器，取消订阅对象等**
