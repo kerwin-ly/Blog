@@ -583,3 +583,85 @@ let myGenericNumber = new GenericNumber<number>();
 myGenericNumber.zeroValue = 0;
 myGenericNumber.add = function(x, y) { return x + y; };
 ```
+
+### 10. 装饰器
+装饰器是一种特殊类型的声明，它能够被附加到类声明，方法， 访问符，属性或参数上。在不改动或最小改动情况下，新增逻辑。
+
+#### 10.1 类装饰器
+普通装饰器
+```js
+function extraName(params: any) { // 这里的params指代的就是下面的类
+  return class extends params {
+    // 重写getName方法
+    public kind: string = 'fist'
+    getName() {
+      console.log('kind changed' + this.kind);
+    }
+  }
+}
+
+@extraName
+class Animal {
+  constructor(
+    public kind: string
+  ) {}
+  getName() {
+    console.log('kind is' + this.kind);
+  }
+}
+
+var b = new Animal('bird');
+b.getName();
+```
+
+装饰器工厂
+```js
+function extraName(name: string) {
+  // 这里的name是装饰器传递进来的参数
+  return function(params: any) {
+    // 这里的params是类
+    params.prototype.name = name;
+  }
+}
+
+@extraName('kerwin')
+class Animal {
+  constructor(
+    public kind: string
+  ) {}
+  getName() {
+    console.log('...');
+  }
+}
+
+var b = new Animal('bird');
+console.log(b.name, b.kind);
+```
+
+#### 10.2 属性装饰器
+```js
+function changeKind(kind: string) {
+  return function(params: any, key: string) { // params => 类，key => 属性名
+    params[key] = kind; // 修改kind
+  }
+}
+
+class Animal {
+  @changeKind('kerwin')
+  public kind: string | undefined;
+
+  constructor() {}
+
+  getName() {
+    console.log(this.kind);
+  }
+}
+
+var d = new Animal('bird');
+d.getName();
+```
+
+#### 10.3 方法装饰器
+```js
+
+```
