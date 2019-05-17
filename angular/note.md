@@ -20,13 +20,19 @@ ng server --open
 ## 常用命令
 ### 1. 新建组件
 ```bash
-# 在components文件夹下面新建news组件
+# 在components目录下创建news组件
 ng g component components/news
 ```
 
 ### 2.创建服务
 ```bash
 ng g service services/store
+```
+
+### 3. 创建指令
+```bash
+# 创建指令highlight
+ng g directive directive/highlight
 ```
 
 ## 学习笔记
@@ -315,7 +321,7 @@ export class NewsComponent {
 } 
 ```
 
-#### 5. 通过ViewChild获取dom节点/调用子组件方法
+### 5. 通过ViewChild获取dom节点/调用子组件方法
 `app.component.html`设置变量box
 ```html
 <app-child #box></app-child>
@@ -339,3 +345,10 @@ export class NewsComponent implements OnInit {
   }
 }
 ```
+
+### 6. 管道
+用作数据转换（后台返回的字段格式和页面呈现的不同）https://www.angular.cn/guide/pipes
+
+### 7. form表单
+#### 7.1 报错Error: If ngModel is used within a form tag, either the name attribute must be set or the form...
+解决：input框的`name`必须书写或者设置`[ngModelOptions]="{standalone: true}"`
