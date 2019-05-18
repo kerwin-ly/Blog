@@ -619,7 +619,7 @@ b.getName();
 function extraName(name: string) {
   // 这里的name是装饰器传递进来的参数
   return function(params: any) {
-    // 这里的params是类
+    // 这里的params对于静态成员来说是类的构造函数，对于实例成员是类的原型对象
     params.prototype.name = name;
   }
 }
@@ -641,7 +641,7 @@ console.log(b.name, b.kind);
 #### 10.2 属性装饰器
 ```js
 function changeKind(kind: string) {
-  return function(params: any, key: string) { // params => 类，key => 属性名
+  return function(params: any, key: string) { // params => 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象，key => 属性名
     params[key] = kind; // 修改kind
   }
 }
@@ -663,5 +663,24 @@ d.getName();
 
 #### 10.3 方法装饰器
 ```js
+function changeKind(kind: string) {
+  return function(params: any, methodName: any, descriptor: string) { // params => 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象，methodName => 方法名， descriptor => 属性描述器
+    console.log(params, methodName, descriptor);
+    params[key] = kind; // 修改kind
+  }
+}
 
+class Animal {
+  public kind: string | undefined;
+
+  constructor() {}
+
+  @changeKind('kerwin')
+  getName() {
+    console.log(this.kind);
+  }
+}
+
+var d = new Animal('bird');
+d.getName();
 ```

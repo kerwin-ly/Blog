@@ -21,18 +21,28 @@ ng server --open
 ### 1. 新建组件
 ```bash
 # 在components目录下创建news组件
-ng g component components/news
+ng g component components/xxx
 ```
 
 ### 2.创建服务
 ```bash
-ng g service services/store
+ng g service services/xxx
 ```
 
 ### 3. 创建指令
 ```bash
 # 创建指令highlight
-ng g directive directive/highlight
+ng g directive directive/xxx
+```
+
+#### 4. 创建自定义模块
+```bash
+ng g module modules/xxx
+```
+
+#### 5. 创建interface
+```bash
+ng g interface interfaces/xxx
 ```
 
 ## 学习笔记
