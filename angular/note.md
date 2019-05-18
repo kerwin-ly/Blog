@@ -38,6 +38,7 @@ ng g directive directive/xxx
 #### 4. 创建自定义模块
 ```bash
 ng g module modules/xxx
+ng g module modules/xxx --routing # 创建模块和对应路由
 ```
 
 #### 5. 创建interface
@@ -263,74 +264,6 @@ ngOnChanges(changes: SimpleChanges) {
 
 * ngOnDestroy() 每当 Angular 每次销毁指令/组件之前调用。 **这里处理一些内存泄漏问题，如：清除计时器，取消订阅对象等**
 
-### 4. 服务service
-1.创建服务(在当前目录的services文件夹下面创建news服务)
-```bash
-ng g service services/news
-```
-
-2.引入服务
-`app.module.ts`
-```js
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NewsComponent } from './components/news/news.component';
-import { ChildComponent } from './components/child/child.component';
-
-import { StoreService } from './services/store.service'; // 引入服务
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    NewsComponent,
-    ChildComponent
-  ],
-  imports: [
-    FormsModule,
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [StoreService], // 这里将服务进行注入
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-```
-
-3.使用服务
-`newsService`
-```js
-import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class NewsService {
-
-  constructor() { }
-  getName(): string {
-    return 'this is kerwin';
-  }
-}
-
-```
-`news.component.ts`
-```js
-import { NewsService } from './services/store.service';
-
-export class NewsComponent {
-  constructor(public store: NewsService) {
-
-  }
-  getServiceName(): void {
-    console.log(this.store.getName()) // 调用服务的方法
-  }
-} 
-```
-
 ### 5. 通过ViewChild获取dom节点/调用子组件方法
 `app.component.html`设置变量box
 ```html
@@ -356,9 +289,5 @@ export class NewsComponent implements OnInit {
 }
 ```
 
-### 6. 管道
-用作数据转换（后台返回的字段格式和页面呈现的不同）https://www.angular.cn/guide/pipes
-
-### 7. form表单
-#### 7.1 报错Error: If ngModel is used within a form tag, either the name attribute must be set or the form...
+### 7. 报错Error: If ngModel is used within a form tag, either the name attribute must be set or the form...
 解决：input框的`name`必须书写或者设置`[ngModelOptions]="{standalone: true}"`
