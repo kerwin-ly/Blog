@@ -18,6 +18,9 @@ ng server --open
 ```
 
 ## 常用命令
+* `--spec=false` 不创建测试文件
+* `--skip-import` 是否忽略在模块添加组件声明，默认为false
+
 ### 1. 新建组件
 ```bash
 # 在components目录下创建news组件
