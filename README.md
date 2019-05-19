@@ -14,6 +14,7 @@
 [TypeScript笔记](https://github.com/kerwin-ly/Blog/blob/master/typescript/note.md)
 
 ### Angular7
+[angular编码规范](https://angular.cn/guide/styleguide)
 [angular7学习笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/note.md)
 
 ### Vue
