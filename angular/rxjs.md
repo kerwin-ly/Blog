@@ -43,3 +43,27 @@ export class AppComponent {
   }
 }
 ```
+
+### 2. of和from
+* of(...items) —— 返回一个 Observable 实例，它用同步的方式把参数中提供的这些值一起发出来。
+
+* from(iterable) —— 把它的参数转换成一个 Observable 实例。 该方法通常用于把一个数组转换成一个（发送多个值的）可观察对象。（挨个发出来）
+```js
+const myObservar = {
+  next: x => console.log('Observer got a next value: ' + x),
+  error: err => console.error('Observer got an error: ' + err),
+  complete: () => console.log('Observer got a complete notification'),
+};
+/* from: 打印了4次如下
+Observer got a next value: kerwin
+Observer got a next value: bob
+Observer got a next value: tim
+Observer got a complete notification
+*/
+
+/* of: 打印了1次如下
+Observer got a next value: kerwin,bob,tim
+*/
+const obData = from(this.users);
+obData.subscribe(myObservar);
+```
