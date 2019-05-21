@@ -78,7 +78,6 @@ const mouseMoves = fromEvent(el, 'mousemove');
  
 // Subscribe to start listening for mouse-move events
 const subscription = mouseMoves.subscribe((evt: MouseEvent) => {
-  // Log coords of mouse movements
   console.log(`Coords: ${evt.clientX} X ${evt.clientY}`);
 
   // unsubscribe to stop listening for mouse movements
