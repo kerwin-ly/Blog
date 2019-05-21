@@ -44,7 +44,8 @@ export class AppComponent {
 }
 ```
 
-### 2. of和from
+### 2. 创建可观察对象的函数和苏
+#### 2.1 of && from
 * of(...items) —— 返回一个 Observable 实例，它用同步的方式把参数中提供的这些值一起发出来。
 
 * from(iterable) —— 把它的参数转换成一个 Observable 实例。 该方法通常用于把一个数组转换成一个（发送多个值的）可观察对象。（挨个发出来）
@@ -66,4 +67,23 @@ Observer got a next value: kerwin,bob,tim
 */
 const obData = from(this.users);
 obData.subscribe(myObservar);
+```
+
+#### 2.2 fromEvent
+```js
+import { fromEvent } from 'rxjs';
+ 
+const el = document.getElementById('my-element');
+const mouseMoves = fromEvent(el, 'mousemove');
+ 
+// Subscribe to start listening for mouse-move events
+const subscription = mouseMoves.subscribe((evt: MouseEvent) => {
+  // Log coords of mouse movements
+  console.log(`Coords: ${evt.clientX} X ${evt.clientY}`);
+
+  // unsubscribe to stop listening for mouse movements
+  if (evt.clientX < 40 && evt.clientY < 40) {
+    subscription.unsubscribe();
+  }
+});
 ```
