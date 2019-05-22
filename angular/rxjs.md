@@ -5,7 +5,9 @@ npm install rxjs
 ```
 
 ## 学习笔记
-### 1. 异步处理
+>详细文档请参考：[学习](https://rxjs-cn.github.io/learn-rxjs-operators/)
+
+### 1. 基本用法
 在service中通过`new Obervable`来观察属性，对应的页面中通过`subscribe`进行订阅。
 
 `rx.service.js`
@@ -19,7 +21,7 @@ import { Observable } from 'rxjs';
 export class RxService {
   constructor() { }
   getRxData() {
-    return new Observable((observer) => {
+    return Observable.create((observer) => {
       setTimeout(() => {
         observer.next({ // 可以执行多次next方法
           name: 'kerwin'
@@ -36,6 +38,14 @@ export class AppComponent {
   constructor (public rxService: RxService) {}
   getRxData() {
     const rxData = this.rxService.getRxData();
+    // 第一种：
+    const sub = rxData.subscribe({
+      next: x => console.log('Observer got a next value: ' + x),
+      error: err => console.error('Observer got an error: ' + err),
+      complete: () => console.log('Observer got a complete notification'),
+    })
+
+    // 第二种：
     const sub = rxData.subscribe((data) => {
       console.log(data);
     });
@@ -44,8 +54,32 @@ export class AppComponent {
 }
 ```
 
-### 2. 创建可观察对象的函数和苏
-#### 2.1 of && from
+### 2. 创建方式
+#### 2.1 Observable.create
+```js
+getRxData() {
+  return Observable.create((observer) => {
+    const data: IPerson[] = [{
+      name: 'kerwin',
+      sex: true,
+      age: 20
+    }, {
+      name: 'july',
+      sex: false,
+      age: 8
+    }, {
+      name: 'bob',
+      sex: true
+    }];
+
+    setTimeout(() => {
+      observer.next(data);
+    }, 1000);
+  });
+}
+```
+
+#### 2.2 of && from
 * of(...items) —— 返回一个 Observable 实例，它用同步的方式把参数中提供的这些值一起发出来。
 
 * from(iterable) —— 把它的参数转换成一个 Observable 实例。 该方法通常用于把一个数组转换成一个（发送多个值的）可观察对象。（挨个发出来）
@@ -69,7 +103,7 @@ const obData = from(this.users);
 obData.subscribe(myObservar);
 ```
 
-#### 2.2 fromEvent
+#### 2.3 fromEvent基于事件创建
 ```js
 import { fromEvent } from 'rxjs';
  
@@ -87,17 +121,40 @@ const subscription = mouseMoves.subscribe((evt: MouseEvent) => {
 });
 ```
 
-#### 2.3 pipe
+### 3. 过滤
+#### 3.1 filter
 ```js
-import { filter, map } from 'rxjs/operators';
+const rxData = of[1, 2, 3]
 
-const squareOdd = of(1, 2, 3, 4, 5)
+const sub = rxData
+  .pipe(filter(data => data > 1))
+  .subscribe((data) => {
+    console.log(data);
+  })
+```
+```js
+interface IPerson {
+  name: string;
+  age: number;
+}
+
+// 过滤年龄小于18的人员
+const sub = rxData
   .pipe(
-    filter(n => n % 2 !== 0),
-    map(n => n * n),
-    catchError(err => of[])
-  );
+    map((data: IPerson[]) => data.filter((item) => item.age > 18))
+  )
+  .subscribe((data: IPerson[]) => {
+    console.log(data);
+  });
+```
 
-// Subscribe to get values
-squareOdd.subscribe(x => console.log(x));
+#### 3.2 first：发出第一个值或第一个通过给定表达式的值
+```js
+const data = from[1, 2, 3, 5, 1];
+
+data
+  .pipe(first(item => item === 2, 'nothing')) // 如果匹配到了值为2，则返回当前值2.如果匹配不到，则返回'nothing'
+  .subscribe(data => {
+    console.log(data);
+  })
 ```
