@@ -49,7 +49,7 @@ ng g module modules/xxx --routing # 创建模块和对应路由
 ng g interface interfaces/xxx
 ```
 
-## 学习笔记
+## Angular
 ### 1. 架构
 #### 1.1 @NgModule 元数据
 `@NgModule`接受一个元数据对象，该对象的属性用来描述这个模块。
@@ -294,3 +294,16 @@ export class NewsComponent implements OnInit {
 
 ### 7. 报错Error: If ngModel is used within a form tag, either the name attribute must be set or the form...
 解决：input框的`name`必须书写或者设置`[ngModelOptions]="{standalone: true}"`
+
+### 8.:host && ::ng-deep改变第三方组件样式
+* `:host`：表示选择器，选择当前的组件
+* `::ng-deep`：表示忽略中间的className嵌套层级关系，直接找到你要修改的clasName
+```less
+:host {
+  ::ng-deep {
+    .xx {
+      ...
+    }
+  }
+}
+```
