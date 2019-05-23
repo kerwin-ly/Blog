@@ -158,3 +158,171 @@ data
     console.log(data);
   })
 ```
+
+### 4. 组合
+#### 4.1 concat
+按照顺序，前一个`observable`完成了再订阅下一个`observable`(有先后顺序)
+```js
+import { concat } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+// 发出 1,2,3
+const sourceOne = of(1, 2, 3);
+// 发出 4,5,6
+const sourceTwo = of(4, 5, 6);
+// 先发出 sourceOne 的值，当完成时订阅 sourceTwo
+const example = sourceOne.pipe(concat(sourceTwo));
+// 输出: 1,2,3,4,5,6
+const subscribe = example.subscribe(val =>
+  console.log('Example: Basic concat:', val)
+);
+```
+
+#### 4.2 concatMap && mergeMap && switchMap
+* concatMap：当希望合并多个observables时，并且要求上一个完成后发出结果才能订阅下一个。**是按照自己的书写observable顺序进行执行**
+* mergeMap：和concatMap类似。不同点在于**哪个observable先完成，就先返回结果，适用于不会被取消的请求（如数据库操作）**
+* switchMap：同上，区别在于**它有取消操作，每次发出时，会取消前一个内部observable订阅。保证了同一时间只有一个内部订阅。适用于可以取消请求的场景（如计时器操作等）**
+
+concatMap
+```js
+const a = of(2000, 1000);
+const example = a
+.pipe(
+  concatMap(val => of(`${val}ms`)
+    .pipe(delay(val)))
+)
+.subscribe(val => console.log(val)); // 2000ms后先打印2000ms，再过1000ms打印1000ms
+```
+
+mergeMap
+```js
+const a = of(2000, 500, 1000);
+const example = a
+.pipe(
+  mergeMap(val => of(`${val}ms`)
+    .pipe(delay(val)))
+)
+.subscribe(val => console.log(val)); // 500ms后先打印500ms，再过1000ms打印1000ms，再过2000ms打印2000ms
+```
+
+switchMap
+```js
+import { timer, interval } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+
+// 立即发出值， 然后每5秒发出值
+const source = timer(0, 5000);
+// 当 source 发出值时切换到新的内部 observable，发出新的内部 observable 所发出的值
+const example = source.pipe(switchMap(() => interval(500)));
+// 输出: 0,1,2,3,4,5,6,7,8,9...0,1,2,3,4,5,6,7,8
+const subscribe = example.subscribe(val => console.log(val));
+```
+
+应用场景：**mergeMap解决咱们接口依赖问题**。如：咱们需要调用b接口获取数据，b接口的参数需要a接口返回。
+```js
+const user = of('kerwin'); // a接口
+const project = of('big project'); // b接口
+
+user
+  .pipe(mergeMap(u => {
+    if (u === 'kerwin') {
+      return project;
+    }
+  }))
+  .subscribe(p => {
+    console.log(p);
+  });
+```
+
+#### 4.3 forkJoin
+当所有observables完成时，发出每个observable的最新值。类似咱们`Promise.all()`的方法。**注意**：如果一个observable发出多个值时，不应该用它。考虑使用`combineLatest`或`zip`的操作符
+
+注意：**如果内部 observable 不完成的话，forkJoin 永远不会发出值！**
+```js
+const all = forkJoin(
+  of('hello'),
+  of('world').pipe(delay(1000))
+);
+const sub = all.subscribe(val => console.log(val)); // 返回一个数组["hello", "world"]
+```
+
+#### 4.4 combinLatest
+当任意observable发出值时，取出对应的最新值。（这个适用于一个observable可能发出多个值的情况）
+```js
+import { timer, combineLatest } from 'rxjs';
+
+// timerOne 在1秒时发出第一个值，然后每4秒发送一次
+const timerOne = timer(1000, 4000);
+// timerTwo 在2秒时发出第一个值，然后每4秒发送一次
+const timerTwo = timer(2000, 4000);
+// timerThree 在3秒时发出第一个值，然后每4秒发送一次
+const timerThree = timer(3000, 4000);
+
+// 当一个 timer 发出值时，将每个 timer 的最新值作为一个数组发出
+const combined = combineLatest(timerOne, timerTwo, timerThree);
+
+const subscribe = combined.subscribe(latestValues => {
+  // 从 timerValOne、timerValTwo 和 timerValThree 中获取最新发出的值
+    const [timerValOne, timerValTwo, timerValThree] = latestValues;
+  /*
+      示例:
+    timerOne first tick: 'Timer One Latest: 1, Timer Two Latest:0, Timer Three Latest: 0
+    timerTwo first tick: 'Timer One Latest: 1, Timer Two Latest:1, Timer Three Latest: 0
+    timerThree first tick: 'Timer One Latest: 1, Timer Two Latest:1, Timer Three Latest: 1
+  */
+    console.log(
+      `Timer One Latest: ${timerValOne},
+     Timer Two Latest: ${timerValTwo},
+     Timer Three Latest: ${timerValThree}`
+    );
+  }
+);
+```
+
+#### 4.5 zip
+当所有的observables发出后，将它们的值作为数组发出。**如果一个observable发出了多个值，那么在发出第一个值后，便不会再次发出值了。**
+```js
+import { delay } from 'rxjs/operators';
+import { of, zip, interval } from 'rxjs';
+
+const sourceOne = of('Hello');
+const sourceTwo = of('World!');
+const sourceThree = of('Goodbye');
+const sourceFour = interval(10);
+// 一直等到所有 observables 都发出一个值，才将所有值作为数组发出
+const example = zip(
+  sourceOne,
+  sourceTwo.pipe(delay(1000)),
+  sourceThree.pipe(delay(2000)),
+  sourceFour.pipe(delay(3000))
+);
+// 输出: ["Hello", "World!", "Goodbye", 0]
+const subscribe = example.subscribe(val => console.log(val));
+```
+
+### 5. 错误处理
+#### 5.1 catchError && timeout
+```js
+import { throwError, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+// 发出错误
+const source = throwError('This is an error!');
+// 优雅地处理错误，并返回带有错误信息的 observable
+const example = source.pipe(catchError(val => of(`I caught: ${val}`)));
+// 输出: 'I caught: This is an error'
+const subscribe = example.subscribe(val => console.log(val));
+```
+
+`timeout`在指定时间间隔内不发出值就报错
+```js
+const a = of(1, 2);
+a
+  .pipe(
+    delay(1000),
+    timeout(500),
+    catchError(error => of('error occured' + error))
+  )
+  .subscribe((val) => {
+    console.log(val);
+  });
+```
