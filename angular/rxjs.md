@@ -123,6 +123,7 @@ const subscription = mouseMoves.subscribe((evt: MouseEvent) => {
 
 ### 3. 过滤
 #### 3.1 filter
+过滤基本类型
 ```js
 const rxData = of[1, 2, 3]
 
@@ -132,19 +133,21 @@ const sub = rxData
     console.log(data);
   })
 ```
-```js
-interface IPerson {
-  name: string;
-  age: number;
-}
 
-// 过滤年龄小于18的人员
-const sub = rxData
-  .pipe(
-    map((data: IPerson[]) => data.filter((item) => item.age > 18))
-  )
-  .subscribe((data: IPerson[]) => {
-    console.log(data);
+过滤对象类型
+```js
+const t1 = of([{
+  name: 'kerwin',
+  age: 30
+}, {
+  name: 'bob',
+  age: 26
+}]);
+
+t1
+  .pipe(filter((person: any) => person.age > 27))
+  .subscribe(val => {
+    console.log(val); // {name: 'kerwin', age: 30}
   });
 ```
 
