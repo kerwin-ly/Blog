@@ -162,6 +162,46 @@ data
   })
 ```
 
+#### 3.3 debounceTime && throttleTime
+* debounceTime：舍弃掉在两次输出之间小于指定时间的发出值
+* throttleTime：指定的持续时间经过后发出最新值
+
+debounceTime
+```js
+import { fromEvent, timer } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+
+const input = document.getElementById('example');
+
+// 对于每次键盘敲击，都将映射成当前输入值
+const example = fromEvent(input, 'keyup').pipe(map(i => i.currentTarget.value));
+
+// 在两次键盘敲击之间等待0.5秒方才发出当前值，
+// 并丢弃这0.5秒内的所有其他值
+const debouncedInput = example.pipe(debounceTime(500));
+
+// 输出值
+const subscribe = debouncedInput.subscribe(val => {
+  console.log(`Debounced Input: ${val}`);
+});
+```
+
+throttleTime
+```js
+import { interval } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
+
+// 每1秒发出值
+const source = interval(1000);
+/*
+  节流5秒
+  节流结束前发出的最后一个值将从源 observable 中发出
+*/
+const example = source.pipe(throttleTime(5000));
+// 输出: 0...6...12
+const subscribe = example.subscribe(val => console.log(val));
+```
+
 ### 4. 组合
 #### 4.1 concat
 按照顺序，前一个`observable`完成了再订阅下一个`observable`(有先后顺序)
@@ -238,7 +278,7 @@ user
 ```
 
 #### 4.3 forkJoin
-当所有observables完成时，发出每个observable的最新值。类似咱们`Promise.all()`的方法。**注意**：如果一个observable发出多个值时，不应该用它。考虑使用`combineLatest`或`zip`的操作符
+当所有observables完成时，发出每个observable的最新值。类似咱们`Promise.all()`的方法。**注意**：如果一个observable发出多个值时，不应该用它。考虑使用`combineLatest`或`zip`的操作符。
 
 注意：**如果内部 observable 不完成的话，forkJoin 永远不会发出值！**
 ```js
@@ -250,7 +290,7 @@ const sub = all.subscribe(val => console.log(val)); // 返回一个数组["hello
 ```
 
 #### 4.4 combinLatest
-当任意observable发出值时，取出对应的最新值。（这个适用于一个observable可能发出多个值的情况）
+当任意observable发出值时，取出对应的最新值。（这个适用于一个observable可能发出多个值的情况，比如：有一个算式，总价=单价*数量，每次单价和数量改变了，都是用最新的值去算总价）
 ```js
 import { timer, combineLatest } from 'rxjs';
 
