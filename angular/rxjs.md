@@ -136,7 +136,7 @@ const sub = rxData
 
 过滤对象类型
 ```js
-const t1 = of([{
+const t1 = from([{
   name: 'kerwin',
   age: 30
 }, {
