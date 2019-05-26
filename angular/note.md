@@ -307,3 +307,29 @@ export class NewsComponent implements OnInit {
   }
 }
 ```
+
+### 9. 动态表单赋值(setValue && patchValue)
+* `setValue`为单个控件赋值
+* `patchValue`为整个表单模型赋值
+```js
+constructor(
+  private fb: FormBuilder
+) {
+  this.userForm = this.fb.group({
+    name: ['', [Validators.required]],
+    age: [null, [Validators.required]],
+  });
+}
+
+setForm() {
+  // 第一种：setValue设置单个值
+  this.userForm.get('name').setValue('kerwin');
+  this.userForm.get('age').setValue(22);
+
+  // 第二种：patchValue设置表单值
+  this.userForm.patchValue({
+    name: 'kerwin',
+    age: 22
+  })
+}
+```
