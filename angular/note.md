@@ -333,3 +333,59 @@ setForm() {
   })
 }
 ```
+
+### 10. 修改数组无法触发列表重新渲染
+>官方解释：当需要对 nzData 中的数据进行增删时需要使用以下操作，使用`push`或者`splice`修改 nzData 的数据**不会生效**
+
+正确方式：
+```js
+// 增加数据
+this.dataSet = [ ...this.dataSet, {
+  key    : `${this.i}`,
+  name   : `Edward King ${this.i}`,
+  age    : '32',
+  address: `London, Park Lane no. ${this.i}`
+}];
+
+// 删除数据
+this.dataSet = this.dataSet.filter(d => d.key !== i);
+```
+
+### 11. lodash在angular中的应用
+1.安装依赖
+```bash
+npm install lodash --save
+
+npm install @types/lodash --save-dev
+```
+
+2.在`tsconfig.json`添加`lodash`类型`"types" : ["lodash"])`
+```json
+{
+ "compileOnSave": false,
+ "compilerOptions": {
+  "outDir": "./dist/out-tsc",
+  "sourceMap": true,
+  "declaration": false,
+  "moduleResolution": "node",
+  "emitDecoratorMetadata": true,
+  "experimentalDecorators": true,
+  "target": "es5",
+  "typeRoots": [
+   "node_modules/@types"
+  ],
+  "types" : ["lodash"],
+  "lib": [
+   "es2017",
+   "dom"
+  ]
+ }
+}
+```
+
+3.使用
+```js
+import * as _ from 'lodash';
+
+_.remove(scores, 2); // 正常使用即可
+```
