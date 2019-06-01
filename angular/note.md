@@ -198,6 +198,7 @@ export class NewsComponent implements OnInit {
   <button (click)="doUpdate()">修改父组件值</button>
 </div>
 ```
+
 ```js
 import { Component, OnInit, Input, Output } from '@angular/core';
 
@@ -220,7 +221,18 @@ export class ChildComponent implements OnInit {
 }
 ```
 
-#### 2.5 没有property时候，动态修改attribute
+#### 2.5 父组件直接获取子组件方法，值(ViewChild)
+```html
+<app-footer #footer></app-footer>
+```
+
+```js
+@ViewChild('footerChild') footer;
+
+this.footer.xxx
+```
+
+#### 2.6 没有property时候，动态修改attribute
 ![attribute分析](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ng-attribute.png)
 ```html
 <table>
@@ -229,13 +241,30 @@ export class ChildComponent implements OnInit {
 </table>
 ```
 
-#### 2.6 管道符
-对数据进行一定的转换修饰
+#### 2.7 管道符
+>对数据进行一定的转换修饰
 
-```html
-<div>
-  <p>{{ data | json }}</p>
-</div>
+
+自定义管道符
+```bash
+# 1. 生成pipe文件
+ng g pipe extraData 
+
+# 2. extra-data.pipe.ts文件
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'dataExtraPipe'
+})
+export class ExtraDataPipe implements PipeTransform {
+
+  transform(value: string, args?: any): string {
+    return value + 'extraData';
+  }
+}
+
+# 3. 使用
+<p> {{ data | dataExtraPipe }} </p>
 ```
 
 ### 3. 生命周期
