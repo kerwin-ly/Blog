@@ -267,7 +267,8 @@ export class ExtraDataPipe implements PipeTransform {
 <p> {{ data | dataExtraPipe }} </p>
 ```
 
-### 3. 生命周期
+### 3. 生命周期及父子组件渲染顺序
+#### 3.1 生命周期
 * ngOnChanges() 当 Angular（重新）设置数据绑定输入属性时响应。 该方法接受当前和上一属性值的 SimpleChanges 对象。在 ngOnInit() 之前以及所绑定的一个或多个输入属性的值发生变化时都会调用。**用来监听数据变化**
 ```js
 ngOnChanges(changes: SimpleChanges) {
@@ -295,6 +296,28 @@ ngOnChanges(changes: SimpleChanges) {
 * ngAfterViewChecked() 每当 Angular 做完组件视图和子视图的变更检测之后调用。**频繁调用，简化逻辑，注意开销**
 
 * ngOnDestroy() 每当 Angular 每次销毁指令/组件之前调用。 **这里处理一些内存泄漏问题，如：清除计时器，取消订阅对象等**
+
+#### 3.2 父子组件渲染顺序问题
+踩坑场景：当页面初始化时候，去拿子组件的变量命名
+```html
+<div>
+  父组件
+  <app-child #child></app-child>
+  <button [disabled]="isDisabled()"></button>
+</div>
+```
+```js
+class Parent implements OnInit {
+  constructor() {}
+
+  isDisabled(): void {
+    // return child.disabled; 报错：child 为undefined,这里由于子组件先渲染完，父组件还没挂载变量child
+    if (child) {
+      return child.disabled; // 解决：加一层判定
+    }
+  }
+}
+```
 
 ### 5. 通过ViewChild获取dom节点/调用子组件方法
 `app.component.html`设置变量box
