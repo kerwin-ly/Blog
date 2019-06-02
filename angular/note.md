@@ -298,6 +298,17 @@ ngOnChanges(changes: SimpleChanges) {
 * ngOnDestroy() 每当 Angular 每次销毁指令/组件之前调用。 **这里处理一些内存泄漏问题，如：清除计时器，取消订阅对象等**
 
 #### 3.2 父子组件渲染顺序问题
+常见的钩子加载顺序
+```
+父组件constructor
+子组件constructor
+父组件OnInit
+子组件Onchanges
+子组件OnInit
+子组件AfterViewInit
+父组件AfterViewInit
+```
+
 踩坑场景：当页面初始化时候，去拿子组件的变量命名
 ```html
 <div>
