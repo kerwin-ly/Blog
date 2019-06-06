@@ -41,9 +41,36 @@ docker rm webserver
 
 > 对于使用 macOS 的用户，在任务栏点击 Docker Desktop 应用图标 -> Perferences... -> Daemon -> Registry mirrors。在列表中填写加速器地址 https://dockerhub.azk8s.cn。修改完成之后，点击 Apply & Restart 按钮，Docker 就会重启并应用配置的镜像地址了。
 
-运行`docker info`，如果是下面的内容就表示成功了
+运行`docker info`，看到 docker 信息
 
-```
+```bash
+...
 Registry Mirrors:
- https://dockerhub.azk8s.cn/
+https://dockerhub.azk8s.cn/
 ```
+
+## 常用命令
+
+### 1. 命令查询
+
+```bash
+docker --help
+```
+
+### 1. 操作镜像
+
+```bash
+# 查看本地镜像
+docker images
+
+# 本地全部镜像
+docker images -a
+
+# 拉取远程镜像
+docker pull nginx
+
+# 删除镜像
+docker rmi -f name
+```
+
+### 2. 操作容器
