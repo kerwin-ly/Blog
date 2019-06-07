@@ -66,11 +66,79 @@ docker images
 # 本地全部镜像
 docker images -a
 
+# 只显示镜像id
+docker images -q
+
 # 拉取远程镜像
 docker pull nginx
 
 # 删除镜像
-docker rmi -f name
+docker rmi -f imageName/imageId
+docker image rm -f imageName/imageId
 ```
 
 ### 2. 操作容器
+
+#### 2.1 启动交互式容器
+
+- -i 以交互模式运行容器
+- -t 为容器重新分配一个伪输入终端，通常与-i 一起使用
+- --name 新容器的别名
+- --no-trunc 不截断输出
+
+```bash
+docker run -it dockerName --newName
+```
+
+#### 2.2 启动守护式容器
+
+启动完成后，容器将自动退出
+
+```bash
+docker run -d dockerName
+```
+
+#### 2.3 列出所有启动的容器
+
+- -a 当前运行的容器 + 历史运行的容器
+- -q 只显示容器编号
+
+```bash
+docker ps
+
+# 前3次运行的进程
+docker ps -n 3
+```
+
+#### 2.4 退出容器
+
+- 第一种：exit 退出，容器停止并退出
+- 第二种：ctrl + P + Q 容器不停止，只是退出（后台运行）
+```bash
+  # 重新进入，进入成功后，再执行操作方法
+  docker attack dockerID
+  ls -l tmp/
+  # 进入并执行
+  docker exec -t dockerID ls -l tmp/
+```
+
+- 第三种：`docker stop id`
+- 第四种：`docker kill id`，强制退出
+
+#### 2.5 删除容器
+
+```bash
+docker rm -f dockerName/dockerId
+
+# 删除多个容器,$(筛选出来的docker容器)
+docker rm -f $(docker ps -a -q)
+# 删除多个容器（将|管道符前面的结果赋值给xargs，然后执行删除）
+docker ps -a -q | xargs docker rm
+```
+
+#### 2.6 查看容器日志
+
+```bash
+# -t 加入时间；-f 持续完后添加；--tail 限制条数；
+docker log -t -f --tail 限制条数 dockerID
+```
