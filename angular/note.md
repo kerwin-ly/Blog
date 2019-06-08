@@ -525,9 +525,7 @@ _.remove(scores, 2); // 正常使用即可
     [(nzVisible)]="reDiffModalVisible"
     (nzOnCancel)="resetStatus()"
   >
-    <div nz-row nzType="flex" class="inner-title" [nzGutter]="16">
-
-    </div>
+    <div nz-row nzType="flex" class="inner-title" [nzGutter]="16"></div>
   </nz-modal>
 </div>
 ```
@@ -543,8 +541,36 @@ _.remove(scores, 2); // 正常使用即可
 :host {
   ::ng-deep {
     .wrapper {
-      ...
+      ...;
     }
   }
 }
+```
+
+### 13. 保证 form 表单中 name 是唯一的
+
+如果表单中有`name`字段，青务必保证其是唯一的。**否则渲染时，前面的数据会被后面的替换，即时绑定的是不同的字段**
+
+如下，`name`属性均为 group，前面的`用户组`数据将被替换成`角色`数据
+
+```html
+<nz-form-item>
+  <nz-form-label>用户组</nz-form-label>
+  <nz-form-control>
+    <nz-checkbox-group
+      [(ngModel)]="userGroupcheckOptions"
+      name="group"
+    ></nz-checkbox-group>
+  </nz-form-control>
+</nz-form-item>
+
+<nz-form-item>
+  <nz-form-label>角色</nz-form-label>
+  <nz-form-control>
+    <nz-checkbox-group
+      [(ngModel)]="roleCheckOptions"
+      name="group"
+    ></nz-checkbox-group>
+  </nz-form-control>
+</nz-form-item>
 ```
