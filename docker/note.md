@@ -83,6 +83,9 @@ docker pull nginx
 # 删除镜像
 docker rmi -f imageName/imageId
 docker image rm -f imageName/imageId
+
+# 查看详情
+docker inspect dockerId
 ```
 
 ### 2. 操作容器
@@ -93,9 +96,11 @@ docker image rm -f imageName/imageId
 - -t 为容器重新分配一个伪输入终端，通常与-i 一起使用
 - --name 新容器的别名
 - --no-trunc 不截断输出
+- -p docker 对外可访问端口:docker 内部服务端口
+- -P 随机分配端口
 
 ```bash
-docker run -it dockerName --newName
+docker run -it -p 8888:8080 dockerName --newName
 ```
 
 #### 2.2 启动守护式容器
@@ -150,4 +155,48 @@ docker ps -a -q | xargs docker rm
 ```bash
 # -t 加入时间；-f 持续完后添加；--tail 限制条数；
 docker log -t -f --tail 限制条数 dockerID
+```
+
+#### 2.7 提交镜像
+
+```bash
+docker commit -a="user" -m="description" dockerID newDockerName
+# demo
+docker commit -a="kerwin" -m="remove docs" e7adb60bb62f liyi/nodocs
+```
+
+### 3. 容器卷(dockerFile)
+
+镜像的描述文件
+
+#### 3.1 容器和宿主机关联，完成数据持久化
+
+```bash
+# 如果容器关了，改了宿主机内容，当重新启动容器后会去同步容器数据
+# ...:ro 只读
+docker run -it -v /宿主机绝对路径目录:/容器内目录
+```
+
+#### 3.2 使用 Dockerfile 创建镜像并运行
+
+[dockerFile 文件]()
+
+编写 dockerFile 生成镜像
+
+```bash
+# 注意最后面的 '.'必须存在，保证其一层一层加载镜像
+ docker build -f ./dockerFile -t ly/centos .
+```
+
+运行镜像，生成一个容器
+
+```bash
+docker run -it ly/centos
+```
+
+#### 3.3 容器间的共享(--volumns-from)
+注意：**容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用它为止**
+```bash
+# doc2与doc1进行共享
+docker run -it --name doc2 --volumns-from doc1 ly/centos
 ```
