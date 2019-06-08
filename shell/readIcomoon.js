@@ -10,10 +10,12 @@ function readFile() {
 		let newJson = {};
 
 		for (let item of icomoonObj.icons) {
-		  newJson[item.properties.name] = item.properties.code;
+			newJson[item.properties.name] = item.properties.code;
 		}
 
-		fs.writeFile("Icomoon.json", JSON.stringify(newJson), { flag: 'w' }, (error) => {
+		fs.writeFile("Icomoon.json", JSON.stringify(newJson), {
+			flag: 'w'
+		}, (error) => {
 			if (error) throw error;
 			console.log('success to get Icommon.json')
 			moveIcomoon();
@@ -33,7 +35,7 @@ function moveIcomoon() {
 			console.log('success to ' + item);
 		})
 	}
-	
+
 }
 
 readFile();

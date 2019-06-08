@@ -1,9 +1,10 @@
-## 解决node回调地狱
+## 解决 node 回调地狱
 
 ### async/await
+
 ```js
-let fs = require('fs');
-let path = require('path');
+let fs = require("fs");
+let path = require("path");
 
 function readFile(fileUrl) {
   return new Promise((resolve, reject) => {
@@ -13,38 +14,39 @@ function readFile(fileUrl) {
       } else {
         resolve(data.toString());
       }
-    })
-  })
+    });
+  });
 }
 
 async function readManyFiles() {
   try {
-    let demo1 = await readFile('./txt/demo1.txt'); // 等待函数调用完再继续执行
-    let demo2 = await readFile('./txt/demo2.txt');
-  } catch(e) {
+    let demo1 = await readFile("./txt/demo1.txt"); // 等待函数调用完再继续执行
+    let demo2 = await readFile("./txt/demo2.txt");
+  } catch (e) {
     console.log(e);
   }
 
-  console.log(demo1 + demo2)
+  console.log(demo1 + demo2);
 }
 
 readManyFiles();
 ```
 
 ### Generator
->generator是es6中的一个新的语法。在function关键字后添加*即可将函数变为generator
-执行`generator`将会返回一个遍历器对象，用于遍历`generator`内部的状态。
-通过方法内部`yield`方法来暂停操作，再根据方法外的`next`方法进行下一步,来控制整个流程
+
+> generator 是 es6 中的一个新的语法。在 function 关键字后添加\*即可将函数变为 generator
+> 执行`generator`将会返回一个遍历器对象，用于遍历`generator`内部的状态。
+> 通过方法内部`yield`方法来暂停操作，再根据方法外的`next`方法进行下一步,来控制整个流程
 
 ```js
 // 我们的主任务——显示关键字
 // 使用yield暂时中断下方代码执行
 // yield后面为promise对象
-const showKeyword = function* (filepath) {
-  console.log('开始读取');
+const showKeyword = function*(filepath) {
+  console.log("开始读取");
   let keyword = yield readFile(filepath);
   console.log(`关键字为${filepath}`);
-}
+};
 
 // generator的流程控制
 let gen = showKeyword();
@@ -53,6 +55,7 @@ res.value.then(res => gen.next(res));
 ```
 
 优化：引入`co`库来自动控制流程
+
 ```js
 const co = reuqire('co');
 
@@ -67,7 +70,9 @@ co(task, './sample.txt');
 ```
 
 ### Promise
->在方法中通过return一个Promise对象，同时利用Promise的链式操作进行处理
+
+> 在方法中通过 return 一个 Promise 对象，同时利用 Promise 的链式操作进行处理
+
 ```js
 function queryDB() {
   return new Promise((resolve, reject) => {
