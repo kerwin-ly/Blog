@@ -80,6 +80,9 @@ docker images -q
 # 拉取远程镜像
 docker pull nginx
 
+# 上传镜像到云端
+docker push ly/centos
+
 # 删除镜像
 docker rmi -f imageName/imageId
 docker image rm -f imageName/imageId
@@ -161,9 +164,9 @@ docker log -t -f --tail 限制条数 dockerID
 docker exec 容器id 具体操作
 ```
 
-#### 2.8 修改容器提交新的镜像
+#### 2.8 容器生成新的镜像
 ```bash
-docker commit -a="user" -m="description" dockerID newDockerName
+docker commit -a="user" -m="description" 容器id newDockerName
 # demo
 docker commit -a="kerwin" -m="remove docs" e7adb60bb62f liyi/nodocs
 ```
