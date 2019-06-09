@@ -51,13 +51,15 @@ https://dockerhub.azk8s.cn/
 
 ## 基本原理
 
-### 1. docker 三大要素
+[!docker-flow]()
+
+### 1. Docker 三大要素
 
 - 镜像：UnionFS(联合文件系统)是一种分层，清亮级的`文件系统`，它也是 Docker 镜像的基础。镜像可以通过分层来继承基础镜像，通过一层一层叠加，来形成应用镜像。Docker 镜像的最底层是`boottfs`，它包含 boot 加载器和内核。其上层是`rootfs`，包含的就是`linux`系统中的`/dev`, `/binx`等目录和文件
 - 容器：镜像实例化生成，一个镜像可以生成一个或多个容器
 - 仓库：装镜像的地方
 
-## 常用命令
+## docker 常用命令
 
 ### 1. 命令查询
 
@@ -67,7 +69,7 @@ docker --help
 
 ### 1. 操作镜像
 
-```bash
+````bash
 # 查看本地镜像
 docker images
 
@@ -87,6 +89,8 @@ docker push 镜像id
 # 删除镜像
 docker rmi -f imageName/imageId
 docker image rm -f imageName/imageId
+# 条件删除，$()，括号中筛选得到的镜像全部干掉
+docker image rm -f $(docker images -aq)
 
 # 查看详情
 docker inspect dockerId
@@ -104,7 +108,7 @@ docker inspect dockerId
 
 ```bash
 docker run -it -p 8888:8080 dockerName --newName
-```
+````
 
 #### 2.2 启动守护式容器
 
@@ -161,11 +165,13 @@ docker log -t -f --tail 限制条数 dockerID
 ```
 
 #### 2.7 外部执行
+
 ```bash
 docker exec 容器id 具体操作
 ```
 
 #### 2.8 容器生成新的镜像
+
 ```bash
 docker commit -a="user" -m="description" 容器id newDockerName
 # demo
@@ -185,7 +191,9 @@ docker run -it -v /宿主机绝对路径目录:/容器内目录
 ```
 
 #### 3.2 具有类似功能的保留字
+
 CMD 和 ENTROYPOINT 的区别
+
 ```bash
 # CMD: 当运行 run 后，配置的 cmd 参数会覆盖 dockerFile 里面的参数
 CMD [ "curl", "-s", "http://ip.cn" ]
@@ -194,7 +202,8 @@ CMD [ "curl", "-s", "http://ip.cn" ]
 ENTRYPOINT [ "curl", "-s", "http://ip.cn" ]
 ```
 
-ADD 和 COPY的区别
+ADD 和 COPY 的区别
+
 ```bash
 #ADD: 复制添加并解压文件(.tar.gz)
 ADD jdk-8uxxx.tar.gz /url/local/
@@ -256,4 +265,53 @@ docker run -it ly/centos
 ```bash
 # doc2与doc1进行共享
 docker run -it --name doc2 --volumns-from doc1 ly/centos
+```
+
+## Docker Compose
+
+> Docker Compose 负责实现对 Docker 容器集群的快速编排。通过一个配置文件来管理多个 Docker 容器，在配置文件中，所有的容器通过 services 来定义，然后使用 docker-compose 脚本来启动，停止和重启应用，和应用中的服务以及所有依赖服务的容器，非常适合组合使用多个容器进行开发的场景。Docker Compose 的两个重要概念
+
+- **服务 (service)**：一个应用容器，实际上可以运行多个相同镜像的实例。
+- **项目 (project)**：由一组关联的应用容器组成的一个完整业务单元。
+
+### 1. 使用
+
+- 1.`Dockerfile` 定义运用的环境
+- 2.`docker-compose.yml` 定义组成应用的各服务
+- 3.`docker-compose up` 启动整个应用
+
+### 2. YAML 配置命令
+
+- build 指定 Dockerfile 所在的目录地址，用于构建镜像，并使用此镜像创建容器，比如上面配置的 build: .
+- command 容器的执行命令
+- dns 自定义 dns 服务器
+- expose 暴露端口配置，但不映射到宿主机，只被连接的服务访问
+- extends 对 docker-compose.yml 的扩展，配置在服务中
+- image 使用的镜像名称或镜像 ID
+- links 链接到其它服务中的容器（一般桥接网络模式使用）
+- net 设置容器的网络模式（四种：bridge, none, container:[name or id]和 host）
+- ports 暴露端口信息，主机和容器的端口映射
+- volumes 数据卷所挂载路径设置
+
+`docker-compoes.yml` demo
+
+```bash
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/code
+    environment:
+      FLASK_ENV: development
+  redis:
+    image: "redis:alpine"
+```
+
+### 3. 常用命令
+
+```bash
+
 ```
