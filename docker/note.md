@@ -86,6 +86,12 @@ docker image rm -f imageName/imageId
 
 # 查看详情
 docker inspect dockerId
+
+# 提交镜像
+
+docker commit -a="user" -m="description" dockerID newDockerName
+# demo
+docker commit -a="kerwin" -m="remove docs" e7adb60bb62f liyi/nodocs
 ```
 
 ### 2. 操作容器
@@ -157,17 +163,14 @@ docker ps -a -q | xargs docker rm
 docker log -t -f --tail 限制条数 dockerID
 ```
 
-#### 2.7 提交镜像
-
+#### 2.7 外部执行
 ```bash
-docker commit -a="user" -m="description" dockerID newDockerName
-# demo
-docker commit -a="kerwin" -m="remove docs" e7adb60bb62f liyi/nodocs
+docker exec 容器id 具体操作
 ```
 
 ### 3. 容器卷(dockerFile)
 
-镜像的描述文件
+镜像的描述文件，也可以说是镜像的构建文件
 
 #### 3.1 容器和宿主机关联，完成数据持久化
 
@@ -177,25 +180,75 @@ docker commit -a="kerwin" -m="remove docs" e7adb60bb62f liyi/nodocs
 docker run -it -v /宿主机绝对路径目录:/容器内目录
 ```
 
-#### 3.2 使用 Dockerfile 创建镜像并运行
+#### 3.2 具有类似功能的保留字
+CMD 和 ENTROYPOINT 的区别
+```bash
+# CMD: 当运行 run 后，配置的 cmd 参数会覆盖 dockerFile 里面的参数
+CMD [ "curl", "-s", "http://ip.cn" ]
 
-[dockerFile 文件](https://github.com/kerwin-ly/Blog/blob/master/docker/dockerFile)
+# ENTROYPOINT: 当运行 run 后，运行的参数会附加上 dockerFile 的参数执行
+ENTRYPOINT [ "curl", "-s", "http://ip.cn" ]
+```
 
-编写 dockerFile 生成镜像
+ADD 和 COPY的区别
+```bash
+#ADD: 复制添加并解压文件(.tar.gz)
+ADD jdk-8uxxx.tar.gz /url/local/
+#COPY: 复制文件
+COPY a.txt /usr/local/
+```
+
+#### 3.3 使用 Dockerfile 创建镜像并运行
+
+1.编写 dockerFile 生成镜像
+
+[dockerFile 文件-ly/centos](https://github.com/kerwin-ly/Blog/blob/master/docker/centos)
+
+```dockerfile
+# 从哪个镜像继承
+FROM centos
+# 作者
+MAINTAINER kerwin<kerwin.leeyi@gmail.com>
+# ONBUILD-父镜像在被子镜像继承后，父镜像的onbuild被触发
+# ONBUILD echo 'build image father'
+# 声明变量
+ENV mypath /tmp
+# 运行容器后的初始位置
+WORKDIR $mypath
+# 安装需要的依赖
+RUN yum -y install vim
+# 生成两个容器卷
+VOLUME ["/dataContainer1", "/dataContainer2"]
+ # 打印
+CMD echo "success finish"
+# 暴露端口
+EXPOSE 80
+# 命令
+CMD /bin/bash
+# 字符串方式
+# CMD [ "curl", "-s", "http:ip.cn" ]
+```
+
+2.运行 dockerfile 生成一个镜像
 
 ```bash
 # 注意最后面的 '.'必须存在，保证其一层一层加载镜像
- docker build -f ./dockerFile -t ly/centos .
+docker build -f 容器卷地址 -t 新镜像名字:version .
+
+# demo
+docker build -f ./dockerFile -t ly/centos .
 ```
 
-运行镜像，生成一个容器
+3.运行镜像，生成容器
 
 ```bash
 docker run -it ly/centos
 ```
 
 #### 3.3 容器间的共享(--volumns-from)
+
 注意：**容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用它为止**
+
 ```bash
 # doc2与doc1进行共享
 docker run -it --name doc2 --volumns-from doc1 ly/centos

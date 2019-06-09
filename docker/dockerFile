@@ -1,7 +1,0 @@
-# 继承父类的镜像
-FROM centos
-# 生成两个容器卷
-VOLUME ["/dataContainer1", "/dataContainer2"]
- # 打印
-CMD echo "success finish"
-CMD /bin/bash
