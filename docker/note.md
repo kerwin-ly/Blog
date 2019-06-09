@@ -87,13 +87,6 @@ docker image rm -f imageName/imageId
 # 查看详情
 docker inspect dockerId
 
-# 提交镜像
-
-docker commit -a="user" -m="description" dockerID newDockerName
-# demo
-docker commit -a="kerwin" -m="remove docs" e7adb60bb62f liyi/nodocs
-```
-
 ### 2. 操作容器
 
 #### 2.1 启动交互式容器
@@ -166,6 +159,13 @@ docker log -t -f --tail 限制条数 dockerID
 #### 2.7 外部执行
 ```bash
 docker exec 容器id 具体操作
+```
+
+#### 2.8 修改容器提交新的镜像
+```bash
+docker commit -a="user" -m="description" dockerID newDockerName
+# demo
+docker commit -a="kerwin" -m="remove docs" e7adb60bb62f liyi/nodocs
 ```
 
 ### 3. 容器卷(dockerFile)
