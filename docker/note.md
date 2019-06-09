@@ -51,7 +51,7 @@ https://dockerhub.azk8s.cn/
 
 ## 基本原理
 
-[!docker-flow]()
+[!docker-flow]((https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/docker-flow.jpeg))
 
 ### 1. Docker 三大要素
 
@@ -312,6 +312,10 @@ services:
 
 ### 3. 常用命令
 
+#### 3.1 启动应用
+* -d: 后台运行
+* 
 ```bash
-
+# 启动应用
+docker-compose up -d
 ```
