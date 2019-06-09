@@ -81,7 +81,8 @@ docker images -q
 docker pull nginx
 
 # 上传镜像到云端
-docker push ly/centos
+# 参考链接：https://www.jianshu.com/p/72dda052c820?from=timeline&isappinstalled=0(上传到阿里云)
+docker push 镜像id
 
 # 删除镜像
 docker rmi -f imageName/imageId
