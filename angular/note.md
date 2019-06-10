@@ -574,3 +574,6 @@ _.remove(scores, 2); // 正常使用即可
   </nz-form-control>
 </nz-form-item>
 ```
+
+### 14. angular中的proxy.config.json配置详情
+>参考链接:[官方链接](https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/proxy.md)
