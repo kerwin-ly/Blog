@@ -72,7 +72,9 @@
 
 ### Docker
 
-[docker 笔记](https://github.com/kerwin-ly/Blog/blob/master/docker/note.md)
+[Docker 基础](https://github.com/kerwin-ly/Blog/blob/master/docker/docker.md)
+[Docker Compose](https://github.com/kerwin-ly/Blog/blob/master/docker/docker-compose.md)
+[Docker Swarm](https://github.com/kerwin-ly/Blog/blob/master/docker/docker-swarm.md)
 
 ## Git
 
