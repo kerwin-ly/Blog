@@ -1,4 +1,5 @@
 # Docker Compose
+[Docker 三剑客之 Docker Compose](https://www.cnblogs.com/xishuai/p/docker-compose.html) 
 
 > Docker Compose 负责实现对 Docker 容器集群的快速编排。通过一个配置文件来管理多个 Docker 容器，在配置文件中，所有的容器通过 services 来定义，然后使用 docker-compose 脚本来启动，停止和重启应用，和应用中的服务以及所有依赖服务的容器，非常适合组合使用多个容器进行开发的场景。一句话来说，**Docker Compose可以通过一个docker-compose.yml文件来管理项目（项目由多个容器组成），而以前，我们必须通过编写脚本来完成这个操作**就是Docker Compose 的两个重要概念
 
