@@ -590,3 +590,13 @@ window.PJF = PJF;
 // 在angular中获取使用
 const PJF = (<any>window).PJF;
 ```
+
+### 16. angular7将sourcemap打开后报错
+报错如下：
+```
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+```
+解决：设置最大内存大小
+```
+node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod
+```
