@@ -593,10 +593,15 @@ const PJF = (<any>window).PJF;
 
 ### 16. angular7将sourcemap打开后报错
 报错如下：
-```
+```bash
 FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
 ```
+
 解决：设置最大内存大小
-```
+```bash
 node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod
+
+# package.json
+"build-sourcemap": "npm run color-less && node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod --source-map=true"
+
 ```
