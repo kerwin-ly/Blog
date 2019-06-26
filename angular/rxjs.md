@@ -396,3 +396,34 @@ a.pipe(
   console.log(val);
 });
 ```
+
+### 6. 监听数据变动,动态渲染页面
+service
+```js
+import { Observable, Subject } from 'rxjs';
+
+private subject = new Subject<any>();
+
+setMessage(message: object) {
+  this.subject.next(message);
+}
+
+getMessage(): Observable<any> {
+  return this.subject.asObservable();
+}
+```
+
+调用
+```js
+this.setMessage({
+  name: 'kerwin',
+  age: 23
+})
+
+// 这里可以在ngOnInit时候对值进行订阅，再根据需求赋值动态渲染页面
+ngOnInit() {
+  this.subscription = this.getMessage().subscribe(user => {
+    this.user = user;
+  })
+}
+```
