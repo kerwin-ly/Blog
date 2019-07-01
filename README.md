@@ -1,4 +1,4 @@
-# 踩坑&&笔记
+# Blog
 
 ## 前端
 
@@ -95,3 +95,8 @@
 [JS 编码规范](https://github.com/kerwin1/Blog/blob/master/common/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
 
 [Git 提交规范](https://github.com/kerwin-ly/Blog/blob/master/common/Git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83.md)
+
+## 优质文章
+
+### 前端
+[一名【合格】前端工程师的自检清单](https://juejin.im/post/5cc1da82f265da036023b628)
