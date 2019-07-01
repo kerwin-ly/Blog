@@ -69,7 +69,7 @@ docker --help
 
 ### 1. 操作镜像
 
-````bash
+```bash
 # 查看本地镜像
 docker images
 
@@ -94,7 +94,7 @@ docker image rm -f $(docker images -aq)
 
 # 查看详情
 docker inspect dockerId
-
+```
 ### 2. 操作容器
 
 #### 2.1 启动交互式容器
