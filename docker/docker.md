@@ -51,7 +51,7 @@ https://dockerhub.azk8s.cn/
 
 ## 基本原理
 
-[!docker-flow](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/docker-flow.jpeg)
+![docker-flow](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/docker-flow.jpeg)
 
 ### 1. Docker 三大要素
 
