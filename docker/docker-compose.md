@@ -44,6 +44,12 @@ services:
 
 ### 3. 常用命令
 
+#### 3.0 构建项目中的镜像
+```bash
+# --force-rm：删除构建过程中的临时容器；--no-cache：不使用缓存构建；--pull：获取最新版本的镜像
+docker-compose build
+```
+
 #### 3.1 启动应用
 
 ```bash
