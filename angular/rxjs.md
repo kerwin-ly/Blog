@@ -415,14 +415,14 @@ getMessage(): Observable<any> {
 
 调用
 ```js
-this.setMessage({
+this.messageService.setMessage({
   name: 'kerwin',
   age: 23
 })
 
 // 这里可以在ngOnInit时候对值进行订阅，再根据需求赋值动态渲染页面
 ngOnInit() {
-  this.subscription = this.getMessage().subscribe(user => {
+  this.subscription = this.messageService.getMessage().subscribe(user => {
     this.user = user;
   })
 }
