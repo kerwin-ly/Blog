@@ -261,8 +261,6 @@ export class ChildComponent implements OnInit {
 
 ```js
 @ViewChild('footerChild') footer;
-
-this.footer.xxx
 ```
 
 #### 2.6 没有 property 时候，动态修改 attribute
