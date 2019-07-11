@@ -573,11 +573,13 @@ _.remove(scores, 2); // 正常使用即可
 </nz-form-item>
 ```
 
-### 14. angular中的proxy.config.json配置详情
->参考链接:[官方链接](https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/proxy.md)
+### 14. angular 中的 proxy.config.json 配置详情
 
-### 15. 如何在typescript中向window对象挂载属性对象等
-在使用框架时，我们常常有这样的场景。如：你在开发中，使用的是vue框架，想用一个`原生js`的插件，这是个引入后自动执行的函数。如果需要在`vue`中使用。则需要把其挂载在`window对象`上，全局去使用。`javascript`中能轻易拿到。但是在`typescript`中则由于`window对象`的类型限制(`window: Window`)而无法挂载。解决办法，将`window`对象声明为`any`
+> 参考链接:[官方链接](https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/proxy.md)
+
+### 15. 如何在 typescript 中向 window 对象挂载属性对象等
+
+在使用框架时，我们常常有这样的场景。如：你在开发中，使用的是 vue 框架，想用一个`原生js`的插件，这是个引入后自动执行的函数。如果需要在`vue`中使用。则需要把其挂载在`window对象`上，全局去使用。`javascript`中能轻易拿到。但是在`typescript`中则由于`window对象`的类型限制(`window: Window`)而无法挂载。解决办法，将`window`对象声明为`any`
 
 ```js
 // 插件中将对象暴露给window
@@ -589,13 +591,16 @@ window.PJF = PJF;
 const PJF = (<any>window).PJF;
 ```
 
-### 16. angular7将sourcemap打开后报错
+### 16. angular7 将 sourcemap 打开后报错
+
 报错如下：
+
 ```bash
 FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
 ```
 
 解决：设置最大内存大小
+
 ```bash
 node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod
 
@@ -604,7 +609,63 @@ node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod
 
 ```
 
-### 17. angular中的常用事件
-```bash
+### 17. angular 中的常用事件
+
+```html
 <button (dblclick)="onClick()"></button>
+```
+
+### 18. cdk-拖拽使用
+
+> 参考：[官方链接](https://v7.material.angular.io/cdk/drag-drop/overview)
+
+安装依赖（这里我的版本是 ng7，最新的 cdk 已经是 8.x，安装后会报警告，所以这里指定版本为 v7 的最后一个版本 v7.3.7）
+
+```bash
+npm install @angular/material@7.3.7 @angular/cdk@7.3.7 --save
+```
+
+在`shared`或`app`模块里面引入 cdk 模块
+
+```
+import { DragDropModule } from '@angular/cdk/drag-drop';
+```
+
+使用：列表拖拽具体：
+
+typescript
+
+```ts
+items = [
+  {
+    name: "1"
+  },
+  {
+    name: "2"
+  },
+  {
+    name: "3"
+  },
+  {
+    name: "4"
+  }
+];
+drop(event: CdkDragDrop<string[]>) {
+  console.log(11);
+  moveItemInArray(this.showedFields, event.previousIndex, event.currentIndex);
+}
+```
+
+html
+
+```html
+<div cdkDropList (cdkDropListDropped)="drop($event)">
+  <div
+    *ngFor="let item of items;let i = index;"
+    cdkDrag
+    style="background-color: red;margin-top: 20px"
+  >
+    {{ item.name }}
+  </div>
+</div>
 ```
