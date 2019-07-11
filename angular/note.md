@@ -651,8 +651,8 @@ items = [
   }
 ];
 drop(event: CdkDragDrop<string[]>) {
-  console.log(11);
-  moveItemInArray(this.showedFields, event.previousIndex, event.currentIndex);
+  // 组件默认保存修改后的状态，如果希望保存拖拽后的状态，使用该方法
+  moveItemInArray(this.items, event.previousIndex, event.currentIndex);
 }
 ```
 
