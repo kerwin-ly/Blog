@@ -605,3 +605,8 @@ node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod
 "build-sourcemap": "npm run color-less && node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod --source-map=true"
 
 ```
+
+### 17. angular中的常用事件
+```bash
+<button (dblclick)="onClick()"></button>
+```
