@@ -669,3 +669,19 @@ html
   </div>
 </div>
 ```
+
+### 19. angular中触发事件
+eg: 自动获取焦点
+```html
+<input nz-input #inputRef />
+```
+
+```js
+@ViewChild('inputRef') inputRef;
+
+ngAfterViewInit(): void {
+  if (this.inputRef) {
+    this.inputRef.nativeElement.focus();
+  }
+}
+```
