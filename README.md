@@ -14,6 +14,8 @@
 
 [惰性载入函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5%E5%87%BD%E6%95%B0.md)
 
+[便捷的js方法](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md)
+
 ### TypeScript
 
 [TypeScript 笔记](https://github.com/kerwin-ly/Blog/blob/master/typescript/note.md)
