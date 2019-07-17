@@ -685,3 +685,6 @@ ngAfterViewInit(): void {
   }
 }
 ```
+
+### 20. Error: Illegal state: Could not load the summary for directive ObserveContent
+解决：`angular/cdk`版本为`v7.3.7`，降级到`v7.2.2`
