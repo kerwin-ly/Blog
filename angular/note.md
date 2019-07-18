@@ -698,3 +698,11 @@ ngAfterViewInit(): void {
 ...
 "buildOptimizer": false
 ```
+
+### 21. Error: No provider for Overlay! StaticInjectorError(AppModule)
+>参考链接：https://github.com/NG-ZORRO/ng-zorro-antd/issues/759
+
+解决：注意`ng-zorro-antd`和`angular-cdk`的版本匹配。如果确保版本没问题。清空依赖，重新install
+```bash
+rm -rf node_modules && rm package-lock.json && npm install
+```
