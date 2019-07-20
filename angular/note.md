@@ -706,3 +706,58 @@ ngAfterViewInit(): void {
 ```bash
 rm -rf node_modules && rm package-lock.json && npm install
 ```
+
+### 22. 轮询接口处理
+使用到`rxjs`的`interval``switchMap``takeWhile`装饰器
+```ts
+  startPolling(time = 3000): void {
+    this.startProgress();
+    this.pollingState = 'start';
+
+    interval(time)
+      .pipe(
+        takeWhile(() => this.pollingState !== 'stop'),
+        switchMap(() => this.getPollingService()),
+        map(res => (this.previewResult = res.data)),
+        tap(() => this.stopPolling())
+      )
+      .subscribe(() => {
+        this.percent = 100;
+      });
+  }
+
+  cancelPolling(): void {
+    this.percent = 0;
+    this.stopPolling();
+  }
+
+  stopPolling(): void {
+    this.pollingState = 'stop';
+    clearInterval(this.timer);
+    this.spinService.emit(false);
+  }
+
+  getPollingService(): Observable<any> {
+    const params = { pollingId: this.previewId };
+    if (this.type === 'load') {
+      return this.sqlTableService.preview(params);
+    } else if (this.type === 'transfer') {
+      return this.sqlTableService.getTransferPreviewId(params);
+    }
+  }
+
+  startProgress(): void {
+    // 初始化进度条，前端控制进度
+    this.percent = 0;
+    let percent = 0;
+    // 假进度条最多到99%
+    this.timer = setInterval(() => {
+      percent = Math.floor(Math.random() * 5);
+      if (this.percent < 99) {
+        this.percent = this.percent + percent;
+      } else {
+        this.percent = 99;
+      }
+    }, 500);
+  }
+```
