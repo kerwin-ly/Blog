@@ -196,7 +196,7 @@ export class AppComponent {
 ```html
 <app-child
   [newsTitle]="newsTitle"
-  (requestChangeTitle)="updateTitle(info)"
+  (requestChangeTitle)="updateTitle($event)"
 ></app-child>
 ```
 
