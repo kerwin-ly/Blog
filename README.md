@@ -82,6 +82,10 @@
 
 [Docker Swarm](https://github.com/kerwin-ly/Blog/blob/master/docker/docker-swarm.md)
 
+### CI/CD持续集成
+
+[CI/CD持续集成](https://github.com/kerwin-ly/Blog/blob/master/docker/CICD.md)
+
 ## Git
 
 [git 笔记](https://github.com/kerwin-ly/Blog/blob/master/git/note.md)
