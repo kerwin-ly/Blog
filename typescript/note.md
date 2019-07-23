@@ -1,8 +1,7 @@
 # TypeScript 学习笔记
 
 > 参考连接：
-> [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why)
-> [官方文档](https://www.tslang.cn/docs/home.html)
+> [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why) > [官方文档](https://www.tslang.cn/docs/home.html)
 
 ## 安装配置
 
@@ -36,7 +35,7 @@ let isNumber: boolean = false;
 let num: number = 123;
 
 // 字符串
-let str: string = "kerwin";
+let str: string = 'kerwin';
 
 // null && undefined：默认情况下null和undefined是所有类型的子类型
 ```
@@ -110,7 +109,7 @@ let num: number = (<string>value).length
 
 ```js
 let value: string | number;
-value = "123";
+value = '123';
 value = 123;
 ```
 
@@ -124,16 +123,16 @@ value = 123;
 
 ```js
 interface Person {
-  name: string;
-  age: number;
-  gendar?: boolean;
+	name: string;
+	age: number;
+	gendar?: boolean;
 }
 
 // sex可选属性,多加一个接口中不存在的属性，报错
 let tom: Person = {
-  name: "Tom",
-  age: 22,
-  isMan: true // 这个属性是接口中不存在的，会报错
+	name: 'Tom',
+	age: 22,
+	isMan: true // 这个属性是接口中不存在的，会报错
 };
 ```
 
@@ -141,15 +140,15 @@ let tom: Person = {
 
 ```js
 interface Person {
-  name: string;
-  age?: number;
-  [propName: string]: any; // 如果这里写的是string类型，由于number不是string的子类型，将报错
+	name: string;
+	age?: number;
+	[propName: string]: any; // 如果这里写的是string类型，由于number不是string的子类型，将报错
 }
 
 let tom: Person = {
-  name: "Tom",
-  age: 25,
-  gender: "male"
+	name: 'Tom',
+	age: 25,
+	gender: 'male'
 };
 ```
 
@@ -157,12 +156,12 @@ let tom: Person = {
 
 ```js
 interface Person {
-  name: string;
-  age?: number;
+	name: string;
+	age?: number;
 }
 
 let tom: Person = {
-  name: "Tom"
+	name: 'Tom'
 };
 ```
 
@@ -188,14 +187,14 @@ tom.id = 2; // 报错：Cannot assign to 'id' because it is a constant or a read
 
 ```js
 interface GetPerson {
-  (name: string, age: number): object;
+	(name: string, age: number): object;
 }
 
 let tom: GetPerson = function(name: string, age: number): object {
-  return {
-    name,
-    age
-  };
+	return {
+		name,
+		age
+	};
 };
 ```
 
@@ -205,20 +204,20 @@ let tom: GetPerson = function(name: string, age: number): object {
 
 ```js
 interface UserArr {
-  [index: number]: string; // 小标必须是number类型，值必须是string类型
+	[index: number]: string; // 小标必须是number类型，值必须是string类型
 }
-let userArr: UserArr = ["kerwin", "bob"];
+let userArr: UserArr = ['kerwin', 'bob'];
 ```
 
 限制对象
 
 ```js
 interface UserObj {
-  [index: string]: string;
+	[index: string]: string;
 }
 let userObj: UserObj = {
-  name: "kerwin",
-  sex: "man"
+	name: 'kerwin',
+	sex: 'man'
 };
 ```
 
@@ -246,12 +245,12 @@ let cat: Cat = {
 
 ```js
 class Point {
-  x: number;
-  y: number;
+	x: number;
+	y: number;
 }
 
 interface Point3d extends Point {
-  z: number;
+	z: number;
 }
 
 let point3d: Point3d = { x: 1, y: 2, z: 3 };
@@ -283,7 +282,7 @@ function do(x: number): void {
 
 ```js
 let mySum = function(x: number, y: number): number {
-  return x + y;
+	return x + y;
 };
 ```
 
@@ -291,10 +290,10 @@ let mySum = function(x: number, y: number): number {
 
 ```js
 let mySum: (x: number, y: number) => number = function(
-  x: number,
-  y: number
+	x: number,
+	y: number
 ): number {
-  return x + y;
+	return x + y;
 };
 ```
 
@@ -302,11 +301,11 @@ let mySum: (x: number, y: number) => number = function(
 
 ```js
 interface sunFunc {
-  (x: number, y: number): number;
+	(x: number, y: number): number;
 }
 
 let mySum: sunFunc = function(x: number, y: number): number {
-  return x + y;
+	return x + y;
 };
 ```
 
@@ -314,12 +313,12 @@ let mySum: sunFunc = function(x: number, y: number): number {
 
 ```js
 function sum(a: number, ...result: number[]): number {
-  let sum = a; // a = 0
+	let sum = a; // a = 0
 
-  for (let i = 0; i < result.length; i++) {
-    sum += result[i];
-  }
-  return sum;
+	for (let i = 0; i < result.length; i++) {
+		sum += result[i];
+	}
+	return sum;
 }
 
 sum(0, 1, 2, 3, 4, 5); // 将0赋值给a,剩下的实参参数传给result
@@ -364,7 +363,7 @@ export default Directions;
 
 ```js
 let b: Boolean = new Boolean(1);
-let e: Error = new Error("Error Message");
+let e: Error = new Error('Error Message');
 let d: Date = new Date();
 let t: RegExp = /[a-z]/;
 ```
@@ -373,9 +372,9 @@ let t: RegExp = /[a-z]/;
 
 ```js
 let body: HTMLElement = document.body;
-let divList: NodeList = document.querySelectorAll("div");
-document.addEventListener("click", function(e: MouseEvent) {
-  // do...
+let divList: NodeList = document.querySelectorAll('div');
+document.addEventListener('click', function(e: MouseEvent) {
+	// do...
 });
 ```
 
@@ -387,15 +386,15 @@ document.addEventListener("click", function(e: MouseEvent) {
 type Name = string;
 type NameResolver = () => string;
 type NameOrResolver = Name | NameResolver;
-let person: Name = "kerwin";
+let person: Name = 'kerwin';
 let getName;
 
 function getName(n: NameOrResolver): Name {
-  if (typeof n === "string") {
-    return n;
-  } else {
-    return n();
-  }
+	if (typeof n === 'string') {
+		return n;
+	} else {
+		return n();
+	}
 }
 ```
 
@@ -403,12 +402,12 @@ function getName(n: NameOrResolver): Name {
 
 ```js
 // 约定事件只能是下面3种的一种，其他事件报错
-type EventNames = "click | mousemove | scroll";
+type EventNames = 'click | mousemove | scroll';
 function handleEvent(ele: Element, event: EventNames) {
-  // do
+	// do
 }
 
-handleEvent(document.getElementById("hello"), "scroll");
+handleEvent(document.getElementById('hello'), 'scroll');
 ```
 
 ### 8. 类
@@ -530,11 +529,15 @@ class Cat implements Animal {
 
 ```js
 // T相当于一个变量，保证了咱们传入和输出值是同一个类型
-function identity<T>(arg: T): T {
-  return arg;
+function createArray<T>(length: number, value: T): Array<T> {
+  let result: T[] = [];
+  for (let i = 0; i < length; i++) {
+      result[i] = value;
+  }
+  return result;
 }
-
-let output = identity < string > "myString";
+​
+createArray<string>(3, 'x'); // ['x', 'x', 'x']
 ```
 
 泛型类
@@ -557,12 +560,12 @@ cat.say();
 
 ```js
 interface Config {
-  <T>(value: T): T;
+	<T>(value: T): T;
 }
 var getData: Config = function<T>(value: T): T {
-  return value;
+	return value;
 };
-getData < string > "kerwin";
+getData<string>('kerwin');
 ```
 
 泛型映射
@@ -595,10 +598,10 @@ db.add(u);
 
 ```js
 function swap<T, U>(tuple: [T, U]): [U, T] {
-  return [tuple[1], tuple[0]];
+	return [tuple[1], tuple[0]];
 }
 
-swap([7, "seven"]); // ['seven', 7]
+swap([7, 'seven']); // ['seven', 7]
 ```
 
 #### 9.2 类型约束
@@ -619,18 +622,18 @@ function loggingIdentity<T entends Lengthwise>(arg: T): T {
 
 ```js
 interface CreateArrayFunc<T> {
-  (length: number, value: T): Array<T>;
+	(length: number, value: T): Array<T>;
 }
 
 let createArray: CreateArrayFunc;
 createArray = function<T>(length: number, value: T): Array<T> {
-  let result: T[] = [];
-  for (let i = 0; i < length; i++) {
-    result[i] = value;
-  }
+	let result: T[] = [];
+	for (let i = 0; i < length; i++) {
+		result[i] = value;
+	}
 };
 
-createArray(3, "x"); // ['x', 'x', 'x']
+createArray(3, 'x'); // ['x', 'x', 'x']
 ```
 
 #### 9.4 泛型类
