@@ -761,3 +761,39 @@ rm -rf node_modules && rm package-lock.json && npm install
     }, 500);
   }
 ```
+
+### 23. 设置input框中光标位置
+场景：通过点击事件，往input框中填入一个函数后，需要自动将光标位置移动到`？`位置。通过点击事件，添加的内容自动在光标位置填充
+```html
+<input nz-input #inputRef />
+```
+
+```ts
+@ViewChild('inputRef') inputRef;
+
+// 输入方法
+setFunc(func: string): void {
+  const expression = this.expressionForm.get('expression').value || '';
+  this.expressionForm.get('expression').setValue(expression + func);
+  this.changeInputPos();
+}
+
+// 修改光标位置
+changeInputPos(): void {
+  const expression = this.expressionForm.get('expression').value || '';
+  const index = expression.indexOf('?');
+  const position = index + 1;
+
+  this.expressionRef.nativeElement.setSelectionRange(position, position); // 设置光标位置
+  this.expressionRef.nativeElement.focus();
+}
+
+// 在光标处填充内容
+updateExpression(value: string): void {
+  const insertIndex = this.inputRef.nativeElement.selectionStart;
+  const expression = this.expressionForm.get('expression').value || '';
+  const updatedExpression = expression.substr(0, insertIndex) + value + expression.substr(insertIndex);
+
+  this.expressionForm.get('expression').setValue(updatedExpression);
+}
+```
