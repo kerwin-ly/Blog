@@ -409,6 +409,7 @@ export class NewsComponent implements OnInit {
 解决：input 框的`name`必须书写或者设置`[ngModelOptions]="{standalone: true}"`
 
 ### 8.:host && ::ng-deep 改变第三方组件样式
+>在 @Component 的元数据中指定的样式只会**对该组件的模板生效**，它们**既不会作用于模板中嵌入的任何组件**，也不会作用于投影进来的组件。把伪类 ::ng-deep 应用到如何一条 CSS 规则上就会完全禁止对那条规则的视图包装。任何带有 ::ng-deep 的样式都会变成全局样式。为了把指定的样式限定在当前组件及其下级组件中，请确保在 ::ng-deep 之前带上 :host 选择器。如果 ::ng-deep 组合器在 :host 伪类之外使用，该样式就会污染其它组件。
 
 - `:host`：表示选择器，选择当前的组件
 - `::ng-deep`：表示忽略中间的 className 嵌套层级关系，直接找到你要修改的 clasName
@@ -797,3 +798,7 @@ updateExpression(value: string): void {
   this.expressionForm.get('expression').setValue(updatedExpression);
 }
 ```
+
+### 24. 使用装饰器来自动取消订阅
+参考链接：https://juejin.im/post/5b27a9c0f265da595b48d0f3
+https://github.com/NetanelBasal/ngx-auto-unsubscribe

@@ -24,9 +24,9 @@
 
 [angular 编码规范](https://angular.cn/guide/styleguide)
 
-[angular7 学习笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/note.md)
+[angular7 开发笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/note.md)
 
-[rxjs 学习笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/rxjs.md)
+[rxjs 开发笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/rxjs.md)
 
 ### Vue
 
