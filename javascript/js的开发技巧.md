@@ -1,4 +1,25 @@
-# 数组中的常用方法
+# JavaScript中的开发技巧
+
+## Number的常用方法
+
+### 1.补零
+```js
+const FillZero = (num, len) => num.toString().padStart(len, "0");
+const num = FillZero(169, 5);
+// num => "00169"
+```
+
+### 2.转数值
+**只对null、""、false、数值字符串有效**
+```js
+const num1 = +null;
+const num2 = +"";
+const num3 = +false;
+const num4 = +"169";
+// num1 num2 num3 num4 => 0 0 0 169
+```
+
+## 数组中的常用方法
 
 ### 1.filter
 
