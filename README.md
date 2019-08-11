@@ -108,3 +108,5 @@
 [一名【合格】前端工程师的自检清单](https://juejin.im/post/5cc1da82f265da036023b628)
 
 [How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
+
+[低效能人士的7个习惯](https://mp.weixin.qq.com/s/wEMeFkQsaw4MX7-RG2jmwQ)
