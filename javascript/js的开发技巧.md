@@ -73,7 +73,6 @@ passed = [12, 54, 18, 130, 44].every(isBigEnough);
 
 ```js
 //打印数组内容：
-
 function printElt(element, index, array) {
   document.writeln("[" + index + "] is " + element + "<br />");
 }
@@ -86,4 +85,16 @@ function printElt(element, index, array) {
 //[0] is 2
 //[1] is 5
 //[2] is 9
+```
+
+## 内置对象
+
+### 1. Date转换为时间戳
+`date.toJSON`返回格林威治时间的JSON格式字符串，转换为北京高时间需要额外加8个时区，然后通过正则把`T`干掉，添加空格
+```js
+function time(time = +new Date()) {
+  var date = new Date(time + 8 * 3600 * 1000);
+  return date.toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '.');
+}
+// "2018.08.09 18:25:54"
 ```
