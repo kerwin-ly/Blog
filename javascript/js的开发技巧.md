@@ -87,6 +87,11 @@ function printElt(element, index, array) {
 //[2] is 9
 ```
 
+### 5.数组去重
+```js
+const arr [...new Set([0, 1, 2, 1, 3, 5])]
+```
+
 ## 内置对象
 
 ### 1. Date转换为时间戳
@@ -97,4 +102,45 @@ function time(time = +new Date()) {
   return date.toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '.');
 }
 // "2018.08.09 18:25:54"
+```
+
+## 函数方法
+
+### 1.判定条件并执行
+```js
+// good
+const isPass = true;
+isPass && myFunc();
+
+// not good
+if (isPass) {
+  myFunc();
+}
+```
+
+### 2.判断类型
+```js
+function DataType(tgt, type) {
+  const dataType = Object.prototype.toString.call(tgt).replace(/\[object /g, "").replace(/\]/g, "").toLowerCase();
+  return type ? dataType === type : dataType;
+}
+DataType("young"); // "string"
+DataType(20190214); // "number"
+DataType(true); // "boolean"
+DataType([], "array"); // true
+DataType({}, "array"); // false
+```
+
+### 3.函数退出代替条件分支退出
+```js
+// good
+if (flag) {
+  return myFunc();
+}
+
+// not good
+if (flag) {
+  myFunc();
+  return false;
+}
 ```
