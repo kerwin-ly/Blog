@@ -14,7 +14,7 @@
 
 [惰性载入函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5%E5%87%BD%E6%95%B0.md)
 
-[JavaScript的开发技巧](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md)
+[JavaScript的开发技巧](https://github.com/kerwin-ly/Blog/blob/master/javascript/js%E7%9A%84%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7.md)
 
 ### TypeScript
 
