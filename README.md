@@ -92,6 +92,8 @@
 
 [git 版本号管理](https://github.com/kerwin1/Blog/blob/master/git/%E7%89%88%E6%9C%AC%E5%8F%B7%E6%84%8F%E4%B9%89.md)
 
+[Git 提交规范](https://github.com/kerwin-ly/Blog/blob/master/common/Git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83.md)
+
 ## 其他
 
 ### 规范
@@ -99,8 +101,6 @@
 [HTML && CSS 编码规范](https://github.com/kerwin1/Blog/blob/master/common/HTML%20%26%26%20CSS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
 
 [JS 编码规范](https://github.com/kerwin1/Blog/blob/master/common/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
-
-[Git 提交规范](https://github.com/kerwin-ly/Blog/blob/master/common/Git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83.md)
 
 ## 优质文章
 
