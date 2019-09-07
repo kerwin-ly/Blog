@@ -430,3 +430,83 @@ ngOnInit() {
 
 ### 7. 如何取消rxjs的订阅
 https://zju.date/do-not-forget-to-unsubscribe-in-angular/
+
+### 8. 解析四种主题Subject
+
+#### Subject
+必须在数据源发射一个数据之前，进行订阅`subscribe`，否者收到的值很有可能是`undefined`
+```
+
+```
+#### BehaviorSubject
+不管在数据源发射数据前后，只要订阅了。接受到的值就是**最新或初始化的一条值**
+
+```ts
+let subject2: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+subject2.next(100);
+subject2.subscribe((res: number) => console.info("behavior-subjectA ", res));
+subject2.next(200);
+subject2.subscribe((res: number) => console.info("behavior-subjectB ", res));
+subject2.next(300);
+```
+
+output
+```
+behavior-subjectA 100
+behavior-subjectA 200
+behavior-subjectB 200
+behavior-subjectA 300
+behavior-subjectB 300
+```
+
+#### ReplaySubject
+
+和`BehaviorSubject`类似，不管在数据源发射数据前后，只要订阅了。接收到的值就是**之前的值加上目前最新的值**
+
+```
+let subject3: ReplaySubject<number> = new ReplaySubject<number>();
+subject3.next(100);
+subject3.next(200);
+subject3.subscribe((res: number) => console.info("replay-subjectA ", res));
+subject3.next(300);
+subject3.subscribe((res: number) => console.info("replay-subjectB ", res));
+subject3.next(400);
+```
+
+output
+```
+replay-subjectA 100
+replay-subjectA 200
+replay-subjectA 300
+replay-subjectB 100
+replay-subjectB 200
+replay-subjectB 300
+replay-subjectA 400
+replay-subjectB 400
+```
+
+#### AsyncSubject
+
+AsyncSubject和BehaviorSubject`ReplaySubject`有些类似，但不同的是AsyncSubject只会存储数据流里的最后一条数据， 而且**只有在数据流complete时才会将值发布出去**。
+
+```ts
+let subject4: AsyncSubject<number> = new AsyncSubject<number>();
+subject4.next(100);
+subject4.next(100);
+subject4.subscribe((res: number) => console.info("async-subjectA ", res));
+subject4.next(300);
+subject4.subscribe((res: number) => console.info("async-subjectB ", res));
+subject4.next(400);
+subject4.subscribe((res: number) => console.info("async-subjectC ", res));
+subject4.complete();
+subject4.subscribe((res: number) => console.info("async-subjectD ", res));
+subject4.next(500);
+```
+
+output
+```ts
+async-subjectA 400
+async-subjectB 400
+async-subjectC 400
+async-subjectD 400
+```
