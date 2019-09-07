@@ -1,4 +1,6 @@
 # git规范
+>[模板参考](https://github.com/kerwin-ly/Blog/tree/master/.github)
+
 ## 一、commit message 规范
 
 每条 commit message 应该包含 **头部**, **正文** 和 **注脚**。其中头部的格式比较特殊，由 **类型**,  **作用范围** 和 **主题** 组成:
