@@ -110,6 +110,10 @@
 
 [node学习指南](https://www.nodejs.red/#/javascript/base)
 
+[JavaScript现代教程](https://zh.javascript.info/garbage-collection)
+
+[node学习指南](https://www.nodejs.red/#/javascript/base)
+
 ### 其他
 
 [How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
