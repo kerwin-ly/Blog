@@ -1,5 +1,85 @@
 # JavaScript中的开发技巧
 
+## 最佳实践
+
+### 1.判断条件时，尽量不要用否定形式。用关键字来表明boolean
+
+```js
+// not good
+if (!isEmial) { ... }
+
+// good
+if (isEmail) { ... }
+
+### 2.多个条件判定时，使用includes
+// not good
+if (person === 'kerwin' || person === 'bob' || person === 'jim') {
+  return 'man';
+}
+
+// good
+const names = ['kerwin', 'bob', 'jim'];
+return names.includes(person);
+```
+
+### 3.尽量不要过多的使用if嵌套,可以用return来跳出方法
+```js
+// not good
+function demo() {
+  if (age > 18) {
+    if (sex === 'man') {
+      // do something
+    } else {
+      console.log('not man');
+    }
+  } else {
+    console.log('too young')
+  }
+}
+
+// good
+function demo() {
+  if (age <= 18) return 'too young';
+  if (sex !== 'man') return 'not man';
+  // do something
+}
+```
+
+### 4.使用map或映射取代switch
+```js
+// not good
+const getCarsByState = (state) => {
+  switch (state) {
+    case 'usa':
+      return ['Ford', 'Dodge'];
+    case 'france':
+      return ['Renault', 'Peugeot'];
+    case 'italy':
+      return ['Fiat'];
+    default:
+      return [];
+  }
+}
+console.log(getCarsByState()); // 输出 []
+console.log(getCarsByState('usa')); // 输出 ['Ford', 'Dodge']
+console.log(getCarsByState('italy')); // 输出 ['Fiat']
+
+// good
+const carState = {
+  usa: ['Ford', 'Dodge'],
+  france: ['Renault', 'Peugeot'],
+  italy: ['Fiat']
+};
+
+const getCarsByState = (state) => {
+  return carState[state] || [];
+}
+
+console.log(getCarsByState()); // 输出 []
+console.log(getCarsByState('usa')); // 输出 ['Ford', 'Dodge']
+console.log(getCarsByState('france')); // 输出 ['Renault', 'Peugeot']
+```
+
 ## Number的常用方法
 
 ### 1.补零
