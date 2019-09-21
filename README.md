@@ -102,16 +102,20 @@
 
 [JS 编码规范](https://github.com/kerwin1/Blog/blob/master/common/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
 
-## 优质文章
+## 优质文章 && 教程
 
 ### 前端
 
 [一名【合格】前端工程师的自检清单](https://juejin.im/post/5cc1da82f265da036023b628)
 
-[How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
+[node学习指南](https://www.nodejs.red/#/javascript/base)
 
-[POST和GET的区别](https://www.oschina.net/news/77354/http-get-post-different)
+[JavaScript现代教程](https://zh.javascript.info/garbage-collection)
+
+[node学习指南](https://www.nodejs.red/#/javascript/base)
 
 ### 其他
 
-[低效能人士的7个习惯](https://mp.weixin.qq.com/s/wEMeFkQsaw4MX7-RG2jmwQ)
+[How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
+
+[POST和GET的区别](https://www.oschina.net/news/77354/http-get-post-different)
