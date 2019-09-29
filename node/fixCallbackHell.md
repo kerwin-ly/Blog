@@ -101,3 +101,36 @@ readFile('./sample.txt')
     console.warn(err);
   });
 ```
+
+### 对js流（stream）的理解
+需求：对一个大文件进行读取
+
+普通方法
+```js
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const server = http.createServer(function (req, res) {
+    const fileName = path.resolve(__dirname, 'data.txt');
+    fs.readFile(fileName, function (err, data) {
+        res.end(data);
+    });
+});
+server.listen(8000);
+
+```
+这样做，有一个很大的弊端，一旦并发量上来后，服务端内存开销很大。同时一个常见的例子，在我们看视频的时候，也不是直接加载好视频全部直接返回给用户的。
+而是通过`流`的方式，边读边返回。将读文件的方法修改为`流`的方式实现
+```js
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const server = http.createServer(function (req, res) {
+    const fileName = path.resolve(__dirname, 'data.txt');
+    let stream = fs.createReadStream(fileName);  // 这一行有改动
+    stream.pipe(res); // 这一行有改动
+});
+server.listen(8000);
+```

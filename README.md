@@ -104,7 +104,7 @@
 
 ## 优质文章 && 教程
 
-### 前端
+### javascript
 
 [一名【合格】前端工程师的自检清单](https://juejin.im/post/5cc1da82f265da036023b628)
 
@@ -114,8 +114,12 @@
 
 [node学习指南](https://www.nodejs.red/#/javascript/base)
 
+[对js流stream的理解](https://m.imooc.com/article/289259)
+
 ### 其他
 
 [How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
 
 [POST和GET的区别](https://www.oschina.net/news/77354/http-get-post-different)
+
+[Apache Benchmark测试http并发量](https://ruby-china.org/topics/13870)
