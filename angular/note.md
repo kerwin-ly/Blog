@@ -805,3 +805,29 @@ https://github.com/NetanelBasal/ngx-auto-unsubscribe
 
 ### 25. 解析Subject BehaviorSubject ReplaySubject AsyncSubject
 https://segmentfault.com/a/1190000012669794
+
+### 26. 秒/分钟/天数之间的换算
+> 最近有个需求。图谱项目中，后端边返回的是`秒`,用户可以拖动时间轴来过滤图谱的边和节点。时间轴的单位是`天`。直接用`scond / 3600 / 24`可能出现除不尽的情况，无法得到准确的天数。时间轴在拖动过程中又需要转换为`秒`去图谱数据中比较。于是使用`dayjs`的api来进行处理。(`diff isSameOrBefore isSameOrAfter`)[dayjs github仓库](https://github.com/iamkun/dayjs)
+
+安装依赖
+```shell
+npm install dayjs --save
+```
+
+换算和比较
+```ts
+import * as dayjs from 'dayjs';
+
+// 换算从1970-01-01到指定日期的天数
+convertTimeToDays(timestamp: number): number {
+  const startDate = dayjs('1970-01-01');
+  const endDate = dayjs(dateFormat(new Date(timestamp), 'yyyy-MM-dd'));
+
+  return endDate.diff(startDate, 'day');
+}
+
+// 判断时间大小
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+dayjs.extend(isSameOrAfter) // 注意必须依赖
+dayjs('2010-10-20').isSameOrAfter('2010-10-19', 'year')
+```
