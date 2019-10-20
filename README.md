@@ -102,6 +102,10 @@
 
 [JS 编码规范](https://github.com/kerwin1/Blog/blob/master/common/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
 
+## 读书笔记
+
+[JavaScript设计模式与开发实践]()
+
 ## 优质文章 && 教程
 
 ### javascript
