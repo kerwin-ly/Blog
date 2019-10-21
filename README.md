@@ -118,8 +118,6 @@
 
 [JavaScript现代教程](https://zh.javascript.info/garbage-collection)
 
-[node学习指南](https://www.nodejs.red/#/javascript/base)
-
 [对js流stream的理解](https://m.imooc.com/article/289259)
 
 [函数柯里化](https://juejin.im/post/5b8350246fb9a019c372d26d)
