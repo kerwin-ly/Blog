@@ -16,6 +16,8 @@
 
 [JavaScript的开发技巧](https://github.com/kerwin-ly/Blog/blob/master/javascript/js%E7%9A%84%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7.md)
 
+[闭包理解](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E9%97%AD%E5%8C%85.md)
+
 ### TypeScript
 
 [TypeScript 笔记](https://github.com/kerwin-ly/Blog/blob/master/typescript/note.md)
