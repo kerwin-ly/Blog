@@ -20,3 +20,5 @@ var B = function(){}; B.prototype = new A();
 var b = new B();
 console.log( b.name ); // 输出:sven
 ```
+
+### 2.单例模式
