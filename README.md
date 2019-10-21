@@ -120,6 +120,8 @@
 
 [对js流stream的理解](https://m.imooc.com/article/289259)
 
+[函数柯里化](https://juejin.im/post/5b8350246fb9a019c372d26d)
+
 ### 其他
 
 [How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
