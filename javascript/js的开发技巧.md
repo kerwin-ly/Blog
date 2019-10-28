@@ -224,3 +224,12 @@ if (flag) {
   return false;
 }
 ```
+
+### 3.js科学计数法转十进制数字
+在js中，如果小数点后超过6为小数或正数超过21位，会将数字转换位科学计数法。
+```ts
+function toNonExponential(num) {
+  var m = num.toExponential().match(/\d(?:\.(\d*))?e([+-]\d+)/);
+  return num.toFixed(Math.max(0, (m[1] || "").length - m[2]));
+}
+```
