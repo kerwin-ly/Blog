@@ -176,3 +176,33 @@ registerForm.onsubmit = function() {
 };
 
 ```
+
+### 4. 代理模式
+>代理模式表示，当不方便去访问某对象时，采用访问其替身对象来控制对其的访问。
+
+例子：计算乘积的函数（缓存代理）
+
+```ts
+var mult = function() {
+  var a = 1;
+  console.log(arguments.length)
+  for(var i = 0, l = arguments.length; i < l; i++) {
+    // console.log(arguments[i], a)
+    a = a * arguments[i];
+  }
+  return a;
+}
+
+var proxyMult = (function(aa) {
+  var cache = {};
+  return function() {
+    var args = Array.prototype.join.call(arguments, ',');
+    if (args in cache) {
+      return cache[args];
+    }
+    return cache[args] = mult.apply(this, arguments);
+  }
+})()
+
+proxyMult(1, 2, 3, 4); // print 24
+```
