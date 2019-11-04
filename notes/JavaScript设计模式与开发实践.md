@@ -146,15 +146,18 @@ var strategies = {
 var Validator = function(){
 this.cache = []; // 保存校验规则
 };
-Validator.prototype.add = function( var ary = rule.split( ':' ); this.cache.push(function(){ //
-var strategy = ary.shift(); ary.unshift( dom.value ); ary.push( errorMsg ); // return strategies[ strategy
-}); };
+Validator.prototype.add = function(
+  var ary = rule.split( ':' );
+  this.cache.push(function(){ //
+  var strategy = ary.shift(); ary.unshift( dom.value ); ary.push(errorMsg); // return strategies[ strategy
+  });
+};
 Validator.prototype.start = function(){
-for ( var i = 0, validatorFunc; validatorFunc = this.cache[ i++ ]; ){
-var msg = validatorFunc(); // 开始校验，并取得校验后的返回信息 if ( msg ){ // 如果有确切的返回值，说明校验没有通过
-return msg; }
-2 3 4 5
-     }6 };
+  for ( var i = 0, validatorFunc; validatorFunc = this.cache[ i++ ]; ){
+    var msg = validatorFunc(); // 开始校验，并取得校验后的返回信息 if ( msg ){ // 如果有确切的返回值，说明校验没有通过
+    return msg; 
+  }
+};
 
 var validataFunc = function() {
   var validator = new Validator(); // 创建一个 validator 对象

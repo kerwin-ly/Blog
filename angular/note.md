@@ -409,7 +409,8 @@ export class NewsComponent implements OnInit {
 解决：input 框的`name`必须书写或者设置`[ngModelOptions]="{standalone: true}"`
 
 ### 8.:host && ::ng-deep 改变第三方组件样式
->在 @Component 的元数据中指定的样式只会**对该组件的模板生效**，它们**既不会作用于模板中嵌入的任何组件**，也不会作用于投影进来的组件。把伪类 ::ng-deep 应用到如何一条 CSS 规则上就会完全禁止对那条规则的视图包装。任何带有 ::ng-deep 的样式都会变成全局样式。为了把指定的样式限定在当前组件及其下级组件中，请确保在 ::ng-deep 之前带上 :host 选择器。如果 ::ng-deep 组合器在 :host 伪类之外使用，该样式就会污染其它组件。
+
+> 在 @Component 的元数据中指定的样式只会**对该组件的模板生效**，它们**既不会作用于模板中嵌入的任何组件**，也不会作用于投影进来的组件。把伪类 ::ng-deep 应用到如何一条 CSS 规则上就会完全禁止对那条规则的视图包装。任何带有 ::ng-deep 的样式都会变成全局样式。为了把指定的样式限定在当前组件及其下级组件中，请确保在 ::ng-deep 之前带上 :host 选择器。如果 ::ng-deep 组合器在 :host 伪类之外使用，该样式就会污染其它组件。
 
 - `:host`：表示选择器，选择当前的组件
 - `::ng-deep`：表示忽略中间的 className 嵌套层级关系，直接找到你要修改的 clasName
@@ -671,8 +672,10 @@ html
 </div>
 ```
 
-### 19. angular中触发事件
+### 19. angular 中触发事件
+
 eg: 自动获取焦点
+
 ```html
 <input nz-input #inputRef />
 ```
@@ -688,10 +691,13 @@ ngAfterViewInit(): void {
 ```
 
 ### 20. Error: Illegal state: Could not load the summary for directive ObserveContent
+
 解决：`angular/cdk`版本为`v7.3.7`，降级到`v7.2.2`
 
-### 21. angular中解决代码压缩，无法查看错误详情问题
+### 21. angular 中解决代码压缩，无法查看错误详情问题
+
 修改`angular.json`文件为
+
 ```json
 "aot": true,
 ...
@@ -701,15 +707,19 @@ ngAfterViewInit(): void {
 ```
 
 ### 21. Error: No provider for Overlay! StaticInjectorError(AppModule)
->参考链接：https://github.com/NG-ZORRO/ng-zorro-antd/issues/759
 
-解决：注意`ng-zorro-antd`和`angular-cdk`的版本匹配。如果确保版本没问题。清空依赖，重新install
+> 参考链接：https://github.com/NG-ZORRO/ng-zorro-antd/issues/759
+
+解决：注意`ng-zorro-antd`和`angular-cdk`的版本匹配。如果确保版本没问题。清空依赖，重新 install
+
 ```bash
 rm -rf node_modules && rm package-lock.json && npm install
 ```
 
 ### 22. 轮询接口处理
-使用到`rxjs`的`interval``switchMap``takeWhile`装饰器
+
+使用到`rxjs`的` interval``switchMap``takeWhile `装饰器
+
 ```ts
   startPolling(time = 3000): void {
     this.startProgress();
@@ -763,8 +773,10 @@ rm -rf node_modules && rm package-lock.json && npm install
   }
 ```
 
-### 23. 设置input框中光标位置
-场景：通过点击事件，往input框中填入一个函数后，需要自动将光标位置移动到`？`位置。通过点击事件，添加的内容自动在光标位置填充
+### 23. 设置 input 框中光标位置
+
+场景：通过点击事件，往 input 框中填入一个函数后，需要自动将光标位置移动到`？`位置。通过点击事件，添加的内容自动在光标位置填充
+
 ```html
 <input nz-input #inputRef />
 ```
@@ -800,21 +812,26 @@ updateExpression(value: string): void {
 ```
 
 ### 24. 使用装饰器来自动取消订阅
+
 参考链接：https://juejin.im/post/5b27a9c0f265da595b48d0f3
 https://github.com/NetanelBasal/ngx-auto-unsubscribe
 
-### 25. 解析Subject BehaviorSubject ReplaySubject AsyncSubject
+### 25. 解析 Subject BehaviorSubject ReplaySubject AsyncSubject
+
 https://segmentfault.com/a/1190000012669794
 
 ### 26. 秒/分钟/天数之间的换算
-> 最近有个需求。图谱项目中，后端边返回的是`秒`,用户可以拖动时间轴来过滤图谱的边和节点。时间轴的单位是`天`。直接用`scond / 3600 / 24`可能出现除不尽的情况，无法得到准确的天数。时间轴在拖动过程中又需要转换为`秒`去图谱数据中比较。于是使用`dayjs`的api来进行处理。(`diff isSameOrBefore isSameOrAfter`)[dayjs github仓库](https://github.com/iamkun/dayjs)
+
+> 最近有个需求。图谱项目中，后端边返回的是`秒`,用户可以拖动时间轴来过滤图谱的边和节点。时间轴的单位是`天`。直接用`scond / 3600 / 24`可能出现除不尽的情况，无法得到准确的天数。时间轴在拖动过程中又需要转换为`秒`去图谱数据中比较。于是使用`dayjs`的 api 来进行处理。(`diff isSameOrBefore isSameOrAfter`)[dayjs github 仓库](https://github.com/iamkun/dayjs)
 
 安装依赖
+
 ```shell
 npm install dayjs --save
 ```
 
 换算和比较
+
 ```ts
 import * as dayjs from 'dayjs';
 
@@ -830,4 +847,39 @@ convertTimeToDays(timestamp: number): number {
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 dayjs.extend(isSameOrAfter) // 注意必须依赖
 dayjs('2010-10-20').isSameOrAfter('2010-10-19', 'year')
+```
+
+#### 27. 监听路由变化
+
+> NavigationStart：导航开始 NavigationEnd：导航结束 NavigationCancel：取消导航 NavigationError：导航出错 RoutesRecoginzed：路由已认证
+
+监听单一事件
+
+```ts
+this.router.events
+  .filter(event => event instanceof NavigationEnd)
+  .subscribe((event: NavigationEnd) => {
+    //do something
+  });
+```
+
+监听多个事件
+
+```ts
+import { Router, NavigationStart } from '@angular/router';
+constructor(router:Router) {
+  router.events.subscribe(event:Event => {
+    if(event instanceof NavigationStart) {
+      //
+    } else if(event instanceof NavigationEnd) {
+      //
+    } else if(event instanceof NavigationCancel) {
+      //
+    } else if(event instanceof NavigationError) {
+      //
+    } else if(event instanceof RoutesRecognized) {
+      //
+    }
+  });
+
 ```
