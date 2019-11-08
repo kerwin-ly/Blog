@@ -155,7 +155,7 @@ Validator.prototype.add = function(
 Validator.prototype.start = function(){
   for ( var i = 0, validatorFunc; validatorFunc = this.cache[ i++ ]; ){
     var msg = validatorFunc(); // 开始校验，并取得校验后的返回信息 if ( msg ){ // 如果有确切的返回值，说明校验没有通过
-    return msg; 
+    return msg;
   }
 };
 
@@ -178,53 +178,56 @@ registerForm.onsubmit = function() {
 ```
 
 ### 4.代理模式
->代理模式表示，当不方便去访问某对象时，采用访问其替身对象来控制对其的访问。
+
+> 代理模式表示，当不方便去访问某对象时，采用访问其替身对象来控制对其的访问。
 
 例子：计算乘积的函数（缓存代理）
 
 ```ts
 var mult = function() {
   var a = 1;
-  for(var i = 0, l = arguments.length; i < l; i++) {
+  for (var i = 0, l = arguments.length; i < l; i++) {
     // console.log(arguments[i], a)
     a = a * arguments[i];
   }
   return a;
-}
+};
 
 var proxyMult = (function(aa) {
   var cache = {};
   return function() {
-    var args = Array.prototype.join.call(arguments, ',');
+    var args = Array.prototype.join.call(arguments, ",");
     if (args in cache) {
       return cache[args];
     }
-    return cache[args] = mult.apply(this, arguments);
-  }
-})()
+    return (cache[args] = mult.apply(this, arguments));
+  };
+})();
 
 proxyMult(1, 2, 3, 4); // print 24
 ```
 
 ### 5.迭代器模式
->迭代器模式是指提供一种顺序方法去访问某聚合对象的元素，而又不暴露其内部构造。
+
+> 迭代器模式是指提供一种顺序方法去访问某聚合对象的元素，而又不暴露其内部构造。
 
 #### 内部迭代器和外部迭代器
-* **内部迭代器**在调用的时候非常方便，外界不用关心迭代器内部的实现，跟迭代器的交互也仅 仅是一次初始调用。但如果想修改内部迭代方式，则十分麻烦。如上面的`each`方法
+
+- **内部迭代器**在调用的时候非常方便，外界不用关心迭代器内部的实现，跟迭代器的交互也仅 仅是一次初始调用。但如果想修改内部迭代方式，则十分麻烦。如上面的`each`方法
 
 ```js
 var each = function(array, callback) {
   for (var i = 0, l = array.length; i < l; i++) {
-    callback(array[i], i, array[i])
+    callback(array[i], i, array[i]);
   }
-}
+};
 
 each([1, 2, 3], function(i, n) {
-  console.log(i, n)
-})
+  console.log(i, n);
+});
 ```
 
-* **外部迭代器**必须显式地请求迭代下一个元素，增加了一些调用的复杂度，但相对也增强了迭代器的灵活性，我们可以手工控制 迭代的过程或者顺序。
+- **外部迭代器**必须显式地请求迭代下一个元素，增加了一些调用的复杂度，但相对也增强了迭代器的灵活性，我们可以手工控制 迭代的过程或者顺序。
 
 ```js
 var Iterator = function(obj) {
@@ -233,18 +236,61 @@ var Iterator = function(obj) {
     current += 1;
   };
   var isDone = function() {
-    return current >= obj.length
-  }
+    return current >= obj.length;
+  };
   var getCurrenItem = function() {
     return obj[current];
-  }
+  };
   return {
     next,
     isDone,
     getCurrenItem
-  }
-}
+  };
+};
 ```
 
 ### 6.发布订阅模式
->发布—订阅模式又叫观察者模式，它定义对象间的一种一对多的依赖关系，当一个对象的状 态发生改变时，所有依赖于它的对象都将得到通知。在 JavaScript 开发中，我们一般用事件模型 来替代传统的发布—订阅模式。
+
+> 发布—订阅模式又叫观察者模式，它定义对象间的一种一对多的依赖关系，当一个对象的状 态发生改变时，所有依赖于它的对象都将得到通知。在 JavaScript 开发中，我们一般用事件模型 来替代传统的发布—订阅模式。
+
+```js
+var event = {
+  clientList: [],
+  listen: function(key, fn) {
+    if (!this.clientList[key]) {
+      this.clientList[key] = [];
+    }
+    this.clientList[key].push(fn); // 订阅的消息添加进缓存列表
+  },
+  trigger: function() {
+    var key = Array.prototype.shift.call(arguments),
+      fns = this.clientList[key];
+    if (!fns || fns.length === 0) {
+      // 如果没有绑定对应的消息
+      return false;
+    }
+    for (var i = 0, fn; (fn = fns[i++]); ) {
+      fn.apply(this, arguments);
+    }
+  }
+};
+
+var installEvent = function(obj) {
+  for (var i in event) {
+    obj[i] = event[i];
+  }
+};
+
+var salesOffices = {};
+installEvent(salesOffices);
+salesOffices.listen("squareMeter88", function(price) {
+  console.log("价格= " + price);
+});
+salesOffices.listen("squareMeter100", function(price) {
+  console.log("价格= " + price);
+  // 小明订阅消息
+  // 小红订阅消息
+});
+salesOffices.trigger("squareMeter88", 2000000); // 输出:2000000
+salesOffices.trigger("squareMeter100", 3000000); // 输出:3000000
+```
