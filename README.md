@@ -124,6 +124,8 @@
 
 [JSON.stringify额外参数的强大功能](https://pawelgrzybek.com/til-the-power-of-json-stringify-replacer-parameter/)
 
+[从浏览器多进程到JS单线程，JS运行机制最全面的一次梳理](https://juejin.im/post/5a6547d0f265da3e283a1df7)
+
 ### 其他
 
 [How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
