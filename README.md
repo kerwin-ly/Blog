@@ -122,6 +122,8 @@
 
 [函数柯里化](https://juejin.im/post/5b8350246fb9a019c372d26d)
 
+[JSON.stringify额外参数的强大功能](https://pawelgrzybek.com/til-the-power-of-json-stringify-replacer-parameter/)
+
 ### 其他
 
 [How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)

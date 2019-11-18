@@ -294,3 +294,47 @@ salesOffices.listen("squareMeter100", function(price) {
 salesOffices.trigger("squareMeter88", 2000000); // 输出:2000000
 salesOffices.trigger("squareMeter100", 3000000); // 输出:3000000
 ```
+
+### 7. 命令模式
+
+> 命令模式中的命令(command)指的是一个执行某些特定事情的指令。命令模式最常见的应用场景是:有时候需要向某些对象发送请求，但是并不知道请求的接收 者是谁，也不知道被请求的操作是什么。此时希望用一种松耦合的方式来设计程序，使得请求发送者和请求接收者能够消除彼此之间的耦合关系。在 js 中，使用高阶函数能够轻易实现
+
+```js
+const closeDoorCommand = {
+  excute: function() {
+    console.log("close the door");
+  }
+};
+
+const openPcCommand = {
+  excute: function() {
+    console.log("open pc");
+  }
+};
+
+const openQQCommand = {
+  excute: function() {
+    console.log("open QQ");
+  }
+};
+
+var MarcoCommand = function() {
+  return {
+    commandList: [],
+    add: function(command) {
+      this.commandList.push(command);
+    },
+    excute: function() {
+      for (let i = 0; i < this.commandList.length; i++) {
+        this.commandList[i].excute();
+      }
+    }
+  };
+};
+
+const marcoCommand = new MarcoCommand();
+marcoCommand.add(closeDoorCommand);
+marcoCommand.add(openPcCommand);
+marcoCommand.add(openQQCommand);
+marcoCommand.excute();
+```

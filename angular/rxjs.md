@@ -461,28 +461,21 @@ behavior-subjectB 300
 
 #### ReplaySubject
 
-和`BehaviorSubject`类似，不管在数据源发射数据前后，只要订阅了。接收到的值就是**之前的值加上目前最新的值**
+和`BehaviorSubject`类似，不管在数据源发射数据前后，只要订阅了。接收到的值就是**之前的值加上目前最新的值**。参数可以最近的几次输出
 
 ```
-let subject3: ReplaySubject<number> = new ReplaySubject<number>();
+// number控制最近的几次输出
+let subject3: ReplaySubject<number> = new ReplaySubject<number>(2);
 subject3.next(100);
 subject3.next(200);
-subject3.subscribe((res: number) => console.info("replay-subjectA ", res));
 subject3.next(300);
-subject3.subscribe((res: number) => console.info("replay-subjectB ", res));
-subject3.next(400);
+subject3.subscribe((res: number) => console.info("replay-subjectA ", res));
 ```
 
 output
 ```
-replay-subjectA 100
 replay-subjectA 200
 replay-subjectA 300
-replay-subjectB 100
-replay-subjectB 200
-replay-subjectB 300
-replay-subjectA 400
-replay-subjectB 400
 ```
 
 #### AsyncSubject
