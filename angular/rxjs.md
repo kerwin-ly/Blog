@@ -134,7 +134,7 @@ const subscription = mouseMoves.subscribe((evt: MouseEvent) => {
 });
 ```
 
-### 3. 过滤
+### 3. 管道符 operators
 
 #### 3.1 filter
 
@@ -220,6 +220,45 @@ const source = interval(1000);
 const example = source.pipe(throttleTime(5000));
 // 输出: 0...6...12
 const subscribe = example.subscribe(val => console.log(val));
+```
+
+#### 3.4 map && mapTo
+
+- **mapTo**: 将发出来的值映射成一个常数值
+- **map**: 对源 observable 的每个值进行加工
+
+mapTo 举例：点击一次按钮，对应按钮次数+1
+
+```ts
+const setHtml = id => val => (document.getElementById(id).innerHTML = val);
+
+const addOneClick$ = id =>
+  fromEvent(document.getElementById(id), "click").pipe(
+    // 将每次点击映射成1
+    mapTo(1),
+    // startWith(0),
+    // 追踪运行中的总数
+    scan((acc, curr) => acc + curr),
+    // 为适当的元素设置 HTML
+    tap(setHtml(`${id}Total`))
+  );
+
+const combineTotal$ = combineLatest(addOneClick$("red"), addOneClick$("black"))
+  .pipe(map(([val1, val2]) => val1 + val2))
+  .subscribe(setHtml("total"));
+```
+
+map 举例
+
+```ts
+interval(5000)
+  .pipe(
+    startWith(0),
+    map(data => "hello" + data)
+  )
+  .subscribe(extra => {
+    console.log(extra); // hello0, hello1, hello2
+  });
 ```
 
 ### 4. 组合
@@ -398,7 +437,9 @@ a.pipe(
 ```
 
 ### 6. 监听数据变动,动态渲染页面
+
 service
+
 ```js
 import { Observable, Subject } from 'rxjs';
 
@@ -414,6 +455,7 @@ getMessage(): Observable<any> {
 ```
 
 调用
+
 ```js
 this.messageService.setMessage({
   name: 'kerwin',
@@ -428,17 +470,22 @@ ngOnInit() {
 }
 ```
 
-### 7. 如何取消rxjs的订阅
+### 7. 如何取消 rxjs 的订阅
+
 https://zju.date/do-not-forget-to-unsubscribe-in-angular/
 
-### 8. 解析四种主题Subject
+### 8. 解析四种主题 Subject
 
 #### Subject
+
 必须在数据源发射一个数据之前，进行订阅`subscribe`，否者收到的值很有可能是`undefined`
+
 ```
 
 ```
+
 #### BehaviorSubject
+
 不管在数据源发射数据前后，只要订阅了。接受到的值就是**最新或初始化的一条值**
 
 ```ts
@@ -451,6 +498,7 @@ subject2.next(300);
 ```
 
 output
+
 ```
 behavior-subjectA 100
 behavior-subjectA 200
@@ -473,6 +521,7 @@ subject3.subscribe((res: number) => console.info("replay-subjectA ", res));
 ```
 
 output
+
 ```
 replay-subjectA 200
 replay-subjectA 300
@@ -480,7 +529,7 @@ replay-subjectA 300
 
 #### AsyncSubject
 
-AsyncSubject和BehaviorSubject`ReplaySubject`有些类似，但不同的是AsyncSubject只会存储数据流里的最后一条数据， 而且**只有在数据流complete时才会将值发布出去**。
+AsyncSubject 和 BehaviorSubject`ReplaySubject`有些类似，但不同的是 AsyncSubject 只会存储数据流里的最后一条数据， 而且**只有在数据流 complete 时才会将值发布出去**。
 
 ```ts
 let subject4: AsyncSubject<number> = new AsyncSubject<number>();
@@ -497,6 +546,7 @@ subject4.next(500);
 ```
 
 output
+
 ```ts
 async-subjectA 400
 async-subjectB 400
