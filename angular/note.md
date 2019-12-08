@@ -883,3 +883,12 @@ constructor(router:Router) {
   });
 
 ```
+
+#### 28. 在html中遍历对象
+>其核心是用到了angular6之后提供的`KeyValuePipe`
+
+```html
+<div *ngFor="let item of object | keyvalue">
+  {{item.key}}:{{item.value}}
+</div>
+```
