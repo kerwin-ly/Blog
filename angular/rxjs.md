@@ -553,3 +553,36 @@ async-subjectB 400
 async-subjectC 400
 async-subjectD 400
 ```
+
+### 9. 实际例子
+
+#### 9.1 模糊搜索 autocomplete + 节流
+
+```html
+<form nz-form [nzLayout]="'inline'" [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your username!">
+      <nz-input-group nzPrefixIcon="user">
+        <input formControlName="userName" nz-input placeholder="Username" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+```
+
+```ts
+constructor(private http: _HttpClient, private fb: FormBuilder) {}
+
+ngOnInit() {
+  this.validateForm = this.fb.group({
+    userName: [null, []]
+  });
+  this.validateForm.get('userName').valueChanges
+    .pipe(
+      throttleTime(500),
+      switchMap(data => this.http.post('api/autocomplete')),
+      mergeMap
+    )
+  );
+}
+```
