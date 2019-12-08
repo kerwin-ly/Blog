@@ -62,11 +62,38 @@
 >typescript-json-schema, 约束后台接口必须返回的字段
 在我们的开发中，常常会出现这种情况。某天，页面突然崩了，发现js在报错。打包上去的代码一般来说都是压缩过的，你可能花费很长一段时间，去排查了问题所在。然而发现...是后台没有返回某个关键字段引起的。这会浪费很多不必要的时间。如果想解决类似的问题，推荐使用其`typescript-json-schema`。在开发时候，约束其接口必须返回的字段。如不返回，可以直接抛错并打印其返回值。（也可以用`sentry`之类的，去日志中查看）
 
-### 4.自动生成CHANGELOG
-* 
+全局安装`typescript-json-schema`
+```shell
+npm install -g typescript-json-schema
+```
 
+TODO
+
+### 4.版本发布，自动生成CHANGELOG
+>参考文章[规范你的 commit message 并且根据 commit 自动生成 CHANGELOG.md](https://juejin.im/post/5bd2debfe51d457abc710b57) [官方文档](https://github.com/conventional-changelog/commitlint)
+
+commitlint规范git提交并配置，[文档链接](https://github.com/conventional-changelog/commitlint#config)
+```shell
+npm install --save-dev @commitlint/cli
+```
+
+全局安装`conventional-changelog-cli`
+```shell
+npm install -g conventional-changelog-cli
+```
+
+本地安装`changelog`依赖
 ```shell
 npm install conventional-changelog-lint-config-canonical conventional-changelog-lint --save-dev
+```
+
+使用
+```shell
+# 不会覆盖以前的 Change log，只会在 CHANGELOG.md 的头部加上自从上次发布以来的变动
+conventional-changelog -p angular -i CHANGELOG.md -s -p 
+
+# 生成所有发布的 Change log
+conventional-changelog -p angular -i CHANGELOG.md -w -r 0
 ```
 
 ## 测试
