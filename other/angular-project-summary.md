@@ -1,4 +1,4 @@
-# Angular 项目开发
+# Angular 项目开发总结
 
 > 总结一下一个新的项目，如何规范的维护
 
@@ -66,10 +66,13 @@
 
 ### 3.接口校验
 
-[使用 typescript-json-schema 校验接口]()
+[使用 typescript-json-schema 校验接口](https://github.com/kerwin-ly/Blog/blob/master/tools/json-schema.md)
 
 ### 4.版本发布，自动生成 CHANGELOG
 
-[如何根据commit自动生成CHANGELOG]()
+[如何根据commit自动生成CHANGELOG](https://github.com/kerwin-ly/Blog/blob/master/tools/changelog.md)
+
+### 3.CodeReview
+`codereview`是保持项目代码质量的关键。前期尤其是新同学进入的时候，建议多提commit给其主要开发人员review（每次commit保持更改不要过多）。同时，在其他开发人员提代码review时，最好在中间流程中也添加新同学。让新同学能快速学习，借鉴风格。
 
 ## 测试

@@ -98,6 +98,9 @@
 
 ## 其他
 
+### 总结
+[如何规范的维护一个项目](https://github.com/kerwin-ly/Blog/blob/master/other/angular-project-summary.md)
+
 ### 规范
 
 [HTML && CSS 编码规范](https://github.com/kerwin1/Blog/blob/master/common/HTML%20%26%26%20CSS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
@@ -110,7 +113,7 @@
 
 ## 读书笔记
 
-[JavaScript设计模式与开发实践]()
+[JavaScript设计模式与开发实践](https://github.com/kerwin-ly/Blog/blob/master/notes/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5.md)
 
 ## 优质文章 && 教程
 
