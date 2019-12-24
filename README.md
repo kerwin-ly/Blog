@@ -121,8 +121,6 @@
 
 [一名【合格】前端工程师的自检清单](https://juejin.im/post/5cc1da82f265da036023b628)
 
-[node学习指南](https://www.nodejs.red/#/javascript/base)
-
 [JavaScript现代教程](https://zh.javascript.info/garbage-collection)
 
 [对js流stream的理解](https://m.imooc.com/article/289259)
@@ -133,12 +131,22 @@
 
 [从浏览器多进程到JS单线程，JS运行机制最全面的一次梳理](https://juejin.im/post/5a6547d0f265da3e283a1df7)
 
-[微前端解决方案](https://tech.antfin.com/community/articles/536)
+### node.js
 
-### 其他
+[node学习指南](https://www.nodejs.red/#/javascript/base)
+
+### typescript
+
+[深度学习typescript](https://jkchao.github.io/typescript-book-chinese/error/common.html#ts2307)
+
+### 代码规范
 
 [How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
+
+### 其他
 
 [POST和GET的区别](https://www.oschina.net/news/77354/http-get-post-different)
 
 [Apache Benchmark测试http并发量](https://ruby-china.org/topics/13870)
+
+[微前端解决方案](https://tech.antfin.com/community/articles/536)
