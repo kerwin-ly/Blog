@@ -338,3 +338,6 @@ marcoCommand.add(openPcCommand);
 marcoCommand.add(openQQCommand);
 marcoCommand.excute();
 ```
+
+### 8. 模板模式
+>模板模式通常是指在父类封装了子类的算法结构，包括了一些公共方法及其子类中方法的执行顺序（如：angular/vue/react的生命周期执行顺序）子类可以集成这个抽象类，来继承其整个算法结构，也可以进行重写
