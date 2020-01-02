@@ -340,4 +340,245 @@ marcoCommand.excute();
 ```
 
 ### 8. 模板模式
->模板模式通常是指在父类封装了子类的算法结构，包括了一些公共方法及其子类中方法的执行顺序（如：angular/vue/react的生命周期执行顺序）子类可以集成这个抽象类，来继承其整个算法结构，也可以进行重写
+
+> 模板模式通常是指在父类封装了子类的算法结构，包括了一些公共方法及其子类中方法的执行顺序（如：angular/vue/react 的生命周期执行顺序）子类可以集成这个抽象类，来继承其整个算法结构，也可以进行重写
+
+举例：煮 coffee || tea，他们有类似的操作步骤。如 把水煮沸 => 用沸水冲泡咖啡/茶 => 把咖啡/茶倒进杯子 => 加糖/柠檬
+
+```js
+const Beverage = function(param) {
+  const boilWater = function() {
+    console.log("把水煮沸");
+  };
+
+  const brew =
+    param.brew ||
+    function() {
+      throw new Error("必须传递 brew 方法");
+    };
+
+  const pourInCup =
+    param.pourInCup ||
+    function() {
+      throw new Error("必须传递 pourInCup 方法");
+    };
+
+  const addCondiments =
+    param.addCondiments ||
+    function() {
+      throw new Error("必须传递 addCondiments 方法");
+    };
+
+  const F = function() {};
+
+  F.prototype.init = function() {
+    boilWater();
+    brew();
+    pourInCup();
+    addCondiments();
+  };
+
+  return F;
+};
+
+const Coffee = Beverage({
+  brew: function() {
+    console.log("用沸水冲泡咖啡");
+  },
+  addCondiments: function() {
+    console.log("把咖啡倒进杯子");
+  },
+  pourInCup: function() {
+    console.log("加糖和牛奶");
+  }
+});
+
+const Tea = Beverage({
+  brew: function() {
+    console.log("用沸水冲泡茶叶");
+  },
+  addCondiments: function() {
+    console.log("把茶叶倒进杯子");
+  },
+  pourInCup: function() {
+    console.log("加柠檬");
+  }
+});
+```
+
+### 9. 享元模式
+
+> 享元(flyweight)模式是一种用于性能优化的模式，目的在于尽量减少共享对象的数量。使用享元模式的关键是如何区别内部状态和外部状态，可以被对象共享的属性通常被划分为 内部状态，如同不管什么样式的衣服，都可以按照性别不同，穿在同一个男模特或者女模特身上， 模特的性别就可以作为内部状态储存在共享对象的内部。而外部状态取决于具体的场景，并根据 场景而变化，就像例子中每件衣服都是不同的，它们不能被一些对象共享，因此只能被划分为外 部状态。
+
+举例：有个服装厂，生产了男女服装各 50 种款式，为了推销需要找模特来拍照，正常可能会找男女模特各 50 个，每个模特分别穿一种服装拍一组照片。传统方法其代码实现如下：
+
+常规写法：有多少款式，就会生成多少对象
+
+```js
+class Modal {
+  constructor(name, gender, clothes) {
+    this.name = name;
+    this.gender = gender;
+    this.clothes = clothes;
+  }
+
+  takePhoto() {
+    console.log(`${this.gender}模特${this.name}穿${this.clothes}拍了张照`);
+  }
+}
+
+// 穿衣拍照实现
+for (let i = 0; i < 50; i++) {
+  let manModel = new Modal(`张${i}`, "男", `服装${i}`);
+  manModel.takePhoto();
+}
+
+for (let i = 50; i < 100; i++) {
+  let womanModel = new Modal(`李${i}`, "女", `服装${i}`);
+  womanModel.takePhoto();
+}
+```
+
+使用享元模式重构
+
+```js
+class Modal {
+  // 单例模式
+  static create(id, gender) {
+    if (this[gender]) {
+      return this[gender];
+    }
+    return (this[gender] = new Modal(id, gender));
+  }
+}
+
+// 管理外部状态
+class TakeClothesManager {
+  static addClothes(id, gender, clothes) {
+    const modal = ModalFactory.create(id, gender);
+    this[id] = {
+      clothes,
+      modal
+    };
+  }
+
+  static takePhoto(id) {
+    const obj = this[id];
+    console.log(
+      `${obj.modal.gender}模特${obj.modal.name}穿${obj.clothes}拍了张照`
+    );
+  }
+}
+
+for (let i = 0; i < 50; i++) {
+  TakeClothesManager.addClothes(i, "男", `服装${i}`);
+  TakeClothesManager.takePhoto(i);
+}
+
+for (let i = 50; i < 100; i++) {
+  const { addClothes, takePhoto } = TakeClothesManager;
+  TakeClothesManager.addClothes(i, "女", `服装${i}`);
+  TakeClothesManager.takePhoto(i);
+}
+```
+
+### 10. 职责链模式
+
+> 使多个对象都有机会去处理请求，避免了发送者与接收者之间的耦合，将这些对象连成一条链，依次传递，直到有对象处理请求为止。（如：公交车递卡刷卡行为）
+
+eg: 假设我们负责一个售卖手机的电商网站，经过分别交纳 500 元定金和 200 元定金的两轮预定后(订单已在此时生成)，现在已经到了正式购买的阶段。
+公司针对支付过定金的用户有一定的优惠政策。在正式购买后，已经支付过 500 元定金的用 户会收到 100 元的商城优惠券，200 元定金的用户可以收到 50 元的优惠券，而之前没有支付定金 的用户只能进入普通购买模式，也就是没有优惠券，且在库存有限的情况下不一定保证能买到。
+
+- orderType:表示订单类型(定金用户或者普通购买用户)，code 的值为 1 的时候是 500 元 定金用户，为 2 的时候是 200 元定金用户，为 3 的时候是普通购买用户。
+- pay:表示用户是否已经支付定金，值为 true 或者 false, 虽然用户已经下过 500 元定金的 订单，但如果他一直没有支付定金，现在只能降级进入普通购买模式。
+- stock:表示当前用于普通购买的手机库存数量，已经支付过 500 元或者 200 元定金的用 户不受此限制。
+
+常规写法：`if else`判断
+
+```js
+const order = function(orderType, pay, stock) {
+  if (orderType === 1) {
+    // 500 元定金购买模式
+    if (pay === true) {
+      // 已支付定金
+      console.log("500 元定金预购, 得到 100 优惠券");
+    } else {
+      // 未支付定金，降级到普通购买模式
+      if (stock > 0) {
+        // 用于普通购买的手机还有库存
+        console.log("普通购买, 无优惠券");
+      } else {
+        console.log("手机库存不足");
+      }
+    }
+  } else if (orderType === 2) {
+    if (pay === true) {
+      // 已支付定金
+      console.log("200 元定金预购, 得到 50 优惠券");
+    } else {
+      // 未支付定金，降级到普通购买模式
+      if (stock > 0) {
+        // 用于普通购买的手机还有库存
+        console.log("普通购买, 无优惠券");
+      } else {
+        console.log("手机库存不足");
+      }
+    }
+  } else {
+    if (stock > 0) {
+      // 用于普通购买的手机还有库存
+      console.log("普通购买, 无优惠券");
+    } else {
+      console.log("手机库存不足");
+    }
+  }
+};
+```
+
+使用职责链模式重构
+
+```js
+const order500 = function(orderType, pay, stock) {
+  if (orderType === 1 && pay === true) {
+    console.log("500 元定金预购, 得到 100 优惠券");
+  } else {
+    return "nextSuccessor";
+  }
+};
+
+const order200 = function(orderType, pay, stock) {
+  if (orderType === 2 && pay === true) {
+    console.log("200 元定金预购, 得到 50 优惠券");
+  } else {
+    return "nextSuccessor";
+  }
+};
+
+const orderNormal = function(orderType, pay, stock) {
+  if (stock > 0) {
+    // 用于普通购买的手机还有库存
+    console.log("普通购买, 无优惠券");
+  } else {
+    console.log("手机库存不足");
+  }
+};
+
+Function.prototype.after = function(fn) {
+  var self = this;
+
+  return function() {
+    var ret = self.apply(this, arguments);
+
+    if (ret === 'nextSuccessor') {
+      return fn.apply(this, arguments);
+    }
+    return ret;
+  }
+}
+
+var order = order500.after(order200).after(orderNormal); // 定义职责链规则
+
+order( 1, true, 500 );  // 输出:500 元定金预购，得到 100 优惠券
+order( 2, true, 500 );  // 输出:200 元定金预购，得到 50 优惠券
+order( 1, false, 500 ); // 输出:普通购买，无优惠券
+```
