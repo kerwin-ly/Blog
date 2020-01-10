@@ -139,9 +139,9 @@
 
 [深度学习typescript](https://jkchao.github.io/typescript-book-chinese/error/common.html#ts2307)
 
-### 代码规范
+### build tools
 
-[How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
+[webpack4.x自定义构建](https://juejin.im/post/5de87444518825124c50cd36#heading-35)
 
 ### 其他
 
@@ -150,3 +150,5 @@
 [Apache Benchmark测试http并发量](https://ruby-china.org/topics/13870)
 
 [微前端解决方案](https://tech.antfin.com/community/articles/536)
+
+[How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
