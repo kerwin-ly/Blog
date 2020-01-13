@@ -569,26 +569,65 @@ Function.prototype.after = function(fn) {
   return function() {
     var ret = self.apply(this, arguments);
 
-    if (ret === 'nextSuccessor') {
+    if (ret === "nextSuccessor") {
       return fn.apply(this, arguments);
     }
     return ret;
-  }
-}
+  };
+};
 
 var order = order500.after(order200).after(orderNormal); // 定义职责链规则
 
-order( 1, true, 500 );  // 输出:500 元定金预购，得到 100 优惠券
-order( 2, true, 500 );  // 输出:200 元定金预购，得到 50 优惠券
-order( 1, false, 500 ); // 输出:普通购买，无优惠券
+order(1, true, 500); // 输出:500 元定金预购，得到 100 优惠券
+order(2, true, 500); // 输出:200 元定金预购，得到 50 优惠券
+order(1, false, 500); // 输出:普通购买，无优惠券
 ```
 
 ### 11. 中介者模式
 
->中介者模式目的在于，解决业务开发时，很多对象与对象的引用，高耦合度问题。让其对象只与中介者通信，处理业务均在中介者中，来达到解耦的目的。比如：买卖房子，买方只需要和中介来询问房屋资源，不用挨个询问xxx你是否卖房。卖方也只需要把自己的房屋信息交给中介。由中介来保持双方通信。
+> 中介者模式目的在于，解决业务开发时，很多对象与对象的引用，高耦合度问题。让其对象只与中介者通信，处理业务均在中介者中，来达到解耦的目的。比如：买卖房子，买方只需要和中介来询问房屋资源，不用挨个询问 xxx 你是否卖房。卖方也只需要把自己的房屋信息交给中介。由中介来保持双方通信。
 
 ### 12. 装饰者模式
 
->在不改变自身的逻辑情况下，在代码运行时给其添加职责。
+> 在不改变自身的逻辑情况下，在代码运行时给其添加职责。
 
 ### 13. 状态模式
+
+> 状态模式定义了状态与行为之间的关系，并将它们封装在一个类里。通过增加新的状态 类，很容易增加新的状态和转换。避免 Context 无限膨胀，状态切换的逻辑被分布在状态类中，也去掉了 Context 中原本过多的条件分支。用对象代替字符串来记录当前状态，使得状态的切换更加一目了然。Context 中的请求动作和状态类中封装的行为可以非常容易地独立变化而互不影响。
+
+### 14.适配器模式
+
+> 适配器模式的作用是解决两个软件实体间的接口不兼容的问题。使用适配器模式之后，原本由于接口不兼容而不能工作的两个软件实体可以一起工作。个人认为和装饰器模式，理念类似。
+
+适配器模式举例：以前调用 googleMap 和 baiduMap 都是 show 方法，某次版本后，baiduMap 改成了 display 方法。在不改动以前复杂逻辑情况下使用适配器
+
+```ts
+const googleMap = {
+  show: function() {
+    console.log('render googleMap');
+  }
+}
+
+const baiduMap = {
+  display: function() {
+    console.log('render baiduMap');
+  }
+}
+
+function renderMap(map) {
+  map.show();
+}
+
+function baiduMapAdapter(baiduMap) {
+  show: function() {
+    return baiduMap.display();
+  }
+}
+
+renderMap(googleMap);
+// renderMap(baiduMap);
+renderMap(baiduMapAdapter);
+
+```
+
+### 15. 单一职责原则
