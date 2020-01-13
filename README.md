@@ -30,6 +30,9 @@
 
 [rxjs 开发笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/rxjs.md)
 
+[angular变更机制详解](https://www.520stone.com/page/article/%E4%BA%94%E7%AF%87%E8%AE%A9%E4%BD%A0%E6%88%90%E4%B8%BAAngular%E5%8F%98%E5%8C%96%E6%A3%80%E6%B5%8B%E4%B8%93%E5%AE%B6/)
+
+
 ### Vue
 
 [vue-mvvm 实现原理（外文）](https://github.com/DMQ/mvvm)
