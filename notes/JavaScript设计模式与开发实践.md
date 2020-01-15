@@ -639,3 +639,172 @@ renderMap(baiduMapAdapter);
 
 ### 3.开放-封闭原则
 >在面向对象的程序设计中，`开放封闭原则(OCP)`是最重要的一条原则。很多时候，一个程序具有良好的设计，往往说明它是符合开放封闭原则的。当需要改变一个程序的功能或者给这个程序增加新功 能的时候，可以使用增加代码的方式，但是不允许改动程序的源代码。其齐心在于区分系统中**变化**和**不变**的地方，利用**对象的多肽性**将变化的地方进行封装处理。
+
+## 重构
+
+### 1.提炼函数
+避免出现超大函数，更利于代码复用，同时函数方法的命名起到了注释的作用
+
+```ts
+
+// not good
+this.http.post('xxx', res => {
+  _.forEach(res.data, item => {
+    ...
+  })
+})
+
+// good
+this.http.post('xxx', res => {
+  this.addExtraParam(res.data);
+})
+
+function addExtraParam(data) {
+  ...
+}
+```
+
+### 2.合并重复的条件片段
+将重复的代码提炼出来
+
+```ts
+// not good
+if (age < 18) {
+  console.log('未成年');
+  goNetBar();
+} else if (age >= 18 && age <= 40) {
+  console.log('中年人');
+  goNetBar();
+} else {
+  console.log('老头子');
+  goNetBar();
+}
+
+// good
+if (age < 18) {
+  console.log('未成年');
+} else if (age >= 18 && age <= 40) {
+  console.log('中年人');
+} else {
+  console.log('老头子');
+}
+goNetBar();
+```
+
+### 3.把条件分支语句提炼成函数
+
+```ts
+// not good
+function getPrice(price) {
+  const date = new Date();
+  if (date.getMonth() >= 6 && date.getMonth <= 9) {
+    return price * 0.8;
+  }
+  return price;
+}
+
+// good
+function getPrice(price) {
+  if (isSummer()) {
+    return price * 0.8;
+  }
+  return price;
+}
+
+function isSumer() {
+  const date = new Date();
+  return date.getMonth() >= 6 && date.getMonth <= 9
+}
+```
+
+### 4.合理使用循环
+
+### 5.提前让函数退出代替嵌套条件分支
+```ts
+// not good
+function getPerson(person) {
+  if (person.age < 18) {
+    if (person.sexy === 'man')  {
+      console.log('不要男的');
+    } else {
+      console.log('ok');
+    }
+  } else {
+    console.log('不要成年人');
+  }
+}
+
+// good
+function getPerson(person) {
+  if (person.age >= 18) {
+    console.log('不要成年人');
+    return;
+  }
+  if (person.sexy === 'man') {
+    console.log('不要男的');
+    return;
+  }
+  console.log('ok');
+} 
+```
+
+### 6.传递对象参数代替过长的参数列表(超过3个参数，建议使用参数对象)
+```ts
+// not good
+function getPerson(name, age, phone, address) {
+  console.log(name, age, phone, address);
+}
+getPerson('kerwin', 23, 182323232, 'earth');
+
+// good
+function getPerson(person) {
+  console.log(person);
+}
+getPerson({
+  name: 'kerwin',
+  age: 23,
+  phone: 23342343,
+  address: 'earth'
+})
+```
+
+### 7.尽量减少参数数量
+
+### 8.少用三目运算符，尤其是嵌套的三目运算符
+
+### 9.合理使用链式调用
+
+### 10.分解大型类
+
+### 11.用return退出多重循环
+```ts
+// not good
+function getNum() {
+  let flag;
+  for (let i = 0; i < 10; i++)  {
+    for (let j = 0; j < 10; j++) {
+      if (i * j >= 30) {
+        flag = true;
+      }
+      if (flag) {
+        break;
+      }
+    }
+  }
+}
+
+// good
+function getNum() {
+  for (let i = 0; i < 10; i++)  {
+    for (let j = 0; j < 10; j++) {
+      // if (i * j >= 30) return;
+      if (i * j >= 30) return printNum(i * j); // 如果return后，还要调用方法
+    }
+  }
+}
+
+function printNum(num) {
+  console.log(num);
+}
+```
+
