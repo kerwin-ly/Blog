@@ -631,18 +631,23 @@ renderMap(baiduMapAdapter);
 ```
 
 ## 设计原则
+
 ### 1.单一职责原则
->`SRP 原则`的优点是降低了单个类或者对象的复杂度，按照职责把对象分解成更小的粒度， 这有助于代码的复用，也有利于进行单元测试。当一个职责需要变更的时候，不会影响到其他 的职责。（eg: 装饰者模式 ，代理模式，单例模式等）
+
+> `SRP 原则`的优点是降低了单个类或者对象的复杂度，按照职责把对象分解成更小的粒度， 这有助于代码的复用，也有利于进行单元测试。当一个职责需要变更的时候，不会影响到其他 的职责。（eg: 装饰者模式 ，代理模式，单例模式等）
 
 ### 2.最少知识原则（迪米特法则）
->`迪米特法则`是指尽量较少对象与对象之间的引用，如果迫不得已，最好是通过第三方对象来对这两个对象进行通信。而不让两个对象直接发生关系。（eg: 中介者模式，外观模式）
+
+> `迪米特法则`是指尽量较少对象与对象之间的引用，如果迫不得已，最好是通过第三方对象来对这两个对象进行通信。而不让两个对象直接发生关系。（eg: 中介者模式，外观模式）
 
 ### 3.开放-封闭原则
->在面向对象的程序设计中，`开放封闭原则(OCP)`是最重要的一条原则。很多时候，一个程序具有良好的设计，往往说明它是符合开放封闭原则的。当需要改变一个程序的功能或者给这个程序增加新功 能的时候，可以使用增加代码的方式，但是不允许改动程序的源代码。其齐心在于区分系统中**变化**和**不变**的地方，利用**对象的多肽性**将变化的地方进行封装处理。
+
+> 在面向对象的程序设计中，`开放封闭原则(OCP)`是最重要的一条原则。很多时候，一个程序具有良好的设计，往往说明它是符合开放  封闭原则的。当需要改变一个程序的功能或者给这个程序增加新功 能的时候，可以使用增加代码的方式，但是不允许改动程序的源代码。其核心在于区分系统中**变化**和**不变**的地方，利用**对象的多肽性**将变化的地方进行封装处理。
 
 ## 重构
 
 ### 1.提炼函数
+
 避免出现超大函数，更利于代码复用，同时函数方法的命名起到了注释的作用
 
 ```ts
@@ -665,28 +670,29 @@ function addExtraParam(data) {
 ```
 
 ### 2.合并重复的条件片段
+
 将重复的代码提炼出来
 
 ```ts
 // not good
 if (age < 18) {
-  console.log('未成年');
+  console.log("未成年");
   goNetBar();
 } else if (age >= 18 && age <= 40) {
-  console.log('中年人');
+  console.log("中年人");
   goNetBar();
 } else {
-  console.log('老头子');
+  console.log("老头子");
   goNetBar();
 }
 
 // good
 if (age < 18) {
-  console.log('未成年');
+  console.log("未成年");
 } else if (age >= 18 && age <= 40) {
-  console.log('中年人');
+  console.log("中年人");
 } else {
-  console.log('老头子');
+  console.log("老头子");
 }
 goNetBar();
 ```
@@ -713,59 +719,61 @@ function getPrice(price) {
 
 function isSumer() {
   const date = new Date();
-  return date.getMonth() >= 6 && date.getMonth <= 9
+  return date.getMonth() >= 6 && date.getMonth <= 9;
 }
 ```
 
 ### 4.合理使用循环
 
 ### 5.提前让函数退出代替嵌套条件分支
+
 ```ts
 // not good
 function getPerson(person) {
   if (person.age < 18) {
-    if (person.sexy === 'man')  {
-      console.log('不要男的');
+    if (person.sexy === "man") {
+      console.log("不要男的");
     } else {
-      console.log('ok');
+      console.log("ok");
     }
   } else {
-    console.log('不要成年人');
+    console.log("不要成年人");
   }
 }
 
 // good
 function getPerson(person) {
   if (person.age >= 18) {
-    console.log('不要成年人');
+    console.log("不要成年人");
     return;
   }
-  if (person.sexy === 'man') {
-    console.log('不要男的');
+  if (person.sexy === "man") {
+    console.log("不要男的");
     return;
   }
-  console.log('ok');
-} 
+  console.log("ok");
+}
 ```
 
-### 6.传递对象参数代替过长的参数列表(超过3个参数，建议使用参数对象)
+### 6.传递对象参数代替过长的参数列表(超过 3 个参数，建议使用参数对象)
+
 ```ts
 // not good
 function getPerson(name, age, phone, address) {
   console.log(name, age, phone, address);
 }
-getPerson('kerwin', 23, 182323232, 'earth');
+getPerson("kerwin", 23, 182323232, "earth");
 
 // good
 function getPerson(person) {
   console.log(person);
 }
 getPerson({
-  name: 'kerwin',
+  name: "kerwin",
   age: 23,
   phone: 23342343,
-  address: 'earth'
-})
+  address: "earth"
+});
 ```
 
 ### 7.尽量减少参数数量
@@ -776,12 +784,13 @@ getPerson({
 
 ### 10.分解大型类
 
-### 11.用return退出多重循环
+### 11.用 return 退出多重循环
+
 ```ts
 // not good
 function getNum() {
   let flag;
-  for (let i = 0; i < 10; i++)  {
+  for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       if (i * j >= 30) {
         flag = true;
@@ -795,7 +804,7 @@ function getNum() {
 
 // good
 function getNum() {
-  for (let i = 0; i < 10; i++)  {
+  for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       // if (i * j >= 30) return;
       if (i * j >= 30) return printNum(i * j); // 如果return后，还要调用方法
@@ -807,4 +816,3 @@ function printNum(num) {
   console.log(num);
 }
 ```
-
