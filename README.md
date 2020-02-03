@@ -53,10 +53,6 @@
 
 [react-native-vector-icons 的使用](https://github.com/kerwin-ly/Blog/blob/master/react/react-native-vector-icons%20usage.md)
 
-### Electron
-
-[electron 笔记](https://github.com/kerwin-ly/Blog/blob/master/electron/note.md)
-
 ### Style
 
 [sass 笔记](https://github.com/kerwin1/Blog/blob/master/style/sass.md)
