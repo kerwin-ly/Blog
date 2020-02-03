@@ -1,5 +1,5 @@
 # git规范
->[模板参考](https://github.com/kerwin-ly/Blog/tree/master/.github)
+>[提交模板参考](https://github.com/kerwin-ly/Blog/tree/master/.github)
 
 ## 一、commit message 规范
 
