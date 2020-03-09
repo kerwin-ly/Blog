@@ -76,8 +76,8 @@ ng g interface interfaces/xxx
 `src/app/app.module.ts`
 
 ```js
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 @NgModule({
   imports: [BrowserModule],
   providers: [Logger],
@@ -98,8 +98,8 @@ export class AppModule {}
 
 ```js
 @Component({
-  selector: "app-hero-list",
-  templateUrl: "./hero-list.component.html",
+  selector: 'app-hero-list',
+  templateUrl: './hero-list.component.html',
   providers: [HeroService]
 })
 export class HeroListComponent implements OnInit {
@@ -466,7 +466,7 @@ this.dataSet = [
   {
     key: `${this.i}`,
     name: `Edward King ${this.i}`,
-    age: "32",
+    age: '32',
     address: `London, Park Lane no. ${this.i}`
   }
 ];
@@ -508,7 +508,7 @@ npm install @types/lodash --save-dev
 3.使用
 
 ```js
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
 _.remove(scores, 2); // 正常使用即可
 ```
@@ -884,11 +884,49 @@ constructor(router:Router) {
 
 ```
 
-#### 28. 在html中遍历对象
->其核心是用到了angular6之后提供的`KeyValuePipe`
+#### 28. 在 html 中遍历对象
+
+> 其核心是用到了 angular6 之后提供的`KeyValuePipe`
 
 ```html
 <div *ngFor="let item of object | keyvalue">
   {{item.key}}:{{item.value}}
 </div>
+```
+
+#### 29. ng-zorro 使用 upload 组件提示 message: '上传错误'
+
+如果使用`beforeUpload`方法，在往数组变量添加数据时，需要用`push`。如果使用`list = [item]`则会报错。
+
+```html
+<nz-upload
+  class="upload-padding"
+  [nzShowUploadList]="false"
+  nzType="drag"
+  [(nzFileList)]="fileList"
+  [nzBeforeUpload]="beforeUpload"
+  nzAccept="application/pdf"
+>
+  <p>
+    <i nz-icon nzType="file-add" nzTheme="outline"></i>
+  </p>
+</nz-upload>
+```
+
+```ts
+beforeUpload = (file: UploadFile): boolean => {
+  this.fileList.push(file); // success
+  return false;
+};
+```
+
+![success-upload](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/success-load.png)
+
+```ts
+beforeUpload = (file: UploadFile): boolean => {
+  this.fileList = [file]; // success
+  return false;
+};
+
+![error-upload](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/error-upload.png)
 ```
