@@ -886,12 +886,29 @@ constructor(router:Router) {
 
 #### 28. 在 html 中遍历对象
 
-> 其核心是用到了 angular6 之后提供的`KeyValuePipe`
+> 其核心是用到了 angular6 之后提供的[KeyValuePipe](https://github.com/angular/angular/blob/9.0.5/packages/common/src/pipes/keyvalue_pipe.ts#L25-L88)。用法可以参考[stackoverflow上面的相关讨论](https://stackoverflow.com/questions/52793944/angular-keyvalue-pipe-sort-properties-iterate-in-order) 
 
+基础用法
 ```html
 <div *ngFor="let item of object | keyvalue">
   {{item.key}}:{{item.value}}
 </div>
+```
+
+有时候，咱们可能需要对对象的循环顺序做控制。则需要一个添加一个`compareFunction`
+
+```html
+<div *ngFor="let item of object | keyvalue: orderKey">
+  {{item.key}}:{{item.value}}
+</div>
+```
+
+```ts
+export class DemoComponent extends OnInit {
+  orderKey = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
+    return Number(a.key) - Number(b.key);
+  };
+}
 ```
 
 #### 29. ng-zorro 使用 upload 组件提示 message: '上传错误'
