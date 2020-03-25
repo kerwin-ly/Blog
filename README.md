@@ -146,6 +146,10 @@
 
 [webpack4.x自定义构建](https://juejin.im/post/5de87444518825124c50cd36#heading-35)
 
+### angular
+
+[A deep dive into @Injectable and “providedIn” in Ivy](https://medium.com/angular-in-depth/deep-dive-into-injectable-and-providedin-in-ivy-2a58c989e31c)
+
 ### 其他
 
 [POST和GET的区别](https://www.oschina.net/news/77354/http-get-post-different)
