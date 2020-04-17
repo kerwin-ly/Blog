@@ -159,3 +159,5 @@
 [微前端解决方案](https://tech.antfin.com/community/articles/536)
 
 [How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
+
+[JS正则表达式完整教程](https://juejin.im/post/5965943ff265da6c30653879)
