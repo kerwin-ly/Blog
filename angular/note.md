@@ -947,3 +947,9 @@ beforeUpload = (file: UploadFile): boolean => {
 
 ![error-upload](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/error-upload.png)
 ```
+
+#### 30. 页面初始阶段，在钩子函数中重复赋值，报错：ERROR Error: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value: 'ngIf: false'. Current value: 'ngIf: true'.
+
+[stackoverflow解决](https://stackoverflow.com/questions/54611631/expressionchangedafterithasbeencheckederror-on-angular-6-while-using-mat-tab/54616248#54616248))
+
+[产生原因：Everything you need to know about the `ExpressionChangedAfterItHasBeenCheckedError`](https://indepth.dev/everything-you-need-to-know-about-the-expressionchangedafterithasbeencheckederror-error/)
