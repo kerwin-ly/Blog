@@ -97,6 +97,8 @@
 
 [Git 提交规范](https://github.com/kerwin-ly/Blog/blob/master/common/Git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83.md)
 
+[Git 异常处理措施](https://juejin.im/post/5edcf3a36fb9a047fa04fbc3)
+
 ## 其他
 
 ### 总结
