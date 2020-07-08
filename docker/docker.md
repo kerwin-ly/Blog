@@ -96,12 +96,13 @@ docker image rm -f $(docker images -aq)
 docker inspect dockerId
 
 # 将镜像保存为压缩包导出
-# docker save -o 要保存的文件名 要保存的镜像名/镜像id
-docker save -o graph.tar 7fbbf0d46010
+# docker save <IMAGE NAME>:<IMAGE TAG> -o save.tar
+# docker save -o graph.tar 7fbbf0d46010
+docker save dockerhub.xxx.com/label_web_html:PRODUCT_20200526_142942 -o shisuo.tar
 
 # 导入镜像包,导入后可以通过docker images查看
 # docker load < 压缩包名
-docker load < graph.tar
+docker load < shisuo.tar
 ```
 ### 2. 操作容器
 

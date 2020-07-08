@@ -108,9 +108,11 @@
 
 [JS 编码规范](https://github.com/kerwin1/Blog/blob/master/common/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
 
-### Mock
+### 工具
 
 [使用mock.js模拟后台请求并返回数据](https://github.com/kerwin-ly/Blog/blob/master/mock/mock.md)
+
+[使用charles抓包node请求](https://www.jianshu.com/p/460d9c519001)
 
 ## 计算机基础
 
