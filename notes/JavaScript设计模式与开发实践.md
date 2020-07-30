@@ -1,5 +1,64 @@
 # JavaScript 设计模式与开发实践
 
+## 基础知识
+
+### 静态类型和动态类型语言
+编程语言按照数据类型大体可以分为两类，一类是静态类型语言，另一类是动态类型语言。静态类型语言**在编译时便已确定变量的类型**，而动态类型语言的变量类型要到**程序运行的时候，待变量被赋予某个值之后，才会具有某种类型**。
+
+### 多态
+统一操作作用与不同对象上，产生不同的执行结果。也就是说，**向不同的对象发送同一个消息，这些对象会根据消息作出不同的反馈**。（举例：当鸭子和鸡都收到“叫”的消息后，鸭子反馈的是“嘎嘎嘎”，鸡反馈的是“咯咯咯”）
+
+多态背后的思想是将“可变的部分”和“不变的部分”进行隔离，达到解耦的目的，同时满足开放-封闭原则。
+
+```js
+// not good
+// 当增加一只狗叫唤时，需要修改makeSound方法，增加else if判断，违反了开放-封闭原则
+function makeSound(animal) {
+  if (animal instanceof Duck) {
+    console.log('嘎嘎嘎');
+  } else if (animal instanceof Chicken) {
+    console.log('咯咯咯');
+  }
+}
+class Duck {
+  constructor() {}
+}
+class Chicken {
+  constructor() {}
+}
+makeSound(new Duck())
+makeSound(new Chicken())
+```
+
+```js
+// good，如果希望添加再添加一只狗，只需要增加狗的类即可，不需要修改makesound方法
+function makeSound(animal) {
+  animal.sound();
+}
+class Duck {
+  constructor() {}
+
+  sound() {
+    console.log('嘎嘎嘎');
+  }
+}
+class Chicken {
+  constructor() {}
+
+  sound() {
+    console.log('咯咯咯')
+  }
+}
+makeSound(new Duck()) // 嘎嘎嘎
+makeSound(new Chicken()) // 咯咯咯
+```
+
+### 封装
+封装的目的是将信息隐藏。通过封装变化的方式，咱们也可以把系统中稳定不变的部分和容易变化的部分隔离开来，在系统的演变过程中，我们只需要替换那些变化的部分，而如果变化的部分是已经封装好了，替换起来也相对容易，便可以最大程度的保证程序的稳定性和可扩展性。
+
+### 继承
+面向对象编程最重要的特性之一就是可以扩展已有的类，它允许我们创建一个类（子类），从已有的类（父类）上继承所有的属性和方法，子类可以包含父类中没有的属性和方法；
+
 ## 设计模式
 
 ### 1.原型模式
@@ -632,17 +691,218 @@ renderMap(baiduMapAdapter);
 
 ## 设计原则
 
-### 1.单一职责原则
+### 1.单一职责原则(Single Responsibility Principle, SRP)
 
-> `SRP 原则`的优点是降低了单个类或者对象的复杂度，按照职责把对象分解成更小的粒度， 这有助于代码的复用，也有利于进行单元测试。当一个职责需要变更的时候，不会影响到其他 的职责。（eg: 装饰者模式 ，代理模式，单例模式等）
+> 单一职责原则体现为：**一个对象(方法)只做一件事情**（eg: 装饰者模式 ，代理模式，单例模式，单例模式等）
 
-### 2.最少知识原则（迪米特法则）
+需要注意的是，不是所有的职责都应该被一一分离。一方面，如果随着需求的变化，有两个职责总是同时变化，那就不必分离他们。（如：`ajax`创建`XMLHttpRequest`和发送`xhr`请求）另一方面，某些情况下，两个职责被耦合在一起，但几乎没有变化的可能性，就没有必要分开它们。等到真正变化的时候，再解耦也不迟。
+
+* 优点：降低了单个类或者对象的复杂度，按照职责把对象分解成更小的粒度， 这有助于代码的复用，也有利于进行单元测试。当一个职责需要变更的时候，不会影响到其他 的职责。
+
+* 缺点：最明显的是会增加编写代码的复杂度。当我们按照职责把对象分解成更小的粒度之后，实际上也增大了这些对象之间相互联系的难度。
+
+“单一职责原则”是咱们在开发中最常见的一个规则，比起一个上百行代码的“胖函数”，拆成一个个更小颗粒的函数并组装，会显得更加易读，优雅。
+
+下面是cli工具中根据yapi生成service代码的部分逻辑
+```ts
+// not good, 如果不考虑单一职责，一个run函数就可以执行完所有逻辑，但让代码的阅读者着实头痛。
+async run(projectId: string, answers: inquirer.Answers) {
+  const swaggerAddress = cwd() + '/swaggerApi.json'; // 本地swagger保存地址
+  try {
+      const user = await yApi.login({ email: yapiConfig.email, password: yapiConfig.password });
+
+      if (user.errcode && user.errcode !== 0) {
+        error('Error: ' + user.errmsg);
+        process.exit(1);
+      }
+      const swagger = await yApi.getSwaggerJson({
+        type: 'xxx',
+        pid: Number(projectId),
+        status: 'all',
+        isWiki: false,
+      });
+
+      if (swagger.errcode && swagger.errcode !== 0) {
+        if (swagger.errcode === 502) {
+          error(`Error: You don't have rights to download swaggerApi.json`);
+        } else {
+          error('Error: ' + swagger.errmsg);
+        }
+        process.exit(1);
+      }
+      fs.writeFileSync(localAddress, JSON.stringify(swagger, null, '\t'));
+      log(`${chalk.green('✔')}  Successfully created swaggerApi.json in the root directory`);
+    } catch (err) {
+      throw err;
+    }
+    const swaggerJson = require(swaggerAddress);
+    const str = tags.reduce((total: string, item: Tag) => (total += item.name), '');
+    const reg = /.*[\u4e00-\u9fa5]+.*$/i;
+    if (reg.test(str)) return;
+    const packageJson = require(cwd() + '/package.json');
+
+    if (packageJson['devDependencies']['xxx']) return;
+    install({
+      devDependencies: ['xxx'],
+    });
+}
+```
+
+```ts
+// good, 将职责划分到各个函数中去。一个函数仅拥有一个职责，并进行关联。可以很亲清晰的了解开发者的用意
+async run(projectId: string, answers: inquirer.Answers) {
+  const swaggerAddress = cwd() + '/swaggerApi.json';
+  await this.downloadSwaggerJson(projectId, swaggerAddress); // 下载swaggerApi.json到本地
+  const swaggerJson = require(swaggerAddress);
+  if (this.hasChinese(swaggerJson.tags)) { // 判断swagger的分类是否含有中文
+    error('Error: Tags should be english in yapi');
+    return;
+  }
+  this.installPackages(); // 安装依赖
+  ...
+}
+```
+
+### 2.最少知识原则/迪米特法则(Least Knowledge Principle)
 
 > `迪米特法则`是指尽量较少对象与对象之间的引用，如果迫不得已，最好是通过第三方对象来对这两个对象进行通信。而不让两个对象直接发生关系。（eg: 中介者模式，外观模式）
 
-### 3.开放-封闭原则
+* 优点：可以实现对象之间的关系解耦，避免混乱的对象之间的引用
 
-> 在面向对象的程序设计中，`开放封闭原则(OCP)`是最重要的一条原则。很多时候，一个程序具有良好的设计，往往说明它是符合开放  封闭原则的。当需要改变一个程序的功能或者给这个程序增加新功 能的时候，可以使用增加代码的方式，但是不允许改动程序的源代码。其核心在于区分系统中**变化**和**不变**的地方，利用**对象的多肽性**将变化的地方进行封装处理。
+* 缺点：当系统的体量十分庞大时，也会导致中介者对象十分复杂，难以维护
+
+如果你的对象引用是如下这种情况
+![对象引用](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/intermediary-false.png)
+
+很明显的，你违背了迪米特法则。对象的四处引用会导致你的程序变得不太牢固。也许你可以尝试下用`中介者模式`来进行改造
+![中介者模式](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/intermediary-false.png)
+
+这里使用一个中介者模式进行举例，如开发一个聊天室系统，咱们应尽量避免用户之间直接发送信息，而是通过“中介者-聊天室”来进行消息传递。如果还需要额外的信息，如发送图片等，直接在中介者类中添加即可，不会对用户类和以前的功能产生耦合。
+```ts
+// 举例：中介者模式
+// 聊天室类
+class CharRoom {
+  static showMessage(name: string, message: string) {
+    console.log(`${name}：${message}`)
+  }
+}
+
+// 抽象
+abstract class User {
+  protected name: string
+
+  public abstract sendMessage(message: string): void
+}
+
+class Jock extends User {
+  constructor () {
+    super()
+    this.name = 'Jock'
+  }
+
+  public sendMessage (message: string): void {
+    CharRoom.showMessage(this.name, message)
+  }
+}
+
+class Mary extends User {
+  constructor () {
+    super()
+    this.name = 'Mary'
+  }
+
+  public sendMessage (message: string): void {
+    CharRoom.showMessage(this.name, message)
+  }
+}
+
+const mary = new Mary()
+const jock = new Jock()
+
+mary.sendMessage('Hello world!')
+jock.sendMessage('Hello Vue')
+```
+
+### 3.开放-封闭原则(Open Closed Principle, OCP)
+
+> 在面向对象的程序设计中，`开放封闭原则(OCP)`是最重要的一条原则。其意思是当需要对一个程序的某个功能进行新增或改变时候，**对源码的扩展/新增开放，对源码的修改关闭，也就是说尽量在不修改源码逻辑的情况下，通过增加代码的方式来满足变化的需求**。其核心在于区分系统中变化和不变的地方，利用对象的多态性将变化的地方进行封装处理。（几乎所有的设计模式/原则都是遵守开放-封闭原则的）
+
+这里举个例子，计算多边形的面积
+```ts
+class Rectangle {
+  public width: number;
+  public height: number;
+  constructor(width: number, height: number) {
+    this.width = width;
+    this.height = height;
+  }
+}
+
+class Circle {
+  public radius: number;
+  constructor(radius: number) {
+    this.radius = radius;
+  }
+}
+
+function calculateAreasOfMultipleShapes(
+  shapes: Array<Rectangle | Circle>
+) {
+  return shapes.reduce(
+    (calculatedArea, shape) => {
+      if (shape instanceof Rectangle) {
+        return calculatedArea + shape.width * shape.height;
+      }
+      if (shape instanceof Circle) {
+        return calculatedArea + shape.radius * Math.PI;
+      }
+    },
+    0
+  );
+}
+```
+
+这时候需求变了。有更多的多边形面积需要计算，如果直接添加`else if`可能会去修改到我们的源代码，如果其源码本身已经很复杂了，则可能导致不必要的影响。那么我们就可以考虑下利用`开放封闭原则`。利用对象的`多态性`来进行重构，把变化的进行封装，让变化的和不变的内容进行隔离。
+```ts
+interface Shape {
+  getArea(): number;
+}
+
+class Rectangle implements Shape {
+  public width: number;
+  public height: number;
+  constructor(width: number, height: number) {
+    this.width = width;
+    this.height = height;
+  }
+  public getArea() {
+    return this.width * this.height;
+  }
+}
+
+class Circle implements Shape {
+  public radius: number;
+  constructor(radius: number) {
+    this.radius = radius;
+  }
+  public getArea() {
+    return this.radius * Math.PI;
+  }
+}
+
+function calculateAreasOfMultipleShapes(
+  shapes: Shape[]
+) {
+  return shapes.reduce(
+    (calculatedArea, shape) => {
+      return calculatedArea + shape.getArea();
+    },
+    0
+  );
+}
+```
+
+上面的例子中可以看出，遵守开放-封闭原则，我们的代码多了许多。而开放-封闭原则是一个看起来比较虚幻的原则，我们很难在第一次了解需求的时候就知道哪些地方可能改变。所以，我们在第一次开发时，最好还是优先保证项目交付，让代码尽可能简洁即可。当需求变化时，再去考虑“封装”并遵守开放-封闭原则。不然，可能会导致你过度封装，代码臃肿。（如：客户让你计算地球的体积，你按球体计算即可，没必要考虑地球变方了，又去把计算体积的方法进行抽象封装）
 
 ## 重构
 
