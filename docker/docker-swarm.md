@@ -164,12 +164,9 @@ docker stack deploy -c docker-compose.yml wordpress
 
 ```
 docker stack ls
-``
+```
 移出服务
-```
 
+```
 docker stack down wordpress
-
-```
-
 ```
