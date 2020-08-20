@@ -138,6 +138,8 @@
 
 [从浏览器多进程到JS单线程，JS运行机制最全面的一次梳理](https://juejin.im/post/5a6547d0f265da3e283a1df7)
 
+[如何编写高质量的函数](https://juejin.im/post/6844903779645538318)
+
 ### node.js
 
 [node学习指南](https://www.nodejs.red/#/javascript/base)
