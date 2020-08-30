@@ -140,6 +140,8 @@
 
 [如何编写高质量的函数](https://juejin.im/post/6844903779645538318)
 
+[clean code javascript](https://github.com/ryanmcdermott/clean-code-javascript?utm_source=gold_browser_extension)
+
 ### node.js
 
 [node学习指南](https://www.nodejs.red/#/javascript/base)
