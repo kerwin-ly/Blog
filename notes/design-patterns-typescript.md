@@ -252,6 +252,8 @@ https://zhuanlan.zhihu.com/p/120071984
 
 简单工厂：根据不同参数创建不同的对象，但一个新的权限出现时。不需要修改外部代码，可以直接调用`new UserFactory().create()`。但内部需要额外增加判定条件。
 
+举个例子，咱们在新增用户的时候，需要根据用户选择的权限，来新增不同权限的用户。
+
 ```ts
 class UserFactory {
   create(name: string, age: number, type: string): void {
@@ -259,15 +261,12 @@ class UserFactory {
       return {
         name,
         age,
-        hasPermission: true,
         root: 'Admin',
       };
     } else if (type === 'Vip') {
       return {
         name,
         age,
-        isStupid: true,
-        hasMoney: true,
         root: 'Vip',
       };
     }
@@ -279,6 +278,8 @@ aa.create('Jim', 23, 'Vip');
 ```
 
 工厂方法：利用多态的方式，去除简单工厂模式中的判断语句。如果需要新增一种权限，即新增一个工厂即可。符合了咱们的`开放封闭原则`。
+
+举个例子，我们需要创建一个用户。如果是`Admin`权限，则将其添加到一个分组下，方便通知系统信息。如果是`Vip`用户，则需要添加一对一的客服人员。这时候，**把工厂抽象出来，让子工厂来决定怎么生产产品, 每个产品都由自己的工厂生产。**
 
 ```ts
 interface User {
@@ -292,31 +293,113 @@ abstract class UserFactory {
 }
 
 class AdminFactory extends UserFactory {
-  public create(name: string, age: number) {
+  public create(name: string, age: number): User {
+    this.addAdminGroup(name); // 将其分配到admin分组下
     return {
       name,
       age,
-      hasPermission: true,
       root: 'Admin',
     };
+  }
+
+  private addAdminGroup(name: string): void {
+    console.log('将xx用户添加到admin分组中去');
   }
 }
 
 class VipFactory extends UserFactory {
-  public create(name: string, age: number) {
+  this.addCustomerService(name); // 安排vip一对一服务
+  public create(name: string, age: number): User {
     return {
       name,
       age,
-      isStupid: true,
-      hasMoney: true,
       root: 'Vip',
     };
+  }
+
+  private addCustomerService(name: string): void {
+    console.log('Vip用户安排一对一的客服人员');
   }
 }
 
 const aa = new VipFactory();
 aa.create('kerwin', 23);
+```
 
+抽象工厂：同样隐藏了具体产品的生产，不过生产的是多种类产品。当需要生产的是一个产品族，并且产品之间或多或少有关联时可以考虑抽象工厂方法。（如：生产枪时，除了生产枪，还需要生产其弹药；创建用户时，除了创建用户，还需要创建其角色权限等）
+
+```ts
+interface User {
+  name: string;
+  age: number;
+  root: string;
+}
+
+interface Role {
+  [props: string]: string[];
+}
+
+abstract class UserFactory {
+  public abstract create(user: User, role: Role): void;
+  public abstract createUser(name: string, age: number): User;
+  public abstract createRole(name: string): Role;
+}
+
+class AdminFactory extends UserFactory {
+  public create(user: User, role: Role): void {
+    console.log('successfully created');
+  }
+
+  public createUser(name: string, age: number): User {
+    this.addAdminGroup(name); // 将其分配到admin分组下
+    return {
+      name,
+      age,
+      root: 'Admin',
+    };
+  }
+
+  public createRole(): Role {
+    return {
+      'Admin': ['add', 'delete', 'update', 'detail']; // 赋予admin角色，拥有增删改查权限
+    }
+  }
+
+  private addAdminGroup(name: string): void {
+    console.log('将xx用户添加到admin分组中去');
+  }
+}
+
+class VipFactory extends UserFactory {
+  public create(user: User, role: Role): void {
+    console.log('successfully created');
+  }
+
+  public createUser(name: string, age: number): User {
+
+  this.addCustomerService(name); // 安排vip一对一服务
+    return {
+      name,
+      age,
+      root: 'Vip',
+    };
+  }
+
+  public createRole(): Role {
+    return {
+      'Vip': ['detail'] // 赋予vip角色，拥有查看权限
+    }
+  }
+
+  private addCustomerService(name: string): void {
+    console.log('Vip用户安排一对一的客服人员');
+  }
+}
+
+const aa = new VipFactory();
+const user = aa.createUser('kerwin', 23);
+const role = aa.createRole();
+aa.create(user, role);
 ```
 
 ## 参考
