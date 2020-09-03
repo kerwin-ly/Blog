@@ -402,6 +402,90 @@ const role = aa.createRole();
 aa.create(user, role);
 ```
 
+### 3. 代理模式
+为一个对象提供一个代用品或占位符，以便控制它的访问
+
+**注意**：代理对象并不会在另一对象的基础上添加方法或修改其方法，也不会简化那个对象的接口，它实现的接口与本体完全相同，所有对它进行的方法调用都会被传递给本体。
+```ts
+interface IBookLibrary {
+  getBook: (bookName: string) => Book;
+  addBook: (book: Book) => void;
+}
+
+interface BookList {
+  [bookName: string]: Book;
+}
+
+interface Book {
+  author: string;
+  name: string;
+}
+
+export default class Client {
+  public static userTest(): Book {
+    const proxy = new BookProxy('user');
+
+    return proxy.getBook('book-a')
+  }
+
+  public static adminTest(): void {
+    const proxy = new BookProxy('admin');
+
+    proxy.addBook({
+      name: 'book-a',
+      author: 'kerwin'
+    })
+    const book = proxy.getBook('book-a');
+    console.log(book);
+  }
+}
+
+// 代理
+class BookProxy implements IBookLibrary {
+  private readonly bookLibrary: BookLibrary;
+  private readonly role: string;
+
+  constructor(role: string) {
+    this.role = role;
+    this.bookLibrary = new BookLibrary();
+  }
+
+  public getBook(bookName: string): Book {
+    return this.bookLibrary.getBook(bookName);
+  }
+
+  public addBook(book: Book): void {
+    if (this.role === 'user') {
+      throw new Error('Dont have right to add'); // 加一层权限拦截
+    }
+    this.bookLibrary.addBook(book);
+  }
+}
+
+// 主体
+class BookLibrary implements IBookLibrary {
+  private books: BookList;
+
+  constructor() {
+    this.books = {} as BookList;
+  }
+
+  public getBook(bookName: string): Book {
+    if (!this.books[bookName]) {
+      throw new Error(`The book ${bookName} does not exsits`)
+    }
+    return this.books[bookName];
+  }
+
+  public addBook(book: Book): void {
+    this.books[book.name] = book;
+  }
+}
+
+Client.adminTest();
+// Client.userTest();
+```
+
 ## 参考
 
 https://github.com/torokmark/design_patterns_in_typescript/tree/master/singleton
