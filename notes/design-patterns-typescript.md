@@ -1,12 +1,12 @@
 # js 设计模式
 
-> 设计模式一共有 23 种
+> 设计模式的定义是:在面向对象软件设计过程中针对特定问题的简洁而优雅的解决方案。
 
 ## 一 设计原则
 
 ### 1.单一职责原则(Single Responsibility Principle, SRP)
 
-> 单一职责原则体现为：**一个对象(方法)只做一件事情**（eg: 装饰者模式 ，代理模式，单例模式，单例模式等）
+> 单一职责原则体现为：**一个对象(方法)只做一件事情**（eg: 装饰者模式 ，代理模式，单例模式等）
 
 需要注意的是，不是所有的职责都应该被一一分离。一方面，如果随着需求的变化，有两个职责总是同时变化，那就不必分离他们。（如：`ajax`创建`XMLHttpRequest`和发送`xhr`请求）另一方面，某些情况下，两个职责被耦合在一起，但几乎没有变化的可能性，就没有必要分开它们。等到真正变化的时候，再解耦也不迟。
 
@@ -167,7 +167,7 @@ function calculateAreasOfMultipleShapes(shapes: Array<Rectangle | Circle>) {
       return calculatedArea + shape.width * shape.height;
     }
     if (shape instanceof Circle) {
-      return calculatedArea + shape.radius * Math.PI;
+      return calculatedArea + Math.pow(shape.radius, 2) * Math.PI;
     }
   }, 0);
 }
@@ -198,7 +198,7 @@ class Circle implements Shape {
     this.radius = radius;
   }
   public getArea() {
-    return this.radius * Math.PI;
+    return Math.pow(this.radius, 2) * Math.PI;
   }
 }
 
@@ -209,11 +209,11 @@ function calculateAreasOfMultipleShapes(shapes: Shape[]) {
 }
 ```
 
-上面的例子中可以看出，遵守开放-封闭原则，我们的代码多了许多。而开放-封闭原则是一个看起来比较虚幻的原则，我们很难在第一次了解需求的时候就知道哪些地方可能改变。所以，我们在第一次开发时，最好还是优先保证项目交付，让代码尽可能简洁即可。当需求变化时，再去考虑“封装”并遵守开放-封闭原则。不然，可能会导致你过度封装，代码臃肿。（如：客户让你计算地球的体积，你按球体计算即可，没必要考虑地球变方了，又去把计算体积的方法进行抽象封装）
+上面的例子中可以看出，遵守开放-封闭原则，我们的代码多了许多。而开放-封闭原则是一个看起来比较虚幻的原则，我们很难在第一次了解需求的时候就知道哪些地方可能改变。所以，我们在第一次开发时，最好还是优先保证项目交付，让代码尽可能简洁即可。当需求变化时，再去考虑“封装”并遵守开放-封闭原则。不然，可能会导致你过度封装，代码臃肿。（举个极端例子，客户让你计算地球的体积，你按球体计算即可，没必要考虑地球变方了，又去把计算体积的方法进行抽象封装）
 
 ### 4.里式置换原则(Liskov Substitution Princple, LSP)
 
-子类能覆盖父类；父类能出现的地方子类就能出现
+主要阐述了有关继承的一些原则，也就是什么时候应该使用继承，什么时候不应该使用继承，以及其中蕴含的原理。其核心**子类可以扩展父类的功能，但不能改变父类原有的功能**
 
 ### 5.依赖倒置原则(Dependency Inversion Principle, DIP)
 
@@ -248,9 +248,8 @@ export class Singleton {
 
 ### 2.工厂模式
 
-https://zhuanlan.zhihu.com/p/120071984
-
-简单工厂：根据不同参数创建不同的对象，但一个新的权限出现时。不需要修改外部代码，可以直接调用`new UserFactory().create()`。但内部需要额外增加判定条件。
+#### 简单工厂
+根据不同参数创建不同的对象，但一个新的权限出现时。不需要修改外部代码，可以直接调用`new UserFactory().create()`。但内部需要额外增加判定条件。
 
 举个例子，咱们在新增用户的时候，需要根据用户选择的权限，来新增不同权限的用户。
 
@@ -277,7 +276,10 @@ const aa = new UserFactory();
 aa.create('Jim', 23, 'Vip');
 ```
 
-工厂方法：利用多态的方式，去除简单工厂模式中的判断语句。如果需要新增一种权限，即新增一个工厂即可。符合了咱们的`开放封闭原则`。
+上面的代码虽然达到了目的，但明显违背了我们刚提到的`开放封闭原则`。如果新增一个角色，则需要进入`create()`方法内部去添加一个条件。接下来，我们使用`工厂方法`来重构。
+
+#### 工厂方法
+利用多态的方式，去除简单工厂模式中的判断语句。如果需要新增一种权限，即新增一个工厂即可。
 
 举个例子，我们需要创建一个用户。如果是`Admin`权限，则将其添加到一个分组下，方便通知系统信息。如果是`Vip`用户，则需要添加一对一的客服人员。这时候，**把工厂抽象出来，让子工厂来决定怎么生产产品, 每个产品都由自己的工厂生产。**
 
@@ -326,7 +328,8 @@ const aa = new VipFactory();
 aa.create('kerwin', 23);
 ```
 
-抽象工厂：同样隐藏了具体产品的生产，不过生产的是多种类产品。当需要生产的是一个产品族，并且产品之间或多或少有关联时可以考虑抽象工厂方法。（如：生产枪时，除了生产枪，还需要生产其弹药；创建用户时，除了创建用户，还需要创建其角色权限等）
+#### 抽象工厂
+同样隐藏了具体产品的生产，不过生产的是多种类产品。当需要生产的是一个产品族，并且产品之间或多或少有关联时可以考虑抽象工厂方法。（如：生产枪时，除了生产枪，还需要生产其弹药；创建用户时，除了创建用户，还需要创建其角色权限等）
 
 ```ts
 interface User {
@@ -403,9 +406,11 @@ aa.create(user, role);
 ```
 
 ### 3. 代理模式
-为一个对象提供一个代用品或占位符，以便控制它的访问
 
-**注意**：代理对象并不会在另一对象的基础上添加方法或修改其方法，也不会简化那个对象的接口，它实现的接口与本体完全相同，所有对它进行的方法调用都会被传递给本体。
+为一个对象提供一个代用品或占位符，以便控制它的访问。
+
+**注意**：代理对象并不会在另一对象的基础上添加方法或修改其方法，也不会简化那个对象的接口，它实现的接口与本体完全相同，所有对它进行的方法调用都会被传递给本体。在实际开发中，当遇到访问对象需要权限验证 or 请求接口十分耗时，需要缓存数据时，我们可以使用代理模式来处理。
+
 ```ts
 interface IBookLibrary {
   getBook: (bookName: string) => Book;
@@ -425,7 +430,7 @@ export default class Client {
   public static userTest(): Book {
     const proxy = new BookProxy('user');
 
-    return proxy.getBook('book-a')
+    return proxy.getBook('book-a');
   }
 
   public static adminTest(): void {
@@ -433,8 +438,8 @@ export default class Client {
 
     proxy.addBook({
       name: 'book-a',
-      author: 'kerwin'
-    })
+      author: 'kerwin',
+    });
     const book = proxy.getBook('book-a');
     console.log(book);
   }
@@ -451,7 +456,7 @@ class BookProxy implements IBookLibrary {
   }
 
   public getBook(bookName: string): Book {
-    return this.bookLibrary.getBook(bookName);
+    return this.bookLibrary.getBook(bookName); // 如果遇到请求耗时操作，这里也可以加一层缓存，从缓存中直接返回数据
   }
 
   public addBook(book: Book): void {
@@ -472,7 +477,7 @@ class BookLibrary implements IBookLibrary {
 
   public getBook(bookName: string): Book {
     if (!this.books[bookName]) {
-      throw new Error(`The book ${bookName} does not exsits`)
+      throw new Error(`The book ${bookName} does not exsits`);
     }
     return this.books[bookName];
   }
@@ -486,6 +491,84 @@ Client.adminTest();
 // Client.userTest();
 ```
 
-## 参考
+### 4. 观察者模式
 
-https://github.com/torokmark/design_patterns_in_typescript/tree/master/singleton
+它定义对象间的一种一对多的依赖关系，当一个对象的状 态发生改变时，所有依赖于它的对象都将得到通知。
+
+```ts
+class Subject {
+  private observers: Observer[] = [];
+
+  public addObserver(observer: Observer): void {
+    console.log(observer, 'is pushed!');
+    this.observers.push(observer);
+  }
+
+  public deleteObserver(observer: Observer): void {
+    console.log('remove', observer);
+    const n: number = this.observers.indexOf(observer);
+    n != -1 && this.observers.splice(n, 1);
+  }
+
+  public notifyObservers(): void {
+    console.log('notify all the observers', this.observers);
+    this.observers.forEach((observer) => observer.notify());
+  }
+}
+
+interface Observer {
+  notify: Function;
+}
+
+class ConcreteObserver implements Observer {
+  constructor(private name: string) {}
+
+  notify() {
+    console.log(`${this.name} has been notified.`);
+  }
+}
+
+function show(): void {
+  const subject: Subject = new Subject();
+  subject.addObserver(new ConcreteObserver('Semlinker'));
+  subject.addObserver(new ConcreteObserver('Kakuqo'));
+  subject.notifyObservers();
+  subject.deleteObserver(new ConcreteObserver('Lolo'));
+  subject.notifyObservers();
+}
+```
+
+### 5. 策略模式
+
+定义一系列的算法，把它们一个个封装起来，并且使它们可以互相替换。
+
+一个基于策略模式的程序至少由两部分组成。
+* 第一个部分：一组策略类 strategy，策略类封装了具体的算法，并负责具体的计算过程。
+* 第二个部分：环境类 Context , Context 接受客户的请求，随后把请求委托给某一个策略类。
+
+```ts
+interface Strategy {
+  S: (salary: number) => number;
+  A: (salary: number) => number;
+  B: (salary: number) => number;
+}
+// strategy
+const strategy: Strategy = {
+  S: function (salary: number): number {
+    return salary * 4;
+  },
+  A: function (salary: number): number {
+    return salary * 3;
+  },
+  B: function (salary: number): number {
+    return salary * 2;
+  },
+};
+// Context
+var calcluateBouns = function (level: string, salary: number): number {
+  return strategy[level](salary);
+};
+console.log(calcluateBouns('S', 4000)); // 输出16000
+console.log(calcluateBouns('A', 3000)); // 输出9000
+console.log(calcluateBouns('B', 2000)); // 输出4000
+```
