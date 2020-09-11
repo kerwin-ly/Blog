@@ -455,6 +455,10 @@ const role = aa.createRole();
 aa.create(user, role);
 ```
 
+简单工厂，工厂方法，抽象工厂的区别
+![对象引用](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/factory.jpeg)
+
+
 ### 3. 代理模式
 
 为一个对象提供一个代用品或占位符，以便控制它的访问。
