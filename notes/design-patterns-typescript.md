@@ -10,7 +10,7 @@
 
 需要注意的是，不是所有的职责都应该被一一分离。一方面，如果随着需求的变化，有两个职责总是同时变化，那就不必分离他们。（如：`ajax`创建`XMLHttpRequest`和发送`xhr`请求）另一方面，某些情况下，两个职责被耦合在一起，但几乎没有变化的可能性，就没有必要分开它们。等到真正变化的时候，再解耦也不迟。
 
-- 优点：降低了单个类或者对象的复杂度，按照职责把对象分解成更小的粒度， 这有助于代码的复用，也有利于进行单元测试。当一个职责需要变更的时候，不会影响到其他 的职责。
+- 优点：降低了单个类或者对象的复杂度，**按照职责把对象分解成更小的粒度**， 这有助于代码的复用，也有利于进行单元测试。当一个职责需要变更的时候，不会影响到其他 的职责。
 
 - 缺点：最明显的是会增加编写代码的复杂度。当我们按照职责把对象分解成更小的粒度之后，实际上也增大了这些对象之间相互联系的难度。
 
@@ -63,7 +63,7 @@ async run(projectId: string, answers: inquirer.Answers) {
 ```
 
 ```ts
-// good, 将职责划分到各个函数中去。一个函数仅拥有一个职责，并进行关联。可以很亲清晰的了解开发者的用意
+// good, 将职责划分到各个函数中去。一个函数仅拥有一个职责，并进行关联。可以很清晰的了解开发者的用意
 async run(projectId: string, answers: inquirer.Answers) {
   const swaggerAddress = cwd() + '/swaggerApi.json';
   await this.downloadSwaggerJson(projectId, swaggerAddress); // 下载swaggerApi.json到本地
@@ -89,53 +89,100 @@ async run(projectId: string, answers: inquirer.Answers) {
 ![对象引用](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/intermediary-false.png)
 
 很明显的，你违背了迪米特法则。对象的四处引用会导致你的程序变得不太牢固。也许你可以尝试下用`中介者模式`来进行改造
-![中介者模式](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/intermediary-false.png)
+![中介者模式](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/intermediary-true.png)
 
-这里使用一个中介者模式进行举例，如开发一个聊天室系统，咱们应尽量避免用户之间直接发送信息，而是通过“中介者-聊天室”来进行消息传递。如果还需要额外的信息，如发送图片等，直接在中介者类中添加即可，不会对用户类和以前的功能产生耦合。
+这里使用一个中介者模式进行举例，如我们使用“滴滴打车”。用户只需要向平台发起“叫车”请求，平台便会自动放出这一消息，司机直接通过平台进行“抢单”。
 
 ```ts
-// 举例：中介者模式
-// 聊天室类
-class CharRoom {
-  static showMessage(name: string, message: string) {
-    console.log(`${name}：${message}`);
+interface Client {
+  getTaxi();
+  pay();
+}
+
+interface Car {
+  isWorking: boolean;
+
+  startWork();
+  finishWork();
+}
+
+interface Mediator {
+  registerClient(client: Client);
+  registerCar(car: Car);
+
+  getCar(): Car;
+  pay(car: Car);
+  updateCarStatus(car: Car);
+}
+
+class User implements Client {
+  taxi: Car;
+
+  constructor(private mediator: Mediator) {
+    this.mediator.registerClient(this);
+  }
+
+  getTaxi() {
+    this.taxi = this.mediator.getCar();
+    if (this.taxi) {
+      console.log('车来了');
+    } else {
+      console.log('没叫到车');
+    }
+  }
+
+  pay() {
+    this.mediator.pay(this.taxi);
+    console.log('付款');
   }
 }
 
-// 抽象
-abstract class User {
-  protected name: string;
+class Taxi implements Car {
+  isWorking: boolean = false;
 
-  public abstract sendMessage(message: string): void;
-}
-
-class Jock extends User {
-  constructor() {
-    super();
-    this.name = 'Jock';
+  constructor(private mediator: Mediator) {
+    this.mediator.registerCar(this);
   }
 
-  public sendMessage(message: string): void {
-    CharRoom.showMessage(this.name, message);
-  }
-}
-
-class Mary extends User {
-  constructor() {
-    super();
-    this.name = 'Mary';
+  startWork() {
+    console.log('有人叫车');
+    this.isWorking = true;
+    this.mediator.updateCarStatus(this);
   }
 
-  public sendMessage(message: string): void {
-    CharRoom.showMessage(this.name, message);
+  finishWork() {
+    console.log('送完这趟了');
+    this.isWorking = false;
+    this.mediator.updateCarStatus(this);
   }
 }
 
-const mary = new Mary();
-const jock = new Jock();
+class DiDi implements Mediator {
+  private clientList: Array<Client> = [];
+  private carList: Array<Car> = [];
 
-mary.sendMessage('Hello world!');
-jock.sendMessage('Hello Vue');
+  registerClient(client: Client) {
+    this.clientList.push(client);
+  }
+
+  registerCar(car: Car) {
+    this.carList.push(car);
+  }
+
+  getCar(): Car {
+    let car = this.carList.find((o) => !o.isWorking);
+    car.startWork();
+    return car;
+  }
+
+  pay(car: Car) {
+    car.finishWork();
+  }
+
+  updateCarStatus(car: Car) {
+    console.log(`车子状态：${car.isWorking ? '工作' : '闲置'}`);
+  }
+}
 ```
 
 ### 3.开放-封闭原则(Open Closed Principle, OCP)
@@ -249,6 +296,7 @@ export class Singleton {
 ### 2.工厂模式
 
 #### 简单工厂
+
 根据不同参数创建不同的对象，但一个新的权限出现时。不需要修改外部代码，可以直接调用`new UserFactory().create()`。但内部需要额外增加判定条件。
 
 举个例子，咱们在新增用户的时候，需要根据用户选择的权限，来新增不同权限的用户。
@@ -279,7 +327,8 @@ aa.create('Jim', 23, 'Vip');
 上面的代码虽然达到了目的，但明显违背了我们刚提到的`开放封闭原则`。如果新增一个角色，则需要进入`create()`方法内部去添加一个条件。接下来，我们使用`工厂方法`来重构。
 
 #### 工厂方法
-利用多态的方式，去除简单工厂模式中的判断语句。如果需要新增一种权限，即新增一个工厂即可。
+
+当遇到不同的“产品”，需要不同的“加工”时候，我们可以考虑工厂方法。
 
 举个例子，我们需要创建一个用户。如果是`Admin`权限，则将其添加到一个分组下，方便通知系统信息。如果是`Vip`用户，则需要添加一对一的客服人员。这时候，**把工厂抽象出来，让子工厂来决定怎么生产产品, 每个产品都由自己的工厂生产。**
 
@@ -329,6 +378,7 @@ aa.create('kerwin', 23);
 ```
 
 #### 抽象工厂
+
 同样隐藏了具体产品的生产，不过生产的是多种类产品。当需要生产的是一个产品族，并且产品之间或多或少有关联时可以考虑抽象工厂方法。（如：生产枪时，除了生产枪，还需要生产其弹药；创建用户时，除了创建用户，还需要创建其角色权限等）
 
 ```ts
@@ -543,8 +593,9 @@ function show(): void {
 定义一系列的算法，把它们一个个封装起来，并且使它们可以互相替换。
 
 一个基于策略模式的程序至少由两部分组成。
-* 第一个部分：一组策略类 strategy，策略类封装了具体的算法，并负责具体的计算过程。
-* 第二个部分：环境类 Context , Context 接受客户的请求，随后把请求委托给某一个策略类。
+
+- 第一个部分：一组策略类 strategy，策略类封装了具体的算法，并负责具体的计算过程。
+- 第二个部分：环境类 Context , Context 接受客户的请求，随后把请求委托给某一个策略类。
 
 ```ts
 interface Strategy {
@@ -564,8 +615,11 @@ const strategy: Strategy = {
     return salary * 2;
   },
 };
+
 // Context
 var calcluateBouns = function (level: string, salary: number): number {
+  if (xx) {
+  }
   return strategy[level](salary);
 };
 console.log(calcluateBouns('S', 4000)); // 输出16000
