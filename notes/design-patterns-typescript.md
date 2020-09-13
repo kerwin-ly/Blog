@@ -89,7 +89,7 @@ async run(projectId: string, answers: inquirer.Answers) {
 ![对象引用](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/intermediary-false.png)
 
 很明显的，你违背了迪米特法则。对象的四处引用会导致你的程序变得不太牢固。也许你可以尝试下用`中介者模式`来进行改造
-![中介者模式](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/intermediary-true.png)
+![中介者模式](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/intermedinary-true.png)
 
 这里使用一个中介者模式进行举例，如我们使用“滴滴打车”。用户只需要向平台发起“叫车”请求，平台便会自动放出这一消息，司机直接通过平台进行“抢单”。
 
