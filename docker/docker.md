@@ -174,7 +174,7 @@ docker container prune
 
 ```bash
 # -t 加入时间；-f 持续完后添加；--tail 限制条数；
-docker log -t -f --tail 限制条数 dockerID
+docker logs -t -f --tail 限制条数 containerID
 ```
 
 #### 2.7 外部执行
