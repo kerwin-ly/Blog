@@ -116,7 +116,7 @@ docker load < shisuo.tar
 - -P 随机分配端口
 
 ```bash
-docker run -it -p 8888:8080 dockerName --newName
+docker run -it -p 8888:8080 imageName --newName(可选) /bin/bash
 ````
 
 #### 2.2 启动守护式容器
@@ -124,7 +124,9 @@ docker run -it -p 8888:8080 dockerName --newName
 启动完成后，容器将自动退出
 
 ```bash
-docker run -d dockerName
+docker run -d imageName # 启动容器后，自动退出
+docker ps # 获取已启动的容器
+docker exec -it containerID /bin/sh # 进入容器
 ```
 
 #### 2.3 列出所有启动的容器
@@ -152,18 +154,20 @@ docker ps -n 3
   docker exec -t dockerID ls -l tmp/
 ```
 
-- 第三种：`docker stop id`
-- 第四种：`docker kill id`，强制退出
+- 第三种：`docker stop containerID`
+- 第四种：`docker kill containerID`，强制退出
 
 #### 2.5 删除容器
 
 ```bash
-docker rm -f dockerName/dockerId
+docker rm -f containerID
 
 # 删除多个容器,$(筛选出来的docker容器)
 docker rm -f $(docker ps -a -q)
 # 删除多个容器（将|管道符前面的结果赋值给xargs，然后执行删除）
 docker ps -a -q | xargs docker rm
+# 将所有停掉的容器干掉
+docker container prune
 ```
 
 #### 2.6 查看容器日志
