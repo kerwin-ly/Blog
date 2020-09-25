@@ -122,6 +122,10 @@
 
 [JavaScript实现数据结构](https://github.com/kerwin-ly/Blog/blob/master/notes/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.md)
 
+## 算法
+
+[算法汇总-待分类](https://github.com/kerwin-ly/Blog/tree/master/algorithm)
+
 ## 优质文章 && 教程
 
 ### javascript
