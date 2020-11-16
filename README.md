@@ -154,6 +154,8 @@
 
 [node学习指南](https://www.nodejs.red/#/javascript/base)
 
+[在vscode中调试typescript + node应用](https://www.barretlee.com/blog/2019/03/18/debugging-in-vscode-tutorial/)
+
 ### typescript
 
 [深度学习typescript](https://jkchao.github.io/typescript-book-chinese/error/common.html#ts2307)
