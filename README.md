@@ -154,7 +154,7 @@
 
 [node学习指南](https://www.nodejs.red/#/javascript/base)
 
-[在vscode中调试typescript + node应用](https://www.barretlee.com/blog/2019/03/18/debugging-in-vscode-tutorial/)
+[在vscode中调试typescript + node应用](https://www.barretlee.com/blog/2019/03/18/debugging-in-vscode-tutorial/) [测试demo/debug-ts](https://github.com/kerwin-ly/Blog/tree/master/node)
 
 ### typescript
 
