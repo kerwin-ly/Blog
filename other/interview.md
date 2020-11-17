@@ -1,8 +1,5 @@
 ## interview
 
-> 参考链接
-> [2018 年最新经典 web 前端面试题](https://juejin.im/post/5baa0797f265da0aaa0517e6) > [前端面试总结](https://github.com/InterviewMap/CS-Interview-Knowledge-Map) > [大厂面试回忆录](https://segmentfault.com/a/1190000009662029) > [每天一道大厂面试题](https://github.com/Advanced-Frontend/Daily-Interview-Question)
-
 ### HTML && CSS
 
 #### 1.css 的盒模型
@@ -41,11 +38,11 @@ fixed: 根据浏览器进行定位
 ```
 
 ```js
-let box = document.getElementById("box");
+let box = document.getElementById('box');
 let num = 10;
 function step() {
   num += 10;
-  box.style.left = num + "px";
+  box.style.left = num + 'px';
   if (num <= 1000) {
     window.requestAnimationFrame(step);
   }
@@ -76,8 +73,8 @@ window.requestAnimationFrame(step);
 ```
 
 ```js
-var list = document.getElementById("list");
-list.addEventListener("click", function(e) {
+var list = document.getElementById('list');
+list.addEventListener('click', function (e) {
   console.log(e.target); // 对应点击的li标签
 });
 ```
@@ -275,14 +272,14 @@ div::after {
 `apply`和`call`区别不大，都可以改变`this`指针的指向。只是后面参数。`apply`可以接数组，`call`则要一个一个挨着写。
 
 ```js
-var Person1 = function(name) {
+var Person1 = function (name) {
   this.name = name;
 };
-var Person2 = function() {
-  this.getname = function() {
+var Person2 = function () {
+  this.getname = function () {
     console.log(this.name); // 这里没有this.name
   };
-  Person1.call(this, "kerwin"); // 通过改变指针，获取this.name
+  Person1.call(this, 'kerwin'); // 通过改变指针，获取this.name
 };
 var person = new Person2();
 person.getname(); // linxin
@@ -323,7 +320,7 @@ bar.call2(foo); // 1
 
 ```js
 var foo = {
-  value: 1
+  value: 1,
 };
 
 function bar() {
@@ -407,11 +404,11 @@ console.log('script end');
 function convertLowerToCamel(str, token) {
   var camelList = [];
   var lowerList = str.split(token); // ['get', 'element', 'by', 'id']
-  var camelStr = "";
+  var camelStr = '';
 
   arr.map((item, index) => {
-    var tempStr = "";
-    var upperWord = "";
+    var tempStr = '';
+    var upperWord = '';
 
     if (index > 0) {
       upperWord = item.charAt(0).toUpperCase();
@@ -422,11 +419,11 @@ function convertLowerToCamel(str, token) {
     camelList.push(tempStr);
   });
 
-  camelStr = camelList.join("");
+  camelStr = camelList.join('');
   return camelStr;
 }
 
-convertToCamelStr("get-element-by-id", "-");
+convertToCamelStr('get-element-by-id', '-');
 ```
 
 #### 8.排序(从小到大排序)
@@ -485,7 +482,7 @@ AMD 规范（require.js）使用的是异步加载，不会影响后面 js 的�
 
 ```js
 /** AMD写法 **/
-define(["a", "b", "c", "d", "e", "f"], function(a, b, c, d, e, f) {
+define(['a', 'b', 'c', 'd', 'e', 'f'], function (a, b, c, d, e, f) {
   // 等于在最前面声明并初始化了要用到的所有模块
   a.doSomething();
   if (false) {
@@ -499,11 +496,11 @@ CMD 规范（sea.js）和 AMD 类似，不过他推崇的是一个按需加载�
 
 ```js
 /** CMD写法 **/
-define(function(require, exports, module) {
-  var a = require("./a"); //在需要时申明
+define(function (require, exports, module) {
+  var a = require('./a'); //在需要时申明
   a.doSomething();
   if (false) {
-    var b = require("./b");
+    var b = require('./b');
     b.doSomething();
   }
 });
@@ -521,18 +518,18 @@ define(function(require, exports, module) {
 
 ```js
 function Foo() {
-  getName = function() {
+  getName = function () {
     alert(1);
   };
   return this;
 }
-Foo.getName = function() {
+Foo.getName = function () {
   alert(2);
 };
-Foo.prototype.getName = function() {
+Foo.prototype.getName = function () {
   alert(3);
 };
-var getName = function() {
+var getName = function () {
   alert(4);
 };
 function getName() {
@@ -558,7 +555,7 @@ new new Foo().getName(); // 3
 function throttle(func, wait) {
   var startTime = 0;
 
-  return function() {
+  return function () {
     var nowTime = Date.now();
 
     if (nowTime - startTime > wait) {
@@ -580,7 +577,7 @@ document.onmousemove = throttle(getNum, 3000);
 ```js
 function debounce(func, wait) {
   var timeout;
-  return function() {
+  return function () {
     clearTimeout(timeout);
     timeout = setTimeout(func, wait);
   };
@@ -610,9 +607,9 @@ document.onmousemove = debounce(getNum, 3000);
 ```js
 function* hello() {
   console.log(1);
-  yield console.log("hello");
+  yield console.log('hello');
   console.log(2);
-  yield console.log("word");
+  yield console.log('word');
 }
 
 var h = hello();
@@ -633,7 +630,7 @@ h.next();
 ```js
 new Promise((resolve, reject) => {
   setTimeout(() => {
-    resolve("FULFILLED");
+    resolve('FULFILLED');
   }, 1000);
 });
 ```
@@ -669,25 +666,25 @@ then 方法必须返回一个新的 promise 对象，因此 promise 支持链式
 
 ```js
 async function async1() {
-  console.log("async1 start");
+  console.log('async1 start');
   await async2();
-  console.log("async1 end");
+  console.log('async1 end');
 }
 async function async2() {
-  console.log("async2");
+  console.log('async2');
 }
-console.log("script start");
-setTimeout(function() {
-  console.log("setTimeout");
+console.log('script start');
+setTimeout(function () {
+  console.log('setTimeout');
 }, 0);
 async1();
-new Promise(function(resolve) {
-  console.log("promise1");
+new Promise(function (resolve) {
+  console.log('promise1');
   resolve();
-}).then(function() {
-  console.log("promise2");
+}).then(function () {
+  console.log('promise2');
 });
-console.log("script end");
+console.log('script end');
 
 /*
 script start
@@ -709,26 +706,26 @@ setTimeout
 
 ```js
 // 这里我们创建了一个单例模式
-let single = function(fn) {
+let single = function (fn) {
   let ret;
-  return function() {
+  return function () {
     console.log(ret); // render一次undefined,render二次true,render三次true
     // 所以之后每次都执行ret，就不会再次绑定了
     return ret || (ret = fn.apply(this, arguments));
   };
 };
 
-let bindEvent = single(function() {
+let bindEvent = single(function () {
   // 虽然下面的renders函数执行3次，bindEvent也执行了3次
   // 但是根据单例模式的特点，函数在被第一次调用后，之后就不再调用了
-  document.getElementById("box").onclick = function() {
-    alert("click");
+  document.getElementById('box').onclick = function () {
+    alert('click');
   };
   return true;
 });
 
-let renders = function() {
-  console.log("渲染");
+let renders = function () {
+  console.log('渲染');
   bindEvent();
 };
 
@@ -749,8 +746,8 @@ add(3, 4); // 7
 
 // 实现了柯里化的函数
 // 接收参数，返回新函数，把参数传给新函数使用，最后求值
-let add = function(x) {
-  return function(y) {
+let add = function (x) {
+  return function (y) {
     return x + y;
   };
 };
@@ -810,11 +807,11 @@ $.fn.myplugin = function() {
 一个简单的插件，获取最大高度
 
 ```js
-(function($) {
-  $.fn.maxHeight = function() {
+(function ($) {
+  $.fn.maxHeight = function () {
     var max = 0;
 
-    this.each(function() {
+    this.each(function () {
       max = Math.max(max, $(this).height());
     });
 
@@ -822,55 +819,53 @@ $.fn.myplugin = function() {
   };
 })(jQuery);
 
-var tallest = $("div").maxHeight(); // 返回最高 div 的高度
+var tallest = $('div').maxHeight(); // 返回最高 div 的高度
 ```
 
 保证 jquery 的链式调用，返回 this(jQuery 实例)
 
 ```js
-(function($) {
-  $.fn.lockDimensions = function(type) {
-    return this.each(function() {
+(function ($) {
+  $.fn.lockDimensions = function (type) {
+    return this.each(function () {
       var $this = $(this);
 
-      if (!type || type == "width") {
+      if (!type || type == 'width') {
         $this.width($this.width());
       }
 
-      if (!type || type == "height") {
+      if (!type || type == 'height') {
         $this.height($this.height());
       }
     });
   };
 })(jQuery);
 
-$("div")
-  .lockDimensions("width")
-  .css("color", "red");
+$('div').lockDimensions('width').css('color', 'red');
 ```
 
 `$.extend`让默认参数和参数对象合并
 
 ```js
-(function($) {
-  $.fn.tooltip = function(options) {
+(function ($) {
+  $.fn.tooltip = function (options) {
     // Create some defaults, extending them with any options that were provided
     var settings = $.extend(
       {
-        location: "top",
-        "background-color": "blue"
+        location: 'top',
+        'background-color': 'blue',
       },
       options
     );
 
-    return this.each(function() {
+    return this.each(function () {
       // Tooltip plugin code here
     });
   };
 })(jQuery);
 
-$("div").tooltip({
-  location: "left"
+$('div').tooltip({
+  location: 'left',
 });
 ```
 
@@ -938,7 +933,7 @@ class Example extends React.Component {
   constructor() {
     super();
     this.state = {
-      val: 0
+      val: 0,
     };
   }
 
@@ -1132,8 +1127,8 @@ $body.append(‘<script src=“http://otherdomain.com/request?callback=updateLis
 // script响应返回的js内容为
 updateList([
   {
-    name: "hello"
-  }
+    name: 'hello',
+  },
 ]);
 ```
 
@@ -1145,22 +1140,22 @@ updateList([
 
 ```js
 // main frame
-let iframeWin = document.querySelector("#my-iframe").contentWindow;
-iframeWin.postMessage({ age: 18 }, "http://parent.com");
-iframeWin.onmessage = function(event) {
-  console.log("recv from iframe ", event.data);
+let iframeWin = document.querySelector('#my-iframe').contentWindow;
+iframeWin.postMessage({ age: 18 }, 'http://parent.com');
+iframeWin.onmessage = function (event) {
+  console.log('recv from iframe ', event.data);
 };
 
 // iframe
-window.onmessage = function(event) {
+window.onmessage = function (event) {
   // test event.origin
   if (event.origin !== expectOrigin) {
     return;
   }
-  console.log("recv from main frame ", event.data);
+  console.log('recv from main frame ', event.data);
 };
 
-window.parent.postMessage("hello, this is from iframe ", "http://child.com");
+window.parent.postMessage('hello, this is from iframe ', 'http://child.com');
 ```
 
 #### 5.Ajax 的原理
@@ -1224,3 +1219,23 @@ http2:
 - 2.在同一个域名下所有请求通信都在一个 tcp 连接上进行，单个连接可以并行交错的
   请求和响应(因为 http2 有两个非常重要的概念，分别是帧和流，帧代表着最小的数据单位，每个帧会标识出该帧属于哪个流，流也就是多个帧组成的数据流。
   多路复用，就是在一个 TCP 连接中可以存在多条流。换句话说，也就是可以发送多个请求，对端可以通过帧中的标识知道属于哪个请求。通过这个技术，可以避免 HTTP 旧版本中的队头阻塞问题，极大的提高传输性能。)
+
+## 相关文章
+
+### 面试知识
+
+[2020 年前端面试复习必读文章【超三百篇文章/赠复习导图】](https://juejin.im/post/6844904116339261447)
+
+[在阿里我是如何当面试官的](https://juejin.im/post/6844904093425598471)
+
+[面试分享：两年工作经验成功面试阿里 P6 总结](https://juejin.im/post/6844903928442667015)
+
+[字节跳动今日头条前端面经（4 轮技术面+hr 面）](https://juejin.im/post/6844904088337907720)
+
+### 简历编写
+
+[《大厂面试》面试官看了直呼想要的简历](https://juejin.im/post/6844904034218803214)
+
+[面试官到底想看什么样的简历？](https://juejin.im/post/6844903879973273607)
+
+[教你如何写初/高级前端简历【赠简历导图】](https://juejin.im/post/6844904121368068103)
