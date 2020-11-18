@@ -150,6 +150,8 @@
 
 [clean code javascript](https://github.com/ryanmcdermott/clean-code-javascript?utm_source=gold_browser_extension)
 
+[JS正则表达式完整教程](https://juejin.im/post/5965943ff265da6c30653879)
+
 ### node.js
 
 [node学习指南](https://www.nodejs.red/#/javascript/base)
@@ -178,6 +180,6 @@
 
 [How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
 
-[JS正则表达式完整教程](https://juejin.im/post/5965943ff265da6c30653879)
-
 [输入URL到渲染全面梳理下-总结篇](https://juejin.im/post/5ebabbf96fb9a043586c8f9e)
+
+[前端性能优化24条建议](https://juejin.im/post/6892994632968306702)
