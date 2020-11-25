@@ -113,7 +113,8 @@ export { SharedModule };
 
 ## 转换 javascript 代码
 
-TODO: 添加 babel 操作的流程图
+
+![流程图](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-process.png)
 
 ### 使用@babel/parser 解析 javascript 代码生成 AST
 
