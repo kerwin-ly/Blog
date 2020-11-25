@@ -1,14 +1,52 @@
-# 使用 babel 来修改 ast 生成代码
+# 使用 babel 来生成 javascript 代码
 
-> 本文涉及到的代码均在[这里](https://github.com/kerwin-ly/Blog/tree/master/demo/ast)，建议结合该代码来阅读文章，便于食用。
+> 本文相关的代码保存于[github 源码](https://github.com/kerwin-ly/Blog/tree/master/demo/ast)处，建议结合该代码来阅读文章，便于食用。
 
-## 初衷
+## 前言
 
 今天在开发`cli`工具的时候遇到了一个场景，在我们通过命令向项目添加完`sentry`后，需要更新`shared.module.ts`文件里面的依赖信息。如下：
 
-![code01](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-code01.png)
+```ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { COMPONENTS } from './components';
+import { DIRECTIVES } from './directives';
+import { ZorroModule } from '@modules/zorro/zorro.module';
+import { PIPES } from './pipes';
+import { SENTRY_PROVIDERS } from '@core/sentry'; // 需要添加的代码
 
-刚开始我是通过正则的方式来进行处理，但在 review 代码过程中，大佬表示这种方式风险性太高，建议用`babel`来处理这种情况。一脸懵逼的我，便开始了探索...
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    ZorroModule,
+  ],
+  declarations: [...COMPONENTS, ...DIRECTIVES, ...PIPES],
+  exports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    ZorroModule,
+    ...COMPONENTS,
+    ...DIRECTIVES,
+    ...PIPES,
+  ],
+  providers: [SENTRY_PROVIDERS], // 需要添加的代码
+})
+class SharedModule {}
+
+export { SharedModule };
+```
+
+刚开始咱是通过正则的方式来进行处理，但在 review 代码过程中，大佬表示这种方式风险性太高，建议用`babel`来处理这种情况。期间，由于文档和相关介绍过少，导致自己踩了不少坑。所以通过这篇文章来记录自己在使用 babel 时的一些坑和解决方法，希望能给大家一些帮助。
 
 ## Babel 介绍
 
@@ -32,7 +70,44 @@ npm install @babel/parser @babel/traverse @babel/types @babel/generator @babel/c
 
 最后将待解析的这段代码粘贴至`ast-demo/code/demo.ts`文件中，如下：
 
-![code02](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-code02.png)
+```ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { COMPONENTS } from './components';
+import { DIRECTIVES } from './directives';
+import { ZorroModule } from '@modules/zorro/zorro.module';
+import { PIPES } from './pipes';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    ZorroModule,
+  ],
+  declarations: [...COMPONENTS, ...DIRECTIVES, ...PIPES],
+  exports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    ZorroModule,
+    ...COMPONENTS,
+    ...DIRECTIVES,
+    ...PIPES,
+  ],
+  providers: [], // 需要添加的代码
+})
+class SharedModule {}
+
+export { SharedModule };
+```
 
 ![项目结构](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-project.png)
 
@@ -46,7 +121,17 @@ TODO: 添加 babel 操作的流程图
 
 需要注意的是，**在使用`@babel/parser`时，由于待解析代码中有`装饰器`，所以必须添加`decorators-legacy`这个插件**才能识别，否则会报错`SyntaxError: This experimental syntax requires enabling one of the following parser plugin(s): 'decorators-legacy, decorators' (11:0)`。
 
-![code03](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-code03.png)
+```ts
+const { parse } = require('@babel/parser');
+const path = require('path');
+const fs = require('fs');
+const codePath = './code/demo.ts'; // 待解析代码路径，
+const file = fs.readFileSync(path.resolve(__dirname, codePath)).toString();
+const ast = parse(file, {
+  sourceType: 'module',
+  plugins: ['decorators-legacy'], // 如果待代码中有装饰器，需要添加该plugin，才能识别。
+});
+```
 
 ### 使用@babel/traverse 遍历 AST 节点，并对特殊节点进行处理
 
@@ -54,14 +139,32 @@ TODO: 添加 babel 操作的流程图
 
 这里我们拿`import`这个语法举例，在`run.js`中添加该代码
 
-![code04](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-code04.png)
+```ts
+const { parse } = require('@babel/parser');
+const traverse = require('@babel/traverse').default; // 遍历ast，对各个节点进行处理
+const path = require('path');
+const fs = require('fs');
+const codePath = './code/demo.ts'; // 待解析代码路径，
+const file = fs.readFileSync(path.resolve(__dirname, codePath)).toString();
+const ast = parse(file, {
+  sourceType: 'module',
+  plugins: ['decorators-legacy'], // 如果待代码中有装饰器，需要添加该plugin，才能识别。
+});
+let num = 0;
+traverse(ast, {
+  ImportDeclaration(path) {
+    num++;
+    console.log(num); //  输出1，2，3，4，5，6，7，8，9
+  },
+});
+```
 
 执行命令`node run.js`结果如下
 ![结果01](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/babel-traverse02.png)
 
 接下来，回到正题，我们期望的结果是：
 
-- 在`class`前面添加一行`import { SENTRY_PROVIDERS } from '@core/sentry';`（有的同学可能会想，看代码结构，为什么不是在`@NgModule`这个装饰器前面添加呢？而是在`class`前面🤔。大家可以思考下，后续我们来填坑）
+- 在`class`前面添加一行`import { SENTRY_PROVIDERS } from '@core/sentry';`（有的同学可能会想，看代码结构，为什么不是在`@NgModule`这个装饰器前面添加呢？而是在`class`前面 🤔。大家可以思考下，后续我们来填坑 ）
 - 在`@NgModule`装饰器里面添加一个键值对，`providers: [SENTRY_PROVIDERS]`
 
 那么如何知道我们`class SharedModule`对应的`AST节点类型`呢？
@@ -79,16 +182,35 @@ TODO: 添加 babel 操作的流程图
 这里大家可以发现和咱们代码中表现的不同，`ClassDeclaration`内部包含了节点`Decorator`，而不是咱们代码中直观看到的~~装饰器与类是同级的~~。这也填了咱们前文中的坑。如果直接在`@NgModule`的前一个节点添加`ImportDeclaration`，那么它会添加在`ClassDeclaration`的内部，不是我们期望的结果。熟悉`装饰器`的同学也应该知道，装饰器可以装饰类、属性、方法等，而不会独立存在的。所以如果你理解装饰器，这里应该第一想到的是应该去`ClassDeclaration`前面添加需要的节点，当然，通过`AST Explorer`也可以直观的得出结果。
 
 接下来修改`run.js`并运行，通过`path.node`属性可以获取对应的`AST节点`
-![code04](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-code04.png)
+
+```js
+const { parse } = require('@babel/parser');
+const traverse = require('@babel/traverse').default; // 遍历ast，对各个节点进行处理
+const path = require('path');
+const fs = require('fs');
+const codePath = './code/demo.ts'; // 待解析代码路径，
+const file = fs.readFileSync(path.resolve(__dirname, codePath)).toString();
+const ast = parse(file, {
+  sourceType: 'module',
+  plugins: ['decorators-legacy'], // 如果待代码中有装饰器，需要添加该plugin，才能识别。
+});
+
+traverse(ast, {
+  ClassDeclaration(path) {
+    console.log(path.node); // add it
+  },
+});
+```
 
 ![ast-result01](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-result01.png)
 
-### 使用@babel/types创建新的AS节点
+### 使用@babel/types 创建新的 AS 节点
+
 通过`@babel/traverse`和`AST Explorer`，我们找到了`class sharedModule`对应的`AST节点类型`。接下来，我们来生成新代码`import { SENTRY_PROVIDERS } from '@core/sentry'`。
 
-这时候便是`@babel/types`登场了，它可以帮助我们创建`AST节点`。详情可以参考[@babel/types api文档](https://babeljs.io/docs/en/babel-types)。
+这时候便是`@babel/types`登场了，它可以帮助我们创建`AST节点`。详情可以参考[@babel/types api 文档](https://babeljs.io/docs/en/babel-types)。
 
-在文档中，我们可以看到许多的api，可以帮助你创建任意已知的`AST`节点。那么问题来了，我怎么知道如何组合这些api来生成我的代码呢？
+在文档中，我们可以看到许多的 api，可以帮助你创建任意已知的`AST`节点。那么问题来了，我怎么知道如何组合这些 api 来生成我的代码呢？
 
 我们拿`import { SENTRY_PROVIDERS } from '@core/sentry'`这行代码举例。同样需要[AST Explorer](https://astexplorer.net/)，观察其对应的`AST`
 
@@ -96,7 +218,7 @@ TODO: 添加 babel 操作的流程图
 
 显而易见，它的`AST节点类型`是`ImportDeclaration`
 
-接着，我们便查看[@babel/types api文档](https://babeljs.io/docs/en/babel-types)是如何生成一个`ImportDeclaration`节点的。
+接着，我们便查看[@babel/types api 文档](https://babeljs.io/docs/en/babel-types)是如何生成一个`ImportDeclaration`节点的。
 
 ![babel-type01](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/babel-type01.png)
 
@@ -111,14 +233,14 @@ t.importDeclaration(specifiers, source); // specifiers， source为定义
 而`specifiers`的类型是`Array<ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier>`数组对象。如果你现在不确定其节点类型是`ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier`的哪一个话，那么便可以回到[AST Explorer](https://astexplorer.net/)去查看。
 
 点击`SENTRY_PROVIDERS`可以获取当前的节点类型`Identifier`，其可以理解为咱们的变量/标识，其父级便是`ImportSpecifier`类型。
-![code04](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-code04.png)
+![ast06](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast06.png)
 
-确定类型后，返回[@babel/types api文档](https://babeljs.io/docs/en/babel-types)，查看生成`ImportSpecifier`节点，需要`local` `imported`和`importKind`参数，而`local`和`imported`必填，是`Identifier`类型，也就是变量。
+确定类型后，返回[@babel/types api 文档](https://babeljs.io/docs/en/babel-types)，查看生成`ImportSpecifier`节点，需要`local` `imported`和`importKind`参数，而`local`和`imported`必填，是`Identifier`类型，也就是变量。
 
 修改代码如下
+
 ```js
 const t = require('@babel/types');
-
 const local = t.Identifier('SENTRY_PROVIDERS');
 const imported = t.Identifier('SENTRY_PROVIDERS');
 const specifiers = [t.ImportSpecifier(local, imported)];
@@ -134,58 +256,134 @@ const importDeclaration = t.importDeclaration(specifiers, source); // source未�
 ![babel-type04](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/babel-type04.png)
 
 修改代码如下，便获得了最终`import xx from 'xx'`这个语法对应的`AST`
-```js
-const t = require('@babel/types');
 
-const local = t.Identifier('SENTRY_PROVIDERS');
-const imported = t.Identifier('SENTRY_PROVIDERS');
-const specifiers = [t.ImportSpecifier(local, imported)];
-const source = t.stringLiteral('@core/sentry'); 
-const importDeclaration = t.importDeclaration(specifiers, source);
+```js
+const { parse } = require('@babel/parser');
+const traverse = require('@babel/traverse').default; // 遍历ast，对各个节点进行处理
+const t = require('@babel/types');
+const path = require('path');
+const fs = require('fs');
+const codePath = './code/demo.ts'; // 待解析代码路径，
+const file = fs.readFileSync(path.resolve(__dirname, codePath)).toString();
+const ast = parse(file, {
+  sourceType: 'module',
+  plugins: ['decorators-legacy'], // 如果待代码中有装饰器，需要添加该plugin，才能识别。
+});
+
+traverse(ast, {
+  ClassDeclaration(path) {
+    const local = t.Identifier('SENTRY_PROVIDERS');
+    const imported = t.Identifier('SENTRY_PROVIDERS');
+    const specifiers = [t.ImportSpecifier(local, imported)];
+    const source = t.stringLiteral('@core/sentry');
+    const importDeclaration = t.importDeclaration(specifiers, source);
+
+    console.log(importDeclaration);
+  },
+});
 ```
 
-![ast-code06](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-code06.png)
+### 对当前的 ast 节点进行操作
 
-### 对当前的ast节点进行操作
 在获得了`ImportDeclaration`的`AST`后，我们需要对原来的`AST`进行修改，从而生成新的`AST`。
 
-这里便需要用到`@babel/traverse`中的`path`参数了。 相关的参数可以查看[babel操作手册-转换操作](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md#toc-transformation-operations)。文档中对已知的api都进行了说明。
+这里便需要用到`@babel/traverse`中的`path`参数了。 相关的参数可以查看[babel 操作手册-转换操作](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md#toc-transformation-operations)。文档中对已知的 api 都进行了说明。
 
 我们需要在`ClassDeclaration`前面添加`ImportDeclaration`节点，修改代码如下：
-![ast-code07](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-code07.png)
+
+```js
+const { parse } = require('@babel/parser');
+const traverse = require('@babel/traverse').default; // 遍历ast，对各个节点进行处理
+const t = require('@babel/types');
+const path = require('path');
+const fs = require('fs');
+const codePath = './code/demo.ts'; // 待解析代码路径，
+const file = fs.readFileSync(path.resolve(__dirname, codePath)).toString();
+const ast = parse(file, {
+  sourceType: 'module',
+  plugins: ['decorators-legacy'], // 如果待代码中有装饰器，需要添加该plugin，才能识别。
+});
+
+traverse(ast, {
+  ClassDeclaration(path) {
+    const local = t.Identifier('SENTRY_PROVIDERS');
+    const imported = t.Identifier('SENTRY_PROVIDERS');
+    const specifiers = [t.ImportSpecifier(local, imported)];
+    const source = t.stringLiteral('@core/sentry');
+    const importDeclaration = t.importDeclaration(specifiers, source);
+
+    path.insertBefore(importDeclaration); // update it
+  },
+});
+```
 
 这里还有一步操作是在`@NgModule`装饰器里面添加`providers: [SENTRY_PROVIDERS]`键值对，使用的是上述同样方法。直接上代码：
 
-![ast-code08](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-code08.png)
+```js
+const { parse } = require('@babel/parser');
+const traverse = require('@babel/traverse').default; // 遍历ast，对各个节点进行处理
+const path = require('path');
+const fs = require('fs');
+const codePath = './code/demo.ts'; // 待解析代码路径，
+const file = fs.readFileSync(path.resolve(__dirname, codePath)).toString();
+const ast = parse(file, {
+  sourceType: 'module',
+  plugins: ['decorators-legacy'], // 如果待代码中有装饰器，需要添加该plugin，才能识别。
+});
+let code;
+let hasProviders = false;
 
-### 使用@babel/generator生成代码
-最后使用`@babel/generator`将其`AST`编译为代码，来进行校验。可以在[@babel/generator api](https://babeljs.io/docs/en/babel-generator)来获取更多信息。
+traverse(ast, {
+  ClassDeclaration(path) {
+    const local = t.Identifier('SENTRY_PROVIDERS');
+    const imported = t.Identifier('SENTRY_PROVIDERS');
+    const specifiers = [t.ImportSpecifier(local, imported)];
+    const source = t.stringLiteral('@core/sentry');
+    const importDeclaration = t.importDeclaration(specifiers, source);
+
+    path.insertBefore(importDeclaration); // 在当前ClassDeclaration节点前插入importDeclaration节点
+  },
+  ObjectProperty(path) {
+    // ObjectProperty 对应js语法中的键值对, xx: xx
+    if (path.node.key.name === 'providers') {
+      // 这里判断，如果代码中已经存在 key值 providers，直接进行添加
+      hasProviders = true;
+      path.node.value.elements.push(t.identifier('SENTRY_PROVIDERS')); // path.node.value.elements可以通过AST Explorer来查看对应层级
+    }
+    if (!hasProviders && isEnd(path.getAllNextSiblings())) {
+      // 判断如果遍历到最后一个ObjectProperty，仍没有providers属性，则添加键值对
+      hasProviders = false;
+      // 在当前节点后面添加一个键值对
+      path.insertAfter(
+        t.objectProperty(t.identifier('providers'), t.arrayExpression())
+      );
+    }
+  },
+});
+
+function isEnd(nodes) {
+  return !nodes.some((item) => item.node.type === 'ObjectProperty');
+}
+```
+
+### 使用@babel/generator 生成代码
+
+最后使用`@babel/generator`将其`AST`编译为代码。可以在[@babel/generator api](https://babeljs.io/docs/en/babel-generator)来获取更多信息。接着使用`fs`模块将代码写入到目标文件中
 
 添加代码如下：
-```js
-...
-const newCode = generate(
-  ast,
-  {
-    /* options */
-  },
-  code
-).code;
-console.log(newCode);
-```
-![ast-code09](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-code09.png)
 
-最后将代码写入到`code/demo.ts`文件中,
 ```js
 ...
+
 fs.writeFileSync(codePath, generate(ast, {}, code).code);
+console.log('Success to generate it');
+
 ```
 
 完整代码：
-![ast-code10](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-cod10.png)
 
-[github源码]((https://github.com/kerwin-ly/Blog/tree/master/demo/ast))
+[github 源码](https://github.com/kerwin-ly/Blog/tree/master/demo/ast)
 
 ## 参考链接
 
-https://babeljs.io/docs/en/babel-parser
+[使用 babel 修改 js 代码](https://juejin.cn/post/6850037265675223054)
