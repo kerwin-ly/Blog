@@ -30,4 +30,6 @@ import { PIPES } from './pipes';
     ...PIPES,
   ],
 })
-export class SharedModule {}
+class SharedModule {}
+
+export { SharedModule };
