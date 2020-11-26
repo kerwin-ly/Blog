@@ -154,6 +154,8 @@
 
 [JS正则表达式完整教程](https://juejin.im/post/5965943ff265da6c30653879)
 
+[算法和数据结构](https://github.com/ConardLi/awesome-coding-js)
+
 ### node.js
 
 [node学习指南](https://www.nodejs.red/#/javascript/base)
