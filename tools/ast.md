@@ -4,7 +4,7 @@
 
 ## 前言
 
-今天在开发`cli`工具的时候遇到了一个场景，在我们通过命令向项目添加完`sentry`后，需要更新`shared.module.ts`文件里面的依赖信息。如下：
+今天在开发`cli`工具的时候遇到了一个场景，通过命令向项目添加完`sentry`后，需要自动向`shared.module.ts`文件添加两行ts代码用于引入依赖。如下：
 
 ```ts
 import { NgModule } from '@angular/core';
@@ -46,11 +46,11 @@ class SharedModule {}
 export { SharedModule };
 ```
 
-刚开始咱是通过正则的方式来进行处理，但在 review 代码过程中，大佬表示这种方式风险性太高，建议用`babel`来处理这种情况。期间，由于文档和相关介绍过少，导致自己踩了不少坑。所以通过这篇文章来记录自己在使用 babel 时的一些坑和解决方法，希望能给大家一些帮助。
+刚开始咱是通过正则的方式来处理，但在 review 代码过程中，大佬表示这种方式风险性太高，建议用`babel`来处理这种情况。由于之前只用过`babel`来做些简单的兼容处理，从未用其来生成代码，于是便利用闲暇时间进行了一番摸索。本文主要概括了`babel`几个核心插件的使用方法和开发中的部分技巧，希望能给大家一些帮助。
 
 ## Babel 介绍
 
-`babel`想必大家都很熟悉了，在项目中用的较多的地方便是它在兼容方面的处理，可以将 es6 的代码转换为 es5 的代码，从而在现有环境中运行。但在这里，我们主要是介绍如果使用`babel`来生成咱们想要的`javascript`代码。
+一想到`babel`,大家第一反应应该是它在兼容方面的处理。它可以将 ECMAScript 2015+ 版本的代码转换为向后兼容的 JavaScript 语法，以便能够运行在当前和旧版本的浏览器或其他环境中。但在这里，我们主要是介绍如果使用`babel`来生成咱们期望的`javascript`代码。
 
 先介绍下咱们将用到的`babel`插件
 
@@ -109,18 +109,18 @@ class SharedModule {}
 export { SharedModule };
 ```
 
-![项目结构](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-project.png)
-
 ## 转换 javascript 代码
 
 
-![流程图](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-process.png)
+![流程图](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3962e89f23054267a3d79a672c4b8743~tplv-k3u1fbpfcp-zoom-1.image)
 
 ### 使用@babel/parser 解析 javascript 代码生成 AST
 
 第一步，我们要将对应的`javascript`代码解析为`AST`。这里因为涉及到文件的读写，后续我们都用`node`来处理：
 
-需要注意的是，**在使用`@babel/parser`时，由于待解析代码中有`装饰器`，所以必须添加`decorators-legacy`这个插件**才能识别，否则会报错`SyntaxError: This experimental syntax requires enabling one of the following parser plugin(s): 'decorators-legacy, decorators' (11:0)`。
+需要注意的是，**在使用`@babel/parser`时，由于待解析代码中有`装饰器`，所以必须添加`decorators-legacy`这个插件**才能识别，否则会报错：
+
+`SyntaxError: This experimental syntax requires enabling one of the following parser plugin(s): 'decorators-legacy, decorators' (11:0)`。
 
 ```ts
 const { parse } = require('@babel/parser');
@@ -136,9 +136,9 @@ const ast = parse(file, {
 
 ### 使用@babel/traverse 遍历 AST 节点，并对特殊节点进行处理
 
-在获取到对应的`AST`后，我们便可以对其节点进行处理，来生成新的`AST`树
+在获取到对应的`AST`后，我们便可以对其节点进行修改
 
-这里我们拿`import`这个语法举例，在`run.js`中添加该代码
+这里我们拿`import xx from xx`这个语法举例，在`run.js`中添加该代码
 
 ```ts
 const { parse } = require('@babel/parser');
@@ -178,7 +178,7 @@ traverse(ast, {
 ![ast-explorer2](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast02.png)
 
 知道了如何获取`AST节点类型`后，接下来我们便可以通过同样的方式来获取`class`对应的节点类型
-![ast-explorer3](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast04.png)
+![ast-explorer3](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fd0a5387fc7f49e2b7142c43972766f4~tplv-k3u1fbpfcp-zoom-1.image)
 
 这里大家可以发现和咱们代码中表现的不同，`ClassDeclaration`内部包含了节点`Decorator`，而不是咱们代码中直观看到的~~装饰器与类是同级的~~。这也填了咱们前文中的坑。如果直接在`@NgModule`的前一个节点添加`ImportDeclaration`，那么它会添加在`ClassDeclaration`的内部，不是我们期望的结果。熟悉`装饰器`的同学也应该知道，装饰器可以装饰类、属性、方法等，而不会独立存在的。所以如果你理解装饰器，这里应该第一想到的是应该去`ClassDeclaration`前面添加需要的节点，当然，通过`AST Explorer`也可以直观的得出结果。
 
@@ -203,7 +203,7 @@ traverse(ast, {
 });
 ```
 
-![ast-result01](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-result01.png)
+![ast-result01](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ed35a6479254adfaef51f48fe32087f~tplv-k3u1fbpfcp-zoom-1.image)
 
 ### 使用@babel/types 创建新的 AS 节点
 
@@ -252,7 +252,7 @@ const importDeclaration = t.importDeclaration(specifiers, source); // source未�
 
 ![babel-type02](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/babel-type02.png)
 
-![babel-type03](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/babel-type03.png)
+![babel-type03](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7c5e703a403243b4aafa67d408601972~tplv-k3u1fbpfcp-zoom-1.image)
 
 ![babel-type04](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/babel-type04.png)
 
@@ -382,9 +382,9 @@ console.log('Success to generate it');
 ```
 
 完整代码：
-
 [github 源码](https://github.com/kerwin-ly/Blog/tree/master/demo/ast)
 
 ## 参考链接
 
 [使用 babel 修改 js 代码](https://juejin.cn/post/6850037265675223054)
+
