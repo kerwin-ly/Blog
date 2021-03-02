@@ -2,7 +2,7 @@
 
 ## 前端
 
-### 原生 JavaScript
+### JavaScript基础
 
 [函数声明和函数表达式的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%92%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB.md)
 
@@ -21,6 +21,8 @@
 [JavaScript的开发技巧](https://github.com/kerwin-ly/Blog/blob/master/javascript/js%E7%9A%84%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7.md)
 
 [闭包理解](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E9%97%AD%E5%8C%85.md)
+
+[如何理解原型和原型链](https://juejin.cn/post/6934498361475072014?utm_source=gold_browser_extension)
 
 ### TypeScript
 
