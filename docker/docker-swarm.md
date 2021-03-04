@@ -162,9 +162,29 @@ docker stack deploy -c docker-compose.yml wordpress
 
 查看服务
 
-```
+```shell
 docker stack ls
 ```
+output
+```
+NAME                SERVICES            ORCHESTRATOR
+demo1                  3                  Swarm
+demo2                  2                  Swarm
+demo3                  3                  Swarm
+```
+
+查看某服务内容器
+```shell
+docker stack services demo1
+```
+output
+```shell
+ID                  NAME                        MODE                REPLICAS            IMAGE                                             PORTS
+j4bahl0l9znc        demo1_redis              replicated              1/1               redis:4
+jtseig9ivpom        demo1_html               replicated              1/1               dockerhub.datagrand.com/yskg/kg_sim_outlier:0.6   *:30000->30000/tcp
+ruaofu55pz0s        demo1_api                replicated              1/1               dockerhub.datagrand.com/yskg/kg_fusion_716:0.3    *:5510->5500/tcp
+```
+
 移出服务
 
 ```
