@@ -297,3 +297,25 @@ git push origin newName
 // 把修改后的本地分支与远程分支关联
 git branch --set-upstream-to origin/newName
 ```
+
+#### 10. 将repo-A仓库的branch-B分支合并到repo-A仓库的branch-B分支
+```shell
+# 1.克隆A仓库
+git clone git@github.com:xxxx/repo-A.git
+
+# 2.添加B仓库为远程分支，设置别名other
+git remote add other git@github.com:xxxx/repo-B.git
+
+# 3.拉取B仓库最新信息到本地
+git fetch other
+
+# 4.以B仓库拉取的master分支作为基准，本地创建一个feature/merge的新分支
+git checkout -b feature/merge other/master
+
+# 5.切换回repo-A仓库的master分支
+git checkout master
+
+# 6.将feature/merge分支合并到repo-A仓库的master分支
+git merge feature/merge --allow-unrelated-histories
+
+```
