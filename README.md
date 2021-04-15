@@ -176,6 +176,10 @@
 
 [A deep dive into @Injectable and “providedIn” in Ivy](https://medium.com/angular-in-depth/deep-dive-into-injectable-and-providedin-in-ivy-2a58c989e31c)
 
+### 浏览器
+
+[一文带你了解如何排查内存泄漏导致的页面卡顿现象](https://juejin.cn/post/6947841638118998029)
+
 ### 其他
 
 [POST和GET的区别](https://www.oschina.net/news/77354/http-get-post-different)
