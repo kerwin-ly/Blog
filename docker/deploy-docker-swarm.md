@@ -123,7 +123,7 @@ services:
 
 #### 1.mysql8.0中必须挂载文件`mysql-files`到容器中，否则报错如下
 
-[!deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy1.png)
+![deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy1.png)
 
 #### 2.mysql8.0启动容器报错`ERROR 2059: Authentication plugin ‘caching_sha2_password’ cannot be loaded`
 启动mysql容器时候报错`ERROR 2059: Authentication plugin ‘caching_sha2_password’ cannot be loaded`。这是由于mysql8.0.3之后的版本引入了一个新的身份验证插件`caching_sha2_password`，从 MySQL-8.0.4开始，此插件成为MySQL服务器的新默认身份验证插件。但目前我设置的密码并不符合该规则，同时由于是个非商业项目，这里我简单的将该加密规则还原成了`mysql_native_password`。（两个加密规则的区别可以戳[这里](https://cloud.tencent.com/developer/article/1708030)）
@@ -165,11 +165,11 @@ firewall-cmd --state // 输出not running
 ```
 
 接着打开腾讯云控制台/安全/安全组/入站规则，暴露对外端口。这里我主要设置了暴露了分别访问前端10001，后端10002，数据库3306的三个端口
-[!deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy2.png)
-[!deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy3.png)
+![deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy2.png)
+![deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy3.png)
 
 针对出站规则，我设置的是ALL
-[!deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy4.png)
+![deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy4.png)
 
 ### 4.服务启动顺序错误，导致数据库无法连接
 在v1的版本中，我使用的是原生pymysql进行数据库连接。由于一启动api服务就开始尝试连接myql，导致一直报错`2003 - Can't connect to MySQL server on ……(61 "Connection refused")`
@@ -254,16 +254,16 @@ services:
 ```
 
 修改完后执行`sh remove.sh`和`sh deploy.sh`重新部署，然后查看其service是否都启动成功。
-[!deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy8.png)
+![deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy8.png)
 
 可以看到各个服务都起来了。然后我们查看其已启动的容器
-[!deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy7.png)
+![deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy7.png)
 
 启动并进入api容器
-[!deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy9.png)
+![deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy9.png)
 
 直接ping mysql服务，发现是可以ping通的。于是我把这里的sql.ini的配置替换成了对应的mysql服务名
-[!deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy10.png)
+![deploy](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/wms-deploy10.png)
 
 sql.ini
 ```

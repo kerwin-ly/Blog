@@ -12,7 +12,7 @@
 
 ### 2. 节点(node)
 
-[!service](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/swarm-diagram.png)
+![service](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/swarm-diagram.png)
 
 运行 `Docker` 的主机可以主动初始化一个 `Swarm` 集群或者加入一个已存在的 `Swarm` 集群，这样这个运行 `Docker` 的主机就成为一个 `Swarm` 集群的节点 `(node)` 。
 
@@ -21,7 +21,7 @@
 
 ### 3. 服务(service)和任务(task)
 
-[!service](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/services-diagram.png)
+![service](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/services-diagram.png)
 
 - 任务 （Task）是 Swarm 中的最小的调度单位，目前来说就是一个单一的容器。
 
