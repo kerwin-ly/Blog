@@ -108,7 +108,10 @@
 ## 其他
 
 ### 总结
+
 [如何规范的维护一个项目](https://github.com/kerwin-ly/Blog/blob/master/other/angular-project-summary.md)
+
+[一次基于docker-swarm部署的项目总结](https://github.com/kerwin-ly/Blog/blob/master/docker/deploy-docker-swarm.md)
 
 ### 规范
 
