@@ -1,7 +1,13 @@
 # 记录一次基于Docker部署流程
 >记录自己第一次部署一个前后端服务遇到的困难和解决方法
+
+技术栈：
+
 前端：Angular10 + Typescript + Rxjs + NgZorro + Bixi
+
 后端：Python3.7 + Flask + Sqlalchemy + Mysql + Gunicorn
+
+部署：Docker-swarm
 
 ## 构建前端镜像
 >前端代码仓库：https://github.com/kerwin-ly/wms_frontend
