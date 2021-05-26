@@ -1,11 +1,11 @@
 # 记录一次基于Docker部署流程
->记录自己第一次部署一个前后端服务遇到的困难和解决方法
+>前段时间帮女朋友做了一个简单的库存系统。在这里记录下自己第一次部署一个前后端服务遇到的问题和解决方法。线上地址：http://42.192.224.202:10001/goods/list
 
 技术栈：
 
 前端：Angular10 + Typescript + Rxjs + NgZorro + Bixi
 
-后端：Python3.7 + Flask + Sqlalchemy + Mysql + Gunicorn
+后端：Python3.7 + Flask + Sqlalchemy + Mysql8.0 + Gunicorn
 
 部署：Docker-swarm
 
@@ -80,7 +80,7 @@ services:
     volumes:
       - ./data/mysql/data:/var/lib/mysql # 挂载数据库数据
       - ./data/mysql/mysql.conf:/etc/mysql/my.cnf # 挂载配置文件
-      - ./data/mysql/mysql-files:/var/lib/mysql-files/
+      - ./data/mysql/mysql-files:/var/lib/mysql-files
     ports:
       - 3306:3306
     restart: always
@@ -115,6 +115,7 @@ services:
       - ./data/api/media:/project/wms_api/media
       - ./data/api/logs:/project/wms_api/logs
       - ./start.sh:/project/wms_api/scripts/start.sh
+      - ./data/api/migrations:/project/wms_api/migrations
     #entrypoint: sh /wait-for-it.sh mysql:3306 -- sh /project/wms_api/scripts/start.sh
     entrypoint: sh /wait-for-it.sh mysql:3306 -- sleep infinity
     #networks:
