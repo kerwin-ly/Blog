@@ -79,6 +79,10 @@
 
 [node 规避回调地狱](https://github.com/kerwin-ly/Blog/blob/master/node/fixCallbackHell.md)
 
+### Python
+
+[python多线程和多进程](https://github.com/kerwin-ly/Blog/blob/master/python/thread.md)
+
 ### Mysql
 
 [mysql 基本命令](https://github.com/kerwin-ly/Blog/blob/master/mysql/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4.md)
