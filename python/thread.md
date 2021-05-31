@@ -4,7 +4,9 @@
 
 ### 进程和线程
 进程：操作系统**分配资源**的最小单位。
+
 线程：操作系统**调度**的最小单位。
+
 一个进程中可以包含多个线程，而多个线程共享一个进程里面的内存空间。
 
 ### CPU密集型和IO密集型
@@ -21,7 +23,7 @@ IO密集型（I/O-bound）：IO密集型是指在系统运行中，大部分时�
 ### 全局解释器锁GIL（Global Interpreter Lock）
 每个CPU在同一时间只能执行一个线程，用于解决数据的完整性和状态同步问题
 
-## 多线程使用
+## 多线程/多进程在python中的应用
 
 ### 使用单线程和多线程爬数据
 
@@ -233,6 +235,115 @@ with ThreadPoolExecutor() as pool:
         url = futures[future]
         print(url, future.result())
 print('parse end')
+```
+
+线程池在web开发中的应用：在web开发中，我们时常会分步去处理一些数据。如：获取前端入参 => 读写服务器文件 => 读写数据库 => api response
+```python
+# 完整代码server_thread.py
+import json
+import time
+import flask
+from concurrent.futures import ThreadPoolExecutor
+
+app = flask.Flask(__name__)
+pool = ThreadPoolExecutor()
+
+def read_file():
+    time.sleep(0.1) # 模拟I/O操作
+    return 'file result'
+
+def read_db():
+    time.sleep(0.2) # 模拟I/O操作
+    return 'db result'
+
+def read_api():
+    time.sleep(0.3) # 模拟I/O操作
+    return 'api result'
+
+# 使用单线程，耗时6s+
+# @app.route("/")
+# def index():
+#     result_file = read_file()
+#     result_db = read_db()
+#     result_api = read_api()
+#     return json.dumps({
+#         "result_file": result_file.result(),
+#         "result_db": result_db.result(),
+#         "result_api": result_api.result()
+#     })
+
+# 使用多线程，耗时3s+
+@app.route("/")
+def index():
+    result_file = pool.submit(read_file)
+    result_db = pool.submit(read_db)
+    result_api = pool.submit(read_api)
+    return json.dumps({
+        "result_file": result_file.result(),
+        "result_db": result_db.result(),
+        "result_api": result_api.result()
+    })
+
+if __name__ == '__main__':
+    app.run()
+```
+
+### CPU密集型计算对比多进程/多线程/单线程运行速度
+计算一个列表中的素数
+
+```python
+# 完整代码speed.py
+import math
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+import time
+
+PRIMES = [112272535095293] * 100
+
+
+def is_prime(n):
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    sqrt_n = int(math.floor(math.sqrt(n)))
+    for i in range(3, sqrt_n + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+
+
+def single_thread():
+    for number in PRIMES:
+        is_prime(number)
+
+
+def multi_thread():
+    with ThreadPoolExecutor() as pool:
+        pool.map(is_prime, PRIMES)
+
+
+def multi_process():
+    with ProcessPoolExecutor() as pool:
+        pool.map(is_prime, PRIMES)
+
+
+if __name__ == "__main__":
+    start = time.time()
+    single_thread()
+    end = time.time()
+    print("single_thread, cost:", end - start, "seconds") # single_thread, cost: 62.97091197967529 seconds
+
+    start = time.time()
+    multi_thread()
+    end = time.time()
+    print("multi_thread, cost:", end - start, "seconds") # multi_thread, cost: 64.66155695915222 seconds
+
+    start = time.time()
+    multi_process()
+    end = time.time()
+    print("multi_process, cost:", end - start, "seconds") # multi_process, cost: 18.89032483100891 seconds
 ```
 
 
