@@ -24,6 +24,8 @@
 
 [如何理解原型和原型链](https://juejin.cn/post/6934498361475072014?utm_source=gold_browser_extension)
 
+[实现一个深拷贝](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E6%B7%B1%E6%8B%B7%E8%B4%9D.md)
+
 ### TypeScript
 
 [TypeScript 笔记](https://github.com/kerwin-ly/Blog/blob/master/typescript/note.md)

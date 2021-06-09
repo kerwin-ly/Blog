@@ -1,5 +1,3 @@
-# js实现一个深拷贝
-```js
 const mapTag = '[object Map]';
 const setTag = '[object Set]';
 const arrayTag = '[object Array]';
@@ -152,10 +150,3 @@ const temp = {
 };
 temp.temp = temp;
 console.log(deepClone(temp));
-
-```
-
-## 参考
-[【JS 进阶】你真的掌握变量和类型了吗](https://juejin.cn/post/6844903854882947080)
-
-[如何写出一个惊艳面试官的深拷贝?](https://segmentfault.com/a/1190000020255831)
