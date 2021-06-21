@@ -27,7 +27,7 @@ IO密集型（I/O-bound）：IO密集型是指在系统运行中，大部分时�
 
 ### 使用单线程和多线程爬数据
 
-完整代码：single_multi_thread.py
+完整代码：[single_multi_thread.py](https://github.com/kerwin-ly/Blog/blob/master/python/single_multi_thread.py)
 ```python
 import threading
 import time
@@ -76,7 +76,7 @@ if __name__ == "__main__":
 ### 使用消息队列完成生产者消费者模式的爬虫
 使用多线程，生产者爬取页面数据并推入队列中。消费者从队列中取数据，并写入到本地文件中
 
-完整代码：queue_thread.py
+完整代码：[queue_thread.py](https://github.com/kerwin-ly/Blog/blob/master/python/queue_thread.py)
 ```python
 import queue
 import threading
@@ -151,7 +151,7 @@ with lock:
 
 举例：多线程取钱。如果不加锁的情况下，很可能出现连续取两次的情况，导致余额为负数。
 
-完整代码：lock_thread.py
+完整代码：[lock_thread.py](https://github.com/kerwin-ly/Blog/blob/master/python/lock_thread.py)
 ```python
 import time
 import threading
@@ -203,7 +203,7 @@ with ThreadPoolExecutor() as pool:
         print(future.result())
 ```
 
-完整代码：pool_thread.py
+完整代码：[pool_thread.py](https://github.com/kerwin-ly/Blog/blob/master/python/pool_thread.py)
 ```python
 from concurrent.futures._base import as_completed
 from concurrent.futures.thread import ThreadPoolExecutor
@@ -238,8 +238,9 @@ print('parse end')
 ```
 
 线程池在web开发中的应用：在web开发中，我们时常会分步去处理一些数据。如：获取前端入参 => 读写服务器文件 => 读写数据库 => api response
+
+完整代码：[server_thread.py](https://github.com/kerwin-ly/Blog/blob/master/python/server_thread.py)
 ```python
-# 完整代码server_thread.py
 import json
 import time
 import flask
@@ -291,8 +292,8 @@ if __name__ == '__main__':
 ### CPU密集型计算对比多进程/多线程/单线程运行速度
 计算一个列表中的素数
 
+完整代码：[speed.py](https://github.com/kerwin-ly/Blog/blob/master/python/speed.py)
 ```python
-# 完整代码speed.py
 import math
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 import time
@@ -359,11 +360,11 @@ if __name__ == "__main__":
 
 **多进程更适用于计算密集型任务。多线程更适用于IO密集型任务。在python中，由于GIL的存在，我们可以简单的理解为其多线程就是并行的单线程**
 
-参考：
+## 参考：
 
-https://zhuanlan.zhihu.com/p/62766037
+[什么是CPU密集型、IO密集型？](https://zhuanlan.zhihu.com/p/62766037)
 
-https://zhuanlan.zhihu.com/p/46368084
+[一文看懂Python多进程与多线程编程](https://zhuanlan.zhihu.com/p/46368084)
 
-https://zhuanlan.zhihu.com/p/20953544
+[谈谈python的GIL、多线程、多进程](https://zhuanlan.zhihu.com/p/20953544)
 
