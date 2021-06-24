@@ -57,9 +57,7 @@
 
 ### React
 
-[react 踩坑](https://github.com/kerwin-ly/Blog/blob/master/react/react.md)
-
-[react-native 踩坑](https://github.com/kerwin-ly/Blog/blob/master/react/react-native.md)
+[react-native v0.47.2 踩坑](https://github.com/kerwin-ly/Blog/blob/master/react/react-native.md)
 
 [react-native-vector-icons 的使用](https://github.com/kerwin-ly/Blog/blob/master/react/react-native-vector-icons%20usage.md)
 
