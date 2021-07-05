@@ -97,8 +97,9 @@ docker inspect dockerId
 
 # 将镜像保存为压缩包导出
 # docker save <IMAGE NAME>:<IMAGE TAG> -o save.tar
-# docker save -o graph.tar 7fbbf0d46010
-docker save dockerhub.xxx.com/label_web_html:PRODUCT_20200526_142942 -o shisuo.tar
+# docker save -o graph.tar 7fbbf0d46010 # load之后没有镜像tag
+
+docker save -o shisuo.tar dockerhub.xxx.com/label_web_html:PRODUCT_20200526_142942
 
 # 导入镜像包,导入后可以通过docker images查看
 # docker load < 压缩包名
