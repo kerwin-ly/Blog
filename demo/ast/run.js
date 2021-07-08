@@ -8,7 +8,7 @@ const codePath = './code/demo.ts'; // 待解析代码路径，
 const file = fs.readFileSync(path.resolve(__dirname, codePath)).toString();
 const ast = parse(file, {
   sourceType: 'module',
-  plugins: ['decorators-legacy'], // 如果待代码中有装饰器，需要添加该plugin，才能识别。
+  plugins: ['decorators-legacy', 'typescript'], // decorators-legacy: 待解析代码中包含装饰器；typescript：待分析代码中包含类型声明等ts特性
 });
 let code;
 let hasProviders = false;
