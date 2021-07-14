@@ -181,6 +181,8 @@
 
 [webpack4.x自定义构建](https://juejin.im/post/5de87444518825124c50cd36#heading-35)
 
+[webpack5最佳实践](https://juejin.cn/post/6982361231071903781#heading-19)
+
 ### angular
 
 [A deep dive into @Injectable and “providedIn” in Ivy](https://medium.com/angular-in-depth/deep-dive-into-injectable-and-providedin-in-ivy-2a58c989e31c)
