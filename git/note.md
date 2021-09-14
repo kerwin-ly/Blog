@@ -334,3 +334,11 @@ git cherry-pick e72jfhfji
 # 提交变更
 git push origin branchB
 ```
+
+#### 12.将旧仓库代码迁移到新的地址，保存所有commit、tag和branch
+```
+git clone --mirror <旧仓库的git地址>
+cd <克隆旧仓库的文件夹>
+git remote set-url origin <新仓库的git地址>
+git push -f origin
+```
