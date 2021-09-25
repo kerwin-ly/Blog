@@ -158,13 +158,72 @@ export class UserCardComponent {
 
 ### @Optional()、@Self()、@SkipSelf()、@Host() 修饰符的使用
 
+#### @Optional()
+
+>通过`@Optional()`装饰服务，表明让该服务可选。即如果在程序中，没有找到服务匹配的`provider`，也不会报错`No provider for xxx`。你可以用一些其他的方法去 
+
+```ts
+export class UserCardComponent {
+  constructor (@Optional private userService: UserService) {}
+}
+```
+
+#### @Self()
+
+>使用`@Self()`让`Angular`仅查看当前组件或指令的`ElementInjector`。
+
+```ts
+// user-card.component.ts
+@Component({
+  selector: 'user-card.component.ts',
+  templateUrl: './user-card.component.html',
+  styleUrls: ['./user-card.component.less'],
+  providers: [UserService] // 只能在该组件中添加依赖，否则报错。如果不希望报错，则需要加上@Optional()修饰符
+})
+export class UserCardComponent {
+  constructor (@Optional() @Self() private userService?: UserService) {}
+}
+```
+
+#### @SkipSelf()
+
+>`@SkipSelf()`与`@Self()`相反。使用`@SkipSelf()`，`Angular`在父`ElementInjector`中而不是当前`ElementInjector`中开始搜索服务.
+
+```ts
+// 子组件 user-card.component.ts
+@Component({
+  selector: 'user-card.component.ts',
+  templateUrl: './user-card.component.html',
+  styleUrls: ['./user-card.component.less'],
+  providers: [UserService] // not work
+})
+export class UserCardComponent {
+  constructor (@SkipSelf() private userService?: UserService) {}
+}
+
+// 父组件 parent-card.component.ts
+@Component({
+  selector: 'parent-card.component.ts',
+  templateUrl: './parent-card.component.html',
+  styleUrls: ['./parent-card.component.less'],
+  providers: [{
+    provide: UserService,
+    useClass: ParentUserService  // work
+  }]
+})
+export class ParentCardComponent {
+  constructor () {}
+}
+```
+
+#### @Host()
+
+>`@Host()`使你可以在搜索`provider`时将当前组件指定为注入器树的最后一站。即使树的更上级有一个服务实例，`Angular`也不会继续寻找。
+
 TODO
 
-
-
-
-
-### useFactory
+### useFactory、useClass、useValue和useExisting不同类型`provider`的应用场景
+#### useFactory 工厂提供商
 
 某天，咱们接到一个需求，需要实现一个`本地存储`的功能，并将其`注入`到`Angular`应用中，使其可以在系统中随意调用
 
@@ -309,7 +368,7 @@ export class CourseCardComponent  {
 
 到此，我们便可以在`user.component.ts`调用`StorageService`里面的方法了
 
-### useClass
+#### useClass 类提供商
 
 emm...你是否觉得上述的写法过于复杂了，而在实际开发中，我们大多数场景是无需手动创建`Provider`和`InjectionToken`的。如下：
 
@@ -404,7 +463,7 @@ providers: [StorageService]
 
 ```
 
-### useValue
+#### useValue 值提供商
 
 完成`本地存储服务`的实现后，我们又收到了一个新需求，研发老大希望提供一个配置文件，来存储`StorageService`的一些默认行为
 
@@ -468,7 +527,7 @@ export class CourseCardComponent  {
 }
 ```
 
-### useExisting
+#### useExisting 别名提供商
 
 如果我们需要基于一个已存在的`provider`来创建一个新的`provider`，或需要重命名一个已存在的`provider`时，可以用`useExisting`属性来处理。比如：创建一个`angular`的表单控件，其在一个表单中会存在多个，每个表单控件存储不同的值。我们可以基于已有的表单控件`provider`来创建
 
@@ -506,9 +565,6 @@ const NET_PROVIDES = [
 ```
 
 multi: 为`false`时，`provider`的值会被覆盖；设置为`true`，将生成多个`provider`并与唯一`InjectionToken` `HTTP_INTERCEPTORS`关联。最后可以通过`NG_VALUE_ACCESSOR`获取所有`provider`的值
-
-### @Optional()、@Self()、@SkipSelf()、@Host()
-
 
 ### 参考链接
 
