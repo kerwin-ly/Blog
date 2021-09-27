@@ -38,10 +38,11 @@
 
 [rxjs 开发笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/rxjs.md)
 
-[angular变更机制详解](https://www.520stone.com/page/article/%E4%BA%94%E7%AF%87%E8%AE%A9%E4%BD%A0%E6%88%90%E4%B8%BAAngular%E5%8F%98%E5%8C%96%E6%A3%80%E6%B5%8B%E4%B8%93%E5%AE%B6/)
-
 [angular7升级到angular9](https://github.com/kerwin-ly/Blog/blob/master/angular/upgrade-angular9.md)
 
+[详解依赖注入](https://github.com/kerwin-ly/Blog/blob/master/angular/%E8%AF%A6%E8%A7%A3%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5.md)
+
+[依赖注入在Angular中的应用](https://github.com/kerwin-ly/Blog/blob/master/angular/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%9C%A8Angular%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.md)
 
 ### Vue
 
@@ -186,6 +187,8 @@
 ### angular
 
 [A deep dive into @Injectable and “providedIn” in Ivy](https://medium.com/angular-in-depth/deep-dive-into-injectable-and-providedin-in-ivy-2a58c989e31c)
+
+[angular变更机制详解](https://www.520stone.com/page/article/%E4%BA%94%E7%AF%87%E8%AE%A9%E4%BD%A0%E6%88%90%E4%B8%BAAngular%E5%8F%98%E5%8C%96%E6%A3%80%E6%B5%8B%E4%B8%93%E5%AE%B6/)
 
 ### 浏览器
 
