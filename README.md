@@ -2,7 +2,7 @@
 
 ## 数据结构&&算法
 
-[JavaScript实现数据结构](https://github.com/kerwin-ly/Blog/blob/master/algorithm/data-structure.md)
+[数据结构-基于Javascript实现](https://github.com/kerwin-ly/Blog/tree/master/data-structure)
 
 [算法汇总-待分类](https://github.com/kerwin-ly/Blog/tree/master/algorithm)
 
