@@ -1,8 +1,20 @@
 # Blog
 
+## 数据结构&&算法
+
+[数据结构-基于Javascript实现](https://github.com/kerwin-ly/Blog/tree/master/data-structure)
+
+[算法汇总-待分类](https://github.com/kerwin-ly/Blog/tree/master/algorithm)
+
+## 计算机网网络
+
+[计算机网络自顶向下方法-读书笔记]()
+
 ## 前端
 
-### JavaScript基础
+### JavaScript
+
+[JavaScript设计模式与开发实践](https://github.com/kerwin-ly/Blog/blob/master/notes/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5.md)
 
 [函数声明和函数表达式的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%92%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB.md)
 
@@ -29,6 +41,8 @@
 ### TypeScript
 
 [TypeScript 笔记](https://github.com/kerwin-ly/Blog/blob/master/typescript/note.md)
+
+[使用Babel生成Typescript代码-AST](https://github.com/kerwin-ly/Blog/blob/master/tools/ast.md)
 
 ### Angular
 
@@ -68,17 +82,19 @@
 
 [less 笔记](https://github.com/kerwin1/Blog/blob/master/style/less.md)
 
-### Cordova
+### 移动端
 
 [cordova 踩坑](https://github.com/kerwin-ly/Blog/blob/master/cordova/note.md)
 
-## 后端
+## 服务端
 
 ### Node
 
 [node 开发常见问题总结](https://github.com/kerwin-ly/Blog/blob/master/node/fix.md)
 
 [node 规避回调地狱](https://github.com/kerwin-ly/Blog/blob/master/node/fixCallbackHell.md)
+
+[在vscode中调试基于typescript的node项目](https://github.com/kerwin-ly/Blog/tree/master/demo/debug-ts)
 
 ### Python
 
@@ -96,11 +112,15 @@
 
 [Docker Swarm](https://github.com/kerwin-ly/Blog/blob/master/docker/docker-swarm.md)
 
+[一次基于docker-swarm部署的项目总结](https://github.com/kerwin-ly/Blog/blob/master/docker/deploy-docker-swarm.md)
+
 ### CI/CD持续集成
 
 [CI/CD持续集成](https://github.com/kerwin-ly/Blog/blob/master/docker/CICD.md)
 
-## Git
+## 开发工具
+
+### Git
 
 [git 笔记](https://github.com/kerwin-ly/Blog/blob/master/git/note.md)
 
@@ -110,100 +130,16 @@
 
 [Git 异常处理措施](https://juejin.im/post/5edcf3a36fb9a047fa04fbc3)
 
-## 其他
+### Mock
 
-### 总结
+[使用mock.js模拟后台请求并返回数据](https://github.com/kerwin-ly/Blog/blob/master/mock/mock.md)
+
+## 最佳实践
+
+### 编码规范
 
 [如何规范的维护一个项目](https://github.com/kerwin-ly/Blog/blob/master/other/angular-project-summary.md)
-
-[一次基于docker-swarm部署的项目总结](https://github.com/kerwin-ly/Blog/blob/master/docker/deploy-docker-swarm.md)
-
-### 规范
 
 [HTML && CSS 编码规范](https://github.com/kerwin1/Blog/blob/master/common/HTML%20%26%26%20CSS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
 
 [JS 编码规范](https://github.com/kerwin1/Blog/blob/master/common/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
-
-### 工具
-
-[使用mock.js模拟后台请求并返回数据](https://github.com/kerwin-ly/Blog/blob/master/mock/mock.md)
-
-[使用charles抓包node请求](https://www.jianshu.com/p/460d9c519001)
-
-[macos下 Charles 抓包浏览器https接口](https://blog.csdn.net/adley_app/article/details/81738836)
-
-[使用babel转换javascript代码](https://github.com/kerwin-ly/Blog/blob/master/tools/ast.md)
-
-## 计算机基础
-
-[JavaScript设计模式与开发实践](https://github.com/kerwin-ly/Blog/blob/master/notes/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5.md)
-
-[JavaScript实现数据结构](https://github.com/kerwin-ly/Blog/blob/master/algorithm/data-structure.md)
-
-## 算法
-
-[算法汇总-待分类](https://github.com/kerwin-ly/Blog/tree/master/algorithm)
-
-## 优质文章 && 教程
-
-### javascript
-
-[一名【合格】前端工程师的自检清单](https://juejin.im/post/5cc1da82f265da036023b628)
-
-[JavaScript现代教程](https://zh.javascript.info/garbage-collection)
-
-[对js流stream的理解](https://m.imooc.com/article/289259)
-
-[函数柯里化](https://juejin.im/post/5b8350246fb9a019c372d26d)
-
-[JSON.stringify额外参数的强大功能](https://pawelgrzybek.com/til-the-power-of-json-stringify-replacer-parameter/)
-
-[从浏览器多进程到JS单线程，JS运行机制最全面的一次梳理](https://juejin.im/post/5a6547d0f265da3e283a1df7)
-
-[如何编写高质量的函数](https://juejin.im/post/6844903779645538318)
-
-[clean code javascript](https://github.com/ryanmcdermott/clean-code-javascript?utm_source=gold_browser_extension)
-
-[JS正则表达式完整教程](https://juejin.im/post/5965943ff265da6c30653879)
-
-[算法和数据结构](https://github.com/ConardLi/awesome-coding-js)
-
-### node.js
-
-[node学习指南](https://www.nodejs.red/#/javascript/base)
-
-[在vscode中调试typescript + node应用](https://www.barretlee.com/blog/2019/03/18/debugging-in-vscode-tutorial/) [测试demo/debug-ts](https://github.com/kerwin-ly/Blog/tree/master/demo/debug-ts)
-
-### typescript
-
-[深度学习typescript](https://jkchao.github.io/typescript-book-chinese/error/common.html#ts2307)
-
-### build tools
-
-[webpack4.x自定义构建](https://juejin.im/post/5de87444518825124c50cd36#heading-35)
-
-[webpack5最佳实践](https://juejin.cn/post/6982361231071903781#heading-19)
-
-### angular
-
-[A deep dive into @Injectable and “providedIn” in Ivy](https://medium.com/angular-in-depth/deep-dive-into-injectable-and-providedin-in-ivy-2a58c989e31c)
-
-[angular变更机制详解](https://www.520stone.com/page/article/%E4%BA%94%E7%AF%87%E8%AE%A9%E4%BD%A0%E6%88%90%E4%B8%BAAngular%E5%8F%98%E5%8C%96%E6%A3%80%E6%B5%8B%E4%B8%93%E5%AE%B6/)
-
-### 浏览器
-
-[一文带你了解如何排查内存泄漏导致的页面卡顿现象](https://juejin.cn/post/6947841638118998029)
-
-### 其他
-
-[POST和GET的区别](https://www.oschina.net/news/77354/http-get-post-different)
-
-[Apache Benchmark测试http并发量](https://ruby-china.org/topics/13870)
-
-[微前端解决方案](https://tech.antfin.com/community/articles/536)
-
-[How to give great code review feedback](https://www.michaelagreiler.com/great-code-review-feedback/)
-
-[输入URL到渲染全面梳理下-总结篇](https://juejin.im/post/5ebabbf96fb9a043586c8f9e)
-
-[前端性能优化24条建议](https://juejin.im/post/6892994632968306702)
