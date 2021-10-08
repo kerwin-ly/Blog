@@ -4,7 +4,7 @@
 
 [数据结构-基于Javascript实现](https://github.com/kerwin-ly/Blog/tree/master/data-structure)
 
-[算法汇总-待分类](https://github.com/kerwin-ly/Blog/tree/master/algorithm)
+[算法汇总-待分类](https://github.com/kerwin-ly/Blog/tree/master/data-structure/algorithm)
 
 ## 计算机网网络
 
