@@ -1,4 +1,4 @@
-# 依赖注入在 Angular 中的应用
+# 深入理解Angular依赖注入（二）：依赖注入在Angular中的应用
 
 本文通过实际案例，带大家了解`依赖注入`在`Angular`中的应用和部分实现原理，其中包括
 
@@ -12,13 +12,13 @@
 
 - `muti`(多提供商)的应用场景
 
-如果你还不清楚什么是`依赖注入`，可以先看下这篇文章[详解依赖注入](https://juejin.cn/post/7012237021607362597/#heading-3)
+如果你还不清楚什么是`依赖注入`，可以先看下这篇文章[深入理解Angular依赖注入（一）：什么是依赖注入](https://juejin.cn/post/7012237021607362597/#heading-3)
 
-### useFactory、useClass、useValue 和 useExisting 不同类型`provider`的应用场景
+## 一、useFactory、useClass、useValue 和 useExisting 不同类型`provider`的应用场景
 
 下面，我们通过实际例子，来对几个提供商的使用场景进行说明。
 
-#### useFactory 工厂提供商
+### 1. useFactory 工厂提供商
 
 某天，咱们接到一个需求：实现一个`本地存储`的功能，并将其`注入`到`Angular`应用中，使其可以在系统中全局使用
 
@@ -168,7 +168,7 @@ export class CourseCardComponent  {
 
 到此，我们便可以在`user.component.ts`调用`StorageService`里面的方法了
 
-#### useClass 类提供商
+### 2. useClass 类提供商
 
 emm...你是否觉得上述的写法过于复杂了，而在实际开发中，我们大多数场景是无需手动创建`Provider`和`InjectionToken`的。如下：
 
@@ -269,7 +269,7 @@ providers: [StorageService]
 
 这也就是我们平常开发中，最常见的一种写法。
 
-#### useValue 值提供商
+### 3. useValue 值提供商
 
 完成`本地存储服务`的实现后，我们又收到了一个新需求，研发老大希望提供一个配置文件，来存储`StorageService`的一些默认行为
 
@@ -337,7 +337,7 @@ export class CourseCardComponent  {
 }
 ```
 
-#### useExisting 别名提供商
+### 4. useExisting 别名提供商
 
 如果我们需要基于一个已存在的`provider`来创建一个新的`provider`，或需要重命名一个已存在的`provider`时，可以用`useExisting`属性来处理。比如：创建一个`angular`的表单控件，其在一个表单中会存在多个，每个表单控件存储不同的值。我们可以基于已有的表单控件`provider`来创建
 
@@ -361,7 +361,7 @@ export class NewInputComponent implements ControlValueAccessor {
 }
 ```
 
-### ModuleInjector 和 ElementInjector 层级注入器的意义
+## 二、ModuleInjector 和 ElementInjector 层级注入器的意义
 
 在`Angular`中有两个注入器层次结构
 
@@ -371,7 +371,7 @@ export class NewInputComponent implements ControlValueAccessor {
 
 我们通过一个实际例子来解释两种注入器的应用场景，比如：设计一个展示用户信息的卡片组件
 
-#### ModuleInjector 模块注入器
+### 1. ModuleInjector 模块注入器
 
 我们使用`user-card.component.ts`来显示组件，用`UserService`来存取该用户的信息
 
@@ -457,7 +457,7 @@ export class UserService2 {
 }
 ```
 
-#### ElementInjector 组件注入器
+#### 2. ElementInjector 组件注入器
 
 在了解完`ModuleInjector`后，我们继续通过刚才的例子讲述`ElementInjector`。
 
@@ -510,11 +510,11 @@ export class UserCardComponent {
 
 > 在组件中使用依赖项时，`Angular`会优先在该组件的`providers`中寻找，判断该依赖项是否有匹配的`provider`。如果有，则直接实例化。如果没有，则查找父组件的`providers`，如果还是没有，则继续找父级的父级，直到`根组件`(app.component.ts)。如果在`根组件`中找到了匹配的`provider`，会先判断其是否有存在的实例，如果有，则直接返回该实例。如果没有，则执行实例化操作。如果`根组件`仍未找到，则开始从`原组件`所在的`module`开始查找，如果`原组件`所在`module`不存在，则继续查找父级`module`，直到`根模块`（app.module.ts）。最后，仍未找到则报错`No provider for xxx`。
 
-### @Optional()、@Self()、@SkipSelf()、@Host() 修饰符的使用
+## 三、@Optional()、@Self()、@SkipSelf()、@Host() 修饰符的使用
 
 在`Angular`应用中，当`依赖项`寻找`provider`时，我们可以通过一些修饰符来**对搜索结果进行容错处理**或**限制搜索的范围**。
 
-#### @Optional()
+### 1. @Optional()
 
 > 通过`@Optional()`装饰服务，表明让该服务可选。即如果在程序中，没有找到服务匹配的`provider`，也不会程序崩溃，报错`No provider for xxx`，而是返回`null`。
 
@@ -524,7 +524,7 @@ export class UserCardComponent {
 }
 ```
 
-#### @Self()
+### 2. @Self()
 
 > 使用`@Self()`让`Angular`仅查看当前组件或指令的`ElementInjector`。
 
@@ -543,7 +543,7 @@ export class UserCardComponent {
 }
 ```
 
-#### @SkipSelf()
+### 3. @SkipSelf()
 
 > `@SkipSelf()`与`@Self()`相反。使用`@SkipSelf()`，`Angular`在父`ElementInjector`中而不是当前`ElementInjector`中开始搜索服务.
 
@@ -576,11 +576,11 @@ export class ParentCardComponent {
 }
 ```
 
-#### @Host()
+### 4. @Host()
 
 > `@Host()`使你可以在搜索`provider`时将当前组件指定为注入器树的最后一站。这和`@Self()`类似，即使树的更上级有一个服务实例，`Angular`也不会继续寻找。
 
-### multi 多服务提供商
+## 四、multi 多服务提供商
 
 某些场景下，我们需要一个`InjectionToken`初始化多个`provider`。比如：在使用拦截器的时候，我们希望在`default.interceptor.ts`之前添加一个  用于 token 校验的`JWTInterceptor`
 
@@ -595,7 +595,11 @@ const NET_PROVIDES = [
 
 multi: 为`false`时，`provider`的值会被覆盖；设置为`true`，将生成多个`provider`并与唯一`InjectionToken` `HTTP_INTERCEPTORS`关联。最后可以通过`HTTP_INTERCEPTORS`获取所有`provider`的值
 
-### 参考链接
+## 相关文章
+
+[# 深入理解Angular依赖注入（一）：什么是依赖注入](https://juejin.cn/post/7012237021607362597)
+
+## 参考链接
 
 [Angular Dependency Injection: Complete Guide](https://blog.angular-university.io/angular-dependency-injection/)
 
