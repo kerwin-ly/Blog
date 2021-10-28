@@ -1,4 +1,4 @@
-# 使用 babel 来生成 javascript 代码
+# 使用 babel 来生成 Typescript 代码
 
 > 本文相关的代码保存于[github 源码](https://github.com/kerwin-ly/Blog/tree/master/demo/ast)处，建议结合该代码来阅读文章，便于食用。
 
