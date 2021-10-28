@@ -17,20 +17,20 @@ npm install rxjs
 `rx.service.js`
 
 ```js
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root',
 })
 export class RxService {
   constructor() {}
   getRxData() {
-    return Observable.create(observer => {
+    return Observable.create((observer) => {
       setTimeout(() => {
         observer.next({
           // 可以执行多次next方法
-          name: "kerwin"
+          name: 'kerwin',
         });
       }, 2000);
     });
@@ -97,9 +97,9 @@ getRxData() {
 
 ```js
 const myObservar = {
-  next: x => console.log("Observer got a next value: " + x),
-  error: err => console.error("Observer got an error: " + err),
-  complete: () => console.log("Observer got a complete notification")
+  next: (x) => console.log('Observer got a next value: ' + x),
+  error: (err) => console.error('Observer got an error: ' + err),
+  complete: () => console.log('Observer got a complete notification'),
 };
 /* from: 打印了4次如下
 Observer got a next value: kerwin
@@ -118,10 +118,10 @@ obData.subscribe(myObservar);
 #### 2.3 fromEvent 基于事件创建
 
 ```js
-import { fromEvent } from "rxjs";
+import { fromEvent } from 'rxjs';
 
-const el = document.getElementById("my-element");
-const mouseMoves = fromEvent(el, "mousemove");
+const el = document.getElementById('my-element');
+const mouseMoves = fromEvent(el, 'mousemove');
 
 // Subscribe to start listening for mouse-move events
 const subscription = mouseMoves.subscribe((evt: MouseEvent) => {
@@ -143,7 +143,7 @@ const subscription = mouseMoves.subscribe((evt: MouseEvent) => {
 ```js
 const rxData = of[(1, 2, 3)];
 
-const sub = rxData.pipe(filter(data => data > 1)).subscribe(data => {
+const sub = rxData.pipe(filter((data) => data > 1)).subscribe((data) => {
   console.log(data);
 });
 ```
@@ -153,16 +153,16 @@ const sub = rxData.pipe(filter(data => data > 1)).subscribe(data => {
 ```js
 const t1 = from([
   {
-    name: "kerwin",
-    age: 30
+    name: 'kerwin',
+    age: 30,
   },
   {
-    name: "bob",
-    age: 26
-  }
+    name: 'bob',
+    age: 26,
+  },
 ]);
 
-t1.pipe(filter((person: any) => person.age > 27)).subscribe(val => {
+t1.pipe(filter((person: any) => person.age > 27)).subscribe((val) => {
   console.log(val); // {name: 'kerwin', age: 30}
 });
 ```
@@ -173,8 +173,8 @@ t1.pipe(filter((person: any) => person.age > 27)).subscribe(val => {
 const data = from[(1, 2, 3, 5, 1)];
 
 data
-  .pipe(first(item => item === 2, "nothing")) // 如果匹配到了值为2，则返回当前值2.如果匹配不到，则返回'nothing'
-  .subscribe(data => {
+  .pipe(first((item) => item === 2, 'nothing')) // 如果匹配到了值为2，则返回当前值2.如果匹配不到，则返回'nothing'
+  .subscribe((data) => {
     console.log(data);
   });
 ```
@@ -187,20 +187,22 @@ data
 debounceTime
 
 ```js
-import { fromEvent, timer } from "rxjs";
-import { debounceTime, map } from "rxjs/operators";
+import { fromEvent, timer } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
-const input = document.getElementById("example");
+const input = document.getElementById('example');
 
 // 对于每次键盘敲击，都将映射成当前输入值
-const example = fromEvent(input, "keyup").pipe(map(i => i.currentTarget.value));
+const example = fromEvent(input, 'keyup').pipe(
+  map((i) => i.currentTarget.value)
+);
 
 // 在两次键盘敲击之间等待0.5秒方才发出当前值，
 // 并丢弃这0.5秒内的所有其他值
 const debouncedInput = example.pipe(debounceTime(500));
 
 // 输出值
-const subscribe = debouncedInput.subscribe(val => {
+const subscribe = debouncedInput.subscribe((val) => {
   console.log(`Debounced Input: ${val}`);
 });
 ```
@@ -208,8 +210,8 @@ const subscribe = debouncedInput.subscribe(val => {
 throttleTime
 
 ```js
-import { interval } from "rxjs";
-import { throttleTime } from "rxjs/operators";
+import { interval } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
 
 // 每1秒发出值
 const source = interval(1000);
@@ -219,7 +221,7 @@ const source = interval(1000);
 */
 const example = source.pipe(throttleTime(5000));
 // 输出: 0...6...12
-const subscribe = example.subscribe(val => console.log(val));
+const subscribe = example.subscribe((val) => console.log(val));
 ```
 
 #### 3.4 map && mapTo
@@ -230,10 +232,10 @@ const subscribe = example.subscribe(val => console.log(val));
 mapTo 举例：点击一次按钮，对应按钮次数+1
 
 ```ts
-const setHtml = id => val => (document.getElementById(id).innerHTML = val);
+const setHtml = (id) => (val) => (document.getElementById(id).innerHTML = val);
 
-const addOneClick$ = id =>
-  fromEvent(document.getElementById(id), "click").pipe(
+const addOneClick$ = (id) =>
+  fromEvent(document.getElementById(id), 'click').pipe(
     // 将每次点击映射成1
     mapTo(1),
     // startWith(0),
@@ -243,9 +245,9 @@ const addOneClick$ = id =>
     tap(setHtml(`${id}Total`))
   );
 
-const combineTotal$ = combineLatest(addOneClick$("red"), addOneClick$("black"))
+const combineTotal$ = combineLatest(addOneClick$('red'), addOneClick$('black'))
   .pipe(map(([val1, val2]) => val1 + val2))
-  .subscribe(setHtml("total"));
+  .subscribe(setHtml('total'));
 ```
 
 map 举例
@@ -254,9 +256,9 @@ map 举例
 interval(5000)
   .pipe(
     startWith(0),
-    map(data => "hello" + data)
+    map((data) => 'hello' + data)
   )
-  .subscribe(extra => {
+  .subscribe((extra) => {
     console.log(extra); // hello0, hello1, hello2
   });
 ```
@@ -268,8 +270,8 @@ interval(5000)
 按照顺序，前一个`observable`完成了再订阅下一个`observable`(有先后顺序)
 
 ```js
-import { concat } from "rxjs/operators";
-import { of } from "rxjs";
+import { concat } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 // 发出 1,2,3
 const sourceOne = of(1, 2, 3);
@@ -278,8 +280,8 @@ const sourceTwo = of(4, 5, 6);
 // 先发出 sourceOne 的值，当完成时订阅 sourceTwo
 const example = sourceOne.pipe(concat(sourceTwo));
 // 输出: 1,2,3,4,5,6
-const subscribe = example.subscribe(val =>
-  console.log("Example: Basic concat:", val)
+const subscribe = example.subscribe((val) =>
+  console.log('Example: Basic concat:', val)
 );
 ```
 
@@ -294,8 +296,8 @@ concatMap
 ```js
 const a = of(2000, 1000);
 const example = a
-  .pipe(concatMap(val => of(`${val}ms`).pipe(delay(val))))
-  .subscribe(val => console.log(val)); // 2000ms后先打印2000ms，再过1000ms打印1000ms
+  .pipe(concatMap((val) => of(`${val}ms`).pipe(delay(val))))
+  .subscribe((val) => console.log(val)); // 2000ms后先打印2000ms，再过1000ms打印1000ms
 ```
 
 mergeMap
@@ -303,39 +305,39 @@ mergeMap
 ```js
 const a = of(2000, 500, 1000);
 const example = a
-  .pipe(mergeMap(val => of(`${val}ms`).pipe(delay(val))))
-  .subscribe(val => console.log(val)); // 500ms后先打印500ms，再过1000ms打印1000ms，再过2000ms打印2000ms
+  .pipe(mergeMap((val) => of(`${val}ms`).pipe(delay(val))))
+  .subscribe((val) => console.log(val)); // 500ms后先打印500ms，再过1000ms打印1000ms，再过2000ms打印2000ms
 ```
 
 switchMap
 
 ```js
-import { timer, interval } from "rxjs";
-import { switchMap } from "rxjs/operators";
+import { timer, interval } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 // 立即发出值， 然后每5秒发出值
 const source = timer(0, 5000);
 // 当 source 发出值时切换到新的内部 observable，发出新的内部 observable 所发出的值
 const example = source.pipe(switchMap(() => interval(500)));
 // 输出: 0,1,2,3,4,5,6,7,8,9...0,1,2,3,4,5,6,7,8
-const subscribe = example.subscribe(val => console.log(val));
+const subscribe = example.subscribe((val) => console.log(val));
 ```
 
 应用场景：**mergeMap 解决咱们接口依赖问题**。如：咱们需要调用 b 接口获取数据，b 接口的参数需要 a 接口返回。
 
 ```js
-const user = of("kerwin"); // a接口
-const project = of("big project"); // b接口
+const user = of('kerwin'); // a接口
+const project = of('big project'); // b接口
 
 user
   .pipe(
-    mergeMap(u => {
-      if (u === "kerwin") {
+    mergeMap((u) => {
+      if (u === 'kerwin') {
         return project;
       }
     })
   )
-  .subscribe(p => {
+  .subscribe((p) => {
     console.log(p);
   });
 ```
@@ -347,8 +349,8 @@ user
 注意：**如果内部 observable 不完成的话，forkJoin 永远不会发出值！**
 
 ```js
-const all = forkJoin(of("hello"), of("world").pipe(delay(1000)));
-const sub = all.subscribe(val => console.log(val)); // 返回一个数组["hello", "world"]
+const all = forkJoin(of('hello'), of('world').pipe(delay(1000)));
+const sub = all.subscribe((val) => console.log(val)); // 返回一个数组["hello", "world"]
 ```
 
 #### 4.4 combinLatest
@@ -356,7 +358,7 @@ const sub = all.subscribe(val => console.log(val)); // 返回一个数组["hello
 当任意 observable 发出值时，取出对应的最新值。（这个适用于一个 observable 可能发出多个值的情况，比如：有一个算式，总价=单价\*数量，每次单价和数量改变了，都是用最新的值去算总价）
 
 ```js
-import { timer, combineLatest } from "rxjs";
+import { timer, combineLatest } from 'rxjs';
 
 // timerOne 在1秒时发出第一个值，然后每4秒发送一次
 const timerOne = timer(1000, 4000);
@@ -368,7 +370,7 @@ const timerThree = timer(3000, 4000);
 // 当一个 timer 发出值时，将每个 timer 的最新值作为一个数组发出
 const combined = combineLatest(timerOne, timerTwo, timerThree);
 
-const subscribe = combined.subscribe(latestValues => {
+const subscribe = combined.subscribe((latestValues) => {
   // 从 timerValOne、timerValTwo 和 timerValThree 中获取最新发出的值
   const [timerValOne, timerValTwo, timerValThree] = latestValues;
   /*
@@ -390,12 +392,12 @@ const subscribe = combined.subscribe(latestValues => {
 当所有的 observables 发出后，将它们的值作为数组发出。**如果一个 observable 发出了多个值，那么在发出第一个值后，便不会再次发出值了。**
 
 ```js
-import { delay } from "rxjs/operators";
-import { of, zip, interval } from "rxjs";
+import { delay } from 'rxjs/operators';
+import { of, zip, interval } from 'rxjs';
 
-const sourceOne = of("Hello");
-const sourceTwo = of("World!");
-const sourceThree = of("Goodbye");
+const sourceOne = of('Hello');
+const sourceTwo = of('World!');
+const sourceThree = of('Goodbye');
 const sourceFour = interval(10);
 // 一直等到所有 observables 都发出一个值，才将所有值作为数组发出
 const example = zip(
@@ -405,7 +407,7 @@ const example = zip(
   sourceFour.pipe(delay(3000))
 );
 // 输出: ["Hello", "World!", "Goodbye", 0]
-const subscribe = example.subscribe(val => console.log(val));
+const subscribe = example.subscribe((val) => console.log(val));
 ```
 
 ### 5. 错误处理
@@ -413,14 +415,14 @@ const subscribe = example.subscribe(val => console.log(val));
 #### 5.1 catchError && timeout
 
 ```js
-import { throwError, of } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { throwError, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 // 发出错误
-const source = throwError("This is an error!");
+const source = throwError('This is an error!');
 // 优雅地处理错误，并返回带有错误信息的 observable
-const example = source.pipe(catchError(val => of(`I caught: ${val}`)));
+const example = source.pipe(catchError((val) => of(`I caught: ${val}`)));
 // 输出: 'I caught: This is an error'
-const subscribe = example.subscribe(val => console.log(val));
+const subscribe = example.subscribe((val) => console.log(val));
 ```
 
 `timeout`在指定时间间隔内不发出值就报错
@@ -430,8 +432,8 @@ const a = of(1, 2);
 a.pipe(
   delay(1000),
   timeout(500),
-  catchError(error => of("error occured" + error))
-).subscribe(val => {
+  catchError((error) => of('error occured' + error))
+).subscribe((val) => {
   console.log(val);
 });
 ```
@@ -491,9 +493,9 @@ https://zju.date/do-not-forget-to-unsubscribe-in-angular/
 ```ts
 let subject2: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 subject2.next(100);
-subject2.subscribe((res: number) => console.info("behavior-subjectA ", res));
+subject2.subscribe((res: number) => console.info('behavior-subjectA ', res));
 subject2.next(200);
-subject2.subscribe((res: number) => console.info("behavior-subjectB ", res));
+subject2.subscribe((res: number) => console.info('behavior-subjectB ', res));
 subject2.next(300);
 ```
 
@@ -535,13 +537,13 @@ AsyncSubject 和 BehaviorSubject`ReplaySubject`有些类似，但不同的是 As
 let subject4: AsyncSubject<number> = new AsyncSubject<number>();
 subject4.next(100);
 subject4.next(100);
-subject4.subscribe((res: number) => console.info("async-subjectA ", res));
+subject4.subscribe((res: number) => console.info('async-subjectA ', res));
 subject4.next(300);
-subject4.subscribe((res: number) => console.info("async-subjectB ", res));
+subject4.subscribe((res: number) => console.info('async-subjectB ', res));
 subject4.next(400);
-subject4.subscribe((res: number) => console.info("async-subjectC ", res));
+subject4.subscribe((res: number) => console.info('async-subjectC ', res));
 subject4.complete();
-subject4.subscribe((res: number) => console.info("async-subjectD ", res));
+subject4.subscribe((res: number) => console.info('async-subjectD ', res));
 subject4.next(500);
 ```
 
@@ -554,7 +556,7 @@ async-subjectC 400
 async-subjectD 400
 ```
 
-### 9. 实际例子
+### 9. 最佳实践
 
 #### 9.1 模糊搜索 autocomplete + 节流
 
@@ -580,9 +582,50 @@ ngOnInit() {
   this.validateForm.get('userName').valueChanges
     .pipe(
       throttleTime(500),
-      switchMap(data => this.http.post('api/autocomplete')),
-      mergeMap
+      switchMap(data => this.http.post('api/autocomplete'))
     )
-  );
+    .subscribe(() => {})
+}
+```
+
+#### 9.2 input 搜索 debounce
+
+```html
+<input [(ngModel)]="word" (ngModelChange)="this.searchValue$.next($event)" />
+```
+
+```ts
+import { Component, Input } from '@angular/core';
+import { Subject } from 'rxjs';
+import {
+  takeUntil,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+} from 'rxjs/operators';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent implements OnDestroy {
+  word: string;
+  searchValue$ = new Subject<string>();
+  destroy$ = new Subject<void>();
+
+  constructor() {
+    this.searchValue$
+      .pipe(takeUntil(this.destroy$), debounceTime(400), distinctUntilChanged())
+      .subscribe((value) => {
+        // 请求获取列表的接口..
+        // this.getList(value);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
 ```
