@@ -595,7 +595,7 @@ ngOnInit() {
 ```
 
 ```ts
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import {
   takeUntil,
@@ -616,9 +616,13 @@ export class AppComponent implements OnDestroy {
 
   constructor() {
     this.searchValue$
-      .pipe(takeUntil(this.destroy$), debounceTime(400), distinctUntilChanged())
+      .pipe(
+        takeUntil(this.destroy$),
+        debounceTime(400),
+        distinctUntilChanged()
+      )
       .subscribe((value) => {
-        // 请求获取列表的接口..
+        // 请求列表的接口..
         // this.getList(value);
       });
   }
