@@ -30,7 +30,7 @@
 
 [函数柯里化](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96.md)
 
-[JavaScript的开发技巧](https://github.com/kerwin-ly/Blog/blob/master/javascript/js%E7%9A%84%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7.md)
+[JavaScript的开发技巧](https://github.com/kerwin-ly/Blog/blob/master/javascript/Javascript%E7%9A%84%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7.md)
 
 [闭包理解](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E9%97%AD%E5%8C%85.md)
 
