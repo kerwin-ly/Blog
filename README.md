@@ -58,7 +58,9 @@
 
 [依赖注入在Angular中的应用](https://github.com/kerwin-ly/Blog/blob/master/angular/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%9C%A8Angular%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.md)
 
-### Vue
+[Angular实现路由信息存储](https://stackblitz.com/edit/angular-ivy-vn3x5j?file=src%2Fapp%2Fapp.component.ts)
+
+### Vue2
 
 [vue-mvvm 实现原理（外文）](https://github.com/DMQ/mvvm)
 
