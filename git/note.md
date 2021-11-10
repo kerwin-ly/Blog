@@ -298,7 +298,7 @@ git push origin newName
 git branch --set-upstream-to origin/newName
 ```
 
-#### 10. 将repo-A仓库的branch-B分支合并到repo-A仓库的branch-B分支
+#### 10. 将repo-A仓库的branch-B分支合并到repo-B仓库的branch-B分支
 ```shell
 # 1.克隆A仓库
 git clone git@github.com:xxxx/repo-A.git
