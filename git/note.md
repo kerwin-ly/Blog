@@ -298,13 +298,13 @@ git push origin newName
 git branch --set-upstream-to origin/newName
 ```
 
-#### 10. 将repo-A仓库的branch-B分支合并到repo-A仓库的branch-B分支
+#### 10. 将repo-A仓库的branch-B分支合并到repo-B仓库的branch-B分支
 ```shell
 # 1.克隆A仓库
-git clone git@github.com:xxxx/repo-A.git
+git clone ssh://git@github.com:xxxx/repo-A.git
 
 # 2.添加B仓库为远程分支，设置别名other
-git remote add other git@github.com:xxxx/repo-B.git
+git remote add other ssh://git@github.com:xxxx/repo-B.git
 
 # 3.拉取B仓库最新信息到本地
 git fetch other
