@@ -46,13 +46,15 @@
 
 ### Angular
 
-[angular 编码规范](https://angular.cn/guide/styleguide)
+[Angular 编码规范](https://angular.cn/guide/styleguide)
 
-[angular7 开发笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/note.md)
+[Angular 基础介绍](https://github.com/kerwin-ly/Blog/blob/master/angular/Angular%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D.md)
 
-[rxjs 开发笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/rxjs.md)
+[Angular 开发技巧&&踩坑记录](https://github.com/kerwin-ly/Blog/blob/master/angular/Angular%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7%26%26%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95.md)
 
-[angular7升级到angular9](https://github.com/kerwin-ly/Blog/blob/master/angular/upgrade-angular9.md)
+[Rxjs 开发笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/rxjs.md)
+
+[Angular7升级到Angular9](https://github.com/kerwin-ly/Blog/blob/master/angular/upgrade-angular9.md)
 
 [详解依赖注入](https://github.com/kerwin-ly/Blog/blob/master/angular/%E8%AF%A6%E8%A7%A3%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5.md)
 
