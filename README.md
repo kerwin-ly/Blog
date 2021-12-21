@@ -122,8 +122,6 @@
 
 [一次基于docker-swarm部署的项目总结](https://github.com/kerwin-ly/Blog/blob/master/docker/deploy-docker-swarm.md)
 
-### CI/CD持续集成
-
 [CI/CD持续集成](https://github.com/kerwin-ly/Blog/blob/master/docker/CICD.md)
 
 ## 开发工具
