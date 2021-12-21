@@ -132,9 +132,9 @@
 
 [Git 操作命令](https://github.com/kerwin-ly/Blog/blob/master/git/note.md)
 
-[Git 版本号管理](https://github.com/kerwin1/Blog/blob/master/git/%E7%89%88%E6%9C%AC%E5%8F%B7%E6%84%8F%E4%B9%89.md)
+[Git 版本号管理](https://github.com/kerwin-ly/Blog/blob/master/git/%E7%89%88%E6%9C%AC%E5%8F%B7%E6%84%8F%E4%B9%89.md)
 
-[Git 提交规范](https://github.com/kerwin-ly/Blog/blob/master/common/Git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83.md)
+[Git 提交规范](https://github.com/kerwin-ly/Blog/blob/master/git/Git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83.md)
 
 [Git 异常处理措施](https://juejin.im/post/5edcf3a36fb9a047fa04fbc3)
 
