@@ -128,7 +128,7 @@
 
 ### Git
 
-[Git 操作命令](https://github.com/kerwin-ly/Blog/blob/master/git/note.md)
+[工作中常用的一些Git命令](https://github.com/kerwin-ly/Blog/blob/master/git/Git%E6%8A%80%E5%B7%A7%E7%AF%87.md)
 
 [Git 版本号管理](https://github.com/kerwin-ly/Blog/blob/master/git/%E7%89%88%E6%9C%AC%E5%8F%B7%E6%84%8F%E4%B9%89.md)
 
