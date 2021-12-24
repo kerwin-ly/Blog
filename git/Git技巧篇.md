@@ -429,3 +429,9 @@ pick 8f33126c feat(*): test4
 git add .
 git rebase --continue
 ```
+
+### 15.根据仓库历史commit切换新的分支
+```shell
+git checkout commitId -b newBranch
+git push origin newBranch
+```
