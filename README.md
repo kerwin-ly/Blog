@@ -2,9 +2,7 @@
 
 ## 数据结构&&算法
 
-[数据结构-基于Javascript实现](https://github.com/kerwin-ly/Blog/tree/master/data-structure)
-
-[算法汇总-待分类](https://github.com/kerwin-ly/Blog/tree/master/data-structure/algorithm)
+[数组专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/array/%E6%95%B0%E7%BB%84.md)
 
 ## 计算机网网络
 
@@ -14,7 +12,7 @@
 
 ### JavaScript
 
-[JavaScript设计模式与开发实践](https://github.com/kerwin-ly/Blog/blob/master/notes/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5.md)
+[JavaScript 设计模式与开发实践](https://github.com/kerwin-ly/Blog/blob/master/notes/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5.md)
 
 [函数声明和函数表达式的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%92%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB.md)
 
@@ -30,7 +28,7 @@
 
 [函数柯里化](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96.md)
 
-[JavaScript的开发技巧](https://github.com/kerwin-ly/Blog/blob/master/javascript/Javascript%E7%9A%84%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7.md)
+[JavaScript 的开发技巧](https://github.com/kerwin-ly/Blog/blob/master/javascript/Javascript%E7%9A%84%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7.md)
 
 [闭包理解](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E9%97%AD%E5%8C%85.md)
 
@@ -42,7 +40,7 @@
 
 [TypeScript 笔记](https://github.com/kerwin-ly/Blog/blob/master/typescript/note.md)
 
-[使用Babel生成Typescript代码-AST](https://github.com/kerwin-ly/Blog/blob/master/tools/ast.md)
+[使用 Babel 生成 Typescript 代码-AST](https://github.com/kerwin-ly/Blog/blob/master/tools/ast.md)
 
 ### Angular
 
@@ -54,13 +52,13 @@
 
 [Rxjs 开发笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/rxjs.md)
 
-[Angular7升级到Angular9](https://github.com/kerwin-ly/Blog/blob/master/angular/upgrade-angular9.md)
+[Angular7 升级到 Angular9](https://github.com/kerwin-ly/Blog/blob/master/angular/upgrade-angular9.md)
 
 [详解依赖注入](https://github.com/kerwin-ly/Blog/blob/master/angular/%E8%AF%A6%E8%A7%A3%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5.md)
 
-[依赖注入在Angular中的应用](https://github.com/kerwin-ly/Blog/blob/master/angular/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%9C%A8Angular%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.md)
+[依赖注入在 Angular 中的应用](https://github.com/kerwin-ly/Blog/blob/master/angular/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%9C%A8Angular%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.md)
 
-[Angular实现路由后退并携带参数](https://stackblitz.com/edit/angular-ivy-vn3x5j?file=src%2Fapp%2Fapp.component.ts)
+[Angular 实现路由后退并携带参数](https://stackblitz.com/edit/angular-ivy-vn3x5j?file=src%2Fapp%2Fapp.component.ts)
 
 ### Vue2
 
@@ -82,7 +80,7 @@
 
 ### 构建工具
 
-[webpack loader 与plugin 开发实战](https://mp.weixin.qq.com/s/pEoS3OCkqxNNgGwZVmMg-w)
+[webpack loader 与 plugin 开发实战](https://mp.weixin.qq.com/s/pEoS3OCkqxNNgGwZVmMg-w)
 
 ### Style
 
@@ -102,11 +100,11 @@
 
 [node 规避回调地狱](https://github.com/kerwin-ly/Blog/blob/master/node/fixCallbackHell.md)
 
-[在vscode中调试基于typescript的node项目](https://github.com/kerwin-ly/Blog/tree/master/demo/debug-ts)
+[在 vscode 中调试基于 typescript 的 node 项目](https://github.com/kerwin-ly/Blog/tree/master/demo/debug-ts)
 
 ### Python
 
-[python多线程和多进程](https://github.com/kerwin-ly/Blog/blob/master/python/thread.md)
+[python 多线程和多进程](https://github.com/kerwin-ly/Blog/blob/master/python/thread.md)
 
 ### Mysql
 
@@ -120,15 +118,15 @@
 
 [Docker Swarm](https://github.com/kerwin-ly/Blog/blob/master/docker/docker-swarm.md)
 
-[一次基于docker-swarm部署的项目总结](https://github.com/kerwin-ly/Blog/blob/master/docker/deploy-docker-swarm.md)
+[一次基于 docker-swarm 部署的项目总结](https://github.com/kerwin-ly/Blog/blob/master/docker/deploy-docker-swarm.md)
 
-[CI/CD持续集成](https://github.com/kerwin-ly/Blog/blob/master/docker/CICD.md)
+[CI/CD 持续集成](https://github.com/kerwin-ly/Blog/blob/master/docker/CICD.md)
 
 ## 开发工具
 
 ### Git
 
-[工作中常用的一些Git命令](https://github.com/kerwin-ly/Blog/blob/master/git/Git%E6%8A%80%E5%B7%A7%E7%AF%87.md)
+[工作中常用的一些 Git 命令](https://github.com/kerwin-ly/Blog/blob/master/git/Git%E6%8A%80%E5%B7%A7%E7%AF%87.md)
 
 [Git 版本号管理](https://github.com/kerwin-ly/Blog/blob/master/git/%E7%89%88%E6%9C%AC%E5%8F%B7%E6%84%8F%E4%B9%89.md)
 
@@ -138,7 +136,7 @@
 
 ### Mock
 
-[使用mock.js模拟后台请求并返回数据](https://github.com/kerwin-ly/Blog/blob/master/mock/mock.md)
+[使用 mock.js 模拟后台请求并返回数据](https://github.com/kerwin-ly/Blog/blob/master/mock/mock.md)
 
 ## 最佳实践
 
