@@ -1,53 +1,50 @@
 /**
- * @param {number} n
- * @return {number[][]}
+ * @param {number[][]} matrix
+ * @return {number[]}
  */
-var generateMatrix = function (n) {
-  let row = 0; // 行数
-  let col = 0; // 列数
-  let loop = Math.floor(n / 2); // 循环的圈数
-  let res = new Array(n).fill(0).map((item) => new Array(n).fill(0)); // 构造二维数组
-  let startX = 0; // 横坐标开始位置
-  let startY = 0; // 纵坐标开始位置
-  let fillNum = n - 1; // 每一层需填充的数字数量
-  let count = 1; // 记录当前填充数字
-  while (loop--) {
-    // 每次循环圈数时，为左闭右开区间[起始位置，结束为止)
-    // 从左到右填充
-    row = startX;
-    col = startY;
-    for (let i = 0; i < fillNum; i++) {
-      res[row][col] = count;
-      count++;
-      col++;
+var spiralOrder = function (matrix) {
+  let top = 0;
+  let bottom = matrix.length - 1;
+  let left = 0;
+  let right = matrix[0].length - 1;
+  let res = [];
+  // 循环一圈
+  while (left < right && top < bottom) {
+    // 从左到右
+    for (let i = left; i < right; i++) {
+      res.push(matrix[top][i]);
     }
     // 从上到下
-    for (let i = 0; i < fillNum; i++) {
-      res[row][col] = count;
-      count++;
-      row++;
+    for (let i = top; i < bottom; i++) {
+      res.push(matrix[i][right]);
     }
     // 从右到左
-    for (let i = 0; i < fillNum; i++) {
-      res[row][col] = count;
-      count++;
-      col--;
+    for (let i = right; i > left; i--) {
+      res.push(matrix[bottom][i]);
     }
     // 从下到上
-    for (let i = 0; i < fillNum; i++) {
-      res[row][col] = count;
-      count++;
-      row--;
+    for (let i = bottom; i > top; i--) {
+      res.push(matrix[i][left]);
     }
-    fillNum -= 2; //  下一圈每行（每列）的填充的个数为上一次填充每行（每列）的填充个数减2
-    startX++; // 更新下一圈的起始行位置
-    startY++; // 更新下一圈的起始列位置
+
+    // 向中间缩进一层
+    top++;
+    right--;
+    bottom--;
+    left++;
   }
-  if (n % 2 !== 0) {
-    // 判断如果是奇数时，最中间位置手动填充。（填充最后一个值，不算一圈）
-    const mid = Math.floor(n / 2);
-    res[mid][mid] = n * n;
+  // 当只剩下一行
+  if (top === bottom) {
+    for (let i = left; i <= right; i++) {
+      res.push(matrix[top][i]);
+    }
   }
+  // 当只剩下一列
+  else if (left === right) {
+    for (let i = top; i <= bottom; i++) {
+      res.push(matrix[i][left]);
+    }
+  }
+
   return res;
 };
-console.log(generateMatrix(5));
