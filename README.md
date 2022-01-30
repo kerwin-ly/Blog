@@ -1,6 +1,8 @@
 # Blog
 
-## 数据结构
+## 数据结构 && 算法
+
+### 数据结构
 [数组](https://github.com/kerwin-ly/Blog/blob/master/data-structure/%E6%95%B0%E7%BB%84.md)
 
 [栈](https://github.com/kerwin-ly/Blog/blob/master/data-structure/%E6%A0%88.md)
@@ -16,7 +18,7 @@
 [树](https://github.com/kerwin-ly/Blog/blob/master/data-structure/%E6%A0%91.md)
 
 [堆](https://github.com/kerwin-ly/Blog/blob/master/data-structure/%E5%A0%86.md)
-## LeetCode算法
+### LeetCode算法题解
 
 [数组专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/array/%E6%95%B0%E7%BB%84.md)
 
