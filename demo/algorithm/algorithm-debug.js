@@ -1,50 +1,132 @@
-/**
- * @param {number[][]} matrix
- * @return {number[]}
- */
-var spiralOrder = function (matrix) {
-  let top = 0;
-  let bottom = matrix.length - 1;
-  let left = 0;
-  let right = matrix[0].length - 1;
-  let res = [];
-  // 循环一圈
-  while (left < right && top < bottom) {
-    // 从左到右
-    for (let i = left; i < right; i++) {
-      res.push(matrix[top][i]);
-    }
-    // 从上到下
-    for (let i = top; i < bottom; i++) {
-      res.push(matrix[i][right]);
-    }
-    // 从右到左
-    for (let i = right; i > left; i--) {
-      res.push(matrix[bottom][i]);
-    }
-    // 从下到上
-    for (let i = bottom; i > top; i--) {
-      res.push(matrix[i][left]);
-    }
-
-    // 向中间缩进一层
-    top++;
-    right--;
-    bottom--;
-    left++;
-  }
-  // 当只剩下一行
-  if (top === bottom) {
-    for (let i = left; i <= right; i++) {
-      res.push(matrix[top][i]);
-    }
-  }
-  // 当只剩下一列
-  else if (left === right) {
-    for (let i = top; i <= bottom; i++) {
-      res.push(matrix[i][left]);
-    }
-  }
-
-  return res;
+function Node(val) {
+  this.val = val;
+  this.next = null;
+}
+var MyLinkedList = function () {
+  this.head = null;
 };
+
+/**
+ * @param {number} index
+ * @return {number}
+ */
+MyLinkedList.prototype.get = function (index) {
+  let i = 0;
+  let node = this.head;
+
+  if (!this.head) {
+    return -1;
+  }
+  while (node) {
+    if (i === index) {
+      return node.val;
+    }
+    i++;
+    node = node.next;
+  }
+  return -1;
+};
+
+/**
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtHead = function (val) {
+  const newNode = new Node(val);
+  newNode.next = this.head;
+  this.head = newNode;
+};
+
+/**
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtTail = function (val) {
+  if (!this.head) {
+    this.head = new Node(val);
+    return;
+  }
+  let node = this.head;
+  while (node.next) {
+    node = node.next;
+  }
+  node.next = new Node(val);
+};
+
+/**
+ * @param {number} index
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtIndex = function (index, val) {
+  if (index <= 0) {
+    this.addAtHead(val);
+    return;
+  }
+  const newNode = new Node(val);
+  let pre = this.head;
+  let cur = this.head.next;
+  let i = 1;
+  while (cur) {
+    if (i === index) {
+      console.log('pre', pre);
+      pre.next = newNode;
+      newNode.next = cur;
+      return;
+    }
+    pre = cur;
+    cur = cur.next;
+    i++;
+  }
+  cur.next = newNode;
+};
+
+/**
+ * @param {number} index
+ * @return {void}
+ */
+MyLinkedList.prototype.deleteAtIndex = function (index) {
+  if (index < 0) {
+    return;
+  }
+  if (index === 0) {
+    this.head = this.head.next;
+    return;
+  }
+  let pre = this.head;
+  let cur = this.head.next;
+  let i = 1;
+  while (cur) {
+    if (i === index) {
+      pre.next = cur.next;
+      return;
+    }
+    i++;
+    pre = cur;
+    cur = cur.next;
+  }
+};
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * var obj = new MyLinkedList()
+ * var param_1 = obj.get(index)
+ * obj.addAtHead(val)
+ * obj.addAtTail(val)
+ * obj.addAtIndex(index,val)
+ * obj.deleteAtIndex(index)
+ */
+
+// var obj = new MyLinkedList();
+// var param_1 = obj.get(index);
+// obj.addAtHead(val);
+// obj.addAtTail(val);
+// obj.addAtIndex(index, val);
+// obj.deleteAtIndex(index);
+linkedList = new MyLinkedList();
+linkedList.addAtHead(1);
+linkedList.addAtTail(3);
+linkedList.addAtIndex(1, 2); //链表变为1-> 2-> 3
+linkedList.get(1); //返回2
+linkedList.deleteAtIndex(1); //现在链表是1-> 3
+linkedList.get(1); //返回3
