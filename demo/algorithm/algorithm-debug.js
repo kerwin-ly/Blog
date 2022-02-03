@@ -1,132 +1,61 @@
-function Node(val) {
-  this.val = val;
-  this.next = null;
-}
-var MyLinkedList = function () {
-  this.head = null;
-};
-
 /**
- * @param {number} index
- * @return {number}
+ * @param {number[]} nums
+ * @return {number[][]}
  */
-MyLinkedList.prototype.get = function (index) {
-  let i = 0;
-  let node = this.head;
-
-  if (!this.head) {
-    return -1;
-  }
-  while (node) {
-    if (i === index) {
-      return node.val;
+var threeSum = function (nums) {
+  const result = []; // 输出的结果数组
+  const sortArr = nums.sort((a, b) => a - b); // 从小到大排序
+  console.log(sortArr.length);
+  for (let i = 0; i < sortArr.length; i++) {
+    // 如果min指针右移时，下一个值和当前值相等，则跳过
+    if (sortArr[i] === sortArr[i - 1]) {
+      continue;
     }
-    i++;
-    node = node.next;
-  }
-  return -1;
-};
-
-/**
- * @param {number} val
- * @return {void}
- */
-MyLinkedList.prototype.addAtHead = function (val) {
-  const newNode = new Node(val);
-  newNode.next = this.head;
-  this.head = newNode;
-};
-
-/**
- * @param {number} val
- * @return {void}
- */
-MyLinkedList.prototype.addAtTail = function (val) {
-  if (!this.head) {
-    this.head = new Node(val);
-    return;
-  }
-  let node = this.head;
-  while (node.next) {
-    node = node.next;
-  }
-  node.next = new Node(val);
-};
-
-/**
- * @param {number} index
- * @param {number} val
- * @return {void}
- */
-MyLinkedList.prototype.addAtIndex = function (index, val) {
-  if (index <= 0) {
-    this.addAtHead(val);
-    return;
-  }
-  const newNode = new Node(val);
-  let pre = this.head;
-  let cur = this.head.next;
-  let i = 1;
-  while (cur) {
-    if (i === index) {
-      console.log('pre', pre);
-      pre.next = newNode;
-      newNode.next = cur;
-      return;
+    let min = i; // 左侧最小值
+    let left = i + 1; // 左指针，除开最小值外的数组中的最小值
+    let right = sortArr.length - 1; // 右指针，数组中的最大值
+    // console.log(sortArr[min], sortArr[left], sortArr[right]);
+    // 如果指针min和指针left的值相加大于0，则表明无论如何相加，结果都会大于0
+    while (sortArr[min] + sortArr[left] < 0 && left < right) {
+      // 如果三个值相加小于0，说明需要加值才能等于0，左指针右移
+      if (sortArr[min] + sortArr[left] + sortArr[right] < 0) {
+        // 如果在移动指针时，遇到当前值与上一个值相等，由于上次该值已经参与了计算，则继续移动指针。
+        while (true) {
+          left++;
+          if (sortArr[left] !== sortArr[left - 1]) {
+            break;
+          }
+        }
+      }
+      // 如果三个值相加大于0，说明需要减值才能等于0，右指针左移
+      else if (sortArr[min] + sortArr[left] + sortArr[right] > 0) {
+        // 如果在移动指针时，遇到当前值与上一个值相等，由于上次该值已经参与了计算，则继续移动指针。
+        while (true) {
+          right--;
+          if (sortArr[right] !== sortArr[right + 1]) {
+            break;
+          }
+        }
+      } else {
+        result.push([sortArr[min], sortArr[left], sortArr[right]]);
+        while (true) {
+          left++; // 右移左指针
+          right--; // 左移右指针
+          if (sortArr[left] !== sortArr[left - 1]) {
+            break;
+          }
+          if (sortArr[right] !== sortArr[right + 1]) {
+            break;
+          }
+          if (left >= right) {
+            break;
+          }
+        }
+      }
     }
-    pre = cur;
-    cur = cur.next;
-    i++;
   }
-  cur.next = newNode;
+  console.log('result', result);
+  return result;
 };
 
-/**
- * @param {number} index
- * @return {void}
- */
-MyLinkedList.prototype.deleteAtIndex = function (index) {
-  if (index < 0) {
-    return;
-  }
-  if (index === 0) {
-    this.head = this.head.next;
-    return;
-  }
-  let pre = this.head;
-  let cur = this.head.next;
-  let i = 1;
-  while (cur) {
-    if (i === index) {
-      pre.next = cur.next;
-      return;
-    }
-    i++;
-    pre = cur;
-    cur = cur.next;
-  }
-};
-
-/**
- * Your MyLinkedList object will be instantiated and called as such:
- * var obj = new MyLinkedList()
- * var param_1 = obj.get(index)
- * obj.addAtHead(val)
- * obj.addAtTail(val)
- * obj.addAtIndex(index,val)
- * obj.deleteAtIndex(index)
- */
-
-// var obj = new MyLinkedList();
-// var param_1 = obj.get(index);
-// obj.addAtHead(val);
-// obj.addAtTail(val);
-// obj.addAtIndex(index, val);
-// obj.deleteAtIndex(index);
-linkedList = new MyLinkedList();
-linkedList.addAtHead(1);
-linkedList.addAtTail(3);
-linkedList.addAtIndex(1, 2); //链表变为1-> 2-> 3
-linkedList.get(1); //返回2
-linkedList.deleteAtIndex(1); //现在链表是1-> 3
-linkedList.get(1); //返回3
+threeSum([0, 0, 0]);
