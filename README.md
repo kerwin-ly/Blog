@@ -3,7 +3,6 @@
 ## 数据结构 && 算法
 
 ### 数据结构
-对常见数据结构的定义和理解，并使用`Javascript`对其实现
 
 [数组](https://github.com/kerwin-ly/Blog/blob/master/data-structure/%E6%95%B0%E7%BB%84.md)
 
