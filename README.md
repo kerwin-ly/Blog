@@ -27,7 +27,7 @@
 
 [哈希表专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/hash-table/%E5%93%88%E5%B8%8C%E8%A1%A8.md)
 
-[字符串]()
+[字符串专题]()
 
 [双指针 TODO]()
 
