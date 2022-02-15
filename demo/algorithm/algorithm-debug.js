@@ -1,33 +1,20 @@
 /**
- * @param {string} s
- * @return {boolean}
+ * @param {string[]} tokens
+ * @return {number}
  */
-var isValid = function (s) {
-  let stack = [];
-  let leftBrackets = ['(', '{', '['];
-  let rightBrackets = [')', '}', ']'];
-  for (let i = 0; i < s.length; i++) {
-    if (leftBrackets.includes(s[i])) {
-      stack.push(s[i]);
-      continue;
-    }
-    if (rightBrackets.includes(s[i])) {
-      let top = stack.pop(); // 栈顶元素
-      if (
-        (s[i] === ')' && top === '(') ||
-        (s[i] === '}' && top === '{') ||
-        (s[i] === ']' && top === '[')
-      ) {
-        continue;
-      } else {
-        stack.push(top); // 将栈顶元素压回栈中
-        stack.push(s[i]); // 将错误的括号也压入栈中
-      }
+var evalRPN = function (tokens) {
+  const stack = [];
+  const operators = ['+', '-', '*', '/'];
+  for (let i = 0; i < tokens.length; i++) {
+    if (operators.includes(tokens[i])) {
+      let temp1 = stack.pop(); // 栈顶元素
+      let temp2 = stack.pop(); // 栈顶前一个元素
+      let result = eval(temp2 + tokens[i] + temp1);
+      stack.push(result);
+    } else {
+      stack.push(tokens[i]);
     }
   }
-  if (stack.length === 0) {
-    return true;
-  }
-  return false;
+  return stack.pop();
 };
-isValid('(])');
+evalRPN(['10', '6', '9', '3', '+', '-11', '*', '/', '*', '17', '+', '5', '+']);
