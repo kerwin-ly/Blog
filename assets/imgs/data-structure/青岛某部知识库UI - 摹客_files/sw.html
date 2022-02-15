@@ -1,0 +1,33 @@
+
+<!-- saved from url=(0033)https://img02.mockplus.cn/sw.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>sw</title>
+  <style>
+    html, body {
+      background: #000;
+    }
+  </style>
+  <script>
+    if ('serviceWorker' in window.navigator) {
+      window.navigator.serviceWorker.register('/sw.js', {
+        scope: '/',
+      }).then(function (res) {
+        if (res.installing) {
+          console.log('Service Worker installing');
+        } else if (res.waiting) {
+          console.log('Service Worker installed');
+        } else if (res.active) {
+          console.log('Service Worker active');
+        }
+      }).catch(function (error) {
+        console.error(error);
+      });
+    }
+  </script>
+</head>
+<body>
+<a href="./logo-white.png">
+  <img src="./logo-white.png" alt="Logo">
+</a>
+
+</body></html>

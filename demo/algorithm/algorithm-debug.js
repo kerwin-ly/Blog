@@ -1,75 +1,33 @@
-var MyStack = function () {
-  this.queue = [];
-};
-
 /**
- * @param {number} x
- * @return {void}
- */
-MyStack.prototype.push = function (x) {
-  this.queue.push(x);
-};
-
-/**
- * @return {number}
- */
-MyStack.prototype.pop = function () {
-  let i = 0;
-  let temp = null;
-  while (i < this.queue.length) {
-    temp = this.queue.shift();
-    // 队列末尾元素（即栈顶元素）不再添加到队列中
-    if (i < this.queue.length - 1) {
-      this.queue.push(temp);
-    }
-    i++;
-  }
-  return temp;
-};
-
-/**
- * @return {number}
- */
-MyStack.prototype.top = function () {
-  let i = 0;
-  let temp = null;
-  while (i < this.queue.length) {
-    temp = this.queue.shift();
-    this.queue.push(temp);
-    i++;
-  }
-  return temp;
-};
-
-/**
+ * @param {string} s
  * @return {boolean}
  */
-MyStack.prototype.empty = function () {
-  if (!this.queue.length) {
+var isValid = function (s) {
+  let stack = [];
+  let leftBrackets = ['(', '{', '['];
+  let rightBrackets = [')', '}', ']'];
+  for (let i = 0; i < s.length; i++) {
+    if (leftBrackets.includes(s[i])) {
+      stack.push(s[i]);
+      continue;
+    }
+    if (rightBrackets.includes(s[i])) {
+      let top = stack.pop(); // 栈顶元素
+      if (
+        (s[i] === ')' && top === '(') ||
+        (s[i] === '}' && top === '{') ||
+        (s[i] === ']' && top === '[')
+      ) {
+        continue;
+      } else {
+        stack.push(top); // 将栈顶元素压回栈中
+        stack.push(s[i]); // 将错误的括号也压入栈中
+      }
+    }
+  }
+  if (stack.length === 0) {
     return true;
   }
   return false;
 };
-
-/**
- * Your MyStack object will be instantiated and called as such:
- * var obj = new MyStack()
- * obj.push(x)
- * var param_2 = obj.pop()
- * var param_3 = obj.top()
- * var param_4 = obj.empty()
- */
-/**
- * Your MyStack object will be instantiated and called as such:
- * var obj = new MyStack()
- * obj.push(x)
- * var param_2 = obj.pop()
- * var param_3 = obj.top()
- * var param_4 = obj.empty()
- */
-const stack = new MyStack();
-stack.push(1);
-stack.push(2);
-stack.top();
-stack.pop();
-stack.empty();
+isValid('(])');
