@@ -19,7 +19,7 @@
 [二叉树](https://github.com/kerwin-ly/Blog/blob/master/data-structure/%E4%BA%8C%E5%8F%89%E6%A0%91.md)
 
 [堆](https://github.com/kerwin-ly/Blog/blob/master/data-structure/%E5%A0%86.md)
-### LeetCode算法题解
+### 算法
 
 [数组专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/array/%E6%95%B0%E7%BB%84.md)
 
@@ -47,7 +47,15 @@
 
 ## 前端
 
-### JavaScript
+### 深入JavaScript原理
+
+[call、apply 和 bind 函数的实现]()
+
+### 实现JavaScript工具函数
+
+[实现函数柯里化curry]()
+
+### javascript(待重新整理)
 
 [JavaScript 设计模式与开发实践](https://github.com/kerwin-ly/Blog/blob/master/notes/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5.md)
 
