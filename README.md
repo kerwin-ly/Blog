@@ -49,6 +49,10 @@
 
 ### 深入JavaScript原理
 
+[理解原型和原型链条 todo]()
+
+[详解js执行上下文]()
+
 [call、apply 和 bind 函数的实现]()
 
 ### 实现JavaScript工具函数
