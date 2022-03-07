@@ -51,13 +51,15 @@
 
 [理解原型和原型链条 todo]()
 
-[详解js执行上下文]()
+[详解js执行上下文](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E8%AF%A6%E8%A7%A3js%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87.md)
 
-[call、apply 和 bind 函数的实现]()
+[call、apply 和 bind 函数的实现](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E5%AE%9E%E7%8E%B0call%E3%80%81apply%E5%92%8Cbind%E6%96%B9%E6%B3%95.md)
+
+[闭包的理解 todo]()
 
 ### 实现JavaScript工具函数
 
-[实现函数柯里化curry]()
+[实现函数柯里化curry](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96curry.md)
 
 ### javascript(待重新整理)
 
@@ -74,8 +76,6 @@
 [惰性载入函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5%E5%87%BD%E6%95%B0.md)
 
 [偏函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%81%8F%E5%87%BD%E6%95%B0.md)
-
-[函数柯里化](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96.md)
 
 [JavaScript 的开发技巧](https://github.com/kerwin-ly/Blog/blob/master/javascript/Javascript%E7%9A%84%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7.md)
 
