@@ -53,31 +53,31 @@
 
 [详解js执行上下文](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E8%AF%A6%E8%A7%A3js%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87.md)
 
+[闭包理解](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E9%97%AD%E5%8C%85.md)
+
 [call、apply 和 bind 函数的实现](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E5%AE%9E%E7%8E%B0call%E3%80%81apply%E5%92%8Cbind%E6%96%B9%E6%B3%95.md)
 
-[闭包理解](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E9%97%AD%E5%8C%85.md)
+[函数声明和函数表达式的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%92%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB.md)
 
-[函数声明和函数表达式的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%92%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB.md)
-
-[基本类型和引用类型的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB.md)
-
-[如何判定 JS 的类型](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9AJS%E7%9A%84%E7%B1%BB%E5%9E%8B.md)
+[基本类型和引用类型的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB.md)
 
 ### 实现JavaScript工具函数
 
 [实现函数柯里化curry](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96curry.md)
 
-[惰性载入函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5%E5%87%BD%E6%95%B0.md)
+[惰性载入函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5%E5%87%BD%E6%95%B0.md)
 
-[偏函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E5%81%8F%E5%87%BD%E6%95%B0.md)
+[偏函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%81%8F%E5%87%BD%E6%95%B0.md)
 
-[实现深拷贝](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E6%B7%B1%E6%8B%B7%E8%B4%9D.md)
+[实现深拷贝](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E6%B7%B1%E6%8B%B7%E8%B4%9D.md)
+
+[如何判定 JS 的类型](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9AJS%E7%9A%84%E7%B1%BB%E5%9E%8B.md)
 
 ### 优雅的编码技巧
 
-[JavaScript 设计模式与开发实践](https://github.com/kerwin-ly/Blog/blob/master/notes/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5.md)
+[JavaScript 设计模式与开发实践](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-coding-skill/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5.md)
 
-[JavaScript 的开发技巧](https://github.com/kerwin-ly/Blog/blob/master/javascript/Javascript%E7%9A%84%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7.md)
+[JavaScript 的开发技巧](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-coding-skill/Javascript%E7%9A%84%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7.md)
 
 ### TypeScript
 
