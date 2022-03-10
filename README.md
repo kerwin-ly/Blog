@@ -49,7 +49,7 @@
 
 ### 深入JavaScript原理
 
-[理解原型和原型链](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%9D%A1.md)
+[理解原型和原型链](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE.md)
 
 [详解js执行上下文](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E8%AF%A6%E8%A7%A3js%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87.md)
 
