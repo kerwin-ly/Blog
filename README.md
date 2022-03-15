@@ -65,13 +65,15 @@
 
 [实现函数柯里化curry](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96curry.md)
 
-[惰性载入函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5%E5%87%BD%E6%95%B0.md)
+[实现惰性载入函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5%E5%87%BD%E6%95%B0.md)
 
-[偏函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%81%8F%E5%87%BD%E6%95%B0.md)
+[实现偏函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%81%8F%E5%87%BD%E6%95%B0.md)
 
 [实现深拷贝](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E6%B7%B1%E6%8B%B7%E8%B4%9D.md)
 
-[如何判定 JS 的类型](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9AJS%E7%9A%84%E7%B1%BB%E5%9E%8B.md)
+[实现JS类型判断](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9AJS%E7%9A%84%E7%B1%BB%E5%9E%8B.md) 
+
+[实现Promise函数]()
 
 ### 优雅的编码技巧
 
