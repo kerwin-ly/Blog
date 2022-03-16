@@ -86,6 +86,11 @@ class MyPromise {
       onRejected(this.reason);
     }
   }
+
+  // 这里的catch方法，实际就是调用then的第二个方法
+  catch(errorCallback) {
+    this.then(null, errorCallback);
+  }
 }
 
 const p1 = new MyPromise((resolve, reject) => {
@@ -124,10 +129,9 @@ p2.then(
 
 ### 第二版：实现异步函数
 
-上面，我们执行了一个同步方法，接下来再看一个异步的方法：
+上面，我们实现了同步方法的 Promise，但接下来再看一个异步的方法（由于没办法模拟微任务，我们通过宏任务的异步任务模拟）：
 
 ```js
-// ...上面代码类似
 const p1 = new MyPromise((resolve, reject) => {
   console.log('立刻触发该函数 p1');
   setTimeout(() => {
@@ -175,7 +179,7 @@ class MyPromise {
         this.status = FULFILLED;
         this.value = value;
         while (this.onResolvedCallbacks.length) {
-          // 3. 取出依赖并执行
+          // 3. 取出执行队列中的回调函数并执行
           const cb = this.onResolvedCallbacks.shift();
           cb(this.value);
         }
@@ -204,17 +208,21 @@ class MyPromise {
       onRejected(this.reason);
     }
     if (this.status === PENDING) {
-      // 1.收集依赖
+      // 1.收集依赖-将回调函数加入到执行队列中
       this.onResolvedCallbacks.push(onFulFilled);
       this.onRejectedCallbacks.push(onRejected);
     }
+  }
+
+  catch(errorCallback) {
+    this.then(null, errorCallback);
   }
 }
 
 const p = new MyPromise((resolve, reject) => {
   console.log('立刻触发该函数 p1');
   setTimeout(() => {
-    // 2.异步触发resolve通知
+    // 2.异步触发resolve通知观察者
     resolve('异步-成功');
   }, 1000);
 });
@@ -231,6 +239,154 @@ p.then(
 // 输出结果如下：
 // 立刻触发该函数 p1
 // 异步-成功
+```
+
+### 第三版：实现 then 链式调用和值穿透
+
+> 链式调用是指在 then 方法中 return 一个任何值，都可以在下一个 then 方法中拿到。而且，当我们不在 then 中放入参数，例：promise.then().then()，那么其后面的 then 依旧可以得到之前 then 返回的值，这就是所谓的值的穿透
+
+我们先来看一个链式调用的例子，如下：
+
+```js
+const p1 = new Promise((resolve, reject) => {
+  resolve(1);
+});
+
+p1.then((res) => {
+  console.log(res);
+  //then回调中可以return一个Promise
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(2);
+    }, 1000);
+  });
+})
+  .then((res) => {
+    console.log(res);
+    //then回调中也可以return一个值
+    return 3;
+  })
+  .then((res) => {
+    console.log(res);
+  });
+
+// 输出结果如下：
+// 1
+// 2
+// 3
+```
+
+通过上面例子，我们可以大致整理出链式调用的实现逻辑：
+
+1. then 方法中需返回一个 Promise 函数，才能继续执行`then`方法
+
+2. 判断`then`方法中返回的是否是一个 Promise 函数。是，则将其加入到`执行任务队列`中；否，则直接执行 resolve 方法进行通知，将执行队列中的函数取出并执行
+
+具体实现代码如下：
+
+```js
+const PENDING = 'PENDING';
+const FULFILLED = 'FULFILLED';
+const REJECTED = 'REJECTED';
+class MyPromise {
+  constructor(executor) {
+    this.status = PENDING;
+    this.value = null;
+    this.reason = null;
+    this.onResolvedCallbacks = [];
+    this.onRejectedCallbacks = [];
+
+    const _resolve = (value) => {
+      if (this.status === PENDING) {
+        this.status = FULFILLED;
+        this.value = value;
+        while (this.onResolvedCallbacks.length) {
+          const cb = this.onResolvedCallbacks.shift();
+          cb(this.value);
+        }
+      }
+    };
+
+    const _reject = (reason) => {
+      if (this.status === PENDING) {
+        this.status = REJECTED;
+        this.reason = reason;
+      }
+    };
+
+    try {
+      executor(_resolve, _reject);
+    } catch (error) {
+      _reject(error);
+    }
+  }
+
+  then(onFulFilled, onRejected) {
+    // 处理onFulFilled和onRejected未传值的情况
+    onFulFilled =
+      typeof onFulFilled === 'function' ? onFulFilled : (value) => value;
+    onRejected =
+      typeof onRejected === 'function'
+        ? onRejected
+        : (err) => {
+            throw err;
+          }; // 直接抛出错误，终止流程
+    if (this.status === FULFILLED) {
+      onFulFilled(this.value);
+    }
+    if (this.status === REJECTED) {
+      onRejected(this.reason);
+    }
+    if (this.status === PENDING) {
+      // 为保证链式调用，结果需返回一个promise函数
+      return new MyPromise((resolve, reject) => {
+        // 回调成功方法
+        const fulfillFn = (res) => {
+          const beforeResolvedResult = onFulFilled(res); // 获取当前then方法中的返回值
+          // 如果当前then方法中返回了一个Promise，则执行then方法，将函数加入到执行队列中
+          // 如果返回的是一个值，则执行resolve方法，触发通知，将队列中的函数取出来执行
+          beforeResolvedResult instanceof MyPromise
+            ? beforeResolvedResult.then(resolve, reject)
+            : resolve(res);
+        };
+        this.onResolvedCallbacks.push(fulfillFn); // 加入函数执行队列
+
+        // 回调失败方法，同理
+        const rejectFn = (err) => {
+          const res = onRejected(err);
+          res instanceof MyPromise ? res.then(resolve, reject) : reject(res);
+        };
+        this.onRejectedCallbacks.push(rejectFn);
+      });
+    }
+  }
+
+  catch(errorCallback) {
+    this.then(null, errorCallback);
+  }
+}
+
+const p1 = new Promise((resolve, reject) => {
+  resolve(1);
+});
+
+p1.then((res) => {
+  console.log(res);
+  // return一个Promise
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(2);
+    }, 1000);
+  });
+})
+  .then((res) => {
+    console.log(res);
+    // return一个值
+    return 3;
+  })
+  .then((res) => {
+    console.log(res);
+  });
 ```
 
 ### 参考

@@ -2,20 +2,17 @@ const PENDING = 'PENDING';
 const FULFILLED = 'FULFILLED';
 const REJECTED = 'REJECTED';
 class MyPromise {
-  // promise实例的函数
   constructor(executor) {
-    this.status = PENDING; // 当前状态
-    this.value = null; // 成功回调的值
-    this.reason = null; // 失败回调的值
-    this.onResolvedCallbacks = []; // 存储成功的回调函数的队列
-    this.onRejectedCallbacks = []; // 存储失败的回调函数的队列
+    this.status = PENDING;
+    this.value = null;
+    this.reason = null;
+    this.onResolvedCallbacks = [];
+    this.onRejectedCallbacks = [];
 
-    // 注意：这里的resolve和reject是在executor内部执行，需要用箭头函数，否则this指向当前作用域
     const _resolve = (value) => {
-      // s1.状态由PENDING转换为FULFILLED后，不可再更改状态
       if (this.status === PENDING) {
         this.status = FULFILLED;
-        this.value = value; // 更新成功回调的值
+        this.value = value;
         while (this.onResolvedCallbacks.length) {
           const cb = this.onResolvedCallbacks.shift();
           cb(this.value);
@@ -24,14 +21,12 @@ class MyPromise {
     };
 
     const _reject = (reason) => {
-      // 状态由PENDING转换为REJECTED后，不可再更改状态
       if (this.status === PENDING) {
         this.status = REJECTED;
-        this.reason = reason; // 更新失败回调的值
+        this.reason = reason;
       }
     };
 
-    // new Promise()后立即执行 executor方法，绑定resolve和reject参数
     try {
       executor(_resolve, _reject);
     } catch (error) {
@@ -39,38 +34,73 @@ class MyPromise {
     }
   }
 
-  // then方法接收两个参数
   then(onFulFilled, onRejected) {
-    // 如果当前状态是FULFILLED，则执行成功回调方法
+    // 处理onFulFilled和onRejected未传值的情况
+    onFulFilled =
+      typeof onFulFilled === 'function' ? onFulFilled : (value) => value;
+    onRejected =
+      typeof onRejected === 'function'
+        ? onRejected
+        : (err) => {
+            throw err;
+          }; // 直接抛出错误，终止流程
     if (this.status === FULFILLED) {
       onFulFilled(this.value);
     }
-    // 如果当前状态是REJECTED，则执行失败回调方法
     if (this.status === REJECTED) {
       onRejected(this.reason);
     }
-    // 如果then方法调用时，当前状态是pending，表示还没被成功回调，存在异步情况
     if (this.status === PENDING) {
-      //  注意这里要将成功和失败回调都保存到数组中
-      this.onResolvedCallbacks.push(onFulFilled);
-      this.onRejectedCallbacks.push(onRejected);
+      // 为保证链式调用，结果需返回一个promise函数
+      return new MyPromise((resolve, reject) => {
+        // 回调成功方法
+        const fulfillFn = (res) => {
+          const beforeResolvedResult = onFulFilled(res); // 获取当前then方法中的返回值
+          // 如果当前then方法中返回了一个Promise，则执行then方法，将函数加入到执行队列中
+          // 如果返回的是一个值，则执行resolve方法，触发通知，将队列中的函数取出来执行
+          beforeResolvedResult instanceof MyPromise
+            ? beforeResolvedResult.then(resolve, reject)
+            : resolve(res);
+        };
+        this.onResolvedCallbacks.push(fulfillFn); // 加入函数执行队列
+
+        // 回调失败方法，同理
+        const rejectFn = (err) => {
+          const res = onRejected(err);
+          res instanceof MyPromise ? res.then(resolve, reject) : reject(res);
+        };
+        this.onRejectedCallbacks.push(rejectFn);
+      });
     }
+  }
+
+  catch(fn) {
+    this.then(undefined, fn);
   }
 }
 
-// 测试demo
-const p = new MyPromise((resolve, reject) => {
-  console.log('立刻触发该函数 p1');
-  setTimeout(() => {
-    resolve('异步-成功');
-  }, 1000);
+const p1 = new Promise((resolve, reject) => {
+  resolve(1);
 });
 
-p.then(
-  (res) => {
+p1.then((res) => {
+  console.log(res);
+  throw new Error('error test');
+  // return一个Promise
+  // return new Promise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     resolve(2);
+  //   }, 1000);
+  // });
+})
+  .then((res) => {
     console.log(res);
-  },
-  (err) => {
-    console.log(err);
-  }
-);
+    // return一个值
+    return 3;
+  })
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log('this is err', err);
+  });
