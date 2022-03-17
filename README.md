@@ -73,7 +73,7 @@
 
 [实现JS类型判断](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9AJS%E7%9A%84%E7%B1%BB%E5%9E%8B.md) 
 
-[实现Promise函数]()
+[实现Promise函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0Promise%E5%87%BD%E6%95%B0.md)
 
 ### 优雅的编码技巧
 
