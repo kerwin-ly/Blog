@@ -133,8 +133,6 @@
 
 ### Node
 
-[node 开发常见问题总结](https://github.com/kerwin-ly/Blog/blob/master/node/fix.md)
-
 [node 规避回调地狱](https://github.com/kerwin-ly/Blog/blob/master/node/fixCallbackHell.md)
 
 [在 vscode 中调试基于 typescript 的 node 项目](https://github.com/kerwin-ly/Blog/tree/master/demo/debug-ts)

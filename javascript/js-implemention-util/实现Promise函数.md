@@ -12,7 +12,7 @@
 >
 > 2.  then 方法接收两个可选参数，分别对应状态改变时触发的回调。then 方法返回一个 promise。then 方法可以被同一个 promise 调用多次。
 
-### 实现 Promise 状态控制
+### 1.实现 Promise 状态控制
 
 下面，我们通过一个例子，来看下 Promise 的执行顺序：
 
@@ -127,7 +127,7 @@ p2.then(
 // 失败
 ```
 
-### 第二版：实现异步函数
+### 2.实现异步函数
 
 上面，我们实现了同步方法的 Promise，但接下来再看一个异步的方法（由于没办法模拟微任务，我们通过宏任务的异步任务模拟）：
 
@@ -241,7 +241,7 @@ p.then(
 // 异步-成功
 ```
 
-### 第三版：实现 then 链式调用和值穿透
+### 3.实现 then 链式调用和值穿透
 
 > 链式调用是指在 then 方法中 return 一个任何值，都可以在下一个 then 方法中拿到。而且，当我们不在 then 中放入参数，例：promise.then().then()，那么其后面的 then 依旧可以得到之前 then 返回的值，这就是所谓的值的穿透
 
@@ -403,7 +403,7 @@ p1.then((res) => {
   });
 ```
 
-### 实现 finally 函数
+### 4.实现 finally 函数
 
 > finally()方法返回一个 Promise。在 promise 结束时，无论结果是 fulfilled 或者是 rejected，都会执行指定的回调函数。在 finally 之后，还可以继续 then。并且会将值原封不动的传递给后面的 then
 
@@ -442,7 +442,7 @@ finally(callback) {
 
 ```
 
-### 实现 Promise.resolve()
+### 5.实现 Promise.resolve()
 
 > Promise.resolve(value)方法返回一个以给定值解析后的 Promise 对象。如果该值为 promise，返回这个 promise；如果这个值是 thenable（即带有"then" 方法)），返回的 promise 会“跟随”这个 thenable 的对象，采用它的最终状态；否则返回的 promise 将以此值完成。此函数将类 promise 对象的多层嵌套展平。
 
@@ -455,7 +455,7 @@ static resolve(value) {
 }
 ```
 
-### 实现 Promise.reject()
+### 6.实现 Promise.reject()
 
 > Promise.reject()方法返回一个带有拒绝原因的 Promise 对象。
 
@@ -465,7 +465,7 @@ static reject(err) {
 }
 ```
 
-### 实现 Promise.all()
+### 7.实现 Promise.all()
 
 > Promise.all(iterable)方法返回一个 Promise 实例，此实例在 iterable 参数内所有的 promise 都“完成（resolved）”或参数中不包含 promise 时回调完成（resolve）；如果参数中 promise 有一个失败（rejected），此实例回调失败（reject），失败原因的是第一个失败 promise 的结果。
 
@@ -520,7 +520,7 @@ static reject(err) {
   // 4
 ```
 
-### 实现 Promise.race()
+### 8.实现 Promise.race()
 
 > Promise.race(iterable)方法返回一个 promise，一旦迭代器中的某个 promise 解决或拒绝，返回的 promise 就会解决或拒绝。
 
@@ -692,7 +692,7 @@ class MyPromise {
 
 ```
 
-### 参考
+## 参考
 
 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill/blob/master/src/index.js)
 
