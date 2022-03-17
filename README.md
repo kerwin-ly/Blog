@@ -2,7 +2,7 @@
 
 ## 数据结构 && 算法
 
-### 数据结构
+### 常见的数据结构
 
 [数组](https://github.com/kerwin-ly/Blog/blob/master/data-structure/%E6%95%B0%E7%BB%84.md)
 
@@ -19,7 +19,7 @@
 [二叉树](https://github.com/kerwin-ly/Blog/blob/master/data-structure/%E4%BA%8C%E5%8F%89%E6%A0%91.md)
 
 [堆](https://github.com/kerwin-ly/Blog/blob/master/data-structure/%E5%A0%86.md)
-### 算法
+### LeetCode算法分类
 
 [数组专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/array/%E6%95%B0%E7%BB%84.md)
 
@@ -93,7 +93,7 @@
 
 [Angular 基础介绍](https://github.com/kerwin-ly/Blog/blob/master/angular/Angular%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D.md)
 
-[Angular 开发技巧&&踩坑记录](https://github.com/kerwin-ly/Blog/blob/master/angular/Angular%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7%26%26%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95.md)
+[Angular 开发技巧&&踩坑笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/Angular%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7%26%26%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95.md)
 
 [Rxjs 开发笔记](https://github.com/kerwin-ly/Blog/blob/master/angular/rxjs.md)
 
@@ -107,25 +107,17 @@
 
 ### Vue2
 
-[vue-mvvm 实现原理（外文）](https://github.com/DMQ/mvvm)
-
 [vue1.x 升级到 2.x](https://github.com/kerwin-ly/Blog/blob/master/vue/upgrade.md)
 
-[webpack1.0 升级 3.0](https://github.com/kerwin1/Blog/blob/master/common/webpack1.0%E5%8D%87%E7%BA%A73.0.md)
-
-[vue 踩坑](https://github.com/kerwin-ly/Blog/blob/master/vue/note.md)
+[vue2.0 踩坑笔记](https://github.com/kerwin-ly/Blog/blob/master/vue/note.md)
 
 [首屏加载优化](https://github.com/kerwin-ly/Blog/blob/master/vue/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96.md)
 
 ### React
 
-[react-native v0.47.2 踩坑](https://github.com/kerwin-ly/Blog/blob/master/react/react-native.md)
+[react-native v0.47.2 踩坑笔记](https://github.com/kerwin-ly/Blog/blob/master/react/react-native.md)
 
 [react-native-vector-icons 的使用](https://github.com/kerwin-ly/Blog/blob/master/react/react-native-vector-icons%20usage.md)
-
-### 构建工具
-
-[webpack loader 与 plugin 开发实战](https://mp.weixin.qq.com/s/pEoS3OCkqxNNgGwZVmMg-w)
 
 ### Style
 
@@ -151,7 +143,7 @@
 
 [python 多线程和多进程](https://github.com/kerwin-ly/Blog/blob/master/python/thread.md)
 
-### Mysql
+### 数据库
 
 [mysql 基本命令](https://github.com/kerwin-ly/Blog/blob/master/mysql/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4.md)
 
@@ -167,7 +159,7 @@
 
 [CI/CD 持续集成](https://github.com/kerwin-ly/Blog/blob/master/docker/CICD.md)
 
-## 开发工具
+## 最佳实践
 
 ### Git
 
@@ -178,12 +170,6 @@
 [Git 提交规范](https://github.com/kerwin-ly/Blog/blob/master/git/Git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83.md)
 
 [Git 异常处理措施](https://juejin.im/post/5edcf3a36fb9a047fa04fbc3)
-
-### Mock
-
-[使用 mock.js 模拟后台请求并返回数据](https://github.com/kerwin-ly/Blog/blob/master/mock/mock.md)
-
-## 最佳实践
 
 ### 编码规范
 
