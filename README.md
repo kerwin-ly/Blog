@@ -43,7 +43,7 @@
 
 ## 计算机网网络
 
-[计算机网络自顶向下方法-读书笔记](https://github.com/kerwin-ly/Blog/blob/master/computer-netwroking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md)
+[《计算机网络自顶向下方法 第七版》读书笔记](https://github.com/kerwin-ly/Blog/blob/master/computer-netwroking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md)
 
 ## 前端
 
@@ -74,6 +74,10 @@
 [实现JS类型判断](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9AJS%E7%9A%84%E7%B1%BB%E5%9E%8B.md) 
 
 [实现Promise函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0Promise%E5%87%BD%E6%95%B0.md)
+
+[实现防抖函数]()
+
+[实现节流函数]()
 
 ### 优雅的编码技巧
 
