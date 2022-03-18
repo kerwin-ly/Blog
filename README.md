@@ -75,11 +75,11 @@
 
 [实现Promise函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0Promise%E5%87%BD%E6%95%B0.md)
 
-[实现防抖函数]()
+[实现防抖函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E9%98%B2%E6%8A%96%E5%87%BD%E6%95%B0.md)
 
-[实现节流函数]()
+[实现节流函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0.md)
 
-[实现平层数组转树结构]
+[实现平层数组转树结构](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%B9%B3%E5%B1%82%E6%95%B0%E7%BB%84%E8%BD%AC%E6%A0%91%E7%BB%93%E6%9E%84.md)
 
 ### 优雅的编码技巧
 
