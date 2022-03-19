@@ -37,7 +37,7 @@
 
 [回溯算法 TODO]()
 
-[贪心算法]()
+[贪心算法专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/greedy-algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.md)
 
 [动态规划算法 TODO]()
 
