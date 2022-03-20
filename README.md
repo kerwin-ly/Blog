@@ -63,6 +63,10 @@
 
 ### 实现JavaScript工具函数
 
+[实现instanceof]()
+
+[实现new操作符]()
+
 [实现函数柯里化curry](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96curry.md)
 
 [实现惰性载入函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5%E5%87%BD%E6%95%B0.md)
