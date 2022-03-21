@@ -35,11 +35,11 @@
 
 [二叉树专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/binary-tree/%E4%BA%8C%E5%8F%89%E6%A0%91.md)
 
-[回溯算法 TODO]()
+[回溯算法专题]()
 
-[贪心算法专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/greedy-algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.md)
+[贪心算法专题 TODO](https://github.com/kerwin-ly/Blog/blob/master/algorithm/greedy-algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.md)
 
-[动态规划算法 TODO]()
+[动态规划算法专题 TODO]()
 
 ## 计算机网网络
 
@@ -63,9 +63,9 @@
 
 ### 实现JavaScript工具函数
 
-[实现instanceof]()
+[实现instanceof](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/instanceof%E6%93%8D%E4%BD%9C%E7%AC%A6.md)
 
-[实现new操作符]()
+[实现new操作符](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/new%E6%93%8D%E4%BD%9C%E7%AC%A6.md)
 
 [实现函数柯里化curry](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96curry.md)
 
