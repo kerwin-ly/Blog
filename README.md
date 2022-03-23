@@ -117,11 +117,9 @@
 
 ### Vue2
 
-[vue1.x 升级到 2.x](https://github.com/kerwin-ly/Blog/blob/master/vue/upgrade.md)
+[Vue1.x 升级到 2.x](https://github.com/kerwin-ly/Blog/blob/master/vue/upgrade.md)
 
-[vue2.0 踩坑笔记](https://github.com/kerwin-ly/Blog/blob/master/vue/note.md)
-
-[首屏加载优化](https://github.com/kerwin-ly/Blog/blob/master/vue/%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96.md)
+[Vue2.0 踩坑笔记](https://github.com/kerwin-ly/Blog/blob/master/vue/note.md)
 
 ### React
 
@@ -137,23 +135,23 @@
 
 ### 移动端
 
-[cordova 踩坑](https://github.com/kerwin-ly/Blog/blob/master/cordova/note.md)
+[Cordova 踩坑](https://github.com/kerwin-ly/Blog/blob/master/cordova/note.md)
 
 ## 服务端
 
 ### Node
 
-[node 规避回调地狱](https://github.com/kerwin-ly/Blog/blob/master/node/fixCallbackHell.md)
+[Node 规避回调地狱](https://github.com/kerwin-ly/Blog/blob/master/node/fixCallbackHell.md)
 
 [在 vscode 中调试基于 typescript 的 node 项目](https://github.com/kerwin-ly/Blog/tree/master/demo/debug-ts)
 
 ### Python
 
-[python 多线程和多进程](https://github.com/kerwin-ly/Blog/blob/master/python/thread.md)
+[Python 多线程和多进程](https://github.com/kerwin-ly/Blog/blob/master/python/thread.md)
 
 ### 数据库
 
-[mysql 基本命令](https://github.com/kerwin-ly/Blog/blob/master/mysql/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4.md)
+[Mysql 基本命令](https://github.com/kerwin-ly/Blog/blob/master/mysql/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4.md)
 
 ### Docker
 
