@@ -8,27 +8,83 @@ webpack 的构建流程包括`初始化`、`构建阶段`和`生成阶段`。下
 
 ### 初始化阶段
 
-1. 初始化参数：从配置文件`webpack.config.js`和`shell`语句中读取参数，获取合并后的参数。
+#### 1. 初始化参数
 
-2. 创建编译器对象：通过上一步获得的参数，初始化`Compiler`对象。
+从配置文件`webpack.config.js`和`shell`语句中读取参数，获取合并后的参数。
 
-3. 初始化编译环境：加载 webpack 的内置插件、注册各种模块工厂、加载配置中的自定义插件、挂载 hooks 等。（如：通过`xxxWebpackPlugin.apply(compiler)`方法，将`compiler`对象传入到`webpack`插件中。每个插件可以通过`compiler`的`hooks`来进行监听编译流程，从而对打包操作等进行更改）。
+#### 2. 创建编译器对象
 
-4. 开始编译：执行`Compiler`对象的`run`方法
+通过上一步获得的参数，初始化`Compiler`对象。
 
-5. 确定入口：根据配置中的 `entry` 找出所有的入口文件，调用 `compilation.addEntry` 将入口文件转换为 `dependence` 对象
+#### 3. 初始化编译环境
 
-### 编译阶段
+遍历用户定义的 plugins 集合，执行插件的 apply 方法。接着加载 webpack 的内置插件、注册各种模块工厂等，最终生成Compiler实例，配置完对应的环境参数。
 
-1. 编译模块(make)：根据 `entry` 对应的 `dependence` 创建 `module` 对象，调用 `loader` 将模块转译为标准 JS 内容，使用 `acorn` 解析生成 `AST 抽象语法树`，从中找出该模块依赖的模块，再 递归 本步骤直到所有入口依赖的文件都经过了本步骤的处理
+下面，我们主要对**自定义插件**和**内置插件**进行简单说明：
 
-2. 完成模块编译：上一步递归处理所有能触达到的模块后，得到了每个模块被翻译后的内容以及它们之间的 `依赖关系图`
+**自定义插件**：如果写过自定义的插件，那么一定会很熟悉每个自定义插件都有个apply方法，通过`xxxWebpackPlugin.apply(compiler)`方法，webpack将`Compiler`对象传入到插件中。这样，每个插件就可以通过`compiler`的`hooks`来进行监听编译流程，从而对打包操作等进行更改。
+
+**内置插件**：webpack自身内置了数百个插件，这些插件并不需要我们手动配置，WebpackOptionsApply 会在初始化阶段根据配置内容动态注入对应的插件，包括：
+
+* 注入 EntryOptionPlugin 插件，处理 entry 配置。
+
+* 根据 devtool 值判断后续用那个插件处理 sourcemap，可选值：EvalSourceMapDevToolPlugin、SourceMapDevToolPlugin、EvalDevToolModulePlugin
+
+* 注入 RuntimePlugin ，用于根据代码内容动态注入 webpack 运行时
+
+#### 4. 开始编译
+
+执行`Compiler`对象的`run`方法
+
+#### 5. 确定入口
+
+根据配置中的 `entry` 找出所有的入口文件，调用 `compilation.addEntry` 将入口文件转换为 `dependence` 对象
+
+### 构建阶段
+
+该阶段主要围绕`module`进行，如下：
+
+#### 1. 编译模块(make)
+
+编译模块的具体流程如下：
+
+1. 根据 `entry` 对应的 `dependence` 创建对应文件类型的 `module` 对象，调用loader-runner仓库的`runLoaders`，通常是将转译为JS文本。
+
+2. 使用 `acorn` 解析生成 `AST 抽象语法树`。
+
+3. 遍历抽象语法树，识别`require/import`等语法对应的AST节点，从中找出该模块依赖的模块，加入到依赖列表中。
+
+4. AST遍历完成后，开始处理模块的依赖`dependence`。重复第一步的操作即可，一直递归下去，直到所有依赖都被解析完毕。
+
+上述过程，简单来看就是：`Dependence => Module => AST => Dependence`
+
+#### 2. 完成模块编译
+
+上一步递归处理所有模块后，得到了每个模块被翻译后的内容以及它们之间的 `依赖关系图`
 
 ### 生成阶段
 
-1. 输出资源(seal)：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再把每个 Chunk 转换成一个单独的文件加入到输出列表。
+在webpack获取完模块内容和模块之间的关系后，便开始了最终资源的生成。该阶段主要围绕`chunks`进行，如下：
 
-2. 写入文件系统(emitAssets)：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。(注意：触发`emit`钩子时，输出文件还没有写入到硬盘中，这时可以对即将输出的最终结果进行最后一次操作)
+![build](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/webpack/build.png)
+
+#### 1. 输出资源(seal)
+
+`seal`主要完成从`module`到`chunks`的过程，如下：
+
+1. 遍历`compilation.modules`集合，根据模块中的`直接依赖` or `动态引入`的规则 ，分配给不同的 `chunk`对象。（如：a.js直接引用了b.js,动态引用了c.js。则将a.js和b.js合成一个chunk，c单独作为一个chunk）
+
+2. 第一步遍历完成后，生成完整的`chunks`集合
+
+3. 调用`createAssets`方法，将`chunks`进行遍历，调用 `compilation.emitAssets` 方法将 assets 信息记录到 `compilation.assets` 对象中
+
+注意：在生成`chunks`的过程中，我们可能遇到一个模块被多次依赖的情况，那么按照上述的流程，必然会生成许多重复的`chunk`。
+
+针对这个问题，webpack 提供了一些插件如 `CommonsChunkPlugin` 、`SplitChunksPlugin`，在基本规则之外进一步优化 chunks 结构。
+
+#### 2. 写入文件系统(emitAssets)
+
+在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。(注意：触发`emit`钩子时，输出文件还没有写入到硬盘中，这时可以对即将输出的最终结果进行最后一次操作)
 
 ## Compiler 和 Compilation 区分
 
