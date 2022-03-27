@@ -20,7 +20,7 @@ webpack 的构建流程包括`初始化`、`构建阶段`和`生成阶段`。下
 
 遍历用户定义的 plugins 集合，执行插件的 apply 方法。接着加载 webpack 的内置插件、注册各种模块工厂等，最终生成Compiler实例，配置完对应的环境参数。
 
-下面，我们主要对**自定义插件**和**内置插件**进行简单说明：
+这里，我们对**自定义插件**和**内置插件**进行简单说明：
 
 **自定义插件**：如果写过自定义的插件，那么一定会很熟悉每个自定义插件都有个apply方法，通过`xxxWebpackPlugin.apply(compiler)`方法，webpack将`Compiler`对象传入到插件中。这样，每个插件就可以通过`compiler`的`hooks`来进行监听编译流程，从而对打包操作等进行更改。
 
@@ -91,3 +91,7 @@ webpack 的构建流程包括`初始化`、`构建阶段`和`生成阶段`。下
 - Compiler： `Compiler`负责 webpack 整个生命周期的编译构建工作，其包含了当前运行的 webpack 配置，如：entry、output、loaders 等。这个度喜庆在启动 webpack 时，即被实例化，且全局仅被创建一次。`webpack plugins`可以通过`apply(compiler) {}`获取其参数，并对 webpack 执行时广播出来的事件，进行监听，来修改 webpack 的一些编译流程。（[compiler hooks](https://webpack.docschina.org/api/compiler-hooks/)）
 
 - Compilation： `Compilation`负责构建模块和`chunk`，代表一次资源版本的构建。当运行`webpack`开发环境时，每当检测到一个文件的变化，就会创建一个新的`compilation`，从而生成一组新的编译资源。一个`Compilation`对象存储了本次打包编译的内容存到内存里（如：当前的模块资源、编译生成资源、变化的文件、依赖信息等）。（[compilation hooks](https://webpack.docschina.org/api/compilation-hooks/)）
+
+## 参考
+
+[[万字总结] 一文吃透 Webpack 核心原理](https://mp.weixin.qq.com/s/SbJNbSVzSPSKBe2YStn2Zw)
