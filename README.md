@@ -35,7 +35,7 @@
 
 [二叉树专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/binary-tree/%E4%BA%8C%E5%8F%89%E6%A0%91.md)
 
-[回溯算法专题]()
+[回溯算法专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/backtracking/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95.md)
 
 [贪心算法专题 TODO](https://github.com/kerwin-ly/Blog/blob/master/algorithm/greedy-algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.md)
 
