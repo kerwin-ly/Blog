@@ -47,6 +47,8 @@
 
 [从输入url到页面显示的过程](https://github.com/kerwin-ly/Blog/blob/master/computer-netwroking/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E7%9A%84%E8%BF%87%E7%A8%8B.md)
 
+[从HTTP1.0到3.0的版本变迁]()
+
 ## 前端
 
 ### 深入JavaScript原理
@@ -87,7 +89,7 @@
 
 [实现平层数组转树结构](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%B9%B3%E5%B1%82%E6%95%B0%E7%BB%84%E8%BD%AC%E6%A0%91%E7%BB%93%E6%9E%84.md)
 
-### 优雅的编码技巧
+### JavaScript最佳实践
 
 [JavaScript 设计模式与开发实践](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-coding-skill/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5.md)
 
