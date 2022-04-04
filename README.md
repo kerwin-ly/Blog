@@ -57,6 +57,8 @@
 
 [详解js执行上下文](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E8%AF%A6%E8%A7%A3js%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87.md)
 
+[理解浏览器和Node.js中的Event Loop TODO]()
+
 [闭包理解](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E9%97%AD%E5%8C%85.md)
 
 [call、apply 和 bind 函数的实现](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E5%AE%9E%E7%8E%B0call%E3%80%81apply%E5%92%8Cbind%E6%96%B9%E6%B3%95.md)
