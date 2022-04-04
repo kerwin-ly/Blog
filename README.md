@@ -37,7 +37,7 @@
 
 [回溯算法专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/backtracking/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95.md)
 
-[贪心算法专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/greedy-algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.md)
+[贪心算法专题 TODO](https://github.com/kerwin-ly/Blog/blob/master/algorithm/greedy-algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.md)
 
 [动态规划算法专题 TODO]()
 
@@ -64,6 +64,8 @@
 [函数声明和函数表达式的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%92%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB.md)
 
 [基本类型和引用类型的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB.md)
+
+[var、let和const的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/var%E3%80%81let%E5%92%8Cconst%E7%9A%84%E5%8C%BA%E5%88%AB.md)
 
 ### 实现JavaScript工具函数
 
