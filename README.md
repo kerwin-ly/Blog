@@ -37,7 +37,7 @@
 
 [回溯算法专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/backtracking/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95.md)
 
-[贪心算法专题 TODO](https://github.com/kerwin-ly/Blog/blob/master/algorithm/greedy-algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.md)
+[贪心算法专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/greedy-algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.md)
 
 [动态规划算法专题 TODO]()
 
@@ -47,7 +47,7 @@
 
 [从输入url到页面显示的过程](https://github.com/kerwin-ly/Blog/blob/master/computer-netwroking/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E7%9A%84%E8%BF%87%E7%A8%8B.md)
 
-[从HTTP1.0到3.0的版本变迁]()
+[从HTTP1.0到3.0的版本变迁](https://github.com/kerwin-ly/Blog/blob/master/computer-netwroking/%E4%BB%8EHTTP1.0%E5%88%B03.0%E7%9A%84%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81.md)
 
 ## 前端
 
