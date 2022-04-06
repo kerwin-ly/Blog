@@ -37,9 +37,9 @@
 
 [回溯算法专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/backtracking/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95.md)
 
-[贪心算法专题 TODO](https://github.com/kerwin-ly/Blog/blob/master/algorithm/greedy-algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.md)
+[贪心算法专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/greedy-algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.md)
 
-[动态规划算法专题 TODO]()
+[动态规划算法专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/dynamic-programming/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95.md)
 
 ## 计算机网网络
 
