@@ -61,15 +61,15 @@
 
 [闭包理解](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E9%97%AD%E5%8C%85.md)
 
-[call、apply 和 bind 函数的实现](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E5%AE%9E%E7%8E%B0call%E3%80%81apply%E5%92%8Cbind%E6%96%B9%E6%B3%95.md)
-
 [函数声明和函数表达式的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%92%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB.md)
 
 [基本类型和引用类型的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB.md)
 
 [var、let和const的区别](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/var%E3%80%81let%E5%92%8Cconst%E7%9A%84%E5%8C%BA%E5%88%AB.md)
 
-### 实现JavaScript工具函数
+### 深入JavaScript函数实现
+
+[call、apply 和 bind 函数的实现](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E5%AE%9E%E7%8E%B0call%E3%80%81apply%E5%92%8Cbind%E6%96%B9%E6%B3%95.md)
 
 [实现instanceof](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/instanceof%E6%93%8D%E4%BD%9C%E7%AC%A6.md)
 
@@ -92,6 +92,8 @@
 [实现节流函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0.md)
 
 [实现平层数组转树结构](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%B9%B3%E5%B1%82%E6%95%B0%E7%BB%84%E8%BD%AC%E6%A0%91%E7%BB%93%E6%9E%84.md)
+
+[使用setTimeout实现setInterval](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E4%BD%BF%E7%94%A8setTimeout%E5%AE%9E%E7%8E%B0setInterval.md)
 
 ### JavaScript最佳实践
 
