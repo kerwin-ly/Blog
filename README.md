@@ -87,6 +87,8 @@
 
 [实现Promise函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0Promise%E5%87%BD%E6%95%B0.md)
 
+[实现 async/await 函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0async%26await%E5%87%BD%E6%95%B0.md)
+
 [实现防抖函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E9%98%B2%E6%8A%96%E5%87%BD%E6%95%B0.md)
 
 [实现节流函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0.md)
