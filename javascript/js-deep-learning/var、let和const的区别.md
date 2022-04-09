@@ -29,11 +29,14 @@ console.log(b === window.b); // true
 
 let 的特点主要如下：
 
-- 没有变量提升
+- 暂时性死区（被let声明的变量，只有在被初始化赋值后，才可以被访问）
 
 ```js
-console.log(a); // 报错：ReferenceError: Cannot access 'a' before initialization
-let value = 'test';
+let a = 'test';
+(function() {
+  console.log(a); // 报错：ReferenceError: Cannot access 'a' before initialization
+  let a = 'test2';
+})()
 ```
 
 - let 声明会形成一个块级作用域，所有外面的语句块访问不到
