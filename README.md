@@ -52,7 +52,7 @@
 
 ## 浏览器
 
-[CSRF 和 XSS 攻击原理]()
+[CSRF 和 XSS 攻击原理](https://github.com/kerwin-ly/Blog/blob/master/broswer/CSRF%E5%92%8CXSS%E6%94%BB%E5%87%BB%E5%8E%9F%E7%90%86.md)
 
 ## 前端
 
@@ -104,7 +104,7 @@
 
 [使用 setTimeout 实现 setInterval](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E4%BD%BF%E7%94%A8setTimeout%E5%AE%9E%E7%8E%B0setInterval.md)
 
-[实现对象属性下划线转小驼峰]()
+[实现对象属性下划线转小驼峰](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%8B%E5%88%92%E7%BA%BF%E8%BD%AC%E5%B0%8F%E9%A9%BC%E5%B3%B0.md)
 
 ### JavaScript 最佳实践
 
@@ -118,7 +118,7 @@
 
 [使用 Babel 生成 Typescript 代码-AST](https://github.com/kerwin-ly/Blog/blob/master/tools/ast.md)
 
-[TypeScript工具类型介绍]()
+[TypeScript工具类型的使用&实现](https://github.com/kerwin-ly/Blog/blob/master/typescript/TypeScript%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D.md)
 
 ### Angular
 

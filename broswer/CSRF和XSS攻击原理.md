@@ -79,7 +79,7 @@ GET 类型的 CSRF 利用非常简单，只需要一个 HTTP 请求，一般会�
 
 在HTTP协议中，每一次请求都会携带 `Origin Header` 或 `Referer Header`来判断是否是信任域发来的请求。
 
-![csrf-header](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/browser/csrf-header.png)
+![csrf-header](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/broswer/csrf-header.png)
 
 注意，有两种情况HTTP请求头中不会携带`Origin Header`。
 
@@ -193,7 +193,7 @@ DOM型XSS其实主要是由于网站前端JavaScript不够严谨导致被注入�
 
 最后附上一张掘金前端的Cookie设置
 
-![safe-cookie](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/browser/safe-cookie.png)
+![safe-cookie](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/broswer/safe-cookie.png)
 
 ## 参考链接
 
