@@ -106,6 +106,8 @@
 
 [实现对象属性下划线转小驼峰](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%8B%E5%88%92%E7%BA%BF%E8%BD%AC%E5%B0%8F%E9%A9%BC%E5%B3%B0.md)
 
+[实现 EventEmitter](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0EventEmitter.md)
+
 ### JavaScript 最佳实践
 
 [JavaScript 设计模式与开发实践](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-coding-skill/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5.md)
