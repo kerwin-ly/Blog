@@ -84,6 +84,8 @@
 
 [实现 async/await 函数](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0async%26await%E5%87%BD%E6%95%B0.md)
 
+[实现 EventEmitter](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0EventEmitter.md)
+
 ### JavaScript 工具函数
 
 [实现函数柯里化 curry](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96curry.md)
@@ -105,8 +107,6 @@
 [使用 setTimeout 实现 setInterval](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E4%BD%BF%E7%94%A8setTimeout%E5%AE%9E%E7%8E%B0setInterval.md)
 
 [实现对象属性下划线转小驼峰](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E4%B8%8B%E5%88%92%E7%BA%BF%E8%BD%AC%E5%B0%8F%E9%A9%BC%E5%B3%B0.md)
-
-[实现 EventEmitter](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0EventEmitter.md)
 
 ### JavaScript 最佳实践
 
@@ -134,9 +134,9 @@
 
 [Angular7 升级到 Angular9](https://github.com/kerwin-ly/Blog/blob/master/angular/upgrade-angular9.md)
 
-[详解依赖注入](https://github.com/kerwin-ly/Blog/blob/master/angular/%E8%AF%A6%E8%A7%A3%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5.md)
+[深入理解Angular依赖注入（一）：什么是依赖注入](https://github.com/kerwin-ly/Blog/blob/master/angular/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Angular%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%80%E4%B9%88%E6%98%AF%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5.md)
 
-[依赖注入在 Angular 中的应用](https://github.com/kerwin-ly/Blog/blob/master/angular/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%9C%A8Angular%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.md)
+[深入理解Angular依赖注入（二）：依赖注入在Angular中的应用](https://github.com/kerwin-ly/Blog/blob/master/angular/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Angular%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%9C%A8Angular%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.md)
 
 [Angular 实现路由后退并携带参数](https://stackblitz.com/edit/angular-ivy-vn3x5j?file=src%2Fapp%2Fapp.component.ts)
 
