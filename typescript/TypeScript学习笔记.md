@@ -1,8 +1,5 @@
 # TypeScript 学习笔记
 
-> 参考连接：
-> [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why) > [官方文档](https://www.tslang.cn/docs/home.html)
-
 ## 安装配置
 
 全局安装 typescript
@@ -35,7 +32,7 @@ let isNumber: boolean = false;
 let num: number = 123;
 
 // 字符串
-let str: string = 'kerwin';
+let str: string = "kerwin";
 
 // null && undefined：默认情况下null和undefined是所有类型的子类型
 ```
@@ -109,7 +106,7 @@ let num: number = (<string>value).length
 
 ```js
 let value: string | number;
-value = '123';
+value = "123";
 value = 123;
 ```
 
@@ -123,16 +120,16 @@ value = 123;
 
 ```js
 interface Person {
-	name: string;
-	age: number;
-	gendar?: boolean;
+  name: string;
+  age: number;
+  gendar?: boolean;
 }
 
 // sex可选属性,多加一个接口中不存在的属性，报错
 let tom: Person = {
-	name: 'Tom',
-	age: 22,
-	isMan: true // 这个属性是接口中不存在的，会报错
+  name: "Tom",
+  age: 22,
+  isMan: true, // 这个属性是接口中不存在的，会报错
 };
 ```
 
@@ -140,15 +137,15 @@ let tom: Person = {
 
 ```js
 interface Person {
-	name: string;
-	age?: number;
-	[propName: string]: any; // 如果这里写的是string类型，由于number不是string的子类型，将报错
+  name: string;
+  age?: number;
+  [propName: string]: any; // 如果这里写的是string类型，由于number不是string的子类型，将报错
 }
 
 let tom: Person = {
-	name: 'Tom',
-	age: 25,
-	gender: 'male'
+  name: "Tom",
+  age: 25,
+  gender: "male",
 };
 ```
 
@@ -156,12 +153,12 @@ let tom: Person = {
 
 ```js
 interface Person {
-	name: string;
-	age?: number;
+  name: string;
+  age?: number;
 }
 
 let tom: Person = {
-	name: 'Tom'
+  name: "Tom",
 };
 ```
 
@@ -187,14 +184,14 @@ tom.id = 2; // 报错：Cannot assign to 'id' because it is a constant or a read
 
 ```js
 interface GetPerson {
-	(name: string, age: number): object;
+  (name: string, age: number): object;
 }
 
-let tom: GetPerson = function(name: string, age: number): object {
-	return {
-		name,
-		age
-	};
+let tom: GetPerson = function (name: string, age: number): object {
+  return {
+    name,
+    age,
+  };
 };
 ```
 
@@ -204,20 +201,20 @@ let tom: GetPerson = function(name: string, age: number): object {
 
 ```js
 interface UserArr {
-	[index: number]: string; // 小标必须是number类型，值必须是string类型
+  [index: number]: string; // 小标必须是number类型，值必须是string类型
 }
-let userArr: UserArr = ['kerwin', 'bob'];
+let userArr: UserArr = ["kerwin", "bob"];
 ```
 
 限制对象
 
 ```js
 interface UserObj {
-	[index: string]: string;
+  [index: string]: string;
 }
 let userObj: UserObj = {
-	name: 'kerwin',
-	sex: 'man'
+  name: "kerwin",
+  sex: "man",
 };
 ```
 
@@ -245,12 +242,12 @@ let cat: Cat = {
 
 ```js
 class Point {
-	x: number;
-	y: number;
+  x: number;
+  y: number;
 }
 
 interface Point3d extends Point {
-	z: number;
+  z: number;
 }
 
 let point3d: Point3d = { x: 1, y: 2, z: 3 };
@@ -281,19 +278,19 @@ function do(x: number): void {
 通过赋值操作，类型推论出左侧变量的类型
 
 ```js
-let mySum = function(x: number, y: number): number {
-	return x + y;
+let mySum = function (x: number, y: number): number {
+  return x + y;
 };
 ```
 
 手动赋值定义左侧变量类型，注意:**这个箭头函数是表明函数输出的类型，不是 es6 中的箭头函数**
 
 ```js
-let mySum: (x: number, y: number) => number = function(
-	x: number,
-	y: number
+let mySum: (x: number, y: number) => number = function (
+  x: number,
+  y: number
 ): number {
-	return x + y;
+  return x + y;
 };
 ```
 
@@ -301,11 +298,11 @@ let mySum: (x: number, y: number) => number = function(
 
 ```js
 interface sunFunc {
-	(x: number, y: number): number;
+  (x: number, y: number): number;
 }
 
-let mySum: sunFunc = function(x: number, y: number): number {
-	return x + y;
+let mySum: sunFunc = function (x: number, y: number): number {
+  return x + y;
 };
 ```
 
@@ -313,12 +310,12 @@ let mySum: sunFunc = function(x: number, y: number): number {
 
 ```js
 function sum(a: number, ...result: number[]): number {
-	let sum = a; // a = 0
+  let sum = a; // a = 0
 
-	for (let i = 0; i < result.length; i++) {
-		sum += result[i];
-	}
-	return sum;
+  for (let i = 0; i < result.length; i++) {
+    sum += result[i];
+  }
+  return sum;
 }
 
 sum(0, 1, 2, 3, 4, 5); // 将0赋值给a,剩下的实参参数传给result
@@ -327,6 +324,7 @@ sum(0, 1, 2, 3, 4, 5); // 将0赋值给a,剩下的实参参数传给result
 #### 3.5 函数重载
 
 ```js
+
 ```
 
 ### 4.声明文件
@@ -363,7 +361,7 @@ export default Directions;
 
 ```js
 let b: Boolean = new Boolean(1);
-let e: Error = new Error('Error Message');
+let e: Error = new Error("Error Message");
 let d: Date = new Date();
 let t: RegExp = /[a-z]/;
 ```
@@ -372,9 +370,9 @@ let t: RegExp = /[a-z]/;
 
 ```js
 let body: HTMLElement = document.body;
-let divList: NodeList = document.querySelectorAll('div');
-document.addEventListener('click', function(e: MouseEvent) {
-	// do...
+let divList: NodeList = document.querySelectorAll("div");
+document.addEventListener("click", function (e: MouseEvent) {
+  // do...
 });
 ```
 
@@ -386,15 +384,15 @@ document.addEventListener('click', function(e: MouseEvent) {
 type Name = string;
 type NameResolver = () => string;
 type NameOrResolver = Name | NameResolver;
-let person: Name = 'kerwin';
+let person: Name = "kerwin";
 let getName;
 
 function getName(n: NameOrResolver): Name {
-	if (typeof n === 'string') {
-		return n;
-	} else {
-		return n();
-	}
+  if (typeof n === "string") {
+    return n;
+  } else {
+    return n();
+  }
 }
 ```
 
@@ -402,12 +400,12 @@ function getName(n: NameOrResolver): Name {
 
 ```js
 // 约定事件只能是下面3种的一种，其他事件报错
-type EventNames = 'click | mousemove | scroll';
+type EventNames = "click | mousemove | scroll";
 function handleEvent(ele: Element, event: EventNames) {
-	// do
+  // do
 }
 
-handleEvent(document.getElementById('hello'), 'scroll');
+handleEvent(document.getElementById("hello"), "scroll");
 ```
 
 ### 8. 类
@@ -525,7 +523,7 @@ class Cat implements Animal {
 
 泛型（Generics）是指在定义函数、接口或类的时候，不预先指定具体的类型，**而在调用的时候再指定类型的一种特性**。它保证了咱们在复用组件时，传入不同的类型后函数返回对应的不同类型。
 
-泛型方法
+**泛型方法**
 
 ```js
 // T相当于一个变量，保证了咱们传入和输出值是同一个类型
@@ -540,7 +538,7 @@ function createArray<T>(length: number, value: T): Array<T> {
 createArray<string>(3, 'x'); // ['x', 'x', 'x']
 ```
 
-泛型类
+**泛型类**
 
 ```js
 class Animal<T> {
@@ -556,19 +554,19 @@ let cat = new Animal<string>('cat');
 cat.say();
 ```
 
-泛型接口
+**泛型接口**
 
 ```js
 interface Config {
-	<T>(value: T): T;
+  <T>(value: T): T;
 }
-var getData: Config = function<T>(value: T): T {
-	return value;
+var getData: Config = function <T>(value: T): T {
+  return value;
 };
-getData<string>('kerwin');
+getData < string > "kerwin";
 ```
 
-泛型映射
+**泛型映射**
 
 ```js
 // interface DBI<T> {}
@@ -594,20 +592,21 @@ let db = new MysqlDb<User>(); // 把类当作参数，传入到泛型类中
 db.add(u);
 ```
 
-#### 9.1 多个类型参数
+#### 9.1 返回多个泛型参数
 
 ```js
 function swap<T, U>(tuple: [T, U]): [U, T] {
-	return [tuple[1], tuple[0]];
+  return [tuple[1], tuple[0]];
 }
 
-swap([7, 'seven']); // ['seven', 7]
+swap([7, "seven"]); // ['seven', 7]
 ```
 
-#### 9.2 类型约束
+#### 9.2 泛型约束
+
+限制参数必须有 length 属性
 
 ```js
-// 限制参数必须有length属性
 interface Lengthwise {
   length: number
 }
@@ -618,36 +617,41 @@ function loggingIdentity<T entends Lengthwise>(arg: T): T {
 }
 ```
 
-#### 9.3 泛型接口
+检查某个键是否在对象上
 
 ```js
-interface CreateArrayFunc<T> {
-	(length: number, value: T): Array<T>;
+// K extends keyof T 确保了K一定在T的属性上
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
 }
-
-let createArray: CreateArrayFunc;
-createArray = function<T>(length: number, value: T): Array<T> {
-	let result: T[] = [];
-	for (let i = 0; i < length; i++) {
-		result[i] = value;
-	}
-};
-
-createArray(3, 'x'); // ['x', 'x', 'x']
 ```
 
-#### 9.4 泛型类
+#### 9.3 泛型默认参数
 
 ```js
-class GenericNumber<T> {
-  zeroValue: T;
-  add: (x: T, y: T) => T;
+interface Person<T = string> {
+  id: T;
 }
 
-let myGenericNumber = new GenericNumber<number>();
-myGenericNumber.zeroValue = 0;
-myGenericNumber.add = function(x, y) { return x + y; };
+const p0: Person = { id: "test" }; // 这里不传入泛型，默认string
+const p1: Person<number> = { id: 28 };
 ```
+
+#### 9.4 泛型条件类型
+
+下面这行类型申明，表示：如果`T`能够赋值给`U`，那么类型为`X`，否则为`Y`
+
+```js
+T extends U ? X : Y
+```
+
+**注意，在`T`是联合类型时，会被自动分发。**如下所示：
+
+以 `T extends U ? X : Y` 条件类型为例，当类型参数的为 `A | B | C` 时，该条件类型将会被解析为 `(A extends U ? X : Y) | (B extends U ? X : Y) | (C extends U ? X : Y)`。
+
+#### 9.4 泛型工具类型
+
+参考笔记：[TypeScript工具类型介绍](https://github.com/kerwin-ly/Blog/blob/master/typescript/TypeScript%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D.md)
 
 ### 10. 装饰器
 
@@ -755,3 +759,11 @@ class Animal {
 var d = new Animal('bird');
 d.getName();
 ```
+
+## 参考
+
+[深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/#why)
+
+[TypeScript文档](https://www.tslang.cn/docs/home.html)
+
+[你不知道的 TypeScript 泛型](https://mp.weixin.qq.com/s/jF0ZEGM9BRQgyKPZ9W9MpA)
