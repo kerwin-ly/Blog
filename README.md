@@ -120,7 +120,7 @@
 
 ### TypeScript
 
-[TypeScript 笔记](https://github.com/kerwin-ly/Blog/blob/master/typescript/note.md)
+[TypeScript 笔记](https://github.com/kerwin-ly/Blog/blob/master/typescript/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
 
 [使用 Babel 生成 Typescript 代码-AST](https://github.com/kerwin-ly/Blog/blob/master/tools/ast.md)
 

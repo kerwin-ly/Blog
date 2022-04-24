@@ -49,7 +49,7 @@ const user = new UserService(['delete_user']);
 
 上述，是我们需求的简单实现，功能上没什么问题，咱愉快的提交了代码。
 
-但第二天，需求变了，鉴权服务还需要提供一个`code`参数用来检查用户工号。于是你需要在实例化`UserService`和`AuthService`的时候都添加`code`参数，`AuthService`才能够获取到。即使这个参数跟`UserService`没半毛钱关系。代码如下：
+但第二天，需求变了，鉴权服务还需要提供一个`code`参数用来检查用户工号。很简单，稍微改下就ok了，代码如下：
 
 ```ts
 // auth.service.ts 鉴权服务
@@ -59,7 +59,7 @@ export class AuthService {
 
     constructor(permissions: string; code: string) {
         this.permissions = permissions;
-        this.code = code;
+        this.code = code; // 添加code
     }
 
     check(): void { ... }
@@ -71,7 +71,7 @@ export class UserService {
     private authService: AuthService;
 
     constructor(permissions: string, code: string) {
-        this.authService = new AuthService(permissions, code);
+        this.authService = new AuthService(permissions, code); // 添加code
     }
 }
 
@@ -80,9 +80,16 @@ const user = new UserService(['查看用户'], 'ZZ0001');
 
 ```
 
+这时，你会发现上述代码中，由于`AuthService`是在`UserService`内部实例化的，耦合在了一起。所以即使这个参数跟`UserService`没有任何关系，但也需要改动`UserService`去适配新的需求。
+```js
+constructor(permissions: string, code: string) {
+  this.authService = new AuthService(permissions, code); // 添加code
+}
+```
+
 这里仅仅是举了一个简单的例子，实际场景中，我们的`AuthService`可能还会依赖其他的服务，那么如果按目前的代码设计，我们需要顺着服务依赖的链路，将参数逐层传递，才能够让其正常运行。
 
-观察上述代码，我们会发现，由于`UserService`内部创建了`AuthService`实例，对其进行了依赖，所以在实例化`UserService`的时候，必须把`AuthService`里面需要的参数也一并带入，这里发生了耦合。
+观察上述代码，我们会发现，由于`UserService`内部创建了`AuthService`实例，逻辑耦合在了一起，所以在实例化`UserService`的时候，必须把`AuthService`里面需要的参数也一并带入，这里发生了耦合。
 
 那么，我们如果把实例化操作放在外面，是不是就可以解决这个耦合问题了？
 
@@ -189,7 +196,7 @@ import 'reflect-metadata';
 function Injectable() {
   return function (target: any) {
     
-    Reflect.defineMetadata('user_info', { name: 'kerwin' }, target); 
+    Reflect.defineMetadata('user_info', { name: 'kerwin' }, target); // 为目标对象target添加一个 “key为user_info，value为{name: 'kerwin'}”的元数据
     return target;
   };
 }
@@ -335,7 +342,7 @@ var UserService = /** @class */ (function () {
 ...
 ```
 
-注意上面生成的js代码和注释内容，我们可以看到，当设置为`emitDecoratorMetadata: true`后，其在编译`ts`文件时，会自动在`装饰器`里面定义一个key为`design:paramtypes`，value为其依赖项的一个`元数据`。
+注意上面生成的js代码，我们可以看到，当设置为`emitDecoratorMetadata: true`后，会自动在`装饰器`中定义一个key为`design:paramtypes`，value是依赖项数组的一个`元数据`。
 
 这也是我们为什么在设置`emitDecoratorMetadata: true`后，无需传递参数，便可通过`Reflect.getMetadata('design:paramtypes', UserService)`直接获取到其执行类中的依赖项的原因
 
@@ -352,7 +359,7 @@ const instanceMap = new Map();
 
 function Injectable() {
   return function (_constructor: any) {
-    providers.push(_constructor);
+    providers.push(_constructor); // 将需注入的类添加到providers数组中，区分普通类
     return _constructor;
   };
 }
@@ -423,7 +430,7 @@ function create(target: any) {
   return new target(...args);
 }
 
-// 判断需要注入
+// 判断该类是否通过Injectable注入到了DI系统中
 function hasProvider(dep: any): boolean {
   return providers.includes(dep);
 }
@@ -431,7 +438,7 @@ function hasProvider(dep: any): boolean {
 create(UserService);
 ```
 
-以上是`依赖注入`的简单实现，没有考虑`环形依赖`等诸多复杂场景。感兴趣的可以研究`Angular 依赖注入系统`的实现[injector.ts](https://github.com/angular/angular/blob/master/packages/core/src/di/injector.ts)，这里笔者能力有限，就不多提了。
+以上是`依赖注入`的简单实现，没有考虑`环形依赖`等诸多复杂场景。感兴趣的可以研究`Angular 依赖注入系统`的实现[injector.ts](https://github.com/angular/angular/blob/master/packages/core/src/di/injector.ts)
 
 ## 总结
 
