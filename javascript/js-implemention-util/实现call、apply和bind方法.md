@@ -3,8 +3,10 @@
 ### 1.实现 call 方法
 
 ```js
+// 在node环境中，函数内this指向global；在函数外，this是指向module.exports，如果没声明，则是一个空对象{}
+// 在浏览器环境中，全局环境的this均指向window
 function getGlobalContext() {
-  return this;
+  return this; 
 }
 Function.prototype._call = function (context) {
   if (typeof this !== "function") {
@@ -20,14 +22,14 @@ Function.prototype._call = function (context) {
 };
 
 // 以下为测试demo
-const name = "global";
+const name = "kerwin";
 const obj = {
   name: "obj-name",
 };
 function getName() {
   return this.name;
 }
-console.log(getName()); // global
+console.log(getName()); // 浏览器环境中输出kerwin，node环境中输出undefined
 console.log(getName._call(obj)); // obj-name
 ```
 
@@ -64,7 +66,7 @@ const obj = {
 function getName(a, b) {
   return this.name + a + b;
 }
-console.log(getName(1, 2)); // global12
+console.log(getName(1, 2)); // 浏览器环境中输出 global12，node环境中输出 NaN（因为this.name是undefined）
 console.log(getName._apply(obj, [1, 2])); // obj-name12
 ```
 
@@ -117,21 +119,23 @@ Function.prototype._bind = function (context) {
   // 利用一个临时函数中转，否则直接使用bindFn.prototype = this.prototype时，会导致修改bindFn原型链上的方法，也直接修改了原函数
   // bindFn.prototype = this.prototype;
   tempFn.prototype = this.prototype; // 原型继承
-  bindFn.prototype = new tempFn();
+  bindFn.prototype = new tempFn(); 
   return bindFn;
 };
 
 const obj = {
-  value: 1,
+  name: 'obj-name',
+  age: 'obj-age',
+  value: 'obj-value'
 };
 function getName(name, age) {
   this.name = name;
   this.age = age;
   console.log(this.name); // kerwin
   console.log(this.age); // 12
-  console.log(this.value); // undefined
+  console.log(this.value); // instance
 }
 const fn = getName._bind(obj, "kerwin");
 // fn(13);
-const instance = new fn(12);
+const instance = new fn(12, 'instance');
 ```
