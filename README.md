@@ -78,7 +78,7 @@
 
 ### 深入 JavaScript 函数实现
 
-[call、apply 和 bind 函数的实现](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-deep-learning/%E5%AE%9E%E7%8E%B0call%E3%80%81apply%E5%92%8Cbind%E6%96%B9%E6%B3%95.md)
+[call、apply 和 bind 函数的实现](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0call%E3%80%81apply%E5%92%8Cbind%E6%96%B9%E6%B3%95.md)
 
 [实现 instanceof](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/instanceof%E6%93%8D%E4%BD%9C%E7%AC%A6.md)
 
