@@ -48,11 +48,14 @@ webpack 的构建流程包括`初始化`、`构建阶段`和`生成阶段`。下
 
 编译模块的具体流程如下：
 
-1. 根据 `entry` 对应的 `dependence` 创建对应文件类型的 `module` 对象，调用loader-runner仓库的`runLoaders`，通常是将转译为JS文本。
+1. 根据 `entry` 对应的 `dependence` 创建对应文件类型的 `module` 对象，调用loader-runner仓库的`runLoaders`，通常是将转译为JS文本。比如说对于图片，需要从图像二进制转换成类似于 export default "data:image/png;base64,xxx" 这类 base64 格式或者 export default "http://xxx" 这类 url 格式。
 
 2. 使用 `acorn` 解析生成 `AST 抽象语法树`。
 
 3. 遍历抽象语法树，识别`require/import`等语法对应的AST节点，从中找出该模块依赖的模块，加入到依赖列表中。
+
+在 HarmonyExportDependencyParserPlugin 插件监听 exportImportSpecifier 钩子，解读 JS 文本对应的资源依赖
+调用 module 对象的 addDependency 将依赖对象加入到 module 依赖列表中
 
 4. AST遍历完成后，开始处理模块的依赖`dependence`。重复第一步的操作即可，一直递归下去，直到所有依赖都被解析完毕。
 
@@ -64,7 +67,7 @@ webpack 的构建流程包括`初始化`、`构建阶段`和`生成阶段`。下
 
 ### 生成阶段
 
-在webpack获取完模块内容和模块之间的关系后，便开始了最终资源的生成。该阶段主要围绕`chunks`进行，如下：
+在webpack获取完模块内容和模块之间的关系后，便开始了最终资源的生成。该阶段主要围绕`chunks`进行，如下（图片来源于：[[万字总结] 一文吃透 Webpack 核心原理](https://mp.weixin.qq.com/s/SbJNbSVzSPSKBe2YStn2Zw)）：
 
 ![build](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/webpack/build.png)
 
