@@ -274,6 +274,8 @@ rules: [
 ];
 ```
 
+测试项目地址：https://github.com/kerwin-ly/webpack-demo
+
 ## 参考
 
 [玩转 webpack，使你的打包速度提升 90%](https://juejin.cn/post/6844904071736852487#heading-8)
