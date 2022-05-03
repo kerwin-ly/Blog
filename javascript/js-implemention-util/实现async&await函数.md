@@ -57,7 +57,7 @@ gen.next('test3');
 
 这里的实现其实也很简单，不让用户手动去调`next()`方法，那我在`_async`函数里面自己调就好啦。
 
-上面，我们看到每次执行`gen.next()`其都会返回一个当前状态：`{value: "当前状态yield返回的值", done: true/false}`。其中，`done`就表示是否结束。我们可以直接递归调用`gen.next()`方法，然后通过`done`字段判断是否结束递归。既可实现`Generator`的自动执行了。代码如下：
+上面，我们看到每次执行`gen.next()`其都会返回一个当前状态：`{value: "当前状态yield返回的值", done: true/false}`。其中，`done`就表示是否结束。我们可以直接递归调用`gen.next()`方法，然后通过`done`字段判断是否结束递归。即可实现`Generator`的自动执行了。代码如下：
 
 ```js
 function* myGenerator() {
@@ -133,7 +133,7 @@ function _async(generator) {
 _async(myGenerator);
 ```
 
-## 3. 对比babel编译的async代码
+## 3. 返回一个函数
 
 通过`babel`编译出来的`async`代码如下：
 
@@ -171,14 +171,16 @@ function _asyncToGenerator(fn) {
 }
 ```
 
-我们可以看出，实现逻辑类似。但`async`应该返回的是一个新函数。所以我们这里也做下改造，同时修改对应的调用方式。如下：
+我们可以看出，实现逻辑类似。但`async`应该返回的是一个新函数。所以我们这里也做下改造，同时修改对应的调用方式。
+
+最终代码如下：
 
 ```js
 function _async(fn) {
   // async实际返回的是一个新函数
   return function () {
     return new Promise((resolve, reject) => {
-      const gen = fn.apply(this, arguments);
+      const gen = fn.apply(this, arguments); // 修改调用方式，绑定this
       const _next = function (value) {
         let state;
         // 防止报错，通过try/catch捕获并抛出
