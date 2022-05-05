@@ -8,7 +8,11 @@
 
 [695. 岛屿的最大面积(中等)](https://github.com/kerwin-ly/Blog/blob/master/algorithm/dfs/695.%20%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%9C%80%E5%A4%A7%E9%9D%A2%E7%A7%AF(%E4%B8%AD%E7%AD%89).md)
 
-[463. 岛屿的周长(简单)](https://github.com/kerwin-ly/Blog/blob/master/algorithm/dfs/463.%20%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF(%E4%B8%AD%E7%AD%89).md)
+[463. 岛屿的周长(中等)](https://github.com/kerwin-ly/Blog/blob/master/algorithm/dfs/463.%20%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF(%E4%B8%AD%E7%AD%89).md)
+
+### 其他
+
+[22. 括号生成(中等)](https://github.com/kerwin-ly/Blog/blob/master/algorithm/backtracking/22.%20%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90(%E4%B8%AD%E7%AD%89).md)
 
 ## 总结
 
@@ -42,7 +46,7 @@ function traverse(TreeNode root) {
 
 ![dfs2](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/algorithm/dfs2.jpeg)
 
-所以一个 dfs 的框架代码可以总结如下：
+所以一个针对“岛屿网格”的 dfs 的代码可以简单总结如下（视题目情况而定）：
 
 ```js
 let dfs = function (grid, row, col) {
