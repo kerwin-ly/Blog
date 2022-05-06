@@ -131,6 +131,10 @@ SameSite可以防范CSRF攻击，但也有其缺点。如下：
 
 同样其也有一定的兼容问题，目前仅新版Chrome和Firefox支持。其还不是太成熟，不过也可以作为一种解决方案。
 
+这里附上一张掘金网站的Cookie设置
+
+![safe-cookie](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/broswer/safe-cookie.png)
+
 ## XSS
 
 ### 什么是XSS
@@ -169,13 +173,13 @@ XSS 攻击不同于CSRF攻击，其发生在当前站点，是页面被注入了
 
 * 纯前端渲染：将返回来的数据和HTML分离，由前端渲染静态HTML，在通过拿到服务端返回的数据，通过DOM API更新到页面上
 
-* 使用专门的库（如:Node中的[jsxss](https://github.com/leizongmin/js-xss)）对HTML进行转义
+* 使用专门的库（如:[jsxss](https://github.com/leizongmin/js-xss)）对HTML进行转义
 
 **针对DOM型XSS**
 
 DOM型XSS其实主要是由于网站前端JavaScript不够严谨导致被注入了恶意代码。如在使用`innerHtml`、`outerHtml`或`document.write()`时，一定要小心。
 
-比如用 Vue/React/Angular 技术栈，使用 `v-html/dangerouslySetInnerHTML/DomSanitizer.bypassSecurityTrustHtml` 功能，就在前端 render 阶段避免 innerHTML、outerHTML 的 XSS 隐患。他会把一些认为有风险的脚本过滤掉。比如：<script></script>
+比如用 `Vue`中的`v-html`，`React`中的`dangerouslySetInnerHTML`和`Angular`中的`DomSanitizer.bypassSecurityTrustHtml`功能，就在前端 render 阶段避免 innerHTML、outerHTML 的 XSS 隐患。他会把一些认为有风险的脚本过滤掉。比如：<script></script>
 
 **补充一些其他的防范措施**
 
@@ -190,10 +194,6 @@ DOM型XSS其实主要是由于网站前端JavaScript不够严谨导致被注入�
 * 设置Cookie的`http-only`属性: 禁止 JavaScript 读取某些敏感 Cookie，攻击者完成 XSS 注入后也无法窃取此 Cookie。
 
 * 验证码：防止脚本冒充用户提交危险操作。
-
-最后附上一张掘金前端的Cookie设置
-
-![safe-cookie](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/broswer/safe-cookie.png)
 
 ## 参考链接
 
