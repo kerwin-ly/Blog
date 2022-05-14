@@ -66,7 +66,7 @@ ng update @angular/core
 ```shell
 ng update ng-alain
 ```
-这里遇到了一个错误，如图（todo,暂时没看到影响）
+
 update-ngalain-error.png
 ![update-ngalain-error](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/update-ngalain-error.png)
 

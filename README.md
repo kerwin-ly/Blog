@@ -21,7 +21,7 @@
 [堆](https://github.com/kerwin-ly/Blog/blob/master/data-structure/%E5%A0%86.md)
 
 ### 算法专题
->按数据结构分类
+按数据结构分类：
 
 [数组专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/array/%E6%95%B0%E7%BB%84.md)
 
@@ -35,7 +35,7 @@
 
 [二叉树专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/binary-tree/%E4%BA%8C%E5%8F%89%E6%A0%91.md)
 
->按解题方法分类
+按解题方法分类：
 
 [双指针专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/two-pointer/%E5%8F%8C%E6%8C%87%E9%92%88.md)
 
