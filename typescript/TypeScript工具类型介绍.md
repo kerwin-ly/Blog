@@ -18,13 +18,27 @@ interface User {
   age: number;
 }
 
-function merge(user: User, userAttr: Partial<User>) {
+function merge(user: User, attr: Partial<User>) {
   return Object.assign(user, attr);
 }
 ```
 
 #### Partial 实现
 
+在实现`Partial`前，需要先掌握`keyof`的使用。
+
+`keyof`用于获取指定类型的key，并以联合类型返回。如下所示：
+
+```js
+interface User {
+  name: string;
+  age: number;
+}
+
+keyof User; // 输出：'name' | 'age'
+```
+
+了解了`keyof`，`Partial`的实现就简单了。如下：
 ```js
 // 遍历类型T，将每个属性的key设置为可选
 type Partial<T> = {
@@ -112,12 +126,14 @@ interface User {
   age: number;
 }
 
-const data: Record<number, Omit<User, "id">> = {
-  1: {
+const data: Record<string, User> = {
+  '1': {
+    id: '1',
     name: "kerwin",
     age: 27,
   },
-  2: {
+  '2': {
+    id: '2',
     name: "bob",
     age: 28,
   },
@@ -127,24 +143,35 @@ const data: Record<number, Omit<User, "id">> = {
 key 也可以是一个联合类型
 
 ```js
-interface PageInfo {
-  title: string;
+interface User {
+  id: string;
+  name: string;
+  age: number;
 }
 
-type Page = "home" | "about" | "contact";
+type Keys = 1 | 2;
 
-const x: Record<Page, PageInfo> = {
-  about: { title: "about" },
-  contact: { title: "contact" },
-  home: { title: "home" },
+const data: _Record<Keys, User> = {
+  1: {
+    id: '1',
+    name: 'kerwin',
+    age: 27,
+  },
+  2: {
+    id: '2',
+    name: 'bob',
+    age: 28,
+  },
 };
+
 ```
 
 #### Record 实现
 
 ```js
-// 这里的keyof any 等于 string | number | 'Symbol'
-type IRecord<K extends keyof any, T> = {
+// 这里的keyof any 等于 string | number | symbol
+// K extends C 表示 类型K一定包含于类型C
+type Record<K extends keyof any, T> = {
   [P in K]: T
 }
 ```
@@ -194,9 +221,9 @@ interface User {
   age: number;
 }
 
-const data: Omit<User, "id"> = {
-  name: "kerwin",
-  age: 27,
+type Keys =  "id" | "name";
+const data: Omit<User, Keys> = {
+  age: 27
 };
 ```
 
@@ -205,9 +232,11 @@ const data: Omit<User, "id"> = {
 `Omit`的实现使用的`Pick`和`Exclude`工具类型。其对应的实现方式在各自工具函数的介绍中有讲。
 
 ```js
-// 先通过Exclude将联合类型中不需要的属性排除 ，得到过滤后的类型key
-// 然后过滤后的联合类型key 传入到Pick中，即可实现Omit
-type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>
+// 先通过Exclude将联合类型中不需要的属性排除 ，得到过滤后的联合类型keys
+// 然后遍历过滤后的联合类型keys，获取value
+type Omit<T, K extends keyof any> = {
+  [P in Exclude<keyof T, K>]: T[P];
+}
 ```
 
 ### Exclude<Type,Union>
