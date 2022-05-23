@@ -52,6 +52,8 @@ true == "2"; // false，先将true转换为数值类型为1，然后比较 1 == 
 "1,2,3" == [1, 2, 3]; // true，先调用valueOf，将数组对象转换为基本类型，得到结果'1,2,3'。'1,2,3' == '1,2,3'
 ```
 
+### valueOf 和 toString
+
 这里补充介绍下`valueOf`和`toString()`：
 
 `valueOf`和`toString()`方法都是在操作符中一边是对象时，自动触发的。
@@ -91,6 +93,8 @@ console.log(d.toString()); // 'function(){ console.log('fn') }'
 上述代码中，我们可以看到。`valueOf()`在转换数组/对象时，返回的仍是原有对象。
 
 而`toString()`在转换数组时，会将其转换为字符串，类似`join(',')`方法。在转换对象属性时，会将其转换为`[object Object]`字符串。
+
+### 综合题分析
 
 最后我们再来看一道综合的面试题：
 
