@@ -40,9 +40,9 @@ console.log(2);
 接下来，我们编写代码实现：
 
 ```js
-const PENDING = 'PENDING';
-const FULFILLED = 'FULFILLED';
-const REJECTED = 'REJECTED';
+const PENDING = "PENDING";
+const FULFILLED = "FULFILLED";
+const REJECTED = "REJECTED";
 class MyPromise {
   // promise实例的函数
   constructor(executor) {
@@ -94,8 +94,8 @@ class MyPromise {
 }
 
 const p1 = new MyPromise((resolve, reject) => {
-  console.log('立刻触发该函数 p1');
-  resolve('成功');
+  console.log("立刻触发该函数 p1");
+  resolve("成功");
 });
 
 p1.then(
@@ -108,8 +108,8 @@ p1.then(
 );
 
 const p2 = new MyPromise((resolve, reject) => {
-  console.log('立刻触发该函数 p2');
-  reject('失败');
+  console.log("立刻触发该函数 p2");
+  reject("失败");
 });
 
 p2.then(
@@ -133,9 +133,9 @@ p2.then(
 
 ```js
 const p1 = new MyPromise((resolve, reject) => {
-  console.log('立刻触发该函数 p1');
+  console.log("立刻触发该函数 p1");
   setTimeout(() => {
-    resolve('异步成功');
+    resolve("异步成功");
   }, 1000);
 });
 
@@ -163,9 +163,9 @@ p1.then(
 在 Promise 中实现时，即：`then收集依赖 -> 异步触发resolve通知 -> 取出依赖并执行`
 
 ```js
-const PENDING = 'PENDING';
-const FULFILLED = 'FULFILLED';
-const REJECTED = 'REJECTED';
+const PENDING = "PENDING";
+const FULFILLED = "FULFILLED";
+const REJECTED = "REJECTED";
 class MyPromise {
   constructor(executor) {
     this.status = PENDING;
@@ -220,10 +220,10 @@ class MyPromise {
 }
 
 const p = new MyPromise((resolve, reject) => {
-  console.log('立刻触发该函数 p1');
+  console.log("立刻触发该函数 p1");
   setTimeout(() => {
     // 2.异步触发resolve通知观察者
-    resolve('异步-成功');
+    resolve("异步-成功");
   }, 1000);
 });
 
@@ -285,9 +285,9 @@ p1.then((res) => {
 具体实现代码如下：
 
 ```js
-const PENDING = 'PENDING';
-const FULFILLED = 'FULFILLED';
-const REJECTED = 'REJECTED';
+const PENDING = "PENDING";
+const FULFILLED = "FULFILLED";
+const REJECTED = "REJECTED";
 class MyPromise {
   constructor(executor) {
     this.status = PENDING;
@@ -324,9 +324,9 @@ class MyPromise {
   then(onFulFilled, onRejected) {
     // 处理onFulFilled和onRejected未传值的情况
     onFulFilled =
-      typeof onFulFilled === 'function' ? onFulFilled : (value) => value;
+      typeof onFulFilled === "function" ? onFulFilled : (value) => value;
     onRejected =
-      typeof onRejected === 'function'
+      typeof onRejected === "function"
         ? onRejected
         : (reason) => {
             throw new Error(reason instanceof Error ? reason.message : reason);
@@ -569,9 +569,9 @@ MyPromise.race([p2, p3, p4]).then((res) => {
 ### 完整代码
 
 ```js
-const PENDING = 'PENDING';
-const FULFILLED = 'FULFILLED';
-const REJECTED = 'REJECTED';
+const PENDING = "PENDING";
+const FULFILLED = "FULFILLED";
+const REJECTED = "REJECTED";
 class MyPromise {
   constructor(executor) {
     this.status = PENDING;
@@ -612,9 +612,9 @@ class MyPromise {
   then(onFulFilled, onRejected) {
     // 处理onFulFilled和onRejected未传值的情况
     onFulFilled =
-      typeof onFulFilled === 'function' ? onFulFilled : (value) => value;
+      typeof onFulFilled === "function" ? onFulFilled : (value) => value;
     onRejected =
-      typeof onRejected === 'function'
+      typeof onRejected === "function"
         ? onRejected
         : (reason) => {
             throw new Error(reason instanceof Error ? reason.message : reason);
@@ -689,7 +689,49 @@ class MyPromise {
     return new MyPromise((resolve, _reject) => _reject(err));
   }
 }
+```
 
+### 实现并发限制的 Promise.all()
+
+由于在`new Promise()`时候，实际已经执行了异步任务。所以我们要实现并发控制，需要在函数内部去实现异步方法。
+
+```js
+/*
+ * limit: 并发限制数量
+ * array: 参数数组
+ * iteratorFn: 回调方法
+ */
+async function asyncAll(limit, array, iteratorFn) {
+  let executing = []; // 正在执行的promise任务
+  let res = []; // promise任务
+
+  for (let [index, value] of array.entries()) {
+    let p = Promise.resolve(iteratorFn(value)); // 将方法转换为Promise
+    res.push(p); // 保存promise任务
+    executing.push(p); // 先将当前promise任务push到executing中。
+    p.then(() => executing.splice(index, 1)); // 当promise任务执行完成后，从executing中删除该任务
+
+    if (executing.length >= limit) {
+      await Promise.race(executing); // 等待executing中任一任务执行完成，继续执行下一个循环。继续往executing添加任务
+    }
+  }
+  return Promise.all(res);
+}
+
+const timeout = (i) => {
+  console.log("开始", i);
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(i);
+      console.log("结束", i);
+    }, i)
+  );
+};
+
+(async () => {
+  const res = await asyncAll(2, [1000, 5000, 3000, 2000], timeout);
+  console.log(res);
+})();
 ```
 
 ## 参考
@@ -699,3 +741,5 @@ class MyPromise {
 [9k 字 | Promise/async/Generator 实现原理解析](https://juejin.cn/post/6844904096525189128#heading-14)
 
 [面试官：“你能手写一个 Promise 吗”](https://zhuanlan.zhihu.com/p/183801144)
+
+[Promise.all() 并发限制](https://liangchaofei.github.io/2020/02/19/promise-all-bing-fa-xian-zhi/)
