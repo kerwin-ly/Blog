@@ -58,7 +58,7 @@
 
 #### 1. 开发工具
 
-维护同一个项目，开发同学的编码风格最好保持一致。最好统一编辑器，如: `vscode`，安装对应的`lint`工具。如`Prettier`之类的去自动 format 代码。
+维护同一个项目，开发同学的编码风格必须保持一致。统一编辑器，如: `vscode`，安装对应的`lint`工具。如`Prettier`之类的去自动 format 代码。
 
 #### 2.代码规范文档
 
@@ -76,3 +76,10 @@
 `codereview`是保持项目代码质量的关键。前期尤其是新同学进入的时候，建议多提commit给其主要开发人员review（每次commit保持更改不要过多）。同时，在其他开发人员提代码review时，最好在中间流程中也添加新同学。让新同学能快速学习，借鉴风格。
 
 ## 测试
+TODO
+
+## 参考
+
+[从零到一建立一套完整的前端规范](https://juejin.cn/post/7085257325165936648)
+
+[clean-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
