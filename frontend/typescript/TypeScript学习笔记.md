@@ -410,7 +410,7 @@ handleEvent(document.getElementById("hello"), "scroll");
 
 ### 8. 类
 
-> ES6 中类的概念请参考:[类的定义](https://github.com/kerwin-ly/Blog/blob/master/javascript/%E7%B1%BB%E5%92%8C%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.md)
+> ES6 中类的概念请参考:[类的定义](https://github.com/kerwin-ly/Blog/blob/master/frontend/javascript/%E7%B1%BB%E5%92%8C%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF.md)
 
 #### 8.1 访问修饰符 public privete protected
 
@@ -651,7 +651,7 @@ T extends U ? X : Y
 
 #### 9.4 泛型工具类型
 
-参考笔记：[TypeScript工具类型介绍](https://github.com/kerwin-ly/Blog/blob/master/typescript/TypeScript%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D.md)
+参考笔记：[TypeScript工具类型介绍](https://github.com/kerwin-ly/Blog/blob/master/frontend/typescript/TypeScript%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D.md)
 
 ### 10. 装饰器
 

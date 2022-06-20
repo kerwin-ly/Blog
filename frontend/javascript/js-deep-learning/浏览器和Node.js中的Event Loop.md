@@ -137,7 +137,7 @@ settimeout
 
 4. 跳到 new Promise 这里，直接执行，打印 promise1，下面遇到 .then()，它是微任务，放到微任务列表等待执行
 
-5. 最后一行直接打印 script end，现在同步代码执行完了，开始执行微任务，即 await 下面的代码，打印 async1 end（如果不清楚，可以看下[async/await的实现](https://github.com/kerwin-ly/Blog/blob/master/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0async%26await%E5%87%BD%E6%95%B0.md)）
+5. 最后一行直接打印 script end，现在同步代码执行完了，开始执行微任务，即 await 下面的代码，打印 async1 end（如果不清楚，可以看下[async/await的实现](https://github.com/kerwin-ly/Blog/blob/master/frontend/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0async%26await%E5%87%BD%E6%95%B0.md)）
 
 6. 继续执行下一个微任务，即执行 then 的回调，打印 promise2
 
