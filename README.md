@@ -180,17 +180,17 @@
 
 ### Node
 
-[Node 规避回调地狱](https://github.com/kerwin-ly/Blog/blob/master/node/fixCallbackHell.md)
+[Node 规避回调地狱](https://github.com/kerwin-ly/Blog/blob/master/backend/node/fixCallbackHell.md)
 
 [在 vscode 中调试基于 typescript 的 node 项目](https://github.com/kerwin-ly/Blog/tree/master/demo/debug-ts)
 
 ### Python
 
-[Python 多线程和多进程](https://github.com/kerwin-ly/Blog/blob/master/python/thread.md)
+[Python 多线程和多进程](https://github.com/kerwin-ly/Blog/blob/master/backend/python/thread.md)
 
 ### 数据库
 
-[Mysql 基本命令](https://github.com/kerwin-ly/Blog/blob/master/mysql/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4.md)
+[Mysql 基本命令](https://github.com/kerwin-ly/Blog/blob/master/backend/mysql/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4.md)
 
 ### Docker
 
