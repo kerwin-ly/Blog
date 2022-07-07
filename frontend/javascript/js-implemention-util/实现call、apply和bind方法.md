@@ -128,14 +128,15 @@ const obj = {
   age: 'obj-age',
   value: 'obj-value'
 };
-function getName(name, age) {
-  this.name = name;
-  this.age = age;
+function getName(name, age, value) {
+  this.name = this.name ?? name;
+  this.age = this.age ?? age;
+  this.value = this.value ?? value;
+  // 使用new操作符实例化后，this指向该实例instance。而不是obj
   console.log(this.name); // kerwin
   console.log(this.age); // 12
   console.log(this.value); // instance
 }
 const fn = getName._bind(obj, "kerwin");
-// fn(13);
 const instance = new fn(12, 'instance');
 ```
