@@ -48,7 +48,7 @@ webpack 的构建流程包括`初始化`、`构建阶段`和`生成阶段`。下
 
 编译模块的具体流程如下：
 
-1. 根据 `entry` 对应的 `dependence` 创建对应文件类型的 `module` 对象，调用loader-runner仓库的`runLoaders`，通常是将转译为JS文本。比如说对于图片，需要从图像二进制转换成类似于 export default "data:image/png;base64,xxx" 这类 base64 格式或者 export default "http://xxx" 这类 url 格式。
+1. 根据 `entry` 对应的 `dependence` 创建对应文件类型的 `module` 对象，调用loader-runner仓库的`runLoaders`，通常是将转译为JS文本。比如说对于图片，需要从图像二进制转换成类似于 `export default "data:image/png;base64,xxx"` 这类 base64 格式或者 `export default "http://xxx"` 这类 url 格式。
 
 2. 使用 `acorn` 解析生成 `AST 抽象语法树`。
 
