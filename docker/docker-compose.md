@@ -69,7 +69,11 @@ docker-compose run ubuntu ls -d
 #### 3.3 日志
 
 ```bash
+# 查看所有容器日志
 docker-compose logs
+
+# 查看指定容器日志的最后10条
+docker-compose logs --tail 10 [service-name]
 ```
 
 #### 3.4 项目中的所有容器
