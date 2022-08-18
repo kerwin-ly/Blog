@@ -1,7 +1,8 @@
 # Docker Compose
-[Docker 三剑客之 Docker Compose](https://www.cnblogs.com/xishuai/p/docker-compose.html) 
 
-> Docker Compose 负责实现对 Docker 容器集群的快速编排。通过一个配置文件来管理多个 Docker 容器，在配置文件中，所有的容器通过 services 来定义，然后使用 docker-compose 脚本来启动，停止和重启应用，和应用中的服务以及所有依赖服务的容器，非常适合组合使用多个容器进行开发的场景。一句话来说，**Docker Compose可以通过一个docker-compose.yml文件来管理项目（项目由多个容器组成），而以前，我们必须通过编写脚本来完成这个操作**就是Docker Compose 的两个重要概念
+[Docker 三剑客之 Docker Compose](https://www.cnblogs.com/xishuai/p/docker-compose.html)
+
+> Docker Compose 负责实现对 Docker 容器集群的快速编排。通过一个配置文件来管理多个 Docker 容器，在配置文件中，所有的容器通过 services 来定义，然后使用 docker-compose 脚本来启动，停止和重启应用，和应用中的服务以及所有依赖服务的容器，非常适合组合使用多个容器进行开发的场景。一句话来说，**Docker Compose 可以通过一个 docker-compose.yml 文件来管理项目（项目由多个容器组成），而以前，我们必须通过编写脚本来完成这个操作**就是 Docker Compose 的两个重要概念
 
 - **服务 (service)**：一个应用容器，实际上可以运行多个相同镜像的实例。
 - **项目 (project)**：由一组关联的应用容器组成的一个完整业务单元。
@@ -45,6 +46,7 @@ services:
 ### 3. 常用命令
 
 #### 3.0 构建项目中的镜像
+
 ```bash
 # --force-rm：删除构建过程中的临时容器；--no-cache：不使用缓存构建；--pull：获取最新版本的镜像
 docker-compose build
@@ -72,8 +74,17 @@ docker-compose run ubuntu ls -d
 # 查看所有容器日志
 docker-compose logs
 
-# 查看指定容器日志的最后10条
+# 查看指定容器的日志
+docker-compose logs [containerName]
+
+# 查看日志的最新10条 --tail
 docker-compose logs --tail 10 [service-name]
+
+# 查看实时日志 -f
+docker-compose logs -f --tail 10 [service-name]
+
+# 日志带上时间戳 -t
+docker-compose logs -f -t --tail 10 [service-name]
 ```
 
 #### 3.4 项目中的所有容器
