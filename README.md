@@ -1,8 +1,6 @@
 # Blog
 
-## 数据结构 && 算法
-
-### 常见的数据结构
+### 数据结构
 
 [数组](https://github.com/kerwin-ly/Blog/blob/master/data-structure/%E6%95%B0%E7%BB%84.md)
 
@@ -50,19 +48,17 @@
 
 [动态规划算法专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/dynamic-programming/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95.md)
 
-## 计算机网网络
+### 计算机网网络
 
-[《计算机网络自顶向下方法 第七版》读书笔记](https://github.com/kerwin-ly/Blog/blob/master/computer-netwroking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md)
+[《计算机网络自顶向下方法 第七版》](https://github.com/kerwin-ly/Blog/blob/master/computer-netwroking/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0.md)
 
 [从输入 url 到页面显示的过程](https://github.com/kerwin-ly/Blog/blob/master/computer-netwroking/%E4%BB%8E%E8%BE%93%E5%85%A5url%E5%88%B0%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E7%9A%84%E8%BF%87%E7%A8%8B.md)
 
 [从 HTTP1.0 到 3.0 的版本变迁](https://github.com/kerwin-ly/Blog/blob/master/computer-netwroking/%E4%BB%8EHTTP1.0%E5%88%B03.0%E7%9A%84%E7%89%88%E6%9C%AC%E5%8F%98%E8%BF%81.md)
 
-## 浏览器
+### 浏览器
 
 [CSRF 和 XSS 攻击原理](https://github.com/kerwin-ly/Blog/blob/master/broswer/CSRF%E5%92%8CXSS%E6%94%BB%E5%87%BB%E5%8E%9F%E7%90%86.md)
-
-## 前端
 
 ### 深入 JavaScript 原理
 
@@ -95,8 +91,6 @@
 [实现 async/await 函数](https://github.com/kerwin-ly/Blog/blob/master/frontend/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0async%26await%E5%87%BD%E6%95%B0.md)
 
 [实现 EventEmitter](https://github.com/kerwin-ly/Blog/blob/master/frontend/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0EventEmitter.md)
-
-### JavaScript 工具函数
 
 [实现函数柯里化 curry](https://github.com/kerwin-ly/Blog/blob/master/frontend/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96curry.md)
 
@@ -132,7 +126,7 @@
 
 [TypeScript 工具类型的使用&实现](https://github.com/kerwin-ly/Blog/blob/master/frontend/typescript/TypeScript%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D.md)
 
-### Angular
+### 前端框架
 
 [Angular 编码规范](https://angular.cn/guide/styleguide)
 
@@ -150,13 +144,9 @@
 
 [Angular 实现路由后退并携带参数](https://stackblitz.com/edit/angular-ivy-vn3x5j?file=src%2Fapp%2Fapp.component.ts)
 
-### Vue2
-
 [Vue1.x 升级到 2.x](https://github.com/kerwin-ly/Blog/blob/master/frontend/vue/upgrade.md)
 
-[Vue2.0 踩坑笔记](https://github.com/kerwin-ly/Blog/blob/master/frontend/vue/note.md)
-
-### React
+[Vue2.0 开发心得 && 技巧总结](https://github.com/kerwin-ly/Blog/blob/master/frontend/vue/note.md)
 
 [React Hooks 学习笔记](https://github.com/kerwin-ly/Blog/blob/master/frontend/react/react%20hooks%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
 
@@ -174,13 +164,19 @@
 
 [Cordova 踩坑记录](https://github.com/kerwin-ly/Blog/blob/master/frontend/cordova/note.md)
 
-### Style
+### 重构 && 设计
 
-[sass 笔记](https://github.com/kerwin1/Blog/blob/master/frontend/style/sass.md)
+[重构：改善既有代码的设计(第 2 版)](todo)
 
-[less 笔记](https://github.com/kerwin1/Blog/blob/master/frontend/style/less.md)
+[如何规范的维护一个项目](https://github.com/kerwin-ly/Blog/blob/master/design/%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%E7%9A%84%E7%BB%B4%E6%8A%A4%E9%A1%B9%E7%9B%AE.md)
 
-## 服务端
+[HTML && CSS 编码规范](https://github.com/kerwin1/Blog/blob/master/design/HTML%20%26%26%20CSS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
+
+[JS 编码规范](https://github.com/kerwin1/Blog/blob/master/design/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
+
+### 测试
+
+[Jest 实践指南](TODO)
 
 ### Node
 
@@ -208,8 +204,6 @@
 
 [CI/CD 持续集成](https://github.com/kerwin-ly/Blog/blob/master/docker/CICD.md)
 
-## 最佳实践
-
 ### Git
 
 [工作中常用的一些 Git 命令](https://github.com/kerwin-ly/Blog/blob/master/git/Git%E6%8A%80%E5%B7%A7%E7%AF%87.md)
@@ -219,11 +213,3 @@
 [Git 提交规范](https://github.com/kerwin-ly/Blog/blob/master/git/Git%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83.md)
 
 [Git 异常处理措施](https://juejin.im/post/5edcf3a36fb9a047fa04fbc3)
-
-### 编码规范
-
-[如何规范的维护一个项目](https://github.com/kerwin-ly/Blog/blob/master/common/%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%E7%9A%84%E7%BB%B4%E6%8A%A4%E9%A1%B9%E7%9B%AE.md)
-
-[HTML && CSS 编码规范](https://github.com/kerwin1/Blog/blob/master/common/HTML%20%26%26%20CSS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
-
-[JS 编码规范](https://github.com/kerwin1/Blog/blob/master/common/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
