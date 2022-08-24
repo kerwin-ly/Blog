@@ -41,6 +41,8 @@ module.exports = {
   coverageDirectory: "coverage",
 
   coverageProvider: "v8",
+
+  // 测试环境，jsdom这个库用 JS 实现了一套 Node.js 环境下的 Web 标准 API。便于我们在jest里直接使用如localStorage等全局api
   testEnvironment: "jsdom",
 };
 ```
@@ -129,7 +131,7 @@ describe("sum", () => {
 
 ## 二、项目实践
 
-### 1. 配置别名
+### 配置别名
 
 在项目中，我们通常会使用路径别名`alias`来避免相对路径的写法。如：
 
@@ -207,4 +209,29 @@ import sum from "../../src/utils/sum";
 
 // 配置moduleDirectories后，引用方式
 import sum from "@/utils/sum";
+```
+
+### setupFilesAfterEnv && setupFiles
+
+在执行某些测试文件前，需要一些“前置条件”，比如：启动一个 `mock server`。我们借助`setupFilesAfterEnv`和`setupFiles`属性来实现
+
+- `setupFiles` 是在 引入测试环境（比如`jsdom`）之后 执行的代码
+
+- `setupFilesAfterEnv` 则是在 安装测试框架之后 执行的代码
+
+他们的执行顺序如下：
+
+**初始化测试环境 => setupFiles => 初始化测试框架(Jest) => setupFilesAfterEnv => 执行测试文件(xxx.jest.ts)**
+
+实际应用场景：
+
+我们可以在 `setupFiles`中添加对测试环境的补充，比如：`Mock` 全局变量 abcd 等。
+
+在 `setupFilesAfterEnv` 可以对测试框架添加插件或者补充，比如：引入和配置 `Jest/Jasmine`（Jest 内部使用了 Jasmine） 插件。
+
+```js
+// jest.config.js
+{
+  setupFiles: ["./tests/jest-setup.ts"],
+}
 ```
