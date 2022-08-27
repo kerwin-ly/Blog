@@ -174,9 +174,7 @@
 
 [JS 编码规范](https://github.com/kerwin1/Blog/blob/master/design/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
 
-### 测试
-
-[Jest 实践指南](TODO)
+[Jest 实践指南](https://github.com/kerwin-ly/Blog/blob/master/frontend/test/Jest%20%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97.md)
 
 ### Node
 

@@ -15,7 +15,7 @@ npm init
 ### 2. 安装依赖
 
 ```shell
-pnpm add -D typescript@^4.6.3 jest@27.5.1 ts-jest@27.1.4 @types/jest@27.4.1
+pnpm install -D typescript@^4.6.3 jest@27.5.1 ts-jest@27.1.4 @types/jest@27.4.1
 ```
 
 注意： **jest 的版本和 ts-jest 的大版本需要一致，如：都是`v27`**
@@ -317,4 +317,188 @@ window.location.href = "https://www.test.com?name=kerwin&id=123";
 
 // 引入jest-location-mock的写法，修改成功
 window.location.assign("https://www.test.com?name=kerwin&id=123");
+```
+
+### 组件测试
+
+在平时开发中，我们遇到最多的应该是关于组件的测试。下面我们通过一个例子来实现：
+
+需求：实现一个 AuthButton，通过 `getLoginState()`调用 Api，获取当前用户的身份并在按钮中展示用户身份。
+
+业务功能实现：
+
+安装`axios`依赖
+
+```shell
+pnpm install -D axios@0.26.1
+```
+
+新建 `src/components/AuthButton/index.tsx`
+
+```js
+// src/components/AuthButton/index.tsx
+import React, { FC, useEffect, useState } from "react";
+import { Button, ButtonProps, message } from "antd";
+import classnames from "classnames";
+import styles from "./styles.module.less";
+import { getUserRole, UserRoleType } from "@/apis/user";
+
+type Props = ButtonProps;
+
+// 身份文案 Mapper
+const mapper: Record<UserRoleType, string> = {
+  user: "普通用户",
+  admin: "管理员",
+};
+
+const AuthButton: FC<Props> = (props) => {
+  const { children, className, ...restProps } = props;
+
+  const [userType, setUserType] = useState<UserRoleType>();
+
+  // 获取用户身份并设置
+  const getLoginState = async () => {
+    const res = await getUserRole();
+    setUserType(res.data.userType);
+  };
+
+  useEffect(() => {
+    getLoginState().catch((e) => message.error(e.message));
+  }, []);
+
+  return (
+    <Button {...restProps} className={classnames(className, styles.authButton)}>
+      {mapper[userType!] || ""}
+      {children}
+    </Button>
+  );
+};
+
+export default AuthButton;
+```
+
+新建`src/components/AuthButton/style.module.less`
+
+```less
+// src/components/AuthButton/style.module.less
+.authButton {
+  border: 1px solid red;
+}
+```
+
+新建`src/apis/user.ts`
+
+```js
+// src/apis/user.ts
+import axios from "axios";
+
+// 用户角色身份
+export type UserRoleType = "user" | "admin";
+
+// 返回
+export interface GetUserRoleRes {
+  userType: UserRoleType;
+}
+
+// 获取用户角色身份
+export const getUserRole = async () => {
+  return axios.get < GetUserRoleRes > "https://mysite.com/api/role";
+};
+```
+
+修改`src/App.tsx`
+
+```ts
+// src/App.tsx
+import React from "react";
+import { Button } from "antd";
+import AuthButton from "./components/AuthButton";
+
+const App = () => {
+  return (
+    <div>
+      <section>
+        <AuthButton>登录</AuthButton>
+      </section>
+    </div>
+  );
+};
+
+export default App;
+```
+
+新建全局类型声明文件 `src/types/global.d.ts`，添加 `.less` 文件的类型定义，防止在 `tsx` 中引入 `less` 报错
+
+```ts
+// src/types/global.d.ts
+declare module "*.less" {
+  const content: any;
+  export default content;
+}
+```
+
+业务功能实现后，我们准备编写测试文件。
+
+首先安装依赖
+
+```shell
+pnpm install -D @testing-library/react@12.1.4 @testing-library/jest-dom@5.16.4
+```
+
+- [testing-library/react](https://github.com/testing-library/react-testing-library): 针对 `React` 的测试库，使得我们可以对 tsx 文件中的 React DOM 进行测试
+
+- [testing-library/jest-dom](https://github.com/testing-library/jest-dom): 提供关于 `DOM` 的 Matcher API。如判断某个`DOM`是否在`document`中
+
+使用：
+
+`tests/jest-setup.ts` 里引入该库：
+
+```ts
+// tests/jest-setup.ts
+import "@testing-library/jest-dom";
+// ...
+```
+
+同时，要在 `tsconfig.json` 里引入这个库的类型声明：
+
+```json
+{
+  "compilerOptions": {
+    "types": ["node", "jest", "@testing-library/jest-dom"]
+  }
+}
+```
+
+- [jest-transform-stub](https://github.com/eddyerburgh/jest-transform-stub): 对非 JS 静态资源做转译。`Jest` 本身只负责测试，不会转译任何内容，所以当我们一直用 tsc 来转译 `TypeScript`。但由于 tsc 看不懂引入的 .less，导致了 Unexpected Token 报错。所以引入该库，得以让我们在测试的 ts 文件中引入静态资源文件。
+
+使用方式：
+
+在 `jest.config.js` 里添加转译配置
+
+```js
+// jest.config.js
+module.exports = {
+  // ...
+  transform: {
+    ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$":
+      "jest-transform-stub",
+  },
+};
+```
+
+新建`tests/components/AuthButton/simple.test.tsx`文件，对其功能进行测试
+
+```ts
+// tests/components/AuthButton/simple.test.tsx
+import { render, screen } from "@testing-library/react";
+import AuthButton from "@/components/AuthButton";
+import React from "react";
+
+describe("AuthButton", () => {
+  it("可以正常展示", () => {
+    render(<AuthButton>登录</AuthButton>);
+
+    expect(screen.getByText("登录")).toBeInTheDocument();
+  });
+});
 ```
