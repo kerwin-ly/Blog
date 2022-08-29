@@ -442,7 +442,7 @@ declare module "*.less" {
 首先安装依赖
 
 ```shell
-pnpm install -D @testing-library/react@12.1.4 @testing-library/jest-dom@5.16.4
+pnpm install -D @testing-library/react@12.1.4 @testing-library/jest-dom@5.16.4 @types/testing-library__jest-dom
 ```
 
 - [testing-library/react](https://github.com/testing-library/react-testing-library): 针对 `React` 的测试库，使得我们可以对 tsx 文件中的 React DOM 进行测试
