@@ -158,6 +158,22 @@ import sum from "@/utils/sum";
 }
 ```
 
+如果使用`webpack`编译打包，还需要配置`webpack.config.js`：
+
+```js
+// webpack.config.js
+module.exports = {
+  ...
+  resolve: {
+    ...,
+    // 设置别名
+    alias: {
+      "@": path.join(__dirname, "src/"),
+    },
+  },
+};
+```
+
 而在 Jest 文件中，我们还需要在`jest.config.js`中进行配置。下面介绍`moduleDirectories`和`moduleNameMapper`两个属性，其都可以达到`alias`的效果。
 
 - 方法一：配置`moduleDirectories`
@@ -319,11 +335,11 @@ window.location.href = "https://www.test.com?name=kerwin&id=123";
 window.location.assign("https://www.test.com?name=kerwin&id=123");
 ```
 
-### 组件测试
+### 业务组件测试
 
 在平时开发中，我们遇到最多的应该是关于组件的测试。下面我们通过一个例子来实现：
 
-需求：实现一个 AuthButton，通过 `getLoginState()`调用 Api，获取当前用户的身份并在按钮中展示用户身份。
+需求：实现一个 `AuthButton`组件，点击该组件，调用 Api，获取当前用户的身份并展示在按钮上。
 
 业务功能实现：
 
@@ -445,6 +461,10 @@ declare module "*.less" {
 pnpm install -D @testing-library/react@12.1.4 @testing-library/jest-dom@5.16.4 @types/testing-library__jest-dom
 ```
 
+::: warning
+如果你出现了使用的是`pnpm`管理安装依赖，那么必须安装`@types/testing-library__jest-dom`类型文件，因为`pnpm`中找不到该文件。而如果使用`npm`或者`yarn`则无需安装`@types/testing-library__jest-dom`文件。
+:::
+
 - [testing-library/react](https://github.com/testing-library/react-testing-library): 针对 `React` 的测试库，使得我们可以对 tsx 文件中的 React DOM 进行测试
 
 - [testing-library/jest-dom](https://github.com/testing-library/jest-dom): 提供关于 `DOM` 的 Matcher API。如判断某个`DOM`是否在`document`中
@@ -486,7 +506,7 @@ module.exports = {
 };
 ```
 
-新建`tests/components/AuthButton/simple.test.tsx`文件，对其功能进行测试
+新建`tests/components/AuthButton/simple.test.tsx`文件，对`AuthButton`组件测试：
 
 ```ts
 // tests/components/AuthButton/simple.test.tsx
@@ -502,3 +522,109 @@ describe("AuthButton", () => {
   });
 });
 ```
+
+上面，我们仅对`AuthButton`的渲染进行了测试，由于数据是从接口中获取，还需要添加对`HTTP`接口进行`Mock`。
+
+**注意**：这里我们并不对`axios`或`getUserRole()`进行测试，因为这样会让测试变得十分冗余。**过度测试代码细节**并不是我们想要的。我们只通过**真实用户（开发者 或 系统的使用者）**的角度来编写测试代码即可。
+
+该场景中，`AuthButton`明显是由**系统使用者**来触发的。他并不关心我们的接口是通过`axios`还是`fetch`去请求的。只要点击该按钮，能显示正确的用户类型即可。所以，我们只需要**Mock HTTP**。
+
+通过[msw](https://github.com/mswjs/msw)，我们可以对指定接口进行拦截并`Mock`数据。类似`mock.js`。
+
+安装依赖
+
+```shell
+pnpm install -D msw@0.39.2
+```
+
+先在 `tests/mockServer/handlers.ts` 里添加 `Http` 请求的 `Mock Handler`：
+
+```js
+import { rest } from "msw";
+
+const handlers = [
+  rest.get("https://mysite.com/api/role", async (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        userType: "user",
+      })
+    );
+  }),
+];
+
+export default handlers;
+```
+
+然后在 `tests/mockServer/server.ts` 里使用这些 `handlers` 创建 `Mock Server` 并导出它：
+
+```ts
+import { setupServer } from "msw/node";
+import handlers from "./handlers";
+
+const server = setupServer(...handlers);
+
+export default server;
+```
+
+在`tests/jest-setup.ts` 里使用 `Mock Server`：
+
+```ts
+import server from "./mockServer/server";
+
+beforeAll(() => {
+  server.listen();
+});
+
+afterEach(() => {
+  server.resetHandlers();
+});
+
+afterAll(() => {
+  server.close();
+});
+```
+
+新建`tests/components/AuthButton/mockHttp.test.tsx`，通过`server.use()`指定拦截某接口请求
+
+```ts
+import server from "../../mockServer/server";
+import { rest } from "msw";
+import { render, screen } from "@testing-library/react";
+import AuthButton from "@/components/AuthButton";
+import React from "react";
+import { UserRoleType } from "@/apis/user";
+
+// 初始化函数
+const setup = (userType: UserRoleType) => {
+  server.use(
+    rest.get("https://mysite.com/api/role", async (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json({ userType }));
+    })
+  );
+};
+
+describe("AuthButton Mock Http 请求", () => {
+  it("可以正确展示普通用户按钮内容", async () => {
+    setup("user");
+
+    render(<AuthButton>你好</AuthButton>);
+
+    expect(await screen.findByText("普通用户你好")).toBeInTheDocument();
+  });
+
+  it("可以正确展示管理员按钮内容", async () => {
+    setup("admin");
+
+    render(<AuthButton>你好</AuthButton>);
+
+    expect(await screen.findByText("管理员你好")).toBeInTheDocument();
+  });
+});
+```
+
+## 总结
+
+### 1. 如何确定单元测试的内容？
+
+todo
