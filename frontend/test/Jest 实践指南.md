@@ -337,6 +337,8 @@ window.location.assign("https://www.test.com?name=kerwin&id=123");
 
 ### 业务组件测试
 
+> 该场景代码：https://github.com/kerwin-ly/jest-demo/pull/1
+
 在平时开发中，我们遇到最多的应该是关于组件的测试。下面我们通过一个例子来实现：
 
 需求：实现一个 `AuthButton`组件，点击该组件，调用 Api，获取当前用户的身份并展示在按钮上。
@@ -619,6 +621,52 @@ describe("AuthButton Mock Http 请求", () => {
     render(<AuthButton>你好</AuthButton>);
 
     expect(await screen.findByText("管理员你好")).toBeInTheDocument();
+  });
+});
+```
+
+### 测试相同函数的多个分支
+
+在平常的代码编写中，同一个函数可能根据不同的条件，会有不同的返回结果。如果对这种场景进行测试，我们便需要用到[jest.spyOn()](https://jestjs.io/docs/jest-object#jestspyonobject-methodname-accesstype)
+
+举个例子针对不同环境，实现不同逻辑的例子
+
+新建`src/utils/env.ts`
+
+```ts
+// src/utils/env.ts
+export const config = {
+  env: "dev",
+};
+```
+
+上述配置是我们最常见的一种写法。但在测试中，由于`spyOn`只能对函数进行 Mock。所以，我们需要换一种写法。
+
+我们知道，利用`Object.defineProperty`的`getter`和`setter`属性可以对对象进行劫持。那么，将上述配置的写法改成一个函数即可使用`spyOn`了
+
+```ts
+// src/utils/env.ts
+export const config = {
+  get env() {
+    return "dev";
+  },
+};
+```
+
+新建`tests/utils/env.test.ts`
+
+```ts
+import { config } from "@/utils/env";
+
+describe("spyOn config", () => {
+  it("dev", () => {
+    jest.spyOn(config, "env", "get").mockReturnValue("dev"); // Mock getEnv function, the return value would be 'dev';
+    expect(config.env).toEqual("dev");
+  });
+
+  it("prod", () => {
+    jest.spyOn(config, "env", "get").mockReturnValue("prod"); // Mock getEnv function, the return value would be 'prod';
+    expect(config.env).toEqual("prod");
   });
 });
 ```
