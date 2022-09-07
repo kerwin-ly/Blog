@@ -58,7 +58,7 @@
 
 ### 浏览器
 
-[CSRF 和 XSS 攻击原理](https://github.com/kerwin-ly/Blog/blob/master/broswer/CSRF%E5%92%8CXSS%E6%94%BB%E5%87%BB%E5%8E%9F%E7%90%86.md)
+[CSRF 和 XSS 攻击原理](https://github.com/kerwin-ly/Blog/blob/master/frontend/broswer/CSRF%E5%92%8CXSS%E6%94%BB%E5%87%BB%E5%8E%9F%E7%90%86.md)
 
 ### 深入 JavaScript 原理
 
@@ -122,7 +122,7 @@
 
 [TypeScript 笔记](https://github.com/kerwin-ly/Blog/blob/master/frontend/typescript/TypeScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
 
-[使用 Babel 生成 Typescript 代码-AST](https://github.com/kerwin-ly/Blog/blob/master/tools/ast.md)
+[使用 Babel 生成 Typescript 代码-AST](https://github.com/kerwin-ly/Blog/blob/master/frontend/tools/ast.md)
 
 [TypeScript 工具类型的使用&实现](https://github.com/kerwin-ly/Blog/blob/master/frontend/typescript/TypeScript%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D.md)
 
@@ -166,7 +166,7 @@
 
 ### 重构 && 设计
 
-[重构：改善既有代码的设计(第 2 版)](todo)
+[重构：改善既有代码的设计(第 2 版)](<https://github.com/kerwin-ly/Blog/blob/master/design/%E9%87%8D%E6%9E%84%EF%BC%9A%E6%94%B9%E5%96%84%E6%97%A2%E6%9C%89%E4%BB%A3%E7%A0%81%E7%9A%84%E8%AE%BE%E8%AE%A1(%E7%AC%AC2%E7%89%88).md>)
 
 [如何规范的维护一个项目](https://github.com/kerwin-ly/Blog/blob/master/design/%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%E7%9A%84%E7%BB%B4%E6%8A%A4%E9%A1%B9%E7%9B%AE.md)
 
