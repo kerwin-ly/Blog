@@ -1,14 +1,14 @@
-## JS 编码规范
+# JS 编码规范
 
-### 一、命名规范
+## 一、命名规范
 
-#### 1. 方法名: 驼峰式命名,第一个小写单词必须是动词。
+### 1. 方法名: 驼峰式命名,第一个小写单词必须是动词。
 
 ```
 eg：getProductList()
 ```
 
-#### 2. 变量:应尽量是一个名词， 驼峰式命名(Boolean 类型在前方根据需求加 is, has, can 等进行标识)
+### 2. 变量:应尽量是一个名词， 驼峰式命名(Boolean 类型在前方根据需求加 is, has, can 等进行标识)
 
 ```
 <!--正确方式-->
@@ -20,13 +20,13 @@ productList, isShowDialog
 productlist, materialinfo, isproduct, showDialog
 ```
 
-#### 3. 常量使用全大写，中间用下划线隔开。
+### 3. 常量使用全大写，中间用下划线隔开。
 
 ```
 eg: const MAX_COUNT = 10;
 ```
 
-#### 4. 明确每个方法，变量的目的，禁止出现用 getList1, getList2 等进行方法（变量）命名
+### 4. 明确每个方法，变量的目的，禁止出现用 getList1, getList2 等进行方法（变量）命名
 
 ```
 <!--正确方式-->
@@ -56,7 +56,7 @@ getList2 () {
 }
 ```
 
-#### 5. 方法，变量等禁止出现拼音，不常见的单词缩写。当出现生僻单词时，尽量写全。
+### 5. 方法，变量等禁止出现拼音，不常见的单词缩写。当出现生僻单词时，尽量写全。
 
 ```
 <!--正确方式-->
@@ -68,7 +68,7 @@ getProductDictionary () {}
 getProductDic () {}
 ```
 
-#### 6. 当需要传递参数时，参数应控制在 3 个以内，再多考虑传递对象。且参数命名应具有可读性。
+### 6. 当需要传递参数时，参数应控制在 3 个以内，再多考虑传递对象。且参数命名应具有可读性。
 
 ```
 <!--正确方式-->
@@ -80,7 +80,7 @@ getProductDictionary (isProdcut, type, format) {}
 getProductDictionary (val1, val2, val3) {}
 ```
 
-#### 7. 常用方法命名
+### 7. 常用方法命名
 
 ```
 增加: addSomething
@@ -95,7 +95,7 @@ getProductDictionary (val1, val2, val3) {}
 设置某值: setSomething
 ```
 
-#### 8. 常用变量命名
+### 8. 常用变量命名
 
 ```
 Boolean: isSomething, hasSomething, canDoSomething
@@ -104,7 +104,7 @@ Boolean: isSomething, hasSomething, canDoSomething
 状态: state
 ```
 
-##### 9. 路由，文件命名驼峰式，如果有动词，应该在首位。
+### 9. 路由，文件命名驼峰式，如果有动词，应该在首位。
 
 ```
 <!--正确方式-->
@@ -116,15 +116,11 @@ addProduct.vue          productInfo.vue
 productAdd.vue          productinfo.vue
 ```
 
-### 二、格式规范
+## 二、格式规范
 
-#### 1. 缩进，空格，声明等严格按照项目中 eslint 规范
+### 1. 缩进、空格、换行、声明等严格按照项目中 eslint 规范，并使用`Prettier`自动格式化。
 
-#### 2. 换行的地方，行末必须有','或者运算符。
-
-#### 3. js 中最外层统一使用单引号，html 中使用双引号
-
-#### 4. 方法名之间应换行。
+### 2. 方法名之间应换行。
 
 ```
 <!--正确方式-->
@@ -133,6 +129,7 @@ function submitProduct () {
 		postData();
 	}
 }
+
 function validate () {
 	...
 	return Boolean
@@ -152,7 +149,7 @@ function validate () {
 }
 ```
 
-#### 5. 声明变量与下方逻辑换行。
+## 3. 声明变量与下方逻辑换行。
 
 ```
 <!--正确方式-->
@@ -175,9 +172,9 @@ function submitProduct () {
 }
 ```
 
-### 三、编写建议
+## 三、编写建议
 
-#### 1. 保存小块代码，检查一个方法是否做过多的事。抽象层级保持一致。
+### 1. 保存小块代码，检查一个方法是否做过多的事。抽象层级保持一致。
 
 如下: 表单提交时，不要让一个方法内，既做了验证，又做数据请求，又做列表刷新类似。
 应考虑验证为一个抽象层，数据请求为一抽象层，是否需要列表刷新为一抽象层。
@@ -213,9 +210,9 @@ function submitProduct () {
 }
 ```
 
-#### 2. 当类似的代码重复过多时，一定要想办法将其抽离。禁止多个方法中，出现重复代码。
+### 2. 当类似的代码重复过多时，一定要想办法将其抽离。禁止多个方法中，出现重复代码。
 
-#### 3. 代码自顶向下阅读。有关联的方法应该位置靠近，且自顶向下。
+### 3. 代码自顶向下阅读。有关联的方法应该位置靠近，且自顶向下。
 
 ```
 <!--正确方式-->
@@ -254,13 +251,13 @@ function submitProduct () {
 }
 ```
 
-#### 4. 坚持维护注释。如果自己修改了某部分代码逻辑，必须把以前的相关联代码注释同样修改。
+### 4. 坚持维护注释。如果自己修改了某部分代码逻辑，必须把以前的相关联代码注释同样修改。
 
-#### 5. 一行代码应该不超过 120 个字符，注意换行。
+### 5. 一行代码应该不超过 120 个字符，注意换行。（）
 
-#### 6. 当一个变量或者属性在多个页面使用时，应考虑抽离为全局的变量。
+### 6. 当一个变量或者属性在多个页面使用时，应考虑抽离为全局的变量。
 
-#### 7. 禁止直接去判 undefined，应用 typeOf
+### 7. 禁止直接去判 undefined，应用 typeOf
 
 ```
 <!--正确方式-->
@@ -272,13 +269,13 @@ if (typeof list === 'undefined') { ... }
 if (list === undefined) { ... }
 ```
 
-#### 8. 如果需要通过路由传参进行判定时，路由参数尽量不使用 Boolean。
+### 8. 如果需要通过路由传参进行判定时，路由参数尽量不使用 Boolean。
 
-    (vue页面刷新后，Boolean可能变为String)
+vue 页面刷新后，`Boolean`可能变为`String`
 
-#### 9. 尽量避免使用 else if
+### 9. 尽量避免使用 else if
 
-如果条件相同，用 switch case
+如果条件相同，用 `switch case`
 
 ```
 <!--正确方式-->
@@ -330,7 +327,7 @@ if (value == '') {
 }
 ```
 
-#### 10. 先声明数值，再使用，避免直接使用数值
+### 10. 拒绝硬编码
 
 ```
 <!--正确方式-->
@@ -349,36 +346,4 @@ function getMinHeight(clientHeight) {
 }
 ```
 
-#### 11. 不要过多的直接注释代码，不要的直接删掉。
-
-### 三、工具使用
-
-#### Prettier
-
-安装[Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)，请禁用其他格式化扩展。
-
-使用`shift option f`格式化代码。
-
-#### lint
-
-安装对应扩展，并保证相关配置文件无语法错误，否则 lint 不能生效。
-
-JavaScript：
-
-安装[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)，配置文件为`eslint.json`
-
-TypeScript：
-
-安装[TSLint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)，配置文件为`tslint.json`。
-
-Style(CSS/Scss/Less)：
-
-安装[stylelint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint)，配置文件为`.stylelintrc`。
-
-html lint:
-安装[HTMLLint](https://marketplace.visualstudio.com/items?itemName=mkaufman.HTMLHint)，配置文件为.htmlhintrc
-
-#### Document This
-
-安装[Document This](https://marketplace.visualstudio.com/items?itemName=joelday.docthis)
-jsDoc 工具, 使用快捷键`Ctrl+Alt+D`为当前方法或类添加说明文件，或者在当前方法(类)输入/\*\*后 tab 就好了
+### 11. 不要过多的直接注释代码，直接删除

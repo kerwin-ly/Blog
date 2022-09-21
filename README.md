@@ -172,7 +172,7 @@
 
 [HTML && CSS 编码规范](https://github.com/kerwin1/Blog/blob/master/design/HTML%20%26%26%20CSS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
 
-[JS 编码规范](https://github.com/kerwin1/Blog/blob/master/design/JS%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
+[JavaScript 编码规范](https://github.com/kerwin1/Blog/blob/master/design/JavaScript%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.md)
 
 [Jest 实践指南](https://github.com/kerwin-ly/Blog/blob/master/frontend/test/Jest%20%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97.md)
 
