@@ -10,13 +10,15 @@ eg：getProductList()
 
 ### 2. 变量:应尽量是一个名词， 驼峰式命名(Boolean 类型在前方根据需求加 is, has, can 等进行标识)
 
+正确方式：
+
 ```
-<!--正确方式-->
 productList, isShowDialog
 ```
 
+错误方式：
+
 ```
-<!--错误方式-->
 productlist, materialinfo, isproduct, showDialog
 ```
 
@@ -28,8 +30,9 @@ eg: const MAX_COUNT = 10;
 
 ### 4. 明确每个方法，变量的目的，禁止出现用 getList1, getList2 等进行方法（变量）命名
 
-```
-<!--正确方式-->
+正确方式：
+
+```js
 let pdaList = [];
 let appList = [];
 
@@ -42,8 +45,9 @@ getMaterialList () {
 }
 ```
 
-```
-<!--错误方式-->
+错误方式：
+
+```js
 let list1 = [];
 let list2 = [];
 
@@ -58,13 +62,15 @@ getList2 () {
 
 ### 5. 方法，变量等禁止出现拼音，不常见的单词缩写。当出现生僻单词时，尽量写全。
 
-```
-<!--正确方式-->
+正确方式：
+
+```js
 getProductDictionary () {}
 ```
 
-```
-<!--错误方式-->
+错误方式：
+
+```js
 getProductDic () {}
 ```
 
@@ -97,6 +103,8 @@ getProductDictionary (val1, val2, val3) {}
 
 ### 8. 常用变量命名
 
+注意关键字，如 Boolean 前面添加 is/has/can 等
+
 ```
 Boolean: isSomething, hasSomething, canDoSomething
 列表数据: somethingList
@@ -104,15 +112,17 @@ Boolean: isSomething, hasSomething, canDoSomething
 状态: state
 ```
 
-### 9. 路由，文件命名驼峰式，如果有动词，应该在首位。
+### 9. 文件命名大驼峰式，如果有动词，应该在末位。
+
+正确方式：
 
 ```
-<!--正确方式-->
-addProduct.vue          productInfo.vue
+ProductAdd.vue          ProductInfo.vue
 ```
 
+错误方式：
+
 ```
-<!--错误方式-->
 productAdd.vue          productinfo.vue
 ```
 
@@ -122,8 +132,9 @@ productAdd.vue          productinfo.vue
 
 ### 2. 方法名之间应换行。
 
+正确方式：
+
 ```
-<!--正确方式-->
 function submitProduct () {
 	if (validate()) {
 		postData();
@@ -136,8 +147,9 @@ function validate () {
 }
 ```
 
-```
-<!--错误方式-->
+错误方式：
+
+```js
 function submitProduct () {
 	if (validate()) {
 		postData();
@@ -151,24 +163,26 @@ function validate () {
 
 ## 3. 声明变量与下方逻辑换行。
 
-```
-<!--正确方式-->
+正确方式：
+
+```js
 let testing = true;
 
-function submitProduct () {
-	if (validate()) {
-		postData();
-	}
+function submitProduct() {
+  if (validate()) {
+    postData();
+  }
 }
 ```
 
-```
-<!--错误方式-->
+错误方式：
+
+```js
 let testing = true;
-function submitProduct () {
-	if (validate()) {
-		postData();
-	}
+function submitProduct() {
+  if (validate()) {
+    postData();
+  }
 }
 ```
 
@@ -179,8 +193,9 @@ function submitProduct () {
 如下: 表单提交时，不要让一个方法内，既做了验证，又做数据请求，又做列表刷新类似。
 应考虑验证为一个抽象层，数据请求为一抽象层，是否需要列表刷新为一抽象层。
 
-```
-<!--正确方式-->
+正确方式：
+
+```js
 function submitProduct () {
 	if (validate()) {
 		postData();
@@ -197,8 +212,9 @@ function postData () {
 }
 ```
 
-```
-<!--错误方式-->
+错误方式：
+
+```js
 function submitProduct () {
 	if (xxx = null && ...) {
 
@@ -214,8 +230,9 @@ function submitProduct () {
 
 ### 3. 代码自顶向下阅读。有关联的方法应该位置靠近，且自顶向下。
 
-```
-<!--正确方式-->
+正确方式：
+
+```js
 function submitProduct () {
 	postData()
 }
@@ -225,8 +242,9 @@ function postData () {
 }
 ```
 
-```
-<!--错误方式1-->
+错误方式：
+
+```js
 function submitProduct () {
 	postData()
 }
@@ -240,17 +258,6 @@ function postData () {
 }
 ```
 
-```
-<!--错误方式2-->
-function postData () {
-	...
-}
-
-function submitProduct () {
-	postData()
-}
-```
-
 ### 4. 坚持维护注释。如果自己修改了某部分代码逻辑，必须把以前的相关联代码注释同样修改。
 
 ### 5. 一行代码应该不超过 120 个字符，注意换行。（）
@@ -259,13 +266,15 @@ function submitProduct () {
 
 ### 7. 禁止直接去判 undefined，应用 typeOf
 
-```
-<!--正确方式-->
+正确方式：
+
+```js
 if (typeof list === 'undefined') { ... }
 ```
 
-```
-<!--错误方式-->
+错误方式：
+
+```js
 if (list === undefined) { ... }
 ```
 
@@ -277,9 +286,9 @@ vue 页面刷新后，`Boolean`可能变为`String`
 
 如果条件相同，用 `switch case`
 
-```
-<!--正确方式-->
+正确方式：
 
+```js
 let list = typeof list;
 switch case (list) {
     case 'undefined':
@@ -293,57 +302,56 @@ switch case (list) {
 }
 ```
 
-```
-<!--错误方式-->
+错误方式：
 
+```js
 if (typeof list === 'undefined') { ... }
 else if (typeof list === 'Object') { ... }
 else if (typeof list === 'String') { ... }
 ```
 
-如果条件不同，体现层级先后逻辑
+如果条件不同，体现层级先后逻辑，提前退出
 
-```
-<!--正确方式-->
-if (value != '') {
-    if (!reg.test(value)) {
-        alert('正则验证失败');
-    } else {
-        ...
-    }
-} else {
-    alert('输入的是空值')
+```js
+if (value === '') {
+	alert('输入的是空值');
+	return;
 }
-```
-
-```
-<!--错误方式-->
-if (value == '') {
-    alert('输入的是空值');
-} else if (!reg.test(value)) {
-    alert('正则验证失败');
-} else if (...) {
-    ...
+if (!reg.test(value)) {
+	alert('正则验证失败');
+	return;
 }
+// do something
+...
 ```
 
 ### 10. 拒绝硬编码
 
-```
-<!--正确方式-->
+正确方式：
+
+```js
 function getMinHeight(clientHeight) {
-	let headerHeight = 30;
+  let headerHeight = 30;
 
-	return clientHeight - headerHeight;
-}
-
-```
-
-```
-<!--错误方式-->
-function getMinHeight(clientHeight) {
-	return clientHeight - 30; // 无法知道30具体是什么值
+  return clientHeight - headerHeight;
 }
 ```
 
-### 11. 不要过多的直接注释代码，直接删除
+错误方式：
+
+```js
+function getMinHeight(clientHeight) {
+  return clientHeight - 30; // 无法知道30具体是什么值
+}
+```
+
+### 11. 代码注释
+
+一般来说，所有的注释都应该被删掉，用 git 的历史记录就可以追踪了。但如果逻辑还没完成，不注释就会报错。针对这种情况，我们需要在注释的头部添加一个`TODO`标识，对下面注释进行解释。让 Reviewer 能够明白其注释的意义。如下：
+
+```js
+// TODO: 功能未完成，暂时保留
+// function getUser() {
+//  const name = 'kerwin';
+//}
+```
