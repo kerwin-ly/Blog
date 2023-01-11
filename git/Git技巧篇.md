@@ -321,7 +321,7 @@ git merge feature/merge --allow-unrelated-histories
 ```
 
 ### 11. 将A分支的某些commit合并到B分支
-当我们维护定制化项目时，经常会出现这种情况。项目启动，你从主分支master切了一个projectA分支出来，进行定制化开发。但开发中，你发现一个主分支切出来的代码有bug。于是给主分支开发人员提了issue并得到了解决。但这时候问题来了，当你在定制化开发的同时，主分支也在不断的更新代码。导致如果你现在直接合并master代码，会有许多无用的变更。这时候你仅希望将“处理bug对应的commit”合并到自己的分支上。。。这里便需要使用到`cherry-pick`，操作如下：
+在实际场景中，如果线上有bug，我们一般会从release分支切hotfix分支进行处理。修复完bug后，该分支需要合并回release，同时develop开发分支也需要该commit。这就需要用到`cherry-pick`了，操作如下：
 ```shell
  # 切到A分支上
 git checkout branchA
