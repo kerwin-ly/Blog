@@ -298,7 +298,8 @@ git push origin newName
 git branch --set-upstream-to origin/newName
 ```
 
-### 10. 将repo-B仓库的master分支合并到repo-A仓库的branch-B分支
+### 10. 将 repo-B 仓库的 master 分支合并到 repo-A 仓库的 branch-B 分支
+
 ```shell
 # 1.克隆A仓库
 git clone ssh://git@github.com:xxxx/repo-A.git
@@ -320,8 +321,10 @@ git merge feature/merge --allow-unrelated-histories
 
 ```
 
-### 11. 将A分支的某些commit合并到B分支
-在实际场景中，如果线上有bug，我们一般会从release分支切hotfix分支进行处理。修复完bug后，该分支需要合并回release，同时develop开发分支也需要该commit。这就需要用到`cherry-pick`了，操作如下：
+### 11. 将 A 分支的某些 commit 合并到 B 分支
+
+在实际场景中，如果线上有 bug，我们一般会从 release 分支切 hotfix 分支进行处理。修复完 bug 后，该分支需要合并回 release，同时 develop 开发分支也需要该 commit。这就需要用到`cherry-pick`了，操作如下：
+
 ```shell
  # 切到A分支上
 git checkout branchA
@@ -335,7 +338,8 @@ git cherry-pick e72jfhfji
 git push origin branchB
 ```
 
-### 12.将旧仓库代码迁移到新的地址，保存所有commit、tag和branch
+### 12.将旧仓库代码迁移到新的地址，保存所有 commit、tag 和 branch
+
 ```
 git clone --mirror <旧仓库的git地址>
 cd <克隆旧仓库的文件夹>
@@ -343,9 +347,10 @@ git remote set-url origin <新仓库的git地址>
 git push -f origin
 ```
 
-### 13.使用rebase合并分支
+### 13.使用 rebase 合并分支
 
-将feature/search 合并到 master分支
+将 feature/search 合并到 master 分支
+
 ```shell
 git checkout master
 git pull origin master
@@ -353,28 +358,32 @@ git rebase feature/search
 ```
 
 合并中遇到冲突，可通过`git status`查看冲突文件，并解决。然后执行以下命令
+
 ```shell
 git add . # 将修改后的冲突文件进行保存
-git rebase --continue 
+git rebase --continue
 ```
 
 执行完上述命令后，会进入一个`vi`编辑界面，无需操作按`esc`后输入`wq`即可
 
 执行完上述操作后，如果还有冲突，则继续解决，重复上述的步骤。直到最后一次`rebase --continue`提示消息如下：
+
 ```shell
 Successfully rebased and updated refs/heads/feature/search.
 ```
 
-rebase成功后，最后提交代码
+rebase 成功后，最后提交代码
+
 ```shell
 git push origin master -f
 ```
 
 补充：如果不想合并分支，通过`git rebase --abort`退出
 
-### 14.使用rebase整合多个commit
+### 14.使用 rebase 整合多个 commit
 
-合并最近的4次提交记录
+合并最近的 4 次提交记录
+
 ```shell
 git rebase -i HEAD~4
 ```
@@ -386,7 +395,7 @@ git log
 git rebase -i 第五次提交的commit_id # 注意git rebase -i 后面跟的commit_id不会参与合并，其只是一个标记
 ```
 
-输入完以上命令后，会出现一个vi编辑页面，如下：
+输入完以上命令后，会出现一个 vi 编辑页面，如下：
 
 ```shell
 pick cacc52da feat(*): test1
@@ -413,7 +422,7 @@ pick 8f33126c feat(*): test4
 #
 ```
 
-将需要合并的commit对应的`pick`修改为`s`或者`squash`
+将需要合并的 commit 对应的`pick`修改为`s`或者`squash`
 
 ```shell
 s cacc52da feat(*): test1
@@ -425,13 +434,26 @@ pick 8f33126c feat(*): test4
 然后按`esc`输入`wq`保存
 
 最后执行
+
 ```shell
 git add .
 git rebase --continue
 ```
 
-### 15.根据仓库历史commit切换新的分支
+### 15.根据仓库历史 commit 切换新的分支
+
 ```shell
 git checkout commitId -b newBranch
 git push origin newBranch
+```
+
+### 16.远程分支名修改后，同步本地已克隆分支
+
+如果远程分支由`master`修改为`main`，将本地为`master`的克隆分支同步成`main`分支
+
+```shell
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
 ```
