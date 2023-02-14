@@ -90,7 +90,7 @@ getProductDictionary (val1, val2, val3) {}
 
 ```
 增加: addSomething
-编辑: updateSomething
+编辑: updateSomething/editSomething
 删除: deleteSomething
 查看: getSomething
 检查: checkSomething
