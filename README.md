@@ -20,7 +20,7 @@
 
 ### 算法专题
 
-按数据结构分类：
+数据结构：
 
 [数组专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/array/%E6%95%B0%E7%BB%84.md)
 
@@ -36,7 +36,7 @@
 
 [图专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/graph/%E5%9B%BE.md)
 
-按解题方法分类：
+算法：
 
 [双指针专题](https://github.com/kerwin-ly/Blog/blob/master/algorithm/two-pointer/%E5%8F%8C%E6%8C%87%E9%92%88.md)
 
