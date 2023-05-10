@@ -272,3 +272,20 @@ https://juejin.im/post/5a115df9f265da432240caaf
   }]
 }
 ```
+
+#### 16. 修改query后跳转相同路由，并触发更新
+
+使用`beforeRouteUpdate`这个hook，可以帮助我们判断上一个路由的信息，并且在当前hook中，可以直接调用`vue`实例。
+
+示例：
+
+```js
+beforeRouteUpdate(to, from) {
+  if (to.path === from.path && to.query !== from.query) {
+    this.init();
+  }
+}
+mounted() {
+  this.init();
+}
+```
