@@ -325,16 +325,41 @@ git merge feature/merge --allow-unrelated-histories
 
 在实际场景中，如果线上有 bug，我们一般会从 release 分支切 hotfix 分支进行处理。修复完 bug 后，该分支需要合并回 release，同时 develop 开发分支也需要该 commit。这就需要用到`cherry-pick`了，操作如下：
 
+1. 切到A分支上
 ```shell
- # 切到A分支上
 git checkout branchA
-# 查看提交记录
+```
+
+2. 查看提交记录（也可以直接从gitlab/github的仓库commit历史中获取）
+```shell
 git log
-# 比如这里我们希望合并记录中的commit_id为 e72jfhfji 的提交
+```
+3. 切到`branchB`准备`cherry-pick`比如这里我们希望合并记录中的commit_id为 e72jfhfji 的提交
+
+```shell
 git checkout branchB
-# 使用cherry-pick合并A分支的指定commit到branchB的本地分支
+```
+4. 使用cherry-pick合并A分支的指定commit到branchB
+
+合并单个commit
+```shell
 git cherry-pick e72jfhfji
-# 提交变更
+```
+
+合并多个commit可以使用`..`将两个commitid连接起来，表示合并`(aaa, bbb]`区间的所有commit，注意区间是左开右闭
+```shell
+git cherry-pick aaa..bbb
+```
+
+如果是期望两边都是闭区间，我们可以使用`^..`
+
+```shell
+git cherry-pick aaa^..bbb
+```
+
+5. cherry-pick时如果遇到冲突，我们需先解决冲突，然后执行`git add .`，然后继续执行`git cherry-pick --continue`
+
+# 5. 提交变更
 git push origin branchB
 ```
 
