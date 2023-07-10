@@ -772,10 +772,10 @@ async run(projectId: string, answers: inquirer.Answers) {
 * 缺点：当系统的体量十分庞大时，也会导致中介者对象十分复杂，难以维护
 
 如果你的对象引用是如下这种情况
-![对象引用](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/intermediary-false.png)
+![对象引用](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/intermediary-false.png)
 
 很明显的，你违背了迪米特法则。对象的四处引用会导致你的程序变得不太牢固。也许你可以尝试下用`中介者模式`来进行改造
-![中介者模式](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/intermediary-false.png)
+![中介者模式](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/intermediary-false.png)
 
 这里使用一个中介者模式进行举例，如开发一个聊天室系统，咱们应尽量避免用户之间直接发送信息，而是通过“中介者-聊天室”来进行消息传递。如果还需要额外的信息，如发送图片等，直接在中介者类中添加即可，不会对用户类和以前的功能产生耦合。
 ```ts

@@ -69,7 +69,7 @@ webpack 的构建流程包括`初始化`、`构建阶段`和`生成阶段`。下
 
 在webpack获取完模块内容和模块之间的关系后，便开始了最终资源的生成。该阶段主要围绕`chunks`进行，如下（图片来源于：[[万字总结] 一文吃透 Webpack 核心原理](https://mp.weixin.qq.com/s/SbJNbSVzSPSKBe2YStn2Zw)）：
 
-![build](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/webpack/build.png)
+![build](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/webpack/build.png)
 
 #### 1. 输出资源(seal)
 

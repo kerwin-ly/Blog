@@ -28,7 +28,7 @@
 
 具体流程如下图：
 
-![执行上下文栈](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/js/context-stack.jpeg)
+![执行上下文栈](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/js/context-stack.jpeg)
 
 了解完了`执行上下文栈`是如何处理`执行上下文`的，接下来，我们来了解下`执行上下文`的属性
 

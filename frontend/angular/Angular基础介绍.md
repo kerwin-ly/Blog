@@ -114,7 +114,7 @@ export class HeroListComponent implements OnInit {
 - 注入器：angular 会在启动过程中为创建其全应用级和所需要的注入器，自己不需要创建。
 - 提供商：用来告诉注入器
 
-![基本类型分析图](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/injector-injects.png)
+![基本类型分析图](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/injector-injects.png)
 `src/app/hero-list.component.ts`
 
 ```js
@@ -265,7 +265,7 @@ export class ChildComponent implements OnInit {
 
 #### 2.6 没有 property 时候，动态修改 attribute
 
-![attribute分析](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ng-attribute.png)
+![attribute分析](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/ng-attribute.png)
 
 ```html
 <table>

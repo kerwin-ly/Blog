@@ -64,7 +64,7 @@ setImmediate(() => {
 
 多执行几次上述代码，你会发现输出结果中，有时会先执行 setTimeout，有时会先执行 setImmediate。
 
-![node-timer](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/js/node-timer.png)
+![node-timer](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/js/node-timer.png)
 
 我们简单分析下原因。首先，在 node 环境中，并不会延迟 0ms 后执行 setTimeout 的回调函数。当参数是 0 时，会被强制修改成 1ms 执行。如：`setTimeout(fn , 1)`。（补充：HTML5 下，最低是 4ms）
 
@@ -137,7 +137,7 @@ settimeout
 
 4. 跳到 new Promise 这里，直接执行，打印 promise1，下面遇到 .then()，它是微任务，放到微任务列表等待执行
 
-5. 最后一行直接打印 script end，现在同步代码执行完了，开始执行微任务，即 await 下面的代码，打印 async1 end（如果不清楚，可以看下[async/await的实现](https://github.com/kerwin-ly/Blog/blob/master/frontend/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0async%26await%E5%87%BD%E6%95%B0.md)）
+5. 最后一行直接打印 script end，现在同步代码执行完了，开始执行微任务，即 await 下面的代码，打印 async1 end（如果不清楚，可以看下[async/await的实现](https://github.com/kerwin-ly/Blog/blob/main/frontend/javascript/js-implemention-util/%E5%AE%9E%E7%8E%B0async%26await%E5%87%BD%E6%95%B0.md)）
 
 6. 继续执行下一个微任务，即执行 then 的回调，打印 promise2
 

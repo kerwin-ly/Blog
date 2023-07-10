@@ -23,9 +23,9 @@ For help see https://nodejs.org/en/docs/inspector
 
 3.输入网址`chrome://inspect`点击下面的`inspect`进入调试页面
 
-- 第二种：使用 vscode 调试 1.使用 vscode 点击图标，![vscode-debug](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/vscode-debug.png)
+- 第二种：使用 vscode 调试 1.使用 vscode 点击图标，![vscode-debug](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/vscode-debug.png)
 
-  2.debug 配置，选择`launch`![vscode-debug](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/vscode-debug-setting.png)
+  2.debug 配置，选择`launch`![vscode-debug](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/vscode-debug-setting.png)
 
 ```json
 {

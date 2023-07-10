@@ -201,7 +201,7 @@ _.remove(scores, 2); // 正常使用即可
 
 ### 9. angular 中的 proxy.config.json 配置详情
 
-> 参考链接:[官方链接](https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/proxy.md)
+> 参考链接:[官方链接](https://github.com/angular/angular-cli/blob/main/docs/documentation/stories/proxy.md)
 
 ### 10. 如何在 typescript 中向 window 对象挂载属性对象等
 
@@ -561,7 +561,7 @@ beforeUpload = (file: UploadFile): boolean => {
 };
 ```
 
-![success-upload](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/success-load.png)
+![success-upload](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/success-load.png)
 
 ```ts
 beforeUpload = (file: UploadFile): boolean => {
@@ -569,7 +569,7 @@ beforeUpload = (file: UploadFile): boolean => {
   return false;
 };
 
-![error-upload](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/error-upload.png)
+![error-upload](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/error-upload.png)
 ```
 
 ### 26. 页面初始阶段，在钩子函数中重复赋值，报错：ERROR Error: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value: 'ngIf: false'. Current value: 'ngIf: true'.

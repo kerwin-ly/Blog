@@ -31,7 +31,7 @@ module.exports = smp.wrap({
 
 最后执行`npm run build`查看效果，如下图：
 
-![speed](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/webpack/speed.png)
+![speed](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/webpack/speed.png)
 
 ### 2. 提高解析速度 - 开启多进程构建
 
@@ -222,7 +222,7 @@ moodule.exports = {
 
 最后执行`npm run build`后，自动打开浏览器http://127.0.0.1:8888 地址，如下图：
 
-![speed](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/webpack/speed.png)
+![speed](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/webpack/speed.png)
 
 ### 2. 按需引入
 

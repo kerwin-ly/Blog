@@ -350,7 +350,7 @@ ok，在执行某个类之前，我们已经能到获取到对应的依赖项了
 
 ### 3. 实现源码
 
-源码戳[这里](https://github.com/kerwin-ly/Blog/tree/master/demo/di) 大概实现代码如下：
+源码戳[这里](https://github.com/kerwin-ly/Blog/tree/main/demo/di) 大概实现代码如下：
 ```ts
 import 'reflect-metadata';
 
@@ -438,7 +438,7 @@ function hasProvider(dep: any): boolean {
 create(UserService);
 ```
 
-以上是`依赖注入`的简单实现，没有考虑`环形依赖`等诸多复杂场景。感兴趣的可以研究`Angular 依赖注入系统`的实现[injector.ts](https://github.com/angular/angular/blob/master/packages/core/src/di/injector.ts)
+以上是`依赖注入`的简单实现，没有考虑`环形依赖`等诸多复杂场景。感兴趣的可以研究`Angular 依赖注入系统`的实现[injector.ts](https://github.com/angular/angular/blob/main/packages/core/src/di/injector.ts)
 
 ## 总结
 

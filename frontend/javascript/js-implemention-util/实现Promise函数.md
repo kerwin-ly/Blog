@@ -736,7 +736,7 @@ const timeout = (i) => {
 
 ## 参考
 
-[promise-polyfill](https://github.com/taylorhakes/promise-polyfill/blob/master/src/index.js)
+[promise-polyfill](https://github.com/taylorhakes/promise-polyfill/blob/main/src/index.js)
 
 [9k 字 | Promise/async/Generator 实现原理解析](https://juejin.cn/post/6844904096525189128#heading-14)
 

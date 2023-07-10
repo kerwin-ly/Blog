@@ -404,7 +404,7 @@ https://github.com/react-navigation/react-navigation/issues/335
 
 #### 28. 自定义 antd-mobile 组件样式&&主题颜色
 
-github: https://github.com/ant-design/antd-mobile-samples/tree/master/rn-custom-ui
+github: https://github.com/ant-design/antd-mobile-samples/tree/main/rn-custom-ui
 
 issue: https://github.com/ant-design/ant-design-mobile/issues/1174
 

@@ -82,7 +82,7 @@ GET 类型的 CSRF 利用非常简单，只需要一个 HTTP 请求，一般会�
 
 在 HTTP 协议中，每一次请求都会携带 `Origin Header` 或 `Referer Header`来判断是否是信任域发来的请求。
 
-![csrf-header](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/broswer/csrf-header.png)
+![csrf-header](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/broswer/csrf-header.png)
 
 注意，有两种情况 HTTP 请求头中不会携带`Origin Header`。
 
@@ -136,7 +136,7 @@ SameSite 可以防范 CSRF 攻击，但也有其缺点。如下：
 
 这里附上一张掘金网站的 Cookie 设置
 
-![safe-cookie](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/broswer/safe-cookie.png)
+![safe-cookie](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/broswer/safe-cookie.png)
 
 ## XSS
 

@@ -14,8 +14,8 @@
 mkdir test_path
 cd test_path && npm init
 ```
-![test1](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/test-path1.png)
-![test2](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/test-path2.png)
+![test1](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/test-path1.png)
+![test2](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/test-path2.png)
 
 接下来，在本地模拟全局安装npm包来进行测试
 ```shell
@@ -34,4 +34,4 @@ __dirname： /usr/local/lib/node_modules/test_path/demo # 代码文件所在的�
 __filename： /usr/local/lib/node_modules/test_path/demo/test.js # 代码文件
 process.cwd()： /Users/xxx/Desktop/test_path # 用户执行node命令时的当前目录
 ```
-![test3](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/test-path3.png)
+![test3](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/test-path3.png)

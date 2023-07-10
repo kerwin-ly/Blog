@@ -5,4 +5,4 @@
 
 ### 使用
 
-将[源码](https://github.com/kerwin-ly/Blog/blob/master/shell/readIcomoon.js)拷贝到生成的 icomoon 文件夹下，执行命名`node readIcomoon.js`
+将[源码](https://github.com/kerwin-ly/Blog/blob/main/shell/readIcomoon.js)拷贝到生成的 icomoon 文件夹下，执行命名`node readIcomoon.js`

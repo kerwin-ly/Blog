@@ -127,7 +127,7 @@ describe("sum", () => {
 
 如果环境配置正确，你会看到下面结果：
 
-![jest1](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/test/jest1.png)
+![jest1](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/test/jest1.png)
 
 ## 二、项目实践
 

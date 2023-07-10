@@ -1,6 +1,6 @@
 # 使用 babel 来生成 Typescript 代码
 
-> 本文相关的代码保存于[github 源码](https://github.com/kerwin-ly/Blog/tree/master/demo/ast)处，建议结合该代码来阅读文章，便于食用。
+> 本文相关的代码保存于[github 源码](https://github.com/kerwin-ly/Blog/tree/main/demo/ast)处，建议结合该代码来阅读文章，便于食用。
 
 ## 前言
 
@@ -161,7 +161,7 @@ traverse(ast, {
 ```
 
 执行命令`node run.js`结果如下
-![结果01](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/babel-traverse02.png)
+![结果01](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/babel-traverse02.png)
 
 接下来，回到正题，我们期望的结果是：
 
@@ -172,10 +172,10 @@ traverse(ast, {
 
 这里由于`AST 节点类型`实在太多了，去官方文档查看的话，会花费很多时间。这里推荐使用[AST Explorer](https://astexplorer.net/)。
 
-![ast-explorer](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast-explorer.png)
+![ast-explorer](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/ast-explorer.png)
 
 如果希望获取某个具体的节点，在左侧源码中选择对应的代码即可，右侧黄色部分即节点类型
-![ast-explorer2](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast02.png)
+![ast-explorer2](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/ast02.png)
 
 知道了如何获取`AST节点类型`后，接下来我们便可以通过同样的方式来获取`class`对应的节点类型
 ![ast-explorer3](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fd0a5387fc7f49e2b7142c43972766f4~tplv-k3u1fbpfcp-zoom-1.image)
@@ -215,13 +215,13 @@ traverse(ast, {
 
 我们拿`import { SENTRY_PROVIDERS } from '@core/sentry'`这行代码举例。同样需要[AST Explorer](https://astexplorer.net/)，观察其对应的`AST`
 
-![ast-explorer5](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast05.png)
+![ast-explorer5](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/ast05.png)
 
 显而易见，它的`AST节点类型`是`ImportDeclaration`
 
 接着，我们便查看[@babel/types api 文档](https://babeljs.io/docs/en/babel-types)是如何生成一个`ImportDeclaration`节点的。
 
-![babel-type01](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/babel-type01.png)
+![babel-type01](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/babel-type01.png)
 
 通过文档，我们了解到，要生成`import xx from xx`这种格式的代码，需要两个参数`specifiers`和`source`。那么我们可以先添加如下代码
 
@@ -234,7 +234,7 @@ t.importDeclaration(specifiers, source); // specifiers， source为定义
 而`specifiers`的类型是`Array<ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier>`数组对象。如果你现在不确定其节点类型是`ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier`的哪一个话，那么便可以回到[AST Explorer](https://astexplorer.net/)去查看。
 
 点击`SENTRY_PROVIDERS`可以获取当前的节点类型`Identifier`，其可以理解为咱们的变量/标识，其父级便是`ImportSpecifier`类型。
-![ast06](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/ast06.png)
+![ast06](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/ast06.png)
 
 确定类型后，返回[@babel/types api 文档](https://babeljs.io/docs/en/babel-types)，查看生成`ImportSpecifier`节点，需要`local` `imported`和`importKind`参数，而`local`和`imported`必填，是`Identifier`类型，也就是变量。
 
@@ -250,11 +250,11 @@ const importDeclaration = t.importDeclaration(specifiers, source); // source未�
 
 完成了`ImportSpecifier`节点的生成，接下来我们查看`ImportDeclaration`所需要的第二个参数，即`source`对应的节点类型是`StringLiteral`，采用同样的方式去查找生成`StringLiteral`节点所需的参数。
 
-![babel-type02](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/babel-type02.png)
+![babel-type02](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/babel-type02.png)
 
 ![babel-type03](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7c5e703a403243b4aafa67d408601972~tplv-k3u1fbpfcp-zoom-1.image)
 
-![babel-type04](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/babel-type04.png)
+![babel-type04](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/babel-type04.png)
 
 修改代码如下，便获得了最终`import xx from 'xx'`这个语法对应的`AST`
 
@@ -288,7 +288,7 @@ traverse(ast, {
 
 在获得了`ImportDeclaration`的`AST`后，我们需要对原来的`AST`进行修改，从而生成新的`AST`。
 
-这里便需要用到`@babel/traverse`中的`path`参数了。 相关的参数可以查看[babel 操作手册-转换操作](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md#toc-transformation-operations)。文档中对已知的 api 都进行了说明。
+这里便需要用到`@babel/traverse`中的`path`参数了。 相关的参数可以查看[babel 操作手册-转换操作](https://github.com/jamiebuilds/babel-handbook/blob/main/translations/zh-Hans/plugin-handbook.md#toc-transformation-operations)。文档中对已知的 api 都进行了说明。
 
 我们需要在`ClassDeclaration`前面添加`ImportDeclaration`节点，修改代码如下：
 
@@ -382,7 +382,7 @@ console.log('Success to generate it');
 ```
 
 完整代码：
-[github 源码](https://github.com/kerwin-ly/Blog/tree/master/demo/ast)
+[github 源码](https://github.com/kerwin-ly/Blog/tree/main/demo/ast)
 
 ## 参考链接
 

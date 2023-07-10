@@ -4,17 +4,17 @@
 
 ### 岛屿问题
 
-[200. 岛屿数量(中等)](https://github.com/kerwin-ly/Blog/blob/master/algorithm/dfs/200.%20%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F(%E4%B8%AD%E7%AD%89).md)
+[200. 岛屿数量(中等)](https://github.com/kerwin-ly/Blog/blob/main/algorithm/dfs/200.%20%E5%B2%9B%E5%B1%BF%E6%95%B0%E9%87%8F(%E4%B8%AD%E7%AD%89).md)
 
-[695. 岛屿的最大面积(中等)](https://github.com/kerwin-ly/Blog/blob/master/algorithm/dfs/695.%20%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%9C%80%E5%A4%A7%E9%9D%A2%E7%A7%AF(%E4%B8%AD%E7%AD%89).md)
+[695. 岛屿的最大面积(中等)](https://github.com/kerwin-ly/Blog/blob/main/algorithm/dfs/695.%20%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%9C%80%E5%A4%A7%E9%9D%A2%E7%A7%AF(%E4%B8%AD%E7%AD%89).md)
 
-[463. 岛屿的周长(中等)](https://github.com/kerwin-ly/Blog/blob/master/algorithm/dfs/463.%20%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF(%E4%B8%AD%E7%AD%89).md)
+[463. 岛屿的周长(中等)](https://github.com/kerwin-ly/Blog/blob/main/algorithm/dfs/463.%20%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF(%E4%B8%AD%E7%AD%89).md)
 
 ### 其他
 
-[22. 括号生成(中等)](https://github.com/kerwin-ly/Blog/blob/master/algorithm/backtracking/22.%20%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90(%E4%B8%AD%E7%AD%89).md)
+[22. 括号生成(中等)](https://github.com/kerwin-ly/Blog/blob/main/algorithm/backtracking/22.%20%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90(%E4%B8%AD%E7%AD%89).md)
 
-[79. 单词搜索(中等)](https://github.com/kerwin-ly/Blog/blob/master/algorithm/dfs/79.%20%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2(%E4%B8%AD%E7%AD%89).md)
+[79. 单词搜索(中等)](https://github.com/kerwin-ly/Blog/blob/main/algorithm/dfs/79.%20%E5%8D%95%E8%AF%8D%E6%90%9C%E7%B4%A2(%E4%B8%AD%E7%AD%89).md)
 
 ## 总结
 
@@ -42,11 +42,11 @@ function traverse(TreeNode root) {
 
 首先，网格结构中的格子有多少相邻结点？答案是上下左右四个。对于格子 (row, col) 来说（row 和 col 分别代表行坐标和列坐标），四个相邻的格子分别是 (row-1, col)、(row+1, col)、(row, col-1)、(row, col+1)。换句话说，网格结构是「四叉」的。
 
-![dfs1](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/algorithm/dfs1.jpeg)
+![dfs1](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/algorithm/dfs1.jpeg)
 
 其次，网格 DFS 中的 base case 是什么？从二叉树的 base case 对应过来，应该是网格中不需要继续遍历、grid[row][col] 会出现数组下标越界异常的格子，也就是那些超出网格范围的格子。
 
-![dfs2](https://raw.githubusercontent.com/kerwin-ly/Blog/master/assets/imgs/algorithm/dfs2.jpeg)
+![dfs2](https://raw.githubusercontent.com/kerwin-ly/Blog/main/assets/imgs/algorithm/dfs2.jpeg)
 
 所以一个针对“岛屿网格”的 dfs 的代码可以简单总结如下（视题目情况而定）：
 
