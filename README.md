@@ -18,7 +18,7 @@
 
 [堆](https://github.com/kerwin-ly/Blog/blob/main/data-structure/%E5%A0%86.md)
 
-### 算法专题
+### 算法
 
 数据结构：
 
@@ -36,7 +36,7 @@
 
 [图专题](https://github.com/kerwin-ly/Blog/blob/main/algorithm/graph/%E5%9B%BE.md)
 
-算法：
+算法分类：
 
 [双指针专题](https://github.com/kerwin-ly/Blog/blob/main/algorithm/two-pointer/%E5%8F%8C%E6%8C%87%E9%92%88.md)
 
