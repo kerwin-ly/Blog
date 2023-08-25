@@ -359,7 +359,8 @@ git cherry-pick aaa^..bbb
 
 5. cherry-pick时如果遇到冲突，我们需先解决冲突，然后执行`git add .`，然后继续执行`git cherry-pick --continue`
 
-# 5. 提交变更
+提交变更
+```shell
 git push origin branchB
 ```
 
