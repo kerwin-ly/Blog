@@ -150,6 +150,8 @@
 
 [React Hooks 学习笔记](https://github.com/kerwin-ly/Blog/blob/main/frontend/react/react%20hooks%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
 
+[解决Vue2 使用Docker Volume挂载JSON文件不生效问题](https://github.com/kerwin-ly/Blog/blob/main/frontend/vue/vue-cli%20docker%E6%8C%82%E8%BD%BD%E6%96%87%E4%BB%B6.md)
+
 ### 构建工具
 
 [Webpack 构建流程浅析](https://github.com/kerwin-ly/Blog/blob/main/frontend/webpack/webpack%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B.md)
