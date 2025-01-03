@@ -1,6 +1,6 @@
 # 解决 element-ui dropdown 位置偏移问题
 
-最近在维护一个老系统，发现我们在给`body`设置了`zoom`属性了，所有`element-ui`组件库的下拉框位置都发错了错乱。比如：`date-picker`, `el-select`等。如下图所示：
+最近在维护一个老系统，发现我们在给`body`设置了`zoom`属性了，所有`element-ui`组件库的下拉框位置都错乱了。比如：`date-picker`, `el-select`等。如下图所示：
 
 ![el-wrong-pos1](https://github.com/kerwin-ly/Blog/blob/main/assets/imgs/issue/el-wrong-pos1.png)
 
@@ -14,31 +14,32 @@
 
 ### 方法二：修改`popper.js`计算位置的逻辑
 
-在排查了element源码后，发现我们在页面上设置了`zoom`属性，整体页面比例为`pageview * scale`。但在[element-ui popper.js](https://github.com/ElemeFE/element/blob/dev/src/utils/popper.js)文件中实际这里计算是以原始位置计算的 left, right 偏移，导致了偏差。
+在排查了element源码后，发现我们在页面上设置了`zoom`属性后，在计算bounding rect时收到了影响。如整体页面比例为`pageview * scale`。但在[element-ui popper.js](https://github.com/ElemeFE/element/blob/dev/src/utils/popper.js)文件中实际这里计算是以原始位置计算的 left, right 偏移，导致了偏差。
 
 ![el-wrong-pos3](https://github.com/kerwin-ly/Blog/blob/main/assets/imgs/issue/el-wrong-pos3.png)
 
 所以在这里我们修改`popper.js`为如下：
 
 ```js
-Popper.prototype.modifiers.applyStyle = function(data) {
-  ...
-  if (this._options.gpuAcceleration && (prefixedProperty = getSupportedPropertyName('transform'))) {
-    styles[prefixedProperty] = 'translate3d(' + left + 'px, ' + top + 'px, 0)';
-    styles.top = 0;
-    styles.left = 0;
-  }
-  else {
-    // update there
-    // styles.left = left;
-    // styles.top = top;
-    styles.left = left / document.body.style.zoom;
-    styles.top = top / document.body.style.zoom;
-  }
-}
+    /**
+     * Get bounding client rect of given element
+     * @function
+     * @ignore
+     * @param {HTMLElement} element
+     * @return {Object} client rect
+     */
+    function getBoundingClientRect(element) {
+        ...
+        return {
+            left: rect.left / document.body.style.zoom,
+            top: rectTop / document.body.style.zoom,
+            right: rect.right / document.body.style.zoom,
+            bottom: rect.bottom / document.body.style.zoom,
+            width: (rect.right - rect.left) / document.body.style.zoom,
+            height: (rect.bottom - rectTop) / document.body.style.zoom
+        };
+    }
 ```
-
-具体改动，可以参考我fork出来的仓库MR: https://github.com/kerwin-ly/bv-element/commit/72594e1259954228864b86e000e2eb539dd6e58d
 
 最后还需要大家将`element-ui`重新打包，可以直接本地使用`patch-package`集成（参考这篇文章：https://juejin.cn/post/7356534347509497919）
 
