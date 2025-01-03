@@ -152,6 +152,8 @@
 
 [解决Vue2 使用Docker Volume挂载JSON文件不生效问题](https://github.com/kerwin-ly/Blog/blob/main/frontend/vue/vue-cli%20docker%E6%8C%82%E8%BD%BD%E6%96%87%E4%BB%B6.md)
 
+[解决element-ui dropdown偏移问题](https://github.com/kerwin-ly/Blog/blob/main/frontend/vue/%E8%A7%A3%E5%86%B3element-ui%20dropdown%E4%BD%8D%E7%BD%AE%E5%81%8F%E7%A7%BB%E9%97%AE%E9%A2%98.md)
+
 ### 构建工具
 
 [Webpack 构建流程浅析](https://github.com/kerwin-ly/Blog/blob/main/frontend/webpack/webpack%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B.md)
