@@ -39,6 +39,21 @@
             height: (rect.bottom - rectTop) / document.body.style.zoom
         };
     }
+
+    function getOffsetRectRelativeToCustomParent(element, parent, fixed) {
+        ...
+
+        if (fixed) {
+            var scrollParent = getScrollParent(parent);
+            parentRect.top += scrollParent.scrollTop / document.body.style.zoom;
+            parentRect.bottom += scrollParent.scrollTop / document.body.style.zoom;
+            parentRect.left += scrollParent.scrollLeft / document.body.style.zoom;
+            parentRect.right += scrollParent.scrollLeft / document.body.style.zoom;
+        }
+
+        ...
+        return rect;
+    }
 ```
 
 最后还需要大家将`element-ui`重新打包，可以直接本地使用`patch-package`集成（参考这篇文章：https://juejin.cn/post/7356534347509497919）
