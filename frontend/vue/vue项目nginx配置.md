@@ -40,5 +40,17 @@ server {
         access_log off;
         add_header Cache-Control "public";
     }
+
+    # Disable cache for index.html
+    location = /index.html {
+      root /usr/share/nginx/html;
+      add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+    }
+ 
+    # Use cache for static resource
+    location ~* \.(?:js|css|ico|png|jpg|jpeg|gif|svg|woff2?)$ {
+      root /usr/share/nginx/html;
+      add_header Cache-Control "public, max-age=31536000, immutable" always;
+    }
 }
 ```
